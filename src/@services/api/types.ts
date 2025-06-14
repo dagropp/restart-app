@@ -506,7 +506,7 @@ export interface GroupResponse {
   partner?: UserResponse;
   bedrooms: number;
   bookmarks: (City | Country)[];
-  destination: City | Country;
+  destination?: City | Country;
 }
 
 export interface GroupPayload {

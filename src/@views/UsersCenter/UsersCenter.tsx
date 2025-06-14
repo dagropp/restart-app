@@ -1,5 +1,4 @@
 import CopyToClipboard from '@common/CopyToClipboard';
-import Link from '@common/Link';
 import Table, { type TableColumn } from '@common/Table';
 import { useUserContext } from '@context/user';
 import apiService, { type CompactUserResponse } from '@services/api';

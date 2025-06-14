@@ -2,8 +2,9 @@ import VisibilityOffRounded from '@mui/icons-material/VisibilityOffRounded';
 import VisibilityRounded from '@mui/icons-material/VisibilityRounded';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import MuiTextField from '@mui/material/TextField';
-import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField/TextField';
+import MuiTextField, {
+  TextFieldProps as MuiTextFieldProps,
+} from '@mui/material/TextField';
 import { useState } from 'react';
 
 export const PasswordInput = ({ type, ...props }: MuiTextFieldProps) => {

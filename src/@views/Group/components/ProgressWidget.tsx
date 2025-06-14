@@ -153,7 +153,7 @@ const FavoritesItem = () => {
   const { data: cities } = apiService.useCities();
   const { data: countries } = apiService.countries.useList();
 
-  const isDestination = group.destination in City;
+  const isDestination = !!group.destination && group.destination in City;
   const isDone =
     !!cities && !!countries && (group.bookmarks.length > 0 || isDestination);
 
@@ -216,7 +216,7 @@ const DestinationItem = () => {
     navigate('/');
   };
 
-  const isDone = destination in City;
+  const isDone = !!destination && destination in City;
 
   return (
     <Item isDone={isDone} label="Choose Destination">
@@ -245,10 +245,10 @@ const ResearchItem = () => {
   const {
     group: { destination },
   } = useUserContext();
-  const isDestination = destination in City;
+  const isDestination = !!destination && destination in City;
 
   const { data: notes = 0 } = apiService.notes.useCount(
-    destination,
+    destination!,
     isDestination,
   );
 

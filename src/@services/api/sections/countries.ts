@@ -7,10 +7,10 @@ import { getUrl } from '../utils';
 const get = (): Promise<Record<Country, CountryData>> =>
   http.get(getUrl('countries'));
 
-const list = (): Promise<Record<Country, CountryData>> =>
+const list = (): Promise<Record<Country, CountryResponse>> =>
   http.get(getUrl('countries', 'list'));
 
-const use = (): UseQueryResult<Record<Country, CountryResponse>> =>
+const use = (): UseQueryResult<Record<Country, CountryData>> =>
   useQuery({
     queryKey: ['countries'],
     queryFn: () => get(),

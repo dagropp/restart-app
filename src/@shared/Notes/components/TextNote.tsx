@@ -1,0 +1,46 @@
+import Link from '@common/Link';
+import Typography from '@common/Typography';
+import useIsOverflow from '@hooks/useIsOverflow.ts';
+import { NoteResponse } from '@services/api';
+import { string } from '@utils/string.utils.ts';
+import clsx from 'clsx';
+import { useMemo } from 'react';
+
+interface Props {
+  note: NoteResponse;
+  fullPage?: boolean;
+}
+
+export const TextNote = ({ note, fullPage }: Props) => {
+  const { ref, isOverflow } = useIsOverflow<HTMLDivElement>('y');
+
+  const display = useMemo(
+    () =>
+      note.data?.split('\n').map((line, index) => (
+        <Typography
+          variant="body2"
+          key={index}
+          className="min-h-4"
+          style={string.containsHebrew(line) ? { direction: 'rtl' } : undefined}
+        >
+          {line}
+        </Typography>
+      )),
+    [note.data],
+  );
+
+  return (
+    <div>
+      <div className={clsx(!fullPage && 'line-clamp-10')} ref={ref}>
+        {display}
+      </div>
+      {isOverflow && !fullPage && (
+        <div className="pt-2">
+          <Link href={String(note.id)}>
+            <Typography variant="body2">Show More...</Typography>
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+};

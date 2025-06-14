@@ -1,0 +1,5 @@
+.cost-of-living {
+  path:nth-child(5) {
+    visibility: hidden;
+  }
+}

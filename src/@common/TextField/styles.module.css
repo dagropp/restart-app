@@ -1,0 +1,5 @@
+.component {
+  fieldset[class*='MuiOutlinedInput'] {
+    top: -7px;
+  }
+}

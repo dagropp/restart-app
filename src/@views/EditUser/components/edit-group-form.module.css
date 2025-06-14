@@ -1,0 +1,8 @@
+.children {
+  flex-direction: column;
+
+  &:has(:nth-child(2):is(button)) {
+    flex-direction: row;
+    align-items: center;
+  }
+}

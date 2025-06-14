@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+
+:root {
+  font-size: 14px;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: normal;
+  }
+}
+
+@theme {
+  --spacing: 4px;
+}

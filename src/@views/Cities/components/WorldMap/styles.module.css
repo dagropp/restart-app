@@ -1,0 +1,17 @@
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+    scale: 0;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.marker {
+  animation: fade-in 0.5s;
+}

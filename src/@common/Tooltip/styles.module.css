@@ -1,0 +1,6 @@
+.hasComponent {
+  [class*='MuiTooltip-tooltip'] {
+    padding: 0;
+    max-width: none;
+  }
+}

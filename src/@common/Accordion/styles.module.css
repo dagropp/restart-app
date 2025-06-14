@@ -1,0 +1,9 @@
+.accordion {
+  border: none !important;
+  &::before {
+    display: none;
+  }
+  [class*='MuiAccordionSummary'] {
+    color: inherit;
+  }
+}

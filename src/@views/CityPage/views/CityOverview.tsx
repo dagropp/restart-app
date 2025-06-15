@@ -3,9 +3,9 @@ import GoogleMapCard from '@shared/GoogleMapCard';
 import Landmarks from '@shared/Landmarks';
 import Overview from '@shared/Overview';
 import Prices from '@shared/Prices';
-import SectionCard from '@shared/SectionCard';
 
 import {
+  CityLinks,
   CityWikiData,
   GeneralData,
   Plan,
@@ -38,12 +38,9 @@ const OverviewWithData = () => {
       <Prices currency={item.country.currency} cost={cost} />
       <Plan />
       <FlightData />
-      <SectionCard title="Time Difference">
-        <TimeDisplayList />
-      </SectionCard>
-      <SectionCard title="Weather">
-        <WeatherDisplay />
-      </SectionCard>
+      <TimeDisplayList />
+      <WeatherDisplay />
+      <CityLinks />
     </Overview>
   );
 };

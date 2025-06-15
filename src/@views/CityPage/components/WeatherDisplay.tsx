@@ -1,4 +1,5 @@
 import Typography from '@common/Typography';
+import AirRoundedIcon from '@mui/icons-material/AirRounded';
 import BedtimeRoundedIcon from '@mui/icons-material/BedtimeRounded';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
@@ -8,6 +9,7 @@ import Box from '@mui/material/Box';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
 import dateService from '@services/date.service';
+import SectionCard from '@shared/SectionCard';
 import { array } from '@utils/array.utils';
 import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
@@ -124,30 +126,32 @@ export const WeatherDisplay = () => {
   );
 
   return (
-    <div className="mx-auto w-max">
-      <div className="mx-auto w-max grid grid-cols-[max-content_1fr] gap-2">
-        <StatsItem
-          Icon={ThunderstormRoundedIcon}
-          label={`${rainDays} rain days per year`}
-          caption={`${Math.round((rainDays / 365) * 100)}% of the year`}
-        />
-        <StatsItem
-          Icon={LightModeRoundedIcon}
-          label={`${maxSunHours} max sun hours`}
-          caption={`${Math.round((weather.sunHours[5] / 24) * 100)}% of the day`}
-        />
-        <StatsItem
-          Icon={DarkModeRoundedIcon}
-          label={`${minSunHours} min sun hours`}
-          caption={`${Math.round((weather.sunHours[11] / 24) * 100)}% of the day`}
-        />
-      </div>
+    <SectionCard title="Weather" TitleIcon={AirRoundedIcon}>
+      <div className="mx-auto w-max">
+        <div className="mx-auto w-max grid grid-cols-[max-content_1fr] gap-2">
+          <StatsItem
+            Icon={ThunderstormRoundedIcon}
+            label={`${rainDays} rain days per year`}
+            caption={`${Math.round((rainDays / 365) * 100)}% of the year`}
+          />
+          <StatsItem
+            Icon={LightModeRoundedIcon}
+            label={`${maxSunHours} max sun hours`}
+            caption={`${Math.round((weather.sunHours[5] / 24) * 100)}% of the day`}
+          />
+          <StatsItem
+            Icon={DarkModeRoundedIcon}
+            label={`${minSunHours} min sun hours`}
+            caption={`${Math.round((weather.sunHours[11] / 24) * 100)}% of the day`}
+          />
+        </div>
 
-      <div className="flex gap-2">
-        {object.values(Season).map((season) => (
-          <WeatherItem key={season} season={season} />
-        ))}
+        <div className="flex gap-2">
+          {object.values(Season).map((season) => (
+            <WeatherItem key={season} season={season} />
+          ))}
+        </div>
       </div>
-    </div>
+    </SectionCard>
   );
 };

@@ -1,3 +1,4 @@
+export * from './CityLinks';
 export * from './CityWikiData';
 export * from './GeneralData';
 export * from './Insights';

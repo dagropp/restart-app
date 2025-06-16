@@ -6,6 +6,7 @@ import apiService, {
   NoteScope,
   UseNotesActions,
 } from '@services/api';
+import { style } from '@utils/style.utils';
 
 import {
   NoteCard,
@@ -48,7 +49,7 @@ const NotesWithData = ({
   return (
     <>
       <div className="my-2">
-        <Masonry columns={3} spacing={2} sequential>
+        <Masonry columns={style.MASONRY_COLUMN_COUNT} spacing={2} sequential>
           <div className="invisible">|</div>
           <NoteForm onSave={handleSave} className="flex flex-col gap-4">
             <NoteEditor
@@ -62,7 +63,7 @@ const NotesWithData = ({
         </Masonry>
       </div>
 
-      <Masonry columns={3} spacing={2} sequential>
+      <Masonry columns={style.MASONRY_COLUMN_COUNT} spacing={2} sequential>
         {notes.map((note) => (
           <NoteCard
             key={note.id}
@@ -80,7 +81,7 @@ const NotesSkeleton = () => {
   const rows = [5, 3, 4, 2, 3, 5, 3, 2];
 
   return (
-    <Masonry columns={3} spacing={2}>
+    <Masonry columns={style.MASONRY_COLUMN_COUNT} spacing={2}>
       <NoteForm
         onSave={async () => console.log()}
         className="flex flex-col gap-4 w-full"

@@ -1,5 +1,6 @@
 import { useUserContext } from '@context/user';
 import Masonry from '@mui/lab/Masonry';
+import { style } from '@utils/style.utils';
 
 import {
   ChildrenDisplay,
@@ -22,7 +23,11 @@ const Group = () => {
         <TopWidget />
       </div>
       <div className="pl-5 pr-1 flex items-center gap-4">
-        <Masonry columns={3} spacing={2} sequential={false}>
+        <Masonry
+          columns={style.MASONRY_COLUMN_COUNT}
+          spacing={2}
+          sequential={false}
+        >
           <UserDisplay user={user} editLink="/settings/user" />
           {partner && <UserDisplay user={partner} />}
           <GroupDisplay />

@@ -60,7 +60,7 @@ export const EditExistingUser = () => {
   };
 
   return (
-    <div className="w-[600px]">
+    <div className="w-[600px] max-w-full">
       <EditUserForm
         user={user}
         onSubmit={handleSubmit}

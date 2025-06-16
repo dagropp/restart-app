@@ -1,5 +1,3 @@
-import './App.css';
-
 import titleService from '@services/title';
 import Cities from '@views/Cities';
 import { useLayoutEffect } from 'react';

@@ -42,13 +42,8 @@ const Routes = () => {
   );
 
   useEffect(() => {
-    if (
-      !isCitiesLoading &&
-      !isScoresLoading &&
-      isLoggedIn !== LoginState.Pending
-    )
-      overlay?.classList.add('done');
-  }, [isCitiesLoading, isScoresLoading, isLoggedIn]);
+    if (!isCitiesLoading && !isScoresLoading) overlay?.classList.add('done');
+  }, [isCitiesLoading, isScoresLoading]);
 
   return (
     <BrowserRouter>

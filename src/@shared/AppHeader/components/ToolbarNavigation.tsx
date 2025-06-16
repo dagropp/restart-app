@@ -131,7 +131,7 @@ export const ToolbarNavigation = () => {
         className="mb-4"
         classes={{
           select: '!text-white border-white !flex !justify-center',
-          icon: '!text-white !right-16',
+          icon: '!text-white',
         }}
       />
     </div>

@@ -102,7 +102,9 @@ const Routes = () => {
                   <Route path="settings">
                     <Route
                       index
-                      element={<Navigate to={SettingsTabKey.USERS} replace />}
+                      element={
+                        <Navigate to={SettingsTabKey.EDIT_USER} replace />
+                      }
                     />
                     {object.values(SettingsTabKey).map((tab) => (
                       <Route

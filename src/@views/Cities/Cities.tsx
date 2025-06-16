@@ -2,6 +2,7 @@ import useFilters from '@hooks/useFilters';
 import apiService, { City, Language } from '@services/api';
 import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
+import { style } from '@utils/style.utils';
 import { useMemo } from 'react';
 
 import { CityTable, WorldMap } from './components';
@@ -58,7 +59,9 @@ const Cities = () => {
 
   return (
     <div className="px-5 pt-5">
-      <WorldMap regions={filters.regions} filteredIds={filteredIds} />
+      {style.isLargerThanPhone && (
+        <WorldMap regions={filters.regions} filteredIds={filteredIds} />
+      )}
       <CityTable
         filters={filters}
         updateFilters={update}

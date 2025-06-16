@@ -1,4 +1,5 @@
 import useFilters from '@hooks/useFilters';
+import { style } from '@utils/style.utils';
 
 import { CountriesTable, CountriesWorldMap } from './components';
 import { CountriesFilters } from './types';
@@ -13,7 +14,9 @@ const Countries = () => {
 
   return (
     <div className="pt-5 px-5">
-      <CountriesWorldMap regions={filters.regions} />
+      {style.isLargerThanPhone && (
+        <CountriesWorldMap regions={filters.regions} />
+      )}
       <CountriesTable
         filters={filters}
         updateFilters={update}

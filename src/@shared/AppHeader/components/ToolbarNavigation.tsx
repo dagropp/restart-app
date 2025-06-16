@@ -1,3 +1,4 @@
+import Select, { SelectOption } from '@common/Select';
 import Typography from '@common/Typography';
 import CompareRoundedIcon from '@mui/icons-material/CompareRounded';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
@@ -9,7 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { useTheme } from '@mui/material/styles';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
-import { Link as RouterLink, useLocation } from 'react-router';
+import { style } from '@utils/style.utils';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router';
 
 interface NavigationButton {
   Icon: OverridableComponent<SvgIconTypeMap>;
@@ -48,12 +50,32 @@ const buttons: NavigationButton[] = [
   {
     Icon: SettingsRoundedIcon,
     label: 'Settings',
-    path: '/settings/user',
+    path: '/settings',
   },
 ];
 
+const options: SelectOption<string>[] = buttons.map(
+  ({ path, label, Icon }) => ({
+    value: path,
+    label: (
+      <div className="flex items-center gap-2">
+        <Icon fontSize="small" />
+        {label}
+      </div>
+    ),
+  }),
+);
+
+const isLargeScreen = style.isMediaQuery('sm');
+
+const getPathValue = (pathname: string) => {
+  const root = pathname.split('/').at(1);
+  return !root || root === 'city' ? '/' : `/${root}`;
+};
+
 export const ToolbarNavigation = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const theme = useTheme();
 
   const buttonStyle = {
@@ -66,8 +88,11 @@ export const ToolbarNavigation = () => {
   const getActiveColor = (isActive: boolean) =>
     isActive ? { color: theme.palette.info.light } : { color: 'inherit' };
 
-  return (
-    <div className="flex flex-col gap-2 w-full pl-2 pr-5" style={buttonStyle}>
+  return isLargeScreen ? (
+    <div
+      className="gap-2 w-full pl-2 pr-5 flex lg:flex-col"
+      style={buttonStyle}
+    >
       {buttons.map(({ label, path, getIsActive, Icon }) => {
         const isActive = getIsActive
           ? getIsActive(pathname)
@@ -95,6 +120,20 @@ export const ToolbarNavigation = () => {
           </RouterLink>
         );
       })}
+    </div>
+  ) : (
+    <div className="mx-3 w-full">
+      <Select<string>
+        options={options}
+        value={getPathValue(pathname)}
+        onChange={navigate}
+        variant="standard"
+        className="mb-4"
+        classes={{
+          select: '!text-white border-white !flex !justify-center',
+          icon: '!text-white !right-16',
+        }}
+      />
     </div>
   );
 };

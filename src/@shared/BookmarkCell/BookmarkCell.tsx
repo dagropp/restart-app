@@ -8,6 +8,7 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import IconButton from '@mui/material/IconButton';
 import apiService, { City, Country, StatusResponse } from '@services/api';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import { style } from '@utils/style.utils';
 import clsx from 'clsx';
 import { type MouseEvent } from 'react';
 
@@ -90,7 +91,7 @@ export const BookmarkCell = ({ row, isAlwaysVisible }: Props) => {
           className={getClassName(
             row.isBookmark,
             row.isDestination,
-            isAlwaysVisible,
+            isAlwaysVisible || !style.isHoverSupported,
           )}
         >
           {row.isBookmark ? bookmarkIcon : emptyBookmarkIcon}
@@ -116,7 +117,7 @@ export const BookmarkCell = ({ row, isAlwaysVisible }: Props) => {
               className={getClassName(
                 row.isDestination,
                 row.isBookmark,
-                isAlwaysVisible,
+                isAlwaysVisible || !style.isHoverSupported,
               )}
               disabled={disabled}
             >

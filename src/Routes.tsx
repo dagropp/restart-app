@@ -42,18 +42,23 @@ const Routes = () => {
   );
 
   useEffect(() => {
-    if (!isCitiesLoading && !isScoresLoading) overlay?.classList.add('done');
-  }, [isCitiesLoading, isScoresLoading]);
+    if (
+      !isCitiesLoading &&
+      !isScoresLoading &&
+      isLoggedIn !== LoginState.Pending
+    )
+      overlay?.classList.add('done');
+  }, [isCitiesLoading, isScoresLoading, isLoggedIn]);
 
   return (
     <BrowserRouter>
       <Wrapper>
         <div
-          className="flex w-full"
+          className="flex flex-col w-full lg:flex-row"
           style={{ backgroundColor: theme.palette.background.default }}
         >
           {isLoggedIn === LoginState.Valid && <AppToolbar />}
-          <div className="w-full h-screen overflow-y-auto overflow-x-hidden">
+          <div className="w-full h-[calc(100vh - 64px)] overflow-y-auto overflow-x-hidden lg:h-screen">
             <div className="w-[1600px] mx-auto max-w-full box-border">
               {isLoggedIn === LoginState.Valid ? (
                 <LibRoutes>
@@ -100,6 +105,10 @@ const Routes = () => {
                     <Route index element={<Group />} />
                   </Route>
                   <Route path="settings">
+                    <Route
+                      index
+                      element={<Navigate to={SettingsTabKey.USERS} replace />}
+                    />
                     {object.values(SettingsTabKey).map((tab) => (
                       <Route
                         key={tab}

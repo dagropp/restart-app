@@ -27,7 +27,7 @@ export const Logo = () => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 99.75 19.08"
       className={clsx(
-        'px-4 pb-4 transition-opacity',
+        'lg:px-4 lg:pb-4 w-1/3 lg:w-auto transition-opacity',
         !isHome && 'cursor-pointer hover:opacity-80',
       )}
       onClick={handleLogoClick}

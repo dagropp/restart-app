@@ -53,7 +53,7 @@ const MenuItemComponent = ({
 );
 
 const AppToolbar = () => {
-  const { setIsLoggedIn, currency, setCurrency } = useAppContext();
+  const { setIsLoggedIn, currency, setCurrency, theme } = useAppContext();
   const { isAdmin, canSendGroupInvite } = useUserContext();
 
   const navigate = useNavigate();
@@ -84,15 +84,17 @@ const AppToolbar = () => {
       <AppBar
         position="sticky"
         color="inherit"
-        className="!w-max h-screen"
+        className="lg:!w-max lg:h-screen h-16"
         elevation={0}
         sx={{ bgcolor: getBgColor }}
       >
-        <Toolbar className="flex flex-col items-center mx-auto !py-4 !px-0 h-full !m-0 relative">
+        <Toolbar className="flex items-center mx-auto !m-0 relative lg:h-full lg:flex-col lg:!py-4 lg:!px-0">
           <Logo />
           <ToolbarNavigation />
-          <div className="self-start flex flex-col gap-2 items-center pl-2 mt-auto">
-            <ThemeSwitch />
+          <div className="flex gap-2 items-center ml-auto pl-2 lg:ml-0 lg:mt-auto lg:self-start lg:flex-col">
+            <div className="hidden lg:block">
+              <ThemeSwitch />
+            </div>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -117,6 +119,10 @@ const AppToolbar = () => {
                     onChange={setCurrency}
                     size="small"
                   />
+                </div>
+                <div className="px-1 pb-2 items-center h-12 flex lg:hidden">
+                  <ThemeSwitch />
+                  {theme} Theme
                 </div>
                 {isAdmin && (
                   <MenuItemComponent

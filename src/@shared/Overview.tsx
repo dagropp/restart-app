@@ -1,5 +1,6 @@
 import Masonry from '@mui/lab/Masonry';
 import Skeleton from '@mui/material/Skeleton';
+import { style } from '@utils/style.utils';
 import { type ReactNode } from 'react';
 
 import SectionCard from './SectionCard';
@@ -14,7 +15,11 @@ const OverviewSkeleton = () => {
   const heights = [300, 250, 200, 150, 200, 250, 180, 80];
 
   return (
-    <Masonry columns={3} spacing={2} sequential={false}>
+    <Masonry
+      columns={style.MASONRY_COLUMN_COUNT}
+      spacing={2}
+      sequential={false}
+    >
       {heights.map((height, index) => (
         <SectionCard className="!p-0" contentClassName="!p-0" key={index}>
           <Skeleton variant="rectangular" height={height} />
@@ -31,7 +36,7 @@ const Overview = ({ loading, gridKey, children }: Props) =>
     </div>
   ) : (
     <Masonry
-      columns={3}
+      columns={style.MASONRY_COLUMN_COUNT}
       spacing={2}
       sequential={false}
       key={gridKey}

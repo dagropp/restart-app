@@ -53,7 +53,7 @@ const Routes = () => {
           style={{ backgroundColor: theme.palette.background.default }}
         >
           {isLoggedIn === LoginState.Valid && <AppToolbar />}
-          <div className="w-full h-[calc(100vh - 64px)] overflow-y-auto overflow-x-hidden lg:h-screen">
+          <div className="w-full lg:overflow-x-hidden lg:h-screen lg:overflow-y-auto">
             <div className="w-[1600px] mx-auto max-w-full box-border">
               {isLoggedIn === LoginState.Valid ? (
                 <LibRoutes>

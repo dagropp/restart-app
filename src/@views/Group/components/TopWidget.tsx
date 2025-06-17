@@ -91,14 +91,11 @@ export const TopWidget = () => {
   return (
     <SectionCard
       title="Places of Interest"
-      contentClassName="max-h-[325px] flex flex-col"
+      contentClassName="md:max-h-[325px] flex flex-col"
     >
       <Box
         className="max-h-full overflow-y-auto"
-        sx={{
-          // bgcolor: (theme) => alpha(theme.palette.background.default, 0.7),
-          borderColor: (theme) => theme.palette.divider,
-        }}
+        sx={{ borderColor: (theme) => theme.palette.divider }}
       >
         <Table
           headerHidden

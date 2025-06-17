@@ -192,6 +192,8 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
 
   const repliesDisplay = fullPage ? replies : replies.slice(0, 5);
 
+  const isHebrewTitle = !!note.title && string.containsHebrew(note.title);
+
   return (
     <>
       <Card variant="outlined" sx={styling}>
@@ -234,15 +236,14 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
             />
           }
         />
-        <CardContent
-          sx={
-            string.containsHebrew(note.data)
-              ? { textAlign: 'right' }
-              : undefined
-          }
-        >
+        <CardContent>
           {note.title && (
-            <Typography variant="subtitle1" className="pb-2">
+            <Typography
+              variant="subtitle1"
+              className="pb-2"
+              dir={isHebrewTitle ? 'rtl' : 'ltr'}
+              align={isHebrewTitle ? 'right' : 'left'}
+            >
               <strong>{note.title}</strong>
             </Typography>
           )}

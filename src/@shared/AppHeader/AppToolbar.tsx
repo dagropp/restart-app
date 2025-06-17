@@ -66,8 +66,10 @@ const AppToolbar = () => {
     setAnchorElUser(event.currentTarget);
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
-  const openInviteDialog = (isGroup: boolean) => () =>
+  const openInviteDialog = (isGroup: boolean) => () => {
+    handleCloseUserMenu();
     setInviteDialogState({ isGroup, isOpen: true });
+  };
   const closeInviteDialog = () => setInviteDialogState(null);
 
   const logout = async () => {

@@ -107,13 +107,13 @@ export const EditUser = () => {
         });
       }
     },
-    [loginRequest, navigate, setIsLoggedIn, signUpRequest],
+    [loginRequest, navigate, refetchCities, setIsLoggedIn, signUpRequest],
   );
 
   const status = data?.status;
 
   return (
-    <div className="w-[500px] flex flex-col justify-center items-center mx-auto pt-5">
+    <div className="w-[500px] flex flex-col justify-center items-center mx-auto pt-5 max-w-full">
       {status === TokenStatus.Valid ? (
         <EditUserForm
           email={email}

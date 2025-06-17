@@ -1,6 +1,6 @@
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded';
 import { CompareData, CompareStatus } from '@services/api';
-import { Fragment, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import InsightsIcon from '../../InsightsIcon';
 import { Item } from './Item';
@@ -33,7 +33,10 @@ export const List = ({ data }: Props) => {
   return (
     <>
       {data.map((item, index) => (
-        <Fragment key={item.key}>
+        <div
+          className="flex col-span-3 gap-3 sm:contents sm:col-span-[initial] sm:gap-0"
+          key={item.key}
+        >
           <Item
             rtl={true}
             label={item.city.label}
@@ -41,7 +44,7 @@ export const List = ({ data }: Props) => {
             isFirst={index === 0}
             isLast={index === data.length - 1}
           />
-          <div className="flex items-center">
+          <div className="hidden items-center sm:flex">
             <InsightsIcon
               insightKey={item.key}
               fontSize="small"
@@ -55,7 +58,7 @@ export const List = ({ data }: Props) => {
             isFirst={index === 0}
             isLast={index === data.length - 1}
           />
-        </Fragment>
+        </div>
       ))}
       <Item
         rtl={true}

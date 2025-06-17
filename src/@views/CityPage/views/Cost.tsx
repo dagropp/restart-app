@@ -1,6 +1,9 @@
+import Typography from '@common/Typography';
+import SentimentVeryDissatisfiedRoundedIcon from '@mui/icons-material/SentimentVeryDissatisfiedRounded';
 import { alpha, Skeleton, Theme } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import SectionCard from '@shared/SectionCard';
+import { style } from '@utils/style.utils';
 
 import { SimulationResults } from '../components';
 import BreakdownGrid, {
@@ -75,7 +78,25 @@ const CostWithData = () => {
 const Cost = ({ loading }: Props) => {
   return (
     <div className="flex gap-4 items-start flex-col px-5">
-      {loading ? <CostSkeleton /> : <CostWithData />}
+      {style.isLargerThanPhone ? (
+        loading ? (
+          <CostSkeleton />
+        ) : (
+          <CostWithData />
+        )
+      ) : (
+        <div className="flex flex-col gap-2 w-full items-center justify-center text-center h-[calc(100vh-230px)]">
+          <Typography variant="h6">Not Available on Small Screens</Typography>
+          <SentimentVeryDissatisfiedRoundedIcon
+            fontSize="large"
+            className="mt-5 mb-5"
+          />
+          <Typography variant="caption" className="text-balance">
+            Cost simulation is currently only supported on larger devices.
+            Please use a tablet or desktop for the best experience.
+          </Typography>
+        </div>
+      )}
     </div>
   );
 };

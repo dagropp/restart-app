@@ -18,7 +18,7 @@ const Group = () => {
 
   return (
     <div className="pt-5 flex flex-col gap-4">
-      <div className="px-5 flex gap-4 max-h-[375px]">
+      <div className="px-5 flex flex-col gap-4 md:max-h-[375px] md:flex-row">
         <ProgressWidget />
         <TopWidget />
       </div>

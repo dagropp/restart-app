@@ -24,7 +24,7 @@ export const Item = ({
   return (
     <Box
       className={clsx(
-        'p-2 flex gap-3 items-center',
+        'p-2 flex gap-3 items-center flex-1',
         rtl && 'justify-end',
         (isFirst || isIsolated) && 'rounded-t-lg',
         (isLast || isIsolated) && 'rounded-b-lg',

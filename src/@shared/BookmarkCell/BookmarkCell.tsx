@@ -8,6 +8,7 @@ import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import IconButton from '@mui/material/IconButton';
 import apiService, { City, Country, StatusResponse } from '@services/api';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import { useTranslations } from '@translations';
 import { style } from '@utils/style.utils';
 import clsx from 'clsx';
 import { type MouseEvent } from 'react';
@@ -38,6 +39,8 @@ const getClassName = (
 
 export const BookmarkCell = ({ row, isAlwaysVisible }: Props) => {
   const { group } = useUserContext();
+  const translations = useTranslations().table.cells.favorites;
+
   const { refetch: refetchGroup } = apiService.useGroup(group.id);
   const { refetch: refetchCities } = apiService.useCities();
   const { refetch: refetchCountries } = apiService.countries.useList();
@@ -52,7 +55,7 @@ export const BookmarkCell = ({ row, isAlwaysVisible }: Props) => {
   });
 
   const handleClick =
-    (api: UseMutationResult<StatusResponse, Error, void, unknown>) =>
+    (api: UseMutationResult<StatusResponse, Error, void>) =>
     async (event: MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
       const { status } = await api.mutateAsync();
@@ -82,7 +85,11 @@ export const BookmarkCell = ({ row, isAlwaysVisible }: Props) => {
   return (
     <div className="flex items-center justify-center gap-1 min-w-16 w-16">
       <Tooltip
-        title={row.isBookmark ? 'Remove Bookmark' : 'Add Bookmark'}
+        title={
+          row.isBookmark
+            ? translations.bookmark.remove
+            : translations.bookmark.add
+        }
         placement="left"
       >
         <IconButton
@@ -101,12 +108,12 @@ export const BookmarkCell = ({ row, isAlwaysVisible }: Props) => {
         <Tooltip
           title={
             disabled
-              ? 'Destination Is Derived from City'
+              ? translations.destination.isDerived
               : row.isDestination
-                ? 'Remove Destination'
+                ? translations.destination.remove
                 : group.destination
-                  ? 'Replace Destination'
-                  : 'Add Destination'
+                  ? translations.destination.replace
+                  : translations.destination.add
           }
           placement="right"
         >

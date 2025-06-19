@@ -2,7 +2,6 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 
-// https://vite.dev/config/
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
@@ -15,6 +14,7 @@ export default defineConfig(() => {
         '@services': '/src/@services',
         '@utils': '/src/@utils',
         '@views': '/src/@views',
+        '@translations': '/src/@translations',
       },
     },
   };

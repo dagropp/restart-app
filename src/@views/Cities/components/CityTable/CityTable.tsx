@@ -8,6 +8,7 @@ import CountryDisplay from '@shared/CountryDisplay';
 import CurrencyDisplay from '@shared/CurrencyDisplay';
 import LanguageDisplay from '@shared/LanguageDisplay';
 import VisaDisplay from '@shared/VisaDisplay';
+import { useTranslations } from '@translations';
 import { number } from '@utils/number.utils.ts';
 import { object } from '@utils/object.utils';
 import { tableSort } from '@utils/table-sort.utils';
@@ -69,6 +70,7 @@ export const CityTable = ({
   const { data, isLoading } = apiService.useCities();
   const { data: scores, isLoading: isScoresLoading } = apiService.score.use();
   const navigate = useNavigate();
+  const translations = useTranslations();
 
   const handleRowClick = (row: CityData) => navigate('/city/' + row.id);
 
@@ -82,51 +84,59 @@ export const CityTable = ({
       },
       {
         key: 'name',
-        label: 'City',
+        label: translations.table.cells.city,
         valueFormatter: ({ name, state }) =>
           state ? `${name}, ${state}` : name,
       },
       {
         key: 'country',
-        label: 'Country',
+        label: translations.table.cells.country,
         cellRenderer: CountryCell,
         sorter: (direction) => (a, b) =>
           a.country.name.localeCompare(b.country.name) * direction,
       },
       {
         key: 'score',
-        label: 'Average Score',
+        label: translations.table.cells.score,
         cellRenderer: ScoreCell,
         sorter: (direction) => (a, b) =>
           (scores[b.id].average - scores[a.id].average) * direction,
       },
       {
         key: 'isEu',
-        label: 'Is EU',
+        label: translations.table.cells.isEu,
         valueFormatter: (row) =>
-          row.country.isEu === EuUnionStatus.Yes ? 'Yes' : 'No',
+          row.country.isEu === EuUnionStatus.Yes
+            ? translations.common.yes
+            : translations.common.no,
         sorter: tableSort.getIsEuSorter((row) => row.country.isEu),
       },
       {
         key: 'visaLevel',
-        label: 'Visa Requirements',
+        label: translations.table.cells.visa,
         cellRenderer: VisaCell,
         sorter: tableSort.getVisaLevelSorter((row) => row.country.visaLevel),
       },
       {
         key: 'language',
-        label: 'Language',
+        label: translations.table.cells.language,
         cellRenderer: LanguageCell,
-        sorter: tableSort.getLanguageSorter((row) => row.language),
+        sorter: tableSort.getLanguageSorter(
+          (row) => row.language,
+          translations,
+        ),
       },
       {
         key: 'currency',
-        label: 'Currency',
+        label: translations.table.cells.currency,
         cellRenderer: CurrencyCell,
-        sorter: tableSort.getCurrencySorter((row) => row.country.currency),
+        sorter: tableSort.getCurrencySorter(
+          (row) => row.country.currency,
+          translations,
+        ),
       },
     ],
-    [scores],
+    [scores, translations],
   );
 
   const rows = useMemo(

@@ -26,7 +26,6 @@ interface RegionData {
   translate: string;
   scale: number;
   marks: MarkData[];
-  label: string;
   strokeWidth: number;
 }
 
@@ -39,7 +38,6 @@ const regionMap: Record<Region, RegionData> = {
   [Region.ALL]: {
     scale: 1,
     translate: '0 0',
-    label: 'All',
     strokeWidth: 0.7,
     marks: [
       // OCEANIA
@@ -104,7 +102,6 @@ const regionMap: Record<Region, RegionData> = {
   [Region.EUROPE]: {
     scale: 3.6,
     translate: '-3% 109%',
-    label: 'Europe',
     strokeWidth: 0.3,
     marks: [
       { x: 65.8, y: 92, cities: [City.NICOSIA, City.LARNACA] },
@@ -148,7 +145,6 @@ const regionMap: Record<Region, RegionData> = {
   [Region.NORTH_AMERICA]: {
     scale: 2.9,
     translate: '100% 78%',
-    label: 'North America',
     strokeWidth: 0.4,
     marks: [
       { x: 74.2, y: 58.1, cities: [City.BOSTON] },
@@ -166,7 +162,6 @@ const regionMap: Record<Region, RegionData> = {
   [Region.ASIA]: {
     scale: 3,
     translate: '-50% 33%',
-    label: 'Asia and Middle-East',
     strokeWidth: 0.4,
     marks: [
       { x: 60.7, y: 79, cities: [City.BENGALURU] },
@@ -180,7 +175,6 @@ const regionMap: Record<Region, RegionData> = {
   [Region.OCEANIA]: {
     scale: 3.2,
     translate: '-129% -94%',
-    label: 'Oceania',
     strokeWidth: 0.4,
     marks: [
       { x: 53.9, y: 63.7, cities: [City.SYDNEY] },

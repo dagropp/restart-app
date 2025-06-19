@@ -1,0 +1,137 @@
+{
+  "table": {
+    "empty": {
+      "title": "No Results Found",
+      "subtitle": "Try adjusting the filters to see more data"
+    },
+    "cells": {
+      "city": "City",
+      "country": "Country",
+      "score": "Average Score",
+      "isEu": "Is EU",
+      "visa": "Visa Requirements",
+      "language": "Language",
+      "currency": "Currency",
+      "favorites": {
+        "bookmark": { "add": "Add Bookmark", "remove": "Remove Bookmark" },
+        "destination": {
+          "add": "Add Destination",
+          "remove": "Remove Destination",
+          "replace": "Replace Destination",
+          "isDerived": "Destination Is Derived from City"
+        }
+      }
+    },
+    "filters": {
+      "minRating": "Min Rating",
+      "region": "Region",
+      "visa": "Visa Requirements",
+      "minEnglishSpeakers": "Min English Speakers",
+      "englishNative": "Native Language",
+      "addFilters": "Add Filters",
+      "editFilters": "Edit Filters",
+      "resetFilters": "Reset Filters"
+    },
+    "map": {
+      "regions": {
+        "all": "All",
+        "europe": "Europe",
+        "northAmerica": "North America",
+        "emea": "Asia and Middle-East",
+        "oceania": "Oceania"
+      }
+    }
+  },
+  "compare": {
+    "vs": "VS."
+  },
+  "common": {
+    "cancel": "Cancel",
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "shared": {
+    "englishSpeakers": "{{speakers}}% English speakers"
+  },
+  "user": {
+    "login": {
+      "title": "Enter your email and password",
+      "action": "Login",
+      "error": "Login failed. Please check your email and password and try again."
+    },
+    "inputs": {
+      "email": "Email",
+      "password": "Password"
+    }
+  },
+  "menu": {
+    "primary": {
+      "cities": "Cities",
+      "countries": "Countries",
+      "compare": "Compare",
+      "notes": "Notes",
+      "group": "Group",
+      "settings": "Settings"
+    },
+    "secondary": {
+      "openSettings": "Open Settings",
+      "inviteUser": "Invite User",
+      "addUserToGroup": "Add User to Group",
+      "logout": "Logout",
+      "lightTheme": "Light Theme",
+      "darkTheme": "Dark Theme"
+    }
+  },
+  "enum": {
+    "visa": {
+      "0": { "short": "Not Required", "regular": "No visa required" },
+      "1": { "short": "Easy", "regular": "Easy visa requirements" },
+      "2": { "short": "Medium", "regular": "Medium visa requirements" }
+    },
+    "language": {
+      "AR": "Arabic",
+      "CS": "Czech",
+      "DA": "Danish",
+      "DE": "German",
+      "EL": "Greek",
+      "EN": "English",
+      "ES": "Spanish",
+      "FI": "Finnish",
+      "FR": "French",
+      "HE": "Hebrew",
+      "HI": "Hindi",
+      "HU": "Hungarian",
+      "NL": "Dutch",
+      "NO": "Norwegian",
+      "PL": "Polish",
+      "PT": "Portuguese",
+      "SL": "Slovak",
+      "SV": "Swedish",
+      "IT": "Italian",
+      "ET": "Estonian",
+      "LT": "Lithuanian",
+      "TR": "Turkish",
+      "IS": "Icelandic",
+      "LV": "Latvian"
+    },
+    "currency": {
+      "AED": "UAE Dirham",
+      "AUD": "Australian Dollar",
+      "CAD": "Canadian Dollar",
+      "CHF": "Swiss Franc",
+      "CZK": "Czech Koruna",
+      "DKK": "Danish Krone",
+      "EUR": "Euro",
+      "GBP": "Pound Sterling",
+      "HUF": "Hungarian Forint",
+      "ILS": "Israeli Shekel",
+      "INR": "Indian Rupee",
+      "NOK": "Norwegian Krone",
+      "NZD": "NZ Dollar",
+      "PLN": "Polish Złoty",
+      "SEK": "Swedish Krona",
+      "USD": "US Dollar"
+    }
+  }
+}

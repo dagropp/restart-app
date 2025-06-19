@@ -3,6 +3,7 @@ import Link from '@common/Link';
 import Typography from '@common/Typography';
 import Skeleton from '@mui/material/Skeleton';
 import apiService from '@services/api';
+import { useTranslationsContext } from '@translations';
 
 import SectionCard from './SectionCard';
 
@@ -18,7 +19,11 @@ interface Props {
 }
 
 const WikiData = ({ wikipediaKey, image, showTitle }: Props) => {
-  const { data, isLoading } = apiService.wiki.useSummary(wikipediaKey);
+  const { language } = useTranslationsContext();
+  const { data, isLoading } = apiService.wiki.useSummary(
+    language,
+    wikipediaKey,
+  );
 
   return (
     <SectionCard

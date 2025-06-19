@@ -24,7 +24,11 @@ const LandmarkItemComponent = ({
   expanded,
   handleExpand,
 }: LandmarkItemComponentProps) => {
-  const { data, isLoading } = apiService.wiki.useSummary(item.key, expanded);
+  const { data, isLoading } = apiService.wiki.useSummary(
+    'en',
+    item.key,
+    expanded,
+  );
 
   return (
     <Accordion

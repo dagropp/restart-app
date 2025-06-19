@@ -1,4 +1,5 @@
 import Tooltip from '@common/Tooltip';
+import Typography from '@common/Typography';
 import { LoginState, useAppContext } from '@context/app';
 import { useUserContext } from '@context/user';
 import GroupAddRoundedIcon from '@mui/icons-material/GroupAddRounded';
@@ -15,6 +16,7 @@ import Toolbar from '@mui/material/Toolbar';
 import apiService from '@services/api';
 import storageService from '@services/storage';
 import { UserInviteDialog } from '@shared/UserInviteDialog.tsx';
+import { useTranslations } from '@translations';
 import clsx from 'clsx';
 import { type MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -34,9 +36,6 @@ type InviteDialogState = {
   isOpen: boolean;
 } | null;
 
-const INVITE_USER = 'Invite User';
-const ADD_USER_TO_GROUP = 'Add User to Group';
-
 const MenuItemComponent = ({
   Icon,
   className,
@@ -55,6 +54,7 @@ const MenuItemComponent = ({
 const AppToolbar = () => {
   const { setIsLoggedIn, currency, setCurrency, theme } = useAppContext();
   const { isAdmin, canSendGroupInvite } = useUserContext();
+  const translations = useTranslations().menu.secondary;
 
   const navigate = useNavigate();
   const { user } = useUserContext();
@@ -98,7 +98,7 @@ const AppToolbar = () => {
               <ThemeSwitch />
             </div>
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              <Tooltip title={translations.openSettings}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <UserAvatar
                     avatar={user.avatar}
@@ -124,14 +124,18 @@ const AppToolbar = () => {
                 </div>
                 <div className="px-1 pb-2 items-center h-12 flex lg:hidden">
                   <ThemeSwitch />
-                  {theme} Theme
+                  <Typography>
+                    {theme === 'Light'
+                      ? translations.lightTheme
+                      : translations.darkTheme}
+                  </Typography>
                 </div>
                 {isAdmin && (
                   <MenuItemComponent
                     onClick={openInviteDialog(false)}
                     Icon={PersonAddAltRoundedIcon}
                   >
-                    {INVITE_USER}
+                    {translations.inviteUser}
                   </MenuItemComponent>
                 )}
                 {canSendGroupInvite && (
@@ -139,11 +143,11 @@ const AppToolbar = () => {
                     onClick={openInviteDialog(true)}
                     Icon={GroupAddRoundedIcon}
                   >
-                    {ADD_USER_TO_GROUP}
+                    {translations.addUserToGroup}
                   </MenuItemComponent>
                 )}
                 <MenuItemComponent onClick={logout} Icon={LogoutRoundedIcon}>
-                  Logout
+                  {translations.logout}
                 </MenuItemComponent>
               </Menu>
             </Box>

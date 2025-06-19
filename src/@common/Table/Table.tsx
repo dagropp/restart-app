@@ -2,6 +2,7 @@ import SentimentDissatisfiedRoundedIcon from '@mui/icons-material/SentimentDissa
 import MuiTable from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
+import { useTranslations } from '@translations';
 import { useMemo, useState } from 'react';
 
 import Typography from '../Typography';
@@ -19,6 +20,7 @@ const Table = <T extends object>({
   loading,
 }: TableProps<T>) => {
   const [sort, setSort] = useState<TableSort<T> | undefined>(defaultSort);
+  const translations = useTranslations().table.empty;
 
   const sorted = useMemo(
     () =>
@@ -55,10 +57,8 @@ const Table = <T extends object>({
       {!rows.length && (
         <div className="h-[300px] flex items-center justify-center flex-col gap-2">
           <SentimentDissatisfiedRoundedIcon fontSize="large" />
-          <Typography variant="h6">No Results Found</Typography>
-          <Typography color="textSecondary">
-            Try adjusting the filters to see more data
-          </Typography>
+          <Typography variant="h6">{translations.title}</Typography>
+          <Typography color="textSecondary">{translations.subtitle}</Typography>
         </div>
       )}
     </TableContainer>

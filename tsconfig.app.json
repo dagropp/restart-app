@@ -30,7 +30,8 @@
       "@hooks/*": ["src/@hooks/*"],
       "@services/*": ["src/@services/*"],
       "@utils/*": ["src/@utils/*"],
-      "@views/*": ["src/@views/*"]
+      "@views/*": ["src/@views/*"],
+      "@translations": ["src/@translations"]
     }
   },
   "include": ["src"]

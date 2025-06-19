@@ -5,6 +5,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { useTheme } from '@mui/material/styles';
 import { VisaLevel } from '@services/api';
 import VisaDisplay from '@shared/VisaDisplay';
+import { useTranslations } from '@translations';
 
 interface Props {
   filter: VisaLevel[];
@@ -33,6 +34,7 @@ const List = ({ items }: ListProps) => {
 
 const VisaFilter = ({ filter, onChange }: Props) => {
   const { ref, isOverflow } = useIsOverflow<HTMLDivElement>('x');
+  const translations = useTranslations().table.filters;
 
   const options: SelectOption<VisaLevel>[] = visas.map((value) => ({
     value,
@@ -50,8 +52,8 @@ const VisaFilter = ({ filter, onChange }: Props) => {
       value={filter}
       multiple
       onChange={onChange}
-      label="Visa Requirements"
-      placeholder="Visa Requirements"
+      label={translations.visa}
+      placeholder={translations.visa}
       renderValue={(items) => {
         return (
           <Tooltip

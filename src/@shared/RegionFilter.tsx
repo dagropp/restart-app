@@ -4,6 +4,7 @@ import useIsOverflow from '@hooks/useIsOverflow';
 import Checkbox from '@mui/material/Checkbox';
 import { useTheme } from '@mui/material/styles';
 import { Region, ValidRegion } from '@services/api';
+import { ITranslations, useTranslations } from '@translations';
 import { object } from '@utils/object.utils';
 
 interface Props {
@@ -15,15 +16,19 @@ interface ListProps {
   items: ValidRegion[];
 }
 
-const map: Record<ValidRegion, string> = {
-  [Region.EUROPE]: 'Europe',
-  [Region.NORTH_AMERICA]: 'North America',
-  [Region.ASIA]: 'Asia & Middle-East',
-  [Region.OCEANIA]: 'Oceania',
+const getRegions = (t: ITranslations): Record<ValidRegion, string> => {
+  const translations = t.table.map.regions;
+  return {
+    [Region.EUROPE]: translations.europe,
+    [Region.NORTH_AMERICA]: translations.northAmerica,
+    [Region.ASIA]: translations.emea,
+    [Region.OCEANIA]: translations.oceania,
+  };
 };
 
 const List = ({ items }: ListProps) => {
   const theme = useTheme();
+  const translations = useTranslations();
 
   return items.map((item) => (
     <div
@@ -31,16 +36,17 @@ const List = ({ items }: ListProps) => {
       className="border border-solid p-2 rounded min-w-max"
       style={{ borderColor: theme.palette.divider }}
     >
-      {map[item]}
+      {getRegions(translations)[item]}
     </div>
   ));
 };
 
 const RegionFilter = ({ filter, onChange }: Props) => {
   const { ref, isOverflow } = useIsOverflow<HTMLDivElement>('x');
+  const translations = useTranslations();
 
   const options: SelectOption<ValidRegion>[] = object
-    .entries(map)
+    .entries(getRegions(translations))
     .map(([value, label]) => ({
       value,
       label: (
@@ -57,8 +63,8 @@ const RegionFilter = ({ filter, onChange }: Props) => {
       value={filter}
       onChange={onChange}
       multiple
-      label="Region"
-      placeholder="Region"
+      label={translations.table.filters.region}
+      placeholder={translations.table.filters.region}
       renderValue={(items) => {
         return (
           <Tooltip

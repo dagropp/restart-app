@@ -3,9 +3,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useTranslations } from '@translations';
 
 import Button from '../Button';
-import { DEFAULT_CANCEL, DEFAULT_SUCCESS } from './constants';
 import { type DialogProps } from './types';
 
 const Dialog = ({
@@ -17,6 +17,8 @@ const Dialog = ({
   title,
   ...props
 }: DialogProps) => {
+  const translations = useTranslations().common;
+
   const handleSuccess = () => {
     if (typeof success !== 'boolean') success?.onAction?.();
     onClose();
@@ -47,8 +49,8 @@ const Dialog = ({
             }
           >
             {typeof cancel !== 'boolean'
-              ? (cancel?.label ?? DEFAULT_CANCEL)
-              : DEFAULT_CANCEL}
+              ? (cancel?.label ?? translations.cancel)
+              : translations.cancel}
           </Button>
         )}
         {success && (
@@ -60,8 +62,8 @@ const Dialog = ({
             }
           >
             {typeof success !== 'boolean'
-              ? (success?.label ?? DEFAULT_SUCCESS)
-              : DEFAULT_SUCCESS}
+              ? (success?.label ?? translations.ok)
+              : translations.ok}
           </Button>
         )}
       </DialogActions>

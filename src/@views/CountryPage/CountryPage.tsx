@@ -1,5 +1,6 @@
 import apiService, { Country } from '@services/api';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslationsContext } from '@translations';
 import { object } from '@utils/object.utils';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
@@ -12,6 +13,7 @@ interface Props {
   tab: CountryTabKey;
 }
 const CountryPage = ({ tab }: Props) => {
+  const { language } = useTranslationsContext();
   const id = useParams().id as Country;
   const { data } = apiService.countries.useList();
 
@@ -24,6 +26,7 @@ const CountryPage = ({ tab }: Props) => {
   });
 
   const { isLoading: wikiDataLoading } = apiService.wiki.useSummary(
+    language,
     item?.wikipediaKey,
   );
 

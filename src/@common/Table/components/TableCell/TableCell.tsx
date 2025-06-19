@@ -1,4 +1,5 @@
 import MuiTableCell from '@mui/material/TableCell';
+import { useTranslations } from '@translations';
 
 import { type TableCellProps } from './types';
 
@@ -6,6 +7,8 @@ export const TableCell = <T extends object>({
   row,
   column,
 }: TableCellProps<T>) => {
+  const translations = useTranslations().common;
+
   const setLabel = () => {
     const data = row[column.key as keyof T];
     if (column.cellRenderer) {
@@ -22,7 +25,7 @@ export const TableCell = <T extends object>({
       case 'number':
         return data.toLocaleString();
       case 'boolean':
-        return data ? 'Yes' : 'No';
+        return data ? translations.yes : translations.no;
       case 'object':
         return JSON.stringify(data);
       default:

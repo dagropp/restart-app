@@ -1,6 +1,7 @@
 import Rating from '@common/Rating';
 import Select, { SelectOption } from '@common/Select';
 import { useFiltersContext } from '@context/filters';
+import { useTranslations } from '@translations';
 
 import { CitiesFilters } from '../../../types';
 
@@ -20,14 +21,15 @@ const options: SelectOption<number>[] = [
 
 export const RatingFilter = () => {
   const { filters, updateFilters } = useFiltersContext<CitiesFilters>();
+  const translations = useTranslations().table.filters;
 
   return (
     <Select
       options={options}
       value={filters.minRating}
       onChange={(minRating) => updateFilters({ minRating })}
-      label="Min Rating"
-      placeholder="Min Rating"
+      label={translations.minRating}
+      placeholder={translations.minRating}
       renderValue={(item) => (
         <div className="flex gap-2 items-center flex-wrap">
           <Rating value={item} readOnly />

@@ -1,12 +1,10 @@
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import { Language } from '@services/api';
+import { useTranslations } from '@translations';
 import { useMemo } from 'react';
 
-interface LanguageData {
-  localLabel: string;
-  englishLabel?: string;
-}
+import { interpolateTranslations } from '../@translations/utils.ts';
 
 interface Props {
   languages: Language[];
@@ -15,31 +13,31 @@ interface Props {
   englishLabelOnly?: boolean;
 }
 
-export const languageMap: Record<Language, LanguageData> = {
-  [Language.AR]: { localLabel: 'العربية', englishLabel: 'Arabic' },
-  [Language.CS]: { localLabel: 'Čeština', englishLabel: 'Czech' },
-  [Language.DA]: { localLabel: 'Dansk', englishLabel: 'Danish' },
-  [Language.DE]: { localLabel: 'Deutsche', englishLabel: 'German' },
-  [Language.EL]: { localLabel: 'Ελληνικά', englishLabel: 'Greek' },
-  [Language.EN]: { localLabel: 'English' },
-  [Language.ES]: { localLabel: 'Español', englishLabel: 'Spanish' },
-  [Language.FI]: { localLabel: 'Suomen', englishLabel: 'Finnish' },
-  [Language.FR]: { localLabel: 'Français', englishLabel: 'French' },
-  [Language.HE]: { localLabel: 'עברית', englishLabel: 'Hebrew' },
-  [Language.HI]: { localLabel: 'हिन्दी', englishLabel: 'Hindi' },
-  [Language.HU]: { localLabel: 'Magyar', englishLabel: 'Hungarian' },
-  [Language.NL]: { localLabel: 'Nederlands', englishLabel: 'Dutch' },
-  [Language.NO]: { localLabel: 'Norsk', englishLabel: 'Norwegian' },
-  [Language.PL]: { localLabel: 'Polski', englishLabel: 'Polish' },
-  [Language.PT]: { localLabel: 'Português', englishLabel: 'Portuguese' },
-  [Language.SL]: { localLabel: 'Slovenčina', englishLabel: 'Slovak' },
-  [Language.SV]: { localLabel: 'Svenska', englishLabel: 'Swedish' },
-  [Language.IT]: { localLabel: 'Italiano', englishLabel: 'Italian' },
-  [Language.ET]: { localLabel: 'Eesti', englishLabel: 'Estonian' },
-  [Language.LT]: { localLabel: 'Lietuvių', englishLabel: 'Lithuanian' },
-  [Language.TR]: { localLabel: 'Türkçe', englishLabel: 'Turkish' },
-  [Language.IS]: { localLabel: 'Íslenska', englishLabel: 'Icelandic' },
-  [Language.LV]: { localLabel: 'Latviešu', englishLabel: 'Latvian' },
+export const languageMap: Record<Language, string> = {
+  [Language.AR]: 'العربية',
+  [Language.CS]: 'Čeština',
+  [Language.DA]: 'Dansk',
+  [Language.DE]: 'Deutsche',
+  [Language.EL]: 'Ελληνικά',
+  [Language.EN]: 'English',
+  [Language.ES]: 'Español',
+  [Language.FI]: 'Suomen',
+  [Language.FR]: 'Français',
+  [Language.HE]: 'עברית',
+  [Language.HI]: 'हिन्दी',
+  [Language.HU]: 'Magyar',
+  [Language.NL]: 'Nederlands',
+  [Language.NO]: 'Norsk',
+  [Language.PL]: 'Polski',
+  [Language.PT]: 'Português',
+  [Language.SL]: 'Slovenčina',
+  [Language.SV]: 'Svenska',
+  [Language.IT]: 'Italiano',
+  [Language.ET]: 'Eesti',
+  [Language.LT]: 'Lietuvių',
+  [Language.TR]: 'Türkçe',
+  [Language.IS]: 'Íslenska',
+  [Language.LV]: 'Latviešu',
 };
 
 const LanguageDisplay = ({
@@ -48,22 +46,28 @@ const LanguageDisplay = ({
   captionAsTooltip,
   englishLabelOnly,
 }: Props) => {
+  const translations = useTranslations();
+
   const formattedLanguages = useMemo(
     () =>
       languages
         .map((language) => {
-          const { localLabel, englishLabel } = languageMap[language];
+          const localLabel = languageMap[language];
+          const englishLabel = translations.enum.language[language];
+
           return englishLabelOnly
             ? englishLabel || localLabel
-            : `${localLabel}${englishLabel ? ` (${englishLabel})` : ''}`;
+            : `${localLabel}${englishLabel !== localLabel ? ` (${englishLabel})` : ''}`;
         })
         .join(', '),
-    [englishLabelOnly, languages],
+    [englishLabelOnly, languages, translations.enum.language],
   );
 
   const englishSpeakersLabel =
     englishSpeakersPercentage &&
-    `${Math.round(englishSpeakersPercentage * 100)}% English speakers`;
+    interpolateTranslations(translations.shared.englishSpeakers, {
+      speakers: Math.round(englishSpeakersPercentage * 100),
+    });
 
   return (
     <Tooltip title={captionAsTooltip && englishSpeakersLabel} placement="left">

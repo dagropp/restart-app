@@ -33,13 +33,15 @@ const CountryDisplay = ({ country, className }: Props) => {
 
   const { name } = data[country];
   return (
-    <Typography
-      variant="body2"
-      className={clsx('flex items-center gap-2', className)}
-    >
+    <div className={clsx('flex items-center gap-2', className)}>
       <CountryImage country={country} className="h-4" />
-      {name}
-    </Typography>
+      <Typography
+        variant="body2"
+        className={clsx('flex items-center gap-2', className)}
+      >
+        {name}
+      </Typography>
+    </div>
   );
 };
 

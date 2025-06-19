@@ -11,6 +11,7 @@ import CountryDisplay from '@shared/CountryDisplay';
 import CurrencyDisplay from '@shared/CurrencyDisplay';
 import LanguageDisplay from '@shared/LanguageDisplay';
 import VisaDisplay from '@shared/VisaDisplay';
+import { useTranslations } from '@translations';
 import { object } from '@utils/object.utils';
 import { tableSort } from '@utils/table-sort.utils';
 import { useMemo } from 'react';
@@ -47,44 +48,6 @@ const LanguageCell = ({
   />
 );
 
-const columns: TableColumn<CountryResponse>[] = [
-  {
-    key: 'bookmark',
-    cellRenderer: BookmarkCell,
-    className: '!pr-0',
-    disableSort: true,
-  },
-  {
-    key: 'name',
-    label: 'Country',
-    cellRenderer: CountryCell,
-  },
-  {
-    key: 'isEu',
-    label: 'Is EU',
-    valueFormatter: (row) => (row.isEu === EuUnionStatus.Yes ? 'Yes' : 'No'),
-    sorter: tableSort.getIsEuSorter((row) => row.isEu),
-  },
-  {
-    key: 'visaLevel',
-    label: 'Visa Requirements',
-    cellRenderer: VisaCell,
-    sorter: tableSort.getVisaLevelSorter((row) => row.visaLevel),
-  },
-  {
-    key: 'language',
-    label: 'Language',
-    cellRenderer: LanguageCell,
-    sorter: tableSort.getLanguageSorter((row) => row.language),
-  },
-  {
-    key: 'currency',
-    label: 'Currency',
-    cellRenderer: CurrencyCell,
-    sorter: tableSort.getCurrencySorter((row) => row.currency),
-  },
-];
-
 export const CountriesTable = ({
   filters,
   updateFilters,
@@ -93,8 +56,59 @@ export const CountriesTable = ({
 }: Props) => {
   const { data, isLoading } = apiService.countries.useList();
   const navigate = useNavigate();
+  const translations = useTranslations();
 
   const handleRowClick = (row: CountryResponse) => navigate(row.id);
+
+  const columns: TableColumn<CountryResponse>[] = useMemo(
+    () => [
+      {
+        key: 'bookmark',
+        cellRenderer: BookmarkCell,
+        className: '!pr-0',
+        disableSort: true,
+      },
+      {
+        key: 'name',
+        label: translations.table.cells.country,
+        cellRenderer: CountryCell,
+      },
+      {
+        key: 'isEu',
+        label: translations.table.cells.isEu,
+        valueFormatter: (row) =>
+          row.isEu === EuUnionStatus.Yes
+            ? translations.common.yes
+            : translations.common.no,
+        sorter: tableSort.getIsEuSorter((row) => row.isEu),
+      },
+      {
+        key: 'visaLevel',
+        label: translations.table.cells.visa,
+        cellRenderer: VisaCell,
+        sorter: tableSort.getVisaLevelSorter((row) => row.visaLevel),
+      },
+      {
+        key: 'language',
+        label: translations.table.cells.language,
+        cellRenderer: LanguageCell,
+        sorter: tableSort.getLanguageSorter(
+          (row) => row.language,
+          translations,
+        ),
+      },
+      {
+        key: 'currency',
+        label: translations.table.cells.currency,
+        cellRenderer: CurrencyCell,
+        sorter: tableSort.getCurrencySorter(
+          (row) => row.currency,
+          translations,
+        ),
+      },
+    ],
+    [translations],
+  );
 
   const filtered = useMemo(() => {
     if (!data) return [];

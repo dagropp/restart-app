@@ -366,6 +366,8 @@ export interface CityData {
   landmarks?: LandmarkItem[];
   isBookmark: boolean;
   isDestination: boolean;
+  satelliteCity?: City | null;
+  satelliteDistance?: number | null;
 }
 
 export interface CurrencyRates {

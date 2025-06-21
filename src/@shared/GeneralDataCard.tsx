@@ -1,7 +1,7 @@
 import Typography from '@common/Typography';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
-import { SvgIconTypeMap } from '@mui/material/SvgIcon';
-import { ReactNode } from 'react';
+import { type OverridableComponent } from '@mui/material/OverridableComponent';
+import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
+import { type PropsWithChildren, type ReactNode } from 'react';
 
 import SectionCard from './SectionCard';
 
@@ -16,7 +16,7 @@ interface Props {
   items: GeneralItemProps[];
 }
 
-const Item = ({ label, display, Icon }: GeneralItemProps) => {
+export const GeneralDataItem = ({ label, display, Icon }: GeneralItemProps) => {
   return (
     <div className="flex items-center justify-between">
       <Typography variant="body2" className="flex items-center gap-2">
@@ -28,13 +28,14 @@ const Item = ({ label, display, Icon }: GeneralItemProps) => {
   );
 };
 
-const GeneralDataCard = ({ items }: Props) => (
+const GeneralDataCard = ({ children, items }: PropsWithChildren<Props>) => (
   <SectionCard>
+    {children}
     <div className="flex flex-col gap-4">
       {items
         .filter((item) => !item.hidden)
         .map((item) => (
-          <Item
+          <GeneralDataItem
             key={item.label}
             label={item.label}
             display={item.display}

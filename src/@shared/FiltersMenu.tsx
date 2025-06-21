@@ -26,8 +26,12 @@ const FiltersMenu = ({ isFiltered, children, reset }: Props) => {
         {isFiltered ? 'Edit Filters' : 'Add Filters'}
       </Button>
       {isFiltered && (
-        <Button variant="outlined" onClick={reset}>
-          <ReplayRoundedIcon />
+        <Button
+          variant="outlined"
+          onClick={reset}
+          endIcon={<ReplayRoundedIcon />}
+        >
+          Reset Filters
         </Button>
       )}
       <Menu

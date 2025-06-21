@@ -60,7 +60,7 @@ const CostEditor = ({ rent, setRent }: Props) => {
 
   return (
     <SectionCard
-      title="Cost of Living"
+      title="Rent"
       subtitle={
         <>
           For a {apartmentSizeLabel} apartment, based on{' '}

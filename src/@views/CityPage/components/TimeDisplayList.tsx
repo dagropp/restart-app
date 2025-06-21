@@ -1,12 +1,15 @@
 import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded';
 import SectionCard from '@shared/SectionCard';
+import { useTranslations } from '@translations';
 
 import TimeDisplay, { CurrentTimeDisplay } from './TimeDisplay';
 
 export const TimeDisplayList = () => {
+  const translations = useTranslations().city.timeDifference;
+
   return (
     <SectionCard
-      title="Time Difference"
+      title={translations.title}
       TitleIcon={AccessTimeFilledRoundedIcon}
     >
       <div className="w-fit mx-auto grid grid-cols-[repeat(3,_auto)] gap-2">

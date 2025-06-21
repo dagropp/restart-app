@@ -1,3 +1,4 @@
+import Typography from '@common/Typography';
 import { Theme } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -80,10 +81,13 @@ const SectionCard = ({
       {(title || subtitle) && (
         <CardHeader
           title={
-            <div className="flex gap-2 items-center justify-center">
+            <Typography
+              variant="h6"
+              className="flex gap-2 items-center justify-center"
+            >
               {title}
               {TitleIcon && <TitleIcon fontSize="small" />}
-            </div>
+            </Typography>
           }
           slotProps={{
             title: { variant: 'h6', className: 'text-center', sx: headerSx },

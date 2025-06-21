@@ -1,10 +1,8 @@
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import { Language } from '@services/api';
-import { useTranslations } from '@translations';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { useMemo } from 'react';
-
-import { interpolateTranslations } from '../@translations/utils.ts';
 
 interface Props {
   languages: Language[];

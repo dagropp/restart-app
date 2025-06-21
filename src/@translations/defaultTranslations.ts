@@ -42,6 +42,107 @@ export const defaultTranslations = {
       },
     },
   },
+  generalSection: {
+    population: 'Population',
+    populationRelativity: '{{population}} / {{percentage}} of the country',
+    density: 'Density',
+    perKm: '/ km',
+    isCapital: 'Is Capital City',
+    elevation: 'Elevation',
+    metersAbbrev: 'm',
+  },
+  city: {
+    flight: {
+      airport: 'Airport',
+      city: 'City',
+      title: '{{airport}}-TLV Flight',
+    },
+    timeDifference: {
+      title: 'Time Difference',
+      current: 'Current Time',
+    },
+    cost: {
+      incomeSlider: {
+        title: 'Annual Income',
+        subtitle: 'As a {{incomeTitle}}',
+        remoteTitle: ', Working remotely in {{cityName}}, {{countryName}}',
+        linkDescription: ', based on ',
+      },
+      rent: {
+        title: 'Rent',
+        subtitle: 'For a {{size}} apartment, based on ',
+        central: 'Central',
+        outer: 'Outer',
+        bedroomSingle: '1 bedroom',
+        bedrooms: '{{bedrooms}} bedrooms',
+      },
+      simulation: {
+        surplus: 'Surplus Rate',
+        deficit: 'Deficit Rate',
+        savings: 'Yearly Savings',
+        losses: 'Yearly Losses',
+        incomes: 'Incomes',
+        grossIncome: "{{name}}'s Gross Income",
+        tax: 'Tax',
+        stipend: "{{name}}'s Stipend / Scholarship",
+        rentDescription: 'For a {{bedrooms}} apartment',
+        generalCost: 'General Cost',
+        familyLabel: 'For a family of {{adults}} and {{children}}',
+        singleAdult: 'For a single adult',
+        couple: 'For a couple',
+        flights: '{{airport}}-TLV Flights / Year',
+        preschool: "{{name}}'s Pre-school",
+        school: "{{name}}'s Private School",
+        expenses: 'Expenses',
+        income: 'Income',
+        errorTitle: 'Not Available on Small Screens',
+        errorSubtitle:
+          'Cost simulation is currently only supported on larger devices. Please use a tablet or desktop for the best experience.',
+      },
+    },
+    jobData: {
+      title: 'Job Data',
+      subtitle: 'As a {{incomeTitle}}',
+      expectedSalary: 'Expected Salary',
+      localDescription: 'Based on current compensation and industry standards',
+      remoteDescription:
+        'Based on working remotely from {{cityName}}, {{countryName}}',
+      comparedWith: 'Compared with ',
+      colAdjusted: 'Cost of Living Adjusted',
+      colAdjustedDescription:
+        'Adjustment for cost of living differences between {{city}} and {{other}}',
+      jobsPosted: '{{jobs}} Jobs Posted',
+      gross: 'Gross Annual',
+      net: 'Monthly Net',
+    },
+    links: {
+      title: 'External Links',
+      costOfLiving: 'Cost of Living Data',
+      income: "{{name}}'s Income Data",
+      facebook: 'Facebook Community',
+      flight: 'Flight Data',
+      wikipedia: 'Wikipedia Page',
+    },
+    plan: {
+      title: 'Plan Ahead',
+      generalCost: 'General Cost',
+      rent: 'Rent',
+      flight: 'One-Way Flight',
+      per3Months: '× 3 Months',
+      perPeople: '× {{people}} People',
+    },
+    score: {
+      title: 'Score',
+    },
+    weather: {
+      title: 'Weather',
+      rainTitle: '{{count}} rain days per year',
+      rainSubtitle: '{{percent}}% of the year',
+      sunlightMax: '{{count}} max sun hours',
+      sunlightMin: '{{count}} min sun hours',
+      sunlightSubtitle: '{{percent}}% of the day',
+    },
+  },
   compare: {
     vs: 'VS.',
   },
@@ -50,6 +151,17 @@ export const defaultTranslations = {
     ok: 'OK',
     yes: 'Yes',
     no: 'No',
+    none: 'None',
+    total: 'Total',
+    perMonth: '/ M',
+    and: 'and',
+    notAvailable: 'N/A',
+  },
+  group: {
+    adultSingle: '1 adult',
+    adults: '{{adults}} adults',
+    childSingle: '1 child',
+    children: '{{children}} children',
   },
   shared: {
     englishSpeakers: '{{speakers}}% English speakers',
@@ -82,6 +194,11 @@ export const defaultTranslations = {
       logout: 'Logout',
       lightTheme: 'Light Theme',
       darkTheme: 'Dark Theme',
+    },
+    tabs: {
+      overview: 'Overview',
+      simulation: 'Simulation',
+      notes: 'Notes ({{notes}})',
     },
   },
   enum: {
@@ -133,6 +250,90 @@ export const defaultTranslations = {
       PLN: 'Polish Złoty',
       SEK: 'Swedish Krona',
       USD: 'US Dollar',
+    },
+    income: {
+      None: {
+        title: 'None',
+      },
+      Other: {
+        title: 'Other',
+        subtitle: "Based on the city's average income",
+      },
+      SocialWorker: {
+        title: 'Social Worker',
+      },
+      Doctor: {
+        title: 'Doctor',
+      },
+      SoftwareEngineerEntry: {
+        title: 'Software Engineer',
+        subtitle: 'Junior/Mid-senior',
+      },
+      SoftwareEngineerSenior: {
+        title: 'Software Engineer',
+        subtitle: 'Senior/Principal',
+      },
+      SoftwareEngineerManager: {
+        title: 'Software Engineering Manager',
+      },
+      ProductDesigner: {
+        title: 'Product Designer',
+        subtitle: 'UI / UX',
+      },
+      ProductManager: {
+        title: 'Product Manager',
+      },
+    },
+    insights: {
+      1: 'The Good',
+      2: 'The So-So',
+      3: 'The Bad',
+    },
+    score: {
+      average: {
+        label: 'Average',
+        description: '',
+      },
+      cost: {
+        label: 'Cost of Living',
+        description:
+          'Comparison of income vs. living costs for single and dual-income households',
+      },
+      distance: {
+        label: 'Distance',
+        description: 'Comparison of travel time and flight costs to Israel',
+      },
+      language: {
+        label: 'Language',
+        description: 'Comparison of English and Hebrew proficiency levels',
+      },
+      qualityRank: {
+        label: 'Quality of Life Rank',
+        description:
+          'Comparison of overall quality of life, including purchasing power, safety, healthcare, cost of living, property affordability, traffic, and pollution levels',
+      },
+      timezone: {
+        label: 'Time Zone',
+        description: 'Comparison of time zone differences with Israel',
+      },
+      visa: {
+        label: 'Visa Requirements',
+        description: 'Comparison of work visa eligibility and requirements',
+      },
+      weather: {
+        label: 'Weather',
+        description: 'Comparison of climate, rainfall, and sunshine hours',
+      },
+      urbanism: {
+        label: 'Urbanism',
+        description: 'Comparison of population, density and stature',
+      },
+    },
+    season: {
+      Summer: 'Summer',
+      Fall: 'Fall',
+      Winter: 'Winter',
+      Spring: 'Spring',
     },
   },
 };

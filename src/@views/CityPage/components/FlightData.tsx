@@ -9,6 +9,7 @@ import SwitchRightRoundedIcon from '@mui/icons-material/SwitchRightRounded';
 import IconButton from '@mui/material/IconButton';
 import dateService from '@services/date.service';
 import SectionCard from '@shared/SectionCard';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { convertCurrency, formatCurrency } from '@utils/format.utils';
 import clsx from 'clsx';
 import { cloneElement, JSX, useEffect, useState } from 'react';
@@ -55,6 +56,7 @@ const FlightData = () => {
   const { currencies, currency: ctxCurrency } = useAppContext();
   const { item } = useCityContext();
   const { isDirectAvailable, isRange, get } = useFlightsData();
+  const translations = useTranslations().city.flight;
   const [isDirect, setIsDirect] = useState(isDirectAvailable);
 
   useEffect(() => {
@@ -74,7 +76,9 @@ const FlightData = () => {
     <SectionCard
       title={
         <div className="flex items-center  justify-center">
-          {item.airport}-TLV Flight
+          {interpolateTranslations(translations.title, {
+            airport: item.airport,
+          })}
           {isRange && (
             <IconButton
               color="inherit"
@@ -107,12 +111,12 @@ const FlightData = () => {
 
       <div className="flex justify-center gap-2 text-center items-start">
         <Typography variant="subtitle2" lineHeight="normal">
-          City
+          {translations.city}
         </Typography>
         <Line icon={<AirportShuttleRoundedIcon />} time={item.driveDuration} />
         <Typography variant="subtitle2">
           <div>{item.airport}</div>
-          <Typography variant="caption">Airport</Typography>
+          <Typography variant="caption">{translations.airport}</Typography>
         </Typography>
         <Line
           icon={<FlightRoundedIcon className="rotate-90" />}
@@ -121,7 +125,7 @@ const FlightData = () => {
         />
         <Typography variant="subtitle2">
           <div>TLV</div>
-          <Typography variant="caption">Airport</Typography>
+          <Typography variant="caption">{translations.airport}</Typography>
         </Typography>
       </div>
     </SectionCard>

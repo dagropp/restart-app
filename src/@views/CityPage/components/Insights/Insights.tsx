@@ -5,10 +5,11 @@ import apiService from '@services/api';
 import InsightsIcon from '@shared/InsightsIcon';
 import SectionCard from '@shared/SectionCard';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslations } from '@translations';
 import { object } from '@utils/object.utils';
 
 import { useCityContext } from '../../context';
-import { itemTypeMap } from './constants';
+import { getItemTypeData } from './constants';
 import { ItemProps } from './types';
 
 const Item = ({ insightKey, label, link }: ItemProps) => {
@@ -32,6 +33,7 @@ const Item = ({ insightKey, label, link }: ItemProps) => {
 
 const Insights = () => {
   const { item } = useCityContext();
+  const translations = useTranslations();
 
   const { data: insights = {} } = useQuery({
     queryKey: ['getInsights', item.id],
@@ -42,7 +44,7 @@ const Insights = () => {
     <SectionCard theme="dark">
       <div className="flex flex-col gap-4">
         {object.entries(insights).map(([key, items]) => {
-          const { bgcolor, Icon, label } = itemTypeMap[key];
+          const { bgcolor, Icon, label } = getItemTypeData(key, translations);
           return (
             <Box
               className="p-2 flex flex-col gap-2 rounded-lg"

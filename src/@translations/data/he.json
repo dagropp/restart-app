@@ -2,18 +2,18 @@
   "table": {
     "empty": {
       "title": "לא נמצאו תוצאות",
-      "subtitle": "נסה לשנות את המסננים כדי לראות יותר נתונים"
+      "subtitle": "נסה להתאים את המסננים כדי לראות יותר נתונים"
     },
     "cells": {
       "city": "עיר",
       "country": "מדינה",
       "score": "ציון ממוצע",
-      "isEu": "באיחוד האירופי",
+      "isEu": "האם באיחוד האירופי",
       "visa": "דרישות ויזה",
       "language": "שפה",
       "currency": "מטבע",
       "favorites": {
-        "bookmark": { "add": "הוסף סימנייה", "remove": "הסר סימנייה" },
+        "bookmark": { "add": "הוסף למועדפים", "remove": "הסר ממועדפים" },
         "destination": {
           "add": "הוסף יעד",
           "remove": "הסר יעד",
@@ -24,10 +24,10 @@
     },
     "filters": {
       "minRating": "דירוג מינימלי",
-      "region": "אזור",
+      "region": "איזור",
       "visa": "דרישות ויזה",
       "minEnglishSpeakers": "אחוז דוברי אנגלית מינימלי",
-      "englishNative": "שפת אם",
+      "englishNative": "שפה אם",
       "addFilters": "הוסף מסננים",
       "editFilters": "ערוך מסננים",
       "resetFilters": "אפס מסננים"
@@ -42,23 +42,132 @@
       }
     }
   },
+  "generalSection": {
+    "population": "אוכלוסייה",
+    "populationRelativity": "{{population}} / {{percentage}} מהמדינה",
+    "density": "צפיפות",
+    "perKm": "/ ק״מ",
+    "isCapital": "האם עיר בירה",
+    "elevation": "גובה מעל פני הים",
+    "metersAbbrev": "מ׳"
+  },
+  "city": {
+    "flight": {
+      "airport": "שדה תעופה",
+      "city": "עיר",
+      "title": "טיסה TLV-{{airport}}"
+    },
+    "timeDifference": {
+      "title": "הפרש שעות",
+      "current": "שעה נוכחית"
+    },
+    "cost": {
+      "incomeSlider": {
+        "title": "הכנסה שנתית",
+        "subtitle": "בתור {{incomeTitle}}",
+        "remoteTitle": ", עבודה מרחוק מ-{{cityName}}, {{countryName}}",
+        "linkDescription": ", על פי "
+      },
+      "rent": {
+        "title": "שכר דירה",
+        "subtitle": "לדירת {{size}}, על פי ",
+        "central": "מרכז העיר",
+        "outer": "פריפריה",
+        "bedroomSingle": "חדר שינה אחד",
+        "bedrooms": "{{bedrooms}} חדרי שינה"
+      },
+      "simulation": {
+        "surplus": "יתרת עודף",
+        "deficit": "יתרת גרעון",
+        "savings": "חיסכון שנתי",
+        "losses": "הפסד שנתי",
+        "incomes": "הכנסות",
+        "grossIncome": "הכנסה ברוטו של {{name}}",
+        "tax": "מס",
+        "stipend": "קצבה / מלגה של {{name}}",
+        "rentDescription": "לדירת {{bedrooms}} חדרים",
+        "generalCost": "הוצאה כללית",
+        "familyLabel": "למשפחה של {{adults}} מבוגרים ו-{{children}} ילדים",
+        "singleAdult": "לאדם בוגר יחיד",
+        "couple": "לזוג",
+        "flights": "טיסות TLV-{{airport}} לשנה",
+        "preschool": "גן של {{name}}",
+        "school": "בית ספר פרטי של {{name}}",
+        "expenses": "הוצאות",
+        "income": "הכנסה",
+        "errorTitle": "לא זמין במסכים קטנים",
+        "errorSubtitle": "סימולציית עלות זמינה כרגע רק במכשירים גדולים יותר. אנא השתמש בטאבלט או מחשב שולחני לחוויה מיטבית."
+      }
+    },
+    "jobData": {
+      "title": "נתוני תעסוקה",
+      "subtitle": "בתור {{incomeTitle}}",
+      "expectedSalary": "שכר צפוי",
+      "localDescription": "בהתבסס על שכר והתנאים בענף המקומי",
+      "remoteDescription": "בהתבסס על עבודה מרחוק מ-{{cityName}}, {{countryName}}",
+      "comparedWith": "בהשוואה ל-",
+      "colAdjusted": "מותאם לעלות מחיה",
+      "colAdjustedDescription": "התאמה להבדלים בעלות המחיה בין {{city}} ל-{{other}}",
+      "jobsPosted": "{{jobs}} משרות פורסמו",
+      "gross": "ברוטו שנתי",
+      "net": "נטו חודשי"
+    },
+    "links": {
+      "title": "קישורים חיצוניים",
+      "costOfLiving": "נתוני עלות מחיה",
+      "income": "נתוני הכנסות של {{name}}",
+      "facebook": "קהילת פייסבוק",
+      "flight": "נתוני טיסות",
+      "wikipedia": "עמוד ויקיפדיה"
+    },
+    "plan": {
+      "title": "תכנן מראש",
+      "generalCost": "הוצאה כללית",
+      "rent": "שכר דירה",
+      "flight": "טיסה בכיוון אחד",
+      "per3Months": "× 3 חודשים",
+      "perPeople": "× {{people}} אנשים"
+    },
+    "score": {
+      "title": "ציון"
+    },
+    "weather": {
+      "title": "מזג אוויר",
+      "rainTitle": "{{count}} ימי גשמים בשנה",
+      "rainSubtitle": "{{percent}}% מהשנה",
+      "sunlightMax": "{{count}} שעות שמש מקסימליות",
+      "sunlightMin": "{{count}} שעות שמש מינימליות",
+      "sunlightSubtitle": "{{percent}}% מהיום"
+    }
+  },
   "compare": {
-    "vs": "נגד"
+    "vs": "לעומת"
   },
   "common": {
     "cancel": "ביטול",
     "ok": "אישור",
     "yes": "כן",
-    "no": "לא"
+    "no": "לא",
+    "none": "אין",
+    "total": "סה״כ",
+    "perMonth": "/ חודש",
+    "and": "ו־",
+    "notAvailable": "לא זמין"
+  },
+  "group": {
+    "adultSingle": "מבוגר אחד",
+    "adults": "{{adults}} מבוגרים",
+    "childSingle": "ילד אחד",
+    "children": "{{children}} ילדים"
   },
   "shared": {
     "englishSpeakers": "{{speakers}}% דוברי אנגלית"
   },
   "user": {
     "login": {
-      "title": "הזן את כתובת האימייל והסיסמה שלך",
-      "action": "התחבר",
-      "error": "ההתחברות נכשלה. בדוק את האימייל והסיסמה ונסה שוב."
+      "title": "הזן אימייל וסיסמה",
+      "action": "התחברות",
+      "error": "ההתחברות נכשלה. אנא בדוק את האימייל והסיסמה ונסה שוב."
     },
     "inputs": {
       "email": "אימייל",
@@ -69,7 +178,7 @@
     "primary": {
       "cities": "ערים",
       "countries": "מדינות",
-      "compare": "השוואה",
+      "compare": "השווה",
       "notes": "הערות",
       "group": "קבוצה",
       "settings": "הגדרות"
@@ -78,14 +187,19 @@
       "openSettings": "פתח הגדרות",
       "inviteUser": "הזמן משתמש",
       "addUserToGroup": "הוסף משתמש לקבוצה",
-      "logout": "התנתק",
-      "lightTheme": "ערכת נושא בהירה",
-      "darkTheme": "ערכת נושא כהה"
+      "logout": "התנתקות",
+      "lightTheme": "עיצוב בהיר",
+      "darkTheme": "עיצוב כהה"
+    },
+    "tabs": {
+      "overview": "סקירה כללית",
+      "simulation": "סימולציה",
+      "notes": "הערות ({{notes}})"
     }
   },
   "enum": {
     "visa": {
-      "0": { "short": "לא נדרש", "regular": "אין צורך בוויזה" },
+      "0": { "short": "לא נדרשת", "regular": "אין צורך בויזה" },
       "1": { "short": "קל", "regular": "דרישות ויזה קלות" },
       "2": { "short": "בינוני", "regular": "דרישות ויזה בינוניות" }
     },
@@ -112,15 +226,15 @@
       "ET": "אסטונית",
       "LT": "ליטאית",
       "TR": "טורקית",
-      "IS": "איסלנדית",
+      "IS": "איסלנדרית",
       "LV": "לטבית"
     },
     "currency": {
-      "AED": "דירהם של איחוד האמירויות",
+      "AED": "דיראם של איחוד האמירויות",
       "AUD": "דולר אוסטרלי",
       "CAD": "דולר קנדי",
-      "CHF": "פרנק שוויצרי",
-      "CZK": "קורונה צ'כית",
+      "CHF": "פרנק שווייצרי",
+      "CZK": "קורונה צ׳כית",
       "DKK": "כתר דני",
       "EUR": "אירו",
       "GBP": "לירה שטרלינג",
@@ -132,6 +246,78 @@
       "PLN": "זלוטי פולני",
       "SEK": "כתר שוודי",
       "USD": "דולר אמריקאי"
+    },
+    "income": {
+      "None": { "title": "ללא" },
+      "Other": {
+        "title": "אחר",
+        "subtitle": "בהתבסס על ממוצע ההכנסה בעיר"
+      },
+      "SocialWorker": { "title": "עובד סוציאלי" },
+      "Doctor": { "title": "רופא" },
+      "SoftwareEngineerEntry": {
+        "title": "מהנדס תוכנה",
+        "subtitle": "ג׳וניור / בינוני-בכיר"
+      },
+      "SoftwareEngineerSenior": {
+        "title": "מהנדס תוכנה",
+        "subtitle": "בכיר / פרינסיפל"
+      },
+      "SoftwareEngineerManager": { "title": "מנהל הנדסת תוכנה" },
+      "ProductDesigner": {
+        "title": "מעצב מוצר",
+        "subtitle": "UI / UX"
+      },
+      "ProductManager": { "title": "מנהל מוצר" }
+    },
+    "insights": {
+      "1": "הטוב",
+      "2": "הסביר",
+      "3": "הפחות טוב"
+    },
+    "score": {
+      "average": {
+        "label": "ממוצע",
+        "description": ""
+      },
+      "cost": {
+        "label": "עלות מחיה",
+        "description": "השוואה בין הכנסה לעלויות מחיה למשקי בית חד־והם"
+      },
+      "distance": {
+        "label": "מרחק",
+        "description": "השוואה של זמן נסיעה ועלויות טיסה לישראל"
+      },
+      "language": {
+        "label": "שפה",
+        "description": "השוואת רמות אנגלית ועברית"
+      },
+      "qualityRank": {
+        "label": "דירוג איכות חיים",
+        "description": "השוואה של איכות חיים כוללת, כולל כוח קנייה, בטיחות, בריאות, עלות מחיה, שווי נכסים, תנועה וזיהום"
+      },
+      "timezone": {
+        "label": "אזור זמן",
+        "description": "השוואת הפרשי שעות עם ישראל"
+      },
+      "visa": {
+        "label": "דרישות ויזה",
+        "description": "השוואת זכאות ודרישות לויזת עבודה"
+      },
+      "weather": {
+        "label": "מזג אוויר",
+        "description": "השוואה של אקלים, גשמים ושעות שמש"
+      },
+      "urbanism": {
+        "label": "עיור",
+        "description": "השוואה של אוכלוסייה, צפיפות והיקף עירוני"
+      }
+    },
+    "season": {
+      "Summer": "קיץ",
+      "Fall": "סתיו",
+      "Winter": "חורף",
+      "Spring": "אביב"
     }
   }
 }

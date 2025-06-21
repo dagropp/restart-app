@@ -3,6 +3,7 @@ import SentimentVeryDissatisfiedRoundedIcon from '@mui/icons-material/SentimentV
 import { alpha, Skeleton, Theme } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import SectionCard from '@shared/SectionCard';
+import { useTranslations } from '@translations';
 import { style } from '@utils/style.utils';
 
 import { SimulationResults } from '../components';
@@ -21,16 +22,17 @@ const getCardBg = (theme: Theme) =>
 
 const CostSkeleton = () => {
   const theme = useTheme();
+  const translations = useTranslations().city.cost.simulation;
 
   return (
     <SectionCard style={{ background: getCardBg(theme) }}>
       <div className="flex justify-stretch">
-        <BreakdownGridSkeleton title="Expenses" />
+        <BreakdownGridSkeleton title={translations.expenses} />
         <div className="flex-1 relative justify-center items-center flex">
           <Skeleton variant="circular" width={250} height={250} />
         </div>
         <div className="flex flex-col gap-5 flex-1">
-          <BreakdownGridSkeleton title="Income" />
+          <BreakdownGridSkeleton title={translations.income} />
         </div>
       </div>
     </SectionCard>
@@ -39,6 +41,7 @@ const CostSkeleton = () => {
 
 const CostWithData = () => {
   const theme = useTheme();
+  const translations = useTranslations().city.cost.simulation;
 
   const {
     positiveState,
@@ -54,7 +57,7 @@ const CostWithData = () => {
       <SectionCard style={{ background: getCardBg(theme) }}>
         <div className="flex justify-stretch">
           <BreakdownGrid
-            title="Expenses"
+            title={translations.expenses}
             rows={negative}
             state={negativeState}
             updateState={updateNegativeState}
@@ -62,7 +65,7 @@ const CostWithData = () => {
           <CostOfLivingChart />
           <div className="flex flex-col gap-5 flex-1">
             <BreakdownGrid
-              title="Income"
+              title={translations.income}
               rows={positive}
               state={positiveState}
               updateState={updatePositiveState}
@@ -76,6 +79,8 @@ const CostWithData = () => {
 };
 
 const Cost = ({ loading }: Props) => {
+  const translations = useTranslations().city.cost.simulation;
+
   return (
     <div className="flex gap-4 items-start flex-col px-5">
       {style.isLargerThanPhone ? (
@@ -86,14 +91,13 @@ const Cost = ({ loading }: Props) => {
         )
       ) : (
         <div className="flex flex-col gap-2 w-full items-center justify-center text-center h-[calc(100vh-230px)]">
-          <Typography variant="h6">Not Available on Small Screens</Typography>
+          <Typography variant="h6">{translations.errorTitle}</Typography>
           <SentimentVeryDissatisfiedRoundedIcon
             fontSize="large"
             className="mt-5 mb-5"
           />
           <Typography variant="caption" className="text-balance">
-            Cost simulation is currently only supported on larger devices.
-            Please use a tablet or desktop for the best experience.
+            {translations.errorSubtitle}
           </Typography>
         </div>
       )}

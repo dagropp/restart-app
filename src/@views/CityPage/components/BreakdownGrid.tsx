@@ -9,6 +9,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Skeleton from '@mui/material/Skeleton';
 import InfoTooltip from '@shared/InfoTooltip.tsx';
+import { useTranslations } from '@translations';
 import {
   convertCurrency,
   type CurrencyConverter,
@@ -185,13 +186,14 @@ const BaseGridRow = ({
 export const BreakdownGridSkeleton = ({
   title,
 }: Pick<Props<BaseState>, 'title'>) => {
+  const translations = useTranslations().common;
   return (
     <div className="flex-1">
       <div className="flex items-center gap-2 pb-3 justify-between">
         <Typography variant="h6">
           {title}{' '}
           <Typography variant="caption" color="textSecondary">
-            <strong>/ Month</strong>
+            <strong>{translations.perMonth}</strong>
           </Typography>
         </Typography>
       </div>
@@ -216,6 +218,7 @@ const BreakdownGrid = <T extends BaseState>({
 }: Props<T>) => {
   const { currency: ctxCurrency, currencies } = useAppContext();
   const { item } = useCityContext();
+  const translations = useTranslations().common;
   const currencyConverter = convertCurrency(
     currencies,
     ctxCurrency,
@@ -233,7 +236,7 @@ const BreakdownGrid = <T extends BaseState>({
         <Typography variant="h6">
           {title}{' '}
           <Typography variant="caption" color="textSecondary">
-            <strong>/ Month</strong>
+            <strong>{translations.perMonth}</strong>
           </Typography>
         </Typography>
       </div>

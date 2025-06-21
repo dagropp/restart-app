@@ -3,6 +3,7 @@ import { alpha } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { SparkLineChart } from '@mui/x-charts';
 import dateService from '@services/date.service.ts';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { format } from '@utils/format.utils';
 import { number } from '@utils/number.utils.ts';
 import dayjs from 'dayjs';
@@ -15,6 +16,7 @@ interface Props {
 
 export const JobsChart = ({ jobs, name }: Props) => {
   const theme = useTheme();
+  const translations = useTranslations().city.jobData;
 
   const trend = useMemo(() => {
     const isBetterThanInitial = jobs.at(-1)! > jobs.at(0)!;
@@ -52,8 +54,10 @@ export const JobsChart = ({ jobs, name }: Props) => {
       <Typography variant="body2">
         <strong>{name}</strong>
       </Typography>
-      <Typography variant="caption" className="">
-        {format.shortNumber(jobs.at(-1)!)} Jobs Posted
+      <Typography variant="caption">
+        {interpolateTranslations(translations.jobsPosted, {
+          jobs: format.shortNumber(jobs.at(-1)!),
+        })}
         <span
           className="px-1 py-0.5 rounded scale-90 inline-block ml-1"
           style={{ backgroundColor: trend.light, color: trend.contrastText }}

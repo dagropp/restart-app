@@ -1,5 +1,6 @@
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { format } from '@utils/format.utils';
 import { number } from '@utils/number.utils';
 
@@ -9,8 +10,13 @@ export const CityPopulation = () => {
   const {
     item: { population, country },
   } = useCityContext();
+  const translations = useTranslations().generalSection;
+
   const percentage = number.percentage(population, country.population);
-  const tooltip = `${Math.round(population).toLocaleString()} / ${percentage} of the country`;
+  const tooltip = interpolateTranslations(translations.populationRelativity, {
+    population: Math.round(population).toLocaleString(),
+    percentage,
+  });
 
   return (
     <Tooltip title={tooltip} placement="left">

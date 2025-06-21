@@ -3,6 +3,7 @@ import Slider, { CurrencyMarkItem } from '@common/Slider';
 import { useAppContext } from '@context/app';
 import { useUserContext } from '@context/user';
 import SectionCard from '@shared/SectionCard';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { convertCurrency } from '@utils/format.utils';
 import { ReactNode } from 'react';
 
@@ -26,6 +27,8 @@ const CostEditor = ({ rent, setRent }: Props) => {
   const { currency, currencies } = useAppContext();
   const { item, cost } = useCityContext();
   const { group } = useUserContext();
+  const translations = useTranslations().city.cost.rent;
+
   const currencyConverter = convertCurrency(
     currencies,
     currency,
@@ -38,7 +41,7 @@ const CostEditor = ({ rent, setRent }: Props) => {
       label: (
         <CurrencyMarkItem
           value={cost.rentOuter}
-          label="Outer"
+          label={translations.outer}
           currency={item.country.currency}
         />
       ),
@@ -48,7 +51,7 @@ const CostEditor = ({ rent, setRent }: Props) => {
       label: (
         <CurrencyMarkItem
           value={cost.rentCentral}
-          label="Central"
+          label={translations.central}
           currency={item.country.currency}
         />
       ),
@@ -56,14 +59,20 @@ const CostEditor = ({ rent, setRent }: Props) => {
   ];
 
   const apartmentSizeLabel =
-    group.bedrooms === 1 ? '1 bedroom' : `${group.bedrooms} bedrooms`;
+    group.bedrooms === 1
+      ? translations.bedroomSingle
+      : interpolateTranslations(translations.bedrooms, {
+          bedrooms: group.bedrooms,
+        });
 
   return (
     <SectionCard
-      title="Cost of Living"
+      title={translations.title}
       subtitle={
         <>
-          For a {apartmentSizeLabel} apartment, based on{' '}
+          {interpolateTranslations(translations.subtitle, {
+            size: apartmentSizeLabel,
+          })}
           <Link external href={getExternalLink(item.costOfLivingKey)}>
             Cost of Living
           </Link>

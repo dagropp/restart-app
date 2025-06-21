@@ -11,6 +11,7 @@ import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import { type OverridableComponent } from '@mui/material/OverridableComponent';
 import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
 import SectionCard from '@shared/SectionCard';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { incomeUtils } from '@utils/income.utils.ts';
 import { useCityContext } from '@views/CityPage/context';
 
@@ -33,50 +34,57 @@ const Item = ({ label, Icon, url }: LinkData) => (
 export const CityLinks = () => {
   const { item } = useCityContext();
   const { user, group } = useUserContext();
+  const translations = useTranslations();
+  const compTranslations = translations.city.links;
 
-  const userIncomeTypeData = incomeUtils.typeMap[user.income];
+  const userIncomeTypeData = incomeUtils.getTypeData(user.income, translations);
   const partnerIncomeTypeData =
-    group.partner && incomeUtils.typeMap[group.partner.income];
+    group.partner &&
+    incomeUtils.getTypeData(group.partner.income, translations);
 
   const list: LinkData[] = [
     {
-      label: 'Cost of Living',
+      label: compTranslations.costOfLiving,
       url: `https://www.numbeo.com/cost-of-living/in/${item.costOfLivingKey}`,
       Icon: PointOfSaleRoundedIcon,
     },
     {
-      label: `${user.firstName}'s Income Data`,
+      label: interpolateTranslations(compTranslations.income, {
+        name: user.firstName,
+      }),
       url: userIncomeTypeData?.getLink?.(item) ?? '',
       Icon: BusinessCenterRoundedIcon,
       hidden: !userIncomeTypeData?.getLink,
     },
     {
-      label: `${group.partner?.firstName}'s Income Data`,
+      label: interpolateTranslations(compTranslations.income, {
+        name: group.partner?.firstName,
+      }),
       url: partnerIncomeTypeData?.getLink?.(item) ?? '',
       Icon: Groups2RoundedIcon,
       hidden: !partnerIncomeTypeData?.getLink,
     },
     {
-      label: 'Facebook Community',
+      label: compTranslations.facebook,
       url: `https://www.facebook.com/groups/${item.communityKey}`,
       Icon: FacebookRoundedIcon,
       hidden: !item.communityKey,
     },
     {
-      label: 'Flight Data',
+      label: compTranslations.flight,
       url: `https://www.kiwi.com/en/search/results/tel-aviv-israel/${item.flightPriceKey}`,
       Icon: FlightTakeoffRoundedIcon,
       hidden: !item.flightPriceKey,
     },
     {
-      label: 'Wikipedia Page',
+      label: compTranslations.wikipedia,
       url: `https://en.wikipedia.org/wiki/${item.wikipediaKey}`,
       Icon: LibraryBooksRoundedIcon,
     },
   ];
 
   return (
-    <SectionCard title="External Links" TitleIcon={PublicRoundedIcon}>
+    <SectionCard title={compTranslations.title} TitleIcon={PublicRoundedIcon}>
       <ul className="flex flex-col gap-2">
         {list
           .filter((item) => !item.hidden)

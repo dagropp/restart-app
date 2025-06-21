@@ -7,7 +7,7 @@ import { TranslationsContext } from './TranslationsContext';
 import { ITranslations, Language } from './types';
 
 export const TranslationsContextWrapper = ({ children }: PropsWithChildren) => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('he');
 
   const isRtl = useMemo(() => rtlLanguages.has(language), [language]);
 

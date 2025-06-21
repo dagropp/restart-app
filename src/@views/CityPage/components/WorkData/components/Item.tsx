@@ -3,6 +3,7 @@ import Typography from '@common/Typography';
 import { useAppContext } from '@context/app';
 import { Currency } from '@services/api';
 import InfoTooltip from '@shared/InfoTooltip.tsx';
+import { useTranslations } from '@translations';
 import { convertCurrency, formatCurrency } from '@utils/format.utils.ts';
 import { useCityContext } from '@views/CityPage/context';
 import { ReactNode, useMemo } from 'react';
@@ -18,6 +19,7 @@ interface Props {
 export const Item = ({ label, gross, net, description, currency }: Props) => {
   const { currencies, currency: ctxCurrency } = useAppContext();
   const { item, currencyConverter: ctxCurrencyConverter } = useCityContext();
+  const translations = useTranslations().city.jobData;
 
   const currencyConverter = useMemo(() => {
     if (!currency) return ctxCurrencyConverter;
@@ -25,8 +27,8 @@ export const Item = ({ label, gross, net, description, currency }: Props) => {
   }, [ctxCurrency, ctxCurrencyConverter, currencies, currency]);
 
   const sections = [
-    { label: 'Gross Annual', value: gross },
-    { label: 'Monthly Net', value: net / 12 },
+    { label: translations.gross, value: gross },
+    { label: translations.net, value: net / 12 },
   ];
 
   return (
@@ -54,8 +56,6 @@ export const Item = ({ label, gross, net, description, currency }: Props) => {
           </Tooltip>
         </div>
       ))}
-
-      <Typography variant="body2">{}</Typography>
     </div>
   );
 };

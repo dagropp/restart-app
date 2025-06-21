@@ -6,6 +6,7 @@ import SavingsRoundedIcon from '@mui/icons-material/SavingsRounded';
 import { Divider } from '@mui/material';
 import { PriceItem } from '@shared/Prices';
 import SectionCard from '@shared/SectionCard';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { formatCurrency } from '@utils/format.utils';
 import { number } from '@utils/number.utils';
 import { useMemo } from 'react';
@@ -23,22 +24,38 @@ export const Plan = () => {
     item: { country },
   } = useCityContext();
   const { cheapest } = useFlightsData();
+  const translations = useTranslations();
+  const compTranslations = translations.city.plan;
 
   const headCount = { adults: partner ? 2 : 1, children: children.length };
 
   const headCountCaption = useMemo(
     () =>
       [
-        headCount.adults === 1 ? '1 adult' : '2 adults',
+        headCount.adults === 1
+          ? translations.group.adultSingle
+          : interpolateTranslations(translations.group.adults, {
+              adults: headCount.adults,
+            }),
         headCount.children
           ? headCount.children === 1
-            ? '1 child'
-            : `${headCount.children} children`
+            ? translations.group.childSingle
+            : interpolateTranslations(translations.group.children, {
+                children: headCount.children,
+              })
           : '',
       ]
         .filter(Boolean)
-        .join(' and '),
-    [headCount.adults, headCount.children],
+        .join(` ${translations.common.and} `),
+    [
+      headCount.adults,
+      headCount.children,
+      translations.common.and,
+      translations.group.adultSingle,
+      translations.group.adults,
+      translations.group.childSingle,
+      translations.group.children,
+    ],
   );
 
   const flightPrice = cheapest?.price ?? 0;
@@ -49,22 +66,24 @@ export const Plan = () => {
     {
       key: 'cost',
       Icon: PointOfSaleRoundedIcon,
-      label: 'General Cost',
-      caption: '× 3 Months',
+      label: compTranslations.generalCost,
+      caption: compTranslations.per3Months,
       value: generalCost * 3,
     },
     {
       key: 'rent',
       Icon: ApartmentRoundedIcon,
-      label: 'Rent',
-      caption: '× 3 Months',
+      label: compTranslations.rent,
+      caption: compTranslations.per3Months,
       value: rentOuter * 3,
     },
     {
       key: 'ticket-1way',
       Icon: AirplaneTicketRoundedIcon,
-      label: 'One-Way Flight',
-      caption: `× ${totalPeople} People`,
+      label: compTranslations.flight,
+      caption: interpolateTranslations(compTranslations.perPeople, {
+        people: totalPeople,
+      }),
       value: onWayTicket,
     },
   ];
@@ -73,7 +92,7 @@ export const Plan = () => {
 
   return (
     <SectionCard
-      title="Plan Ahead"
+      title={compTranslations.title}
       TitleIcon={SavingsRoundedIcon}
       subtitle={headCountCaption}
     >
@@ -88,7 +107,7 @@ export const Plan = () => {
         ))}
         <Divider />
         <PriceItem
-          label="Total"
+          label={translations.common.total}
           formattedValue={formatCurrency(total, country.currency)}
           convertedValue={currencyConverter(total)}
         />

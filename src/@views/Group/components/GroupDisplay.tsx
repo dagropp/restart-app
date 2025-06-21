@@ -10,6 +10,7 @@ import TollRoundedIcon from '@mui/icons-material/TollRounded';
 import IconButton from '@mui/material/IconButton';
 import { ChildrenResponse, IncomeType } from '@services/api';
 import SectionCard from '@shared/SectionCard';
+import { useTranslations } from '@translations';
 import { incomeUtils } from '@utils/income.utils';
 import dayjs from 'dayjs';
 
@@ -28,6 +29,7 @@ const getChildrenTooltip = (children: ChildrenResponse[]) => {
 
 export const GroupDisplay = () => {
   const { group, user } = useUserContext();
+  const translations = useTranslations();
 
   const incomes = [user.income, group.partner?.income].filter(
     (income) => income && income !== IncomeType.None,
@@ -53,7 +55,7 @@ export const GroupDisplay = () => {
       value: incomes.length,
       Icon: TollRoundedIcon,
       tooltip: incomes
-        .map((income) => incomeUtils.typeMap[income!].title)
+        .map((income) => incomeUtils.getTypeData(income!, translations).title)
         .join(' and '),
     },
     {

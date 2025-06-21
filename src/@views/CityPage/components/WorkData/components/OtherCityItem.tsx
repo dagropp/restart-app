@@ -9,6 +9,7 @@ import apiService, { City, IncomeItem, IncomeType } from '@services/api';
 import CityMenu from '@shared/CityMenu.tsx';
 import InfoTooltip from '@shared/InfoTooltip.tsx';
 import { useQuery } from '@tanstack/react-query';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { useCityContext } from '@views/CityPage/context';
 import { type MouseEvent, useMemo, useState } from 'react';
 
@@ -25,6 +26,7 @@ export const OtherCityItem = ({ value, onChange, marks }: Props) => {
   const { item, cost } = useCityContext();
   const { currencies } = useAppContext();
   const { data: cities } = apiService.useCities();
+  const translations = useTranslations().city.jobData;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isAdjustedCOL, setIsAdjustedCOL] = useState(true);
@@ -58,7 +60,7 @@ export const OtherCityItem = ({ value, onChange, marks }: Props) => {
   const menu = (
     <span className="flex flex-col">
       <strong>
-        Compared with{' '}
+        {translations.comparedWith}
         <Link
           onClick={openMenu}
           className="cursor-pointer inline-flex items-center"
@@ -78,9 +80,14 @@ export const OtherCityItem = ({ value, onChange, marks }: Props) => {
           }
           label={
             <span className="flex items-center gap-1">
-              <Typography variant="caption">Cost of Living Adjusted</Typography>
+              <Typography variant="caption">
+                {translations.colAdjusted}
+              </Typography>
               <InfoTooltip
-                title={`Adjustment for cost of living differences between ${item.name} and ${cities?.[value].name}`}
+                title={interpolateTranslations(
+                  translations.colAdjustedDescription,
+                  { city: item.name, other: cities?.[value].name },
+                )}
               />
             </span>
           }

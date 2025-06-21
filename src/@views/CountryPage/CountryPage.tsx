@@ -23,10 +23,6 @@ const CountryPage = ({ tab }: Props) => {
     enabled: !!item?.id,
   });
 
-  const { isLoading: wikiDataLoading } = apiService.wiki.useSummary(
-    item?.wikipediaKey,
-  );
-
   const { data: cities } = apiService.useCities();
   const { data: scores } = apiService.score.use();
 
@@ -40,7 +36,7 @@ const CountryPage = ({ tab }: Props) => {
     [cities, id, scores],
   );
 
-  const isLoading = !item || !cost || !countryCities || wikiDataLoading;
+  const isLoading = !item || !cost || !countryCities;
 
   return isLoading ? (
     <GeneralTabs tab={tab} item={item} loading={isLoading} />

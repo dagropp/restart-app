@@ -8,6 +8,7 @@ import FilterHdrRoundedIcon from '@mui/icons-material/FilterHdrRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import PaymentsRoundedIcon from '@mui/icons-material/PaymentsRounded';
 import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
+import RadarIcon from '@mui/icons-material/Radar';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import { EuUnionStatus } from '@services/api';
 import CurrencyDisplay from '@shared/CurrencyDisplay';
@@ -19,7 +20,11 @@ import TimeDifferenceDisplay from '@shared/TimeDifferenceDisplay';
 import { format } from '@utils/format.utils';
 
 import { useCityContext } from '../../context';
-import { CityPopulation, SatelliteCard } from './components';
+import {
+  CityPopulation,
+  SatelliteCard,
+  SatelliteCitiesList,
+} from './components';
 
 export const GeneralData = () => {
   const { item } = useCityContext();
@@ -61,6 +66,12 @@ export const GeneralData = () => {
         </Typography>
       ),
       Icon: AccountBalanceRoundedIcon,
+    },
+    {
+      label: 'Satellite Cities',
+      display: <SatelliteCitiesList />,
+      Icon: RadarIcon,
+      hidden: !item.satelliteChildren.length,
     },
     {
       label: 'Is European Union',

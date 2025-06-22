@@ -66,7 +66,12 @@ export const WorkData = () => {
       </div>
       {income.jobs.length > 0 && (
         <div className="flex items-center gap-4 w-full mt-2">
-          <JobsChart jobs={income.jobs} name={item.name} />{' '}
+          <JobsChart
+            jobs={income.jobs}
+            name={
+              item.satelliteCity ? cities[item.satelliteCity].name : item.name
+            }
+          />
           {!!otherCityIncome?.jobs.length && (
             <JobsChart
               jobs={otherCityIncome.jobs}

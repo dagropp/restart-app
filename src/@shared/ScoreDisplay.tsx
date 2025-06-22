@@ -84,7 +84,7 @@ const ScoreItemComponent = ({ value, scoreKey }: ScoreItemComponentProps) => {
 
 const ScoreDisplay = ({ city, averageHidden, className }: Props) => {
   const { data: scores } = apiService.score.use();
-  const { average, ...sections } = scores[city];
+  const { average, ...sections } = scores[city] ?? {};
 
   return (
     <div

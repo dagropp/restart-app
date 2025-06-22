@@ -7,7 +7,10 @@ export const findComparisonCity = (
 ) => {
   const list = object.values(cities).filter((city) => item.id !== city.id);
 
-  const inCountry = list.find((city) => city.country.id === item.country.id);
+  const inCountry = list.find(
+    (city) =>
+      city.country.id === item.country.id && city.id !== item.satelliteCity,
+  );
   if (inCountry) return inCountry.id;
 
   const inRegion = list.find((city) =>

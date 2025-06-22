@@ -34,6 +34,15 @@ const Item = ({ city, value, onMenuClick }: ItemProps) => (
   </MenuItem>
 );
 
+const isSatelliteCity = (cities: Record<City, CityData>, city: City) =>
+  !!cities[city].satelliteCity;
+
+const isMetroCity = (
+  cities: Record<City, CityData>,
+  excludedCity: City,
+  city: City,
+) => city === cities[excludedCity].satelliteCity;
+
 const CityMenu = ({ exclude, anchorEl, onClose, value, onChange }: Props) => {
   const { data: cities } = apiService.useCities();
 
@@ -51,13 +60,21 @@ const CityMenu = ({ exclude, anchorEl, onClose, value, onChange }: Props) => {
       .values(cities)
       .filter(
         ({ id, country }) =>
-          id !== excludedCity.id && country.id === excludedCity.country.id,
+          !isSatelliteCity(cities, id) &&
+          !isMetroCity(cities, excludedCity.id, id) &&
+          id !== excludedCity.id &&
+          country.id === excludedCity.country.id,
       );
 
   const otherCities = excludedCity
     ? object
         .values(cities)
-        .filter(({ country }) => country.id !== excludedCity.country.id)
+        .filter(
+          ({ id, country }) =>
+            !isSatelliteCity(cities, id) &&
+            !isMetroCity(cities, excludedCity.id, id) &&
+            country.id !== excludedCity.country.id,
+        )
     : cities && object.values(cities);
 
   return (

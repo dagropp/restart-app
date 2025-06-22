@@ -95,6 +95,10 @@ export enum City {
   LARNACA = 'LARNACA',
   RIGA = 'RIGA',
   SANTA_CLARA = 'SANTA_CLARA',
+  UTRECHT = 'UTRECHT',
+  HAARLEM = 'HAARLEM',
+  READING = 'READING',
+  POTSDAM = 'POTSDAM',
 }
 
 export enum Country {

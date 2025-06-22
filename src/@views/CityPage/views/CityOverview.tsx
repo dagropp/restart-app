@@ -1,10 +1,10 @@
 import FunFacts from '@shared/FunFacts';
-import GoogleMapCard from '@shared/GoogleMapCard';
 import Landmarks from '@shared/Landmarks';
 import Overview from '@shared/Overview';
 import Prices from '@shared/Prices';
 
 import {
+  CityGoogleMapCard,
   CityLinks,
   CityWikiData,
   GeneralData,
@@ -31,7 +31,7 @@ const OverviewWithData = () => {
       <Insights />
       <GeneralData />
       <ScoreCard />
-      <GoogleMapCard query={`${item.name},${item.country.name}`} zoom={10} />
+      <CityGoogleMapCard />
       {item.landmarks && <Landmarks items={item.landmarks} />}
       {item.funFacts && <FunFacts items={item.funFacts} />}
       <WorkData />

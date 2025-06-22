@@ -1,3 +1,4 @@
+export * from './CityGoogleMapCard';
 export * from './CityLinks';
 export * from './CityWikiData';
 export * from './GeneralData';

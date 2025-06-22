@@ -20,7 +20,7 @@ const OverviewWithData = () => {
       <CityList />
       <CountryGeneralData />
       <Prices cost={cost} currency={item.currency} />
-      <GoogleMapCard query={item.name} />
+      <GoogleMapCard params={{ place: item.name }} />
     </Overview>
   );
 };

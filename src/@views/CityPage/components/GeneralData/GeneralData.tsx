@@ -71,7 +71,7 @@ export const GeneralData = () => {
       label: 'Satellite Cities',
       display: <SatelliteCitiesList />,
       Icon: RadarIcon,
-      hidden: !item.satelliteChildren.length,
+      hidden: !item.satelliteChildren?.length,
     },
     {
       label: 'Is European Union',

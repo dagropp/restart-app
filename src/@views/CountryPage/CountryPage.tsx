@@ -32,7 +32,7 @@ const CountryPage = ({ tab }: Props) => {
       object
         .values(cities)
         .filter(({ country }) => country.id === id)
-        .toSorted((a, b) => scores[b.id].average - scores[a.id].average),
+        .toSorted((a, b) => scores[b.id]?.average - scores[a.id]?.average),
     [cities, id, scores],
   );
 

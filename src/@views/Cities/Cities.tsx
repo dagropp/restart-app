@@ -37,7 +37,7 @@ const Cities = () => {
           !filters.visa.length || filters.visa.includes(city.country.visaLevel);
         const isRating =
           !filters.minRating ||
-          number.roundBy(scores[key].average / 2, 2) >= filters.minRating;
+          number.roundBy(scores[key]?.average / 2, 2) >= filters.minRating;
         const isCountry =
           !countriesSet.size || countriesSet.has(city.country.id);
         const isEnglish =

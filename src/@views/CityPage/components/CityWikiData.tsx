@@ -2,7 +2,7 @@ import { City } from '@services/api';
 import WikiData from '@shared/WikiData.tsx';
 import { useCityContext } from '@views/CityPage/context';
 
-const rationMap: Record<City, number> = {
+const ratioMap: Record<City, number> = {
   [City.AMSTERDAM]: 600 / 400,
   [City.ATHENS]: 600 / 400,
   [City.AUCKLAND]: 600 / 360,
@@ -62,6 +62,10 @@ const rationMap: Record<City, number> = {
   [City.VILNIUS]: 600 / 398,
   [City.WARSAW]: 600 / 361,
   [City.ZURICH]: 600 / 397,
+  [City.UTRECHT]: 1000 / 563,
+  [City.HAARLEM]: 1000 / 777,
+  [City.POTSDAM]: 1000 / 667,
+  [City.READING]: 1000 / 750,
 };
 
 export const CityWikiData = () => {
@@ -72,7 +76,7 @@ export const CityWikiData = () => {
       wikipediaKey={item.wikipediaKey}
       image={{
         path: `/assets/city-images/${item.id}.webp`,
-        ratio: rationMap[item.id],
+        ratio: ratioMap[item.id],
       }}
     />
   );

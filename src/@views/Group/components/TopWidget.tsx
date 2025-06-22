@@ -37,10 +37,10 @@ const columns: TableColumn<FavoriteItem>[] = [
 
       return (
         <Rating
-          value={score.average}
+          value={score?.average}
           base={10}
           readOnly
-          tooltip={number.toFixed(score.average / 2)}
+          tooltip={number.toFixed(score?.average / 2)}
         />
       );
     },

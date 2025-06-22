@@ -98,7 +98,7 @@ export const CityTable = ({
         label: 'Average Score',
         cellRenderer: ScoreCell,
         sorter: (direction) => (a, b) =>
-          (scores[b.id].average - scores[a.id].average) * direction,
+          (scores[b.id]?.average - scores[a.id]?.average) * direction,
       },
       {
         key: 'isEu',
@@ -139,7 +139,7 @@ export const CityTable = ({
             ? Number(b.isDestination) - Number(a.isDestination)
             : a.isBookmark !== b.isBookmark
               ? Number(b.isBookmark) - Number(a.isBookmark)
-              : scores[b.id].average - scores[a.id].average,
+              : scores[b.id]?.average - scores[a.id]?.average,
         ),
     [data, filteredIds, scores],
   );

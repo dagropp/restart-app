@@ -1,5 +1,6 @@
 import Select, { SelectOption, type SelectProps } from '@common/Select';
-import apiService, { City } from '@services/api';
+import { City } from '@root/types';
+import apiService from '@services/api';
 import { object } from '@utils/object.utils';
 import { useMemo } from 'react';
 

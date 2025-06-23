@@ -1,4 +1,5 @@
-import { score } from '@services/api/sections/score.ts';
+import { type City, type Country, type Currency } from '@root/types';
+import { score } from '@services/api/sections/score';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import { http } from '../http.service';
@@ -16,11 +17,8 @@ import {
   wiki,
 } from './sections';
 import {
-  type City,
   type CityData,
   CostResponse,
-  Country,
-  Currency,
   CurrencyList,
   EditUserPayload,
   GroupPayload,

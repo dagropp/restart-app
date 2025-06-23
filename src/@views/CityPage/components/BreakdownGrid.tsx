@@ -8,7 +8,7 @@ import Checkbox, { CheckboxProps } from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Skeleton from '@mui/material/Skeleton';
-import InfoTooltip from '@shared/InfoTooltip.tsx';
+import InfoTooltip from '@shared/InfoTooltip';
 import {
   convertCurrency,
   type CurrencyConverter,

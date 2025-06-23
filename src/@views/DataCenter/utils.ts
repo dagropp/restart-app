@@ -1,5 +1,5 @@
 import { ScrapingType } from '@services/api';
-import { DataFreshness } from '@views/DataCenter/types.ts';
+import { DataFreshness } from '@views/DataCenter/types';
 import dayjs from 'dayjs';
 
 export const scrapingTypeMap: Record<ScrapingType, string> = {

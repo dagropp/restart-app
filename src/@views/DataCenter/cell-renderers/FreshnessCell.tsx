@@ -3,8 +3,8 @@ import Typography from '@common/Typography';
 import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { ScrapingData } from '@services/api';
-import { DataFreshness } from '@views/DataCenter/types.ts';
-import { getDataFreshness } from '@views/DataCenter/utils.ts';
+import { DataFreshness } from '@views/DataCenter/types';
+import { getDataFreshness } from '@views/DataCenter/utils';
 import { useMemo } from 'react';
 
 const freshnessLabel: Record<DataFreshness, string> = {

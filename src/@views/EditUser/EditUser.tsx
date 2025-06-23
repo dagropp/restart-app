@@ -1,7 +1,8 @@
 import { toastService } from '@common/Toast';
 import { LoginState, useAppContext } from '@context/app';
 import { CircularProgress } from '@mui/material';
-import apiService, { Currency, TokenStatus, UserPayload } from '@services/api';
+import { Currency } from '@root/types';
+import apiService, { TokenStatus, UserPayload } from '@services/api';
 import storageService from '@services/storage';
 import titleService from '@services/title';
 import { useMutation, useQuery } from '@tanstack/react-query';

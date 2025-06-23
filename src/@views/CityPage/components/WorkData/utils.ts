@@ -1,5 +1,6 @@
-import { City, CityData } from '@services/api';
-import { object } from '@utils/object.utils.ts';
+import { City } from '@root/types';
+import { CityData } from '@services/api';
+import { object } from '@utils/object.utils';
 
 export const findComparisonCity = (
   item: CityData,

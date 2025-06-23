@@ -14,7 +14,7 @@ import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
 import Toolbar from '@mui/material/Toolbar';
 import apiService from '@services/api';
 import storageService from '@services/storage';
-import { UserInviteDialog } from '@shared/UserInviteDialog.tsx';
+import { UserInviteDialog } from '@shared/UserInviteDialog';
 import clsx from 'clsx';
 import { type MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router';

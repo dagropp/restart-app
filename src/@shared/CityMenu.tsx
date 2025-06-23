@@ -2,7 +2,8 @@ import Divider from '@mui/material/Divider';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { alpha, Theme } from '@mui/material/styles';
-import apiService, { City, CityData } from '@services/api';
+import { City } from '@root/types';
+import apiService, { CityData } from '@services/api';
 import { object } from '@utils/object.utils';
 
 import { CityDisplay } from './CityDisplay';

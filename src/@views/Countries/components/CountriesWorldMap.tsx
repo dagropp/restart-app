@@ -1,7 +1,7 @@
 import Tooltip from '@common/Tooltip';
 import RoomRoundedIcon from '@mui/icons-material/RoomRounded';
-import { Country, Region, ValidRegion } from '@services/api';
-import CountryDisplay from '@shared/CountryDisplay.tsx';
+import { Country, Region, ValidRegion } from '@root/types';
+import CountryDisplay from '@shared/CountryDisplay';
 import MapElement from '@shared/MapElement';
 import classes from '@views/Cities/components/WorldMap/styles.module.css';
 import clsx from 'clsx';

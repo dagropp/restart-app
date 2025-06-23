@@ -10,7 +10,7 @@ import PaymentsRoundedIcon from '@mui/icons-material/PaymentsRounded';
 import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import RadarIcon from '@mui/icons-material/Radar';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
-import { EuUnionStatus } from '@services/api';
+import { EuUnionStatus } from '@root/types';
 import CurrencyDisplay from '@shared/CurrencyDisplay';
 import GeneralDataCard, {
   type GeneralItemProps,

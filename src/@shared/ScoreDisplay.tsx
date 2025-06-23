@@ -3,8 +3,9 @@ import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import Divider from '@mui/material/Divider';
-import apiService, { City, ScoreKey } from '@services/api';
-import { object } from '@utils/object.utils.ts';
+import { City } from '@root/types';
+import apiService, { ScoreKey } from '@services/api';
+import { object } from '@utils/object.utils';
 import clsx from 'clsx';
 import { type ReactNode } from 'react';
 

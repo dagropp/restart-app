@@ -1,4 +1,5 @@
-import { Country, Currency } from '../api/types';
+import { Country, Currency } from '@root/types';
+
 import { type CurrencyData } from './currency.types';
 
 export const map: Record<Currency, CurrencyData> = {

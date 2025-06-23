@@ -2,7 +2,8 @@ import Link from '@common/Link';
 import Tooltip from '@common/Tooltip';
 import HttpsRoundedIcon from '@mui/icons-material/HttpsRounded';
 import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
-import apiService, { NoteResponse, NoteScope } from '@services/api';
+import { NoteScope } from '@root/types';
+import apiService, { NoteResponse } from '@services/api';
 import dateService from '@services/date.service';
 import { useMemo } from 'react';
 

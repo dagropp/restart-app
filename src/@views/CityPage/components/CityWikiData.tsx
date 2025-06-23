@@ -1,5 +1,5 @@
-import { City } from '@services/api';
-import WikiData from '@shared/WikiData.tsx';
+import { City } from '@root/types';
+import WikiData from '@shared/WikiData';
 import { useCityContext } from '@views/CityPage/context';
 
 const ratioMap: Record<City, number> = {
@@ -66,6 +66,8 @@ const ratioMap: Record<City, number> = {
   [City.HAARLEM]: 1000 / 777,
   [City.POTSDAM]: 1000 / 667,
   [City.READING]: 1000 / 750,
+  [City.ROTTERDAM]: 0,
+  [City.DEN_HAAG]: 0,
 };
 
 export const CityWikiData = () => {

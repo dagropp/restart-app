@@ -5,8 +5,8 @@ import TextSnippetRoundedIcon from '@mui/icons-material/TextSnippetRounded';
 import IconButton from '@mui/material/IconButton';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
-import { NoteType } from '@services/api';
-import { NoteData } from '@shared/Notes/components/NoteForm.tsx';
+import { NoteType } from '@root/types';
+import { NoteData } from '@shared/Notes/components/NoteForm';
 import { useFormContext } from 'react-hook-form';
 
 interface NoteTypeOptions {

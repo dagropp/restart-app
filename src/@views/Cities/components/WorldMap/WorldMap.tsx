@@ -2,7 +2,8 @@ import Rating from '@common/Rating';
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import RoomRoundedIcon from '@mui/icons-material/RoomRounded';
-import apiService, { City, CityData, Region } from '@services/api';
+import { City, Region } from '@root/types';
+import apiService, { CityData } from '@services/api';
 import CountryDisplay from '@shared/CountryDisplay';
 import MapElement from '@shared/MapElement';
 import { object } from '@utils/object.utils';
@@ -80,6 +81,8 @@ const regionMap: Record<Region, RegionData> = {
           City.BRUSSELS,
           City.UTRECHT,
           City.HAARLEM,
+          City.ROTTERDAM,
+          City.DEN_HAAG,
         ],
       },
       {
@@ -125,7 +128,13 @@ const regionMap: Record<Region, RegionData> = {
       {
         x: 33.8,
         y: 44.6,
-        cities: [City.AMSTERDAM, City.UTRECHT, City.HAARLEM],
+        cities: [
+          City.AMSTERDAM,
+          City.UTRECHT,
+          City.HAARLEM,
+          City.ROTTERDAM,
+          City.DEN_HAAG,
+        ],
       },
       { x: 34.7, y: 48.3, cities: [City.EINDHOVEN] },
       { x: 33.7, y: 50.6, cities: [City.BRUSSELS] },

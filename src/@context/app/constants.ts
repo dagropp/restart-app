@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { ThemeType } from '@services/api';
+import { ThemeType } from '@root/types';
 
 export const appThemes = {
   [ThemeType.Dark]: createTheme({ palette: { mode: 'dark' } }),

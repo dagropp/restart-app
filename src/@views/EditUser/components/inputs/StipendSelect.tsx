@@ -1,7 +1,8 @@
 import TextField from '@common/TextField';
-import { Currency, UserResponse } from '@services/api';
+import { Currency } from '@root/types';
+import { UserResponse } from '@services/api';
 import { CurrencyMenu } from '@shared/index';
-import { InputName } from '@views/EditUser/types.ts';
+import { InputName } from '@views/EditUser/types';
 import { ChangeEvent, useState } from 'react';
 
 interface Props {

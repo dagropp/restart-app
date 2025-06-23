@@ -1,6 +1,6 @@
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
-import { City, Country } from '@services/api';
+import { City, Country } from '@root/types';
 import { ReactNode } from 'react';
 
 export interface ListItem {

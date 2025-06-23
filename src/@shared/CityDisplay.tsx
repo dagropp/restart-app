@@ -1,5 +1,6 @@
 import Typography from '@common/Typography';
-import apiService, { City, Country } from '@services/api';
+import { City, Country } from '@root/types';
+import apiService from '@services/api';
 import { CountryImage } from '@shared/CountryDisplay';
 
 interface CityWithDataProps {

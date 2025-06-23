@@ -1,10 +1,11 @@
 import { useUserContext } from '@context/user';
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
-import apiService, { IncomeType } from '@services/api';
+import { IncomeType } from '@root/types';
+import apiService from '@services/api';
 import SectionCard from '@shared/SectionCard';
 import { useQuery } from '@tanstack/react-query';
 import { incomeUtils } from '@utils/income.utils';
-import { findComparisonCity } from '@views/CityPage/components/WorkData/utils.ts';
+import { findComparisonCity } from '@views/CityPage/components/WorkData/utils';
 import { useCityContext } from '@views/CityPage/context';
 import { useIncomeData } from '@views/CityPage/hooks';
 import { useState } from 'react';

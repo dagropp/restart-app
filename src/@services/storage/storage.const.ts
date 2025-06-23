@@ -1,7 +1,9 @@
+import { Currency, IncomeType, ThemeType, UserType } from '@root/types';
+
 import { type AppStorage } from './storage.types';
 
-export const defaultAppStorage = {
-  currency: 'ILS',
+export const defaultAppStorage: AppStorage = {
+  currency: Currency.ILS,
   user: {
     id: '',
     firstName: '',
@@ -9,8 +11,8 @@ export const defaultAppStorage = {
     email: '',
     sessionId: '',
     citizenship: [],
-    income: 'None',
-    type: 'Standard',
+    income: IncomeType.None,
+    type: UserType.Standard,
     incomeMark: 0,
     groupId: '',
     dateOfBirth: '',
@@ -18,6 +20,6 @@ export const defaultAppStorage = {
     stipendCurrency: null,
     incomeRemote: null,
   },
-  theme: 'System',
+  theme: ThemeType.System,
   filters: {},
-} as AppStorage;
+};

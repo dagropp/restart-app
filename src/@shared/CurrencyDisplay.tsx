@@ -1,7 +1,7 @@
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import { useAppContext } from '@context/app';
-import { Currency } from '@services/api';
+import { Currency } from '@root/types';
 import currencyService from '@services/currency';
 import { convertCurrency, formatCurrency } from '@utils/format.utils';
 import clsx from 'clsx';

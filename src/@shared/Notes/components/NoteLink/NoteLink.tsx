@@ -3,7 +3,7 @@ import { CircularProgress, Skeleton } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import apiService from '@services/api';
-import { SpotifyPlayer } from '@shared/Notes/components/NoteLink/components/SpotifyPlayer.tsx';
+import { SpotifyPlayer } from '@shared/Notes/components/NoteLink/components/SpotifyPlayer';
 import { useQuery } from '@tanstack/react-query';
 
 import { YouTubePlayer } from './components';

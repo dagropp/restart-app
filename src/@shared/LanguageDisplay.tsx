@@ -1,6 +1,6 @@
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
-import { Language } from '@services/api';
+import { Language } from '@root/types';
 import { useMemo } from 'react';
 
 interface LanguageData {

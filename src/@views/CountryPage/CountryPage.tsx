@@ -1,10 +1,10 @@
-import apiService, { Country } from '@services/api';
+import { Country, CountryTabKey } from '@root/types';
+import apiService from '@services/api';
 import { useQuery } from '@tanstack/react-query';
 import { object } from '@utils/object.utils';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
-import { CountryTabKey } from '../../types';
 import { GeneralTabs, Tabs } from './components';
 import { CountryContextWrapper } from './context';
 

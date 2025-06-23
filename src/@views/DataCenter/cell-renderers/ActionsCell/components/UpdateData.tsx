@@ -1,6 +1,6 @@
 import Button from '@common/Button';
 import Typography from '@common/Typography';
-import usePrevValue from '@hooks/usePrevValue.ts';
+import usePrevValue from '@hooks/usePrevValue';
 import { CircularProgress } from '@mui/material';
 import apiService, {
   ScrapingStatusResponse,

@@ -1,5 +1,6 @@
 import useFilters from '@hooks/useFilters';
-import apiService, { City, Language } from '@services/api';
+import { City, Language } from '@root/types';
+import apiService from '@services/api';
 import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
 import { style } from '@utils/style.utils';

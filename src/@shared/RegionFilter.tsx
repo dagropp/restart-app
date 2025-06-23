@@ -3,7 +3,7 @@ import Tooltip from '@common/Tooltip';
 import useIsOverflow from '@hooks/useIsOverflow';
 import Checkbox from '@mui/material/Checkbox';
 import { useTheme } from '@mui/material/styles';
-import { Region, ValidRegion } from '@services/api';
+import { Region, ValidRegion } from '@root/types';
 import { object } from '@utils/object.utils';
 
 interface Props {

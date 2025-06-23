@@ -11,7 +11,7 @@ import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import { type OverridableComponent } from '@mui/material/OverridableComponent';
 import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
 import SectionCard from '@shared/SectionCard';
-import { incomeUtils } from '@utils/income.utils.ts';
+import { incomeUtils } from '@utils/income.utils';
 import { useCityContext } from '@views/CityPage/context';
 
 interface LinkData {

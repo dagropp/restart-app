@@ -1,5 +1,6 @@
 import { useUserContext } from '@context/user';
-import { IncomeItem, IncomeResponse, IncomeType } from '@services/api';
+import { IncomeType } from '@root/types';
+import { IncomeItem, IncomeResponse } from '@services/api';
 
 import { useCityContext } from '../context';
 

@@ -1,4 +1,4 @@
-import { Currency } from '@services/api';
+import { Currency } from '@root/types';
 import { CurrencyConverter, formatCurrency } from '@utils/format.utils';
 
 export const formatSliderHandle = (

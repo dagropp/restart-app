@@ -2,9 +2,9 @@ import Typography from '@common/Typography';
 import { alpha } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { SparkLineChart } from '@mui/x-charts';
-import dateService from '@services/date.service.ts';
+import dateService from '@services/date.service';
 import { format } from '@utils/format.utils';
-import { number } from '@utils/number.utils.ts';
+import { number } from '@utils/number.utils';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 

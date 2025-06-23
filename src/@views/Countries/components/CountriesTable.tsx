@@ -1,11 +1,8 @@
 import Table, { type TableCellRenderer, TableColumn } from '@common/Table';
 import { alpha } from '@mui/material';
 import Box from '@mui/material/Box';
-import apiService, {
-  CountryResponse,
-  EuUnionStatus,
-  Language,
-} from '@services/api';
+import { EuUnionStatus, Language } from '@root/types';
+import apiService, { CountryResponse } from '@services/api';
 import { BookmarkCell } from '@shared/BookmarkCell';
 import CountryDisplay from '@shared/CountryDisplay';
 import CurrencyDisplay from '@shared/CurrencyDisplay';

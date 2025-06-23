@@ -1,7 +1,7 @@
 import { TableCellRenderer } from '@common/Table';
 import Typography from '@common/Typography';
 import { ScrapingRecordsIncomeLevels } from '@services/api';
-import { incomeUtils } from '@utils/income.utils.ts';
+import { incomeUtils } from '@utils/income.utils';
 
 export const IncomeTypeJobCell = ({
   row,

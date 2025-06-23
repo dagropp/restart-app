@@ -1,11 +1,6 @@
 import { useAppContext } from '@context/app';
-import apiService, {
-  City,
-  CityData,
-  Country,
-  CountryResponse,
-  Currency,
-} from '@services/api';
+import { City, Country, Currency } from '@root/types';
+import apiService, { CityData, CountryResponse } from '@services/api';
 import { convertCurrency, formatCurrency } from '@utils/format.utils';
 
 interface Props {

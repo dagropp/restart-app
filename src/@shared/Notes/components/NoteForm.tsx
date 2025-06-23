@@ -1,5 +1,6 @@
 import Form from '@common/Form';
-import { NoteResponse, NoteType } from '@services/api';
+import { NoteType } from '@root/types';
+import { NoteResponse } from '@services/api';
 import { string } from '@utils/string.utils';
 import { type ReactNode } from 'react';
 

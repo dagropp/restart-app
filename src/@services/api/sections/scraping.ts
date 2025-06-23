@@ -8,7 +8,7 @@ import apiService, {
   StatusResponse,
 } from '@services/api';
 import { useQuery } from '@tanstack/react-query';
-import { object } from '@utils/object.utils.ts';
+import { object } from '@utils/object.utils';
 import { useEffect, useState } from 'react';
 
 import { http } from '../../http.service';

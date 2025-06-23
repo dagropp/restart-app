@@ -1,13 +1,13 @@
 import { useAppContext } from '@context/app';
 import { useUserContext } from '@context/user';
-import apiService, { City } from '@services/api';
+import { City, CityTabKey } from '@root/types';
+import apiService from '@services/api';
 import titleService from '@services/title';
 import { useQuery } from '@tanstack/react-query';
 import { convertCurrency } from '@utils/format.utils';
 import { useLayoutEffect, useMemo } from 'react';
 import { useParams } from 'react-router';
 
-import { CityTabKey } from '../../types';
 import Tabs, { GeneralTabs } from './components/Tabs';
 import { CityContextWrapper, CostContextWrapper } from './context';
 

@@ -1,7 +1,8 @@
 import Modal from '@common/Modal';
 import { useAppContext } from '@context/app';
 import { useUserContext } from '@context/user';
-import { Currency, IncomeItem, IncomeType } from '@services/api';
+import { Currency, IncomeType } from '@root/types';
+import { IncomeItem } from '@services/api';
 import { useMemo, useReducer, useState } from 'react';
 
 import CityIncomeSlider from '../components/CityIncomeSlider';

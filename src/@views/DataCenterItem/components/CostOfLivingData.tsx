@@ -1,13 +1,12 @@
 import Table, { TableColumn } from '@common/Table';
+import { City, Country } from '@root/types';
 import apiService, {
-  City,
-  Country,
   ScrapingRecordsCostOfLiving,
   ScrapingType,
 } from '@services/api';
 import dateService from '@services/date.service';
 import { CityDisplay } from '@shared/CityDisplay';
-import CountryDisplay from '@shared/CountryDisplay.tsx';
+import CountryDisplay from '@shared/CountryDisplay';
 import { useQuery } from '@tanstack/react-query';
 import { CurrencyValueCell } from '@views/DataCenterItem/components/cell-renderers';
 

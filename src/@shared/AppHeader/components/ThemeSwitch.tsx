@@ -2,7 +2,7 @@ import Switch from '@common/Switch';
 import { useAppContext } from '@context/app';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
-import { ThemeType } from '@services/api';
+import { ThemeType } from '@root/types';
 import storageService from '@services/storage';
 import clsx from 'clsx';
 

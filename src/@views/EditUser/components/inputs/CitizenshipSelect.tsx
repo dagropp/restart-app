@@ -1,4 +1,4 @@
-import { Country } from '@services/api';
+import { Country } from '@root/types';
 import CountrySelect from '@shared/CountrySelect';
 import { useState } from 'react';
 

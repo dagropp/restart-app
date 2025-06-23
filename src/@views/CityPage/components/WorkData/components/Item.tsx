@@ -1,9 +1,9 @@
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import { useAppContext } from '@context/app';
-import { Currency } from '@services/api';
-import InfoTooltip from '@shared/InfoTooltip.tsx';
-import { convertCurrency, formatCurrency } from '@utils/format.utils.ts';
+import { Currency } from '@root/types';
+import InfoTooltip from '@shared/InfoTooltip';
+import { convertCurrency, formatCurrency } from '@utils/format.utils';
 import { useCityContext } from '@views/CityPage/context';
 import { ReactNode, useMemo } from 'react';
 

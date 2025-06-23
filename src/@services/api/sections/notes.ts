@@ -1,3 +1,4 @@
+import { City, Country, NoteScope, NoteType } from '@root/types';
 import apiService, {
   NotesCountResponse,
   UseNotesHook,
@@ -7,14 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 import { http } from '../../http.service';
-import {
-  City,
-  Country,
-  NoteResponse,
-  NoteScope,
-  NoteType,
-  StatusResponse,
-} from '../types';
+import { NoteResponse, StatusResponse } from '../types';
 import { getUrl } from '../utils';
 
 const get = (

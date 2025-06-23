@@ -1,10 +1,7 @@
 import Toast, { toastService, type ToastState } from '@common/Toast';
 import { ThemeProvider } from '@mui/material/styles';
-import apiService, {
-  type Currency,
-  type CurrencyList,
-  ThemeType,
-} from '@services/api';
+import { Currency, ThemeType } from '@root/types';
+import apiService, { type CurrencyList } from '@services/api';
 import storageService from '@services/storage';
 import { useQuery } from '@tanstack/react-query';
 import {

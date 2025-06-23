@@ -5,15 +5,17 @@ import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRou
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import PaymentsRoundedIcon from '@mui/icons-material/PaymentsRounded';
+import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
-import { City } from '@root/types';
+import { City, ValidRegion } from '@root/types';
 import apiService from '@services/api';
 import CurrencyDisplay from '@shared/CurrencyDisplay';
 import GeneralDataCard, { GeneralItemProps } from '@shared/GeneralDataCard';
 import LanguageDisplay from '@shared/LanguageDisplay';
 import TimeDifferenceDisplay from '@shared/TimeDifferenceDisplay';
+import { regions } from '@utils/regions.utils';
 import { useMemo } from 'react';
 
 import { useCountryContext } from '../context';
@@ -53,6 +55,15 @@ export const CountryGeneralData = () => {
   }, [cities]);
 
   const items: GeneralItemProps[] = [
+    {
+      label: 'Region',
+      display: (
+        <Typography variant="body2">
+          {regions.map[item.regions.at(0) as ValidRegion]}
+        </Typography>
+      ),
+      Icon: PublicRoundedIcon,
+    },
     {
       label: 'Capital',
       display: <CapitalDisplay />,

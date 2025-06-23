@@ -106,7 +106,7 @@ const regionMap: Record<Region, RegionData> = {
       {
         x: 46.7,
         y: 20.2,
-        cities: [City.ZURICH, City.BERN, City.BASEL, City.GENEVA],
+        cities: [City.ZURICH, City.BERN, City.BASEL, City.GENEVA, City.LUGANO],
       },
     ],
   },
@@ -155,6 +155,7 @@ const regionMap: Record<Region, RegionData> = {
       { x: 41.3, y: 57, cities: [City.MUNICH] },
       { x: 37.6, y: 52, cities: [City.FRANKFURT] },
       { x: 38, y: 59.7, cities: [City.ZURICH] },
+      { x: 38, y: 62.7, cities: [City.LUGANO] },
       { x: 37.2, y: 58.2, cities: [City.BASEL] },
       { x: 36.5, y: 60.2, cities: [City.BERN] },
       // fixed

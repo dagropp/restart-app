@@ -3,8 +3,9 @@ import Tooltip from '@common/Tooltip';
 import useIsOverflow from '@hooks/useIsOverflow';
 import Checkbox from '@mui/material/Checkbox';
 import { useTheme } from '@mui/material/styles';
-import { Region, ValidRegion } from '@root/types';
+import { ValidRegion } from '@root/types';
 import { object } from '@utils/object.utils';
+import { regions } from '@utils/regions.utils';
 
 interface Props {
   onChange: (value: ValidRegion[]) => void;
@@ -15,13 +16,6 @@ interface ListProps {
   items: ValidRegion[];
 }
 
-const map: Record<ValidRegion, string> = {
-  [Region.EUROPE]: 'Europe',
-  [Region.NORTH_AMERICA]: 'North America',
-  [Region.ASIA]: 'Asia & Middle-East',
-  [Region.OCEANIA]: 'Oceania',
-};
-
 const List = ({ items }: ListProps) => {
   const theme = useTheme();
 
@@ -31,7 +25,7 @@ const List = ({ items }: ListProps) => {
       className="border border-solid p-2 rounded min-w-max"
       style={{ borderColor: theme.palette.divider }}
     >
-      {map[item]}
+      {regions.map[item]}
     </div>
   ));
 };
@@ -40,7 +34,7 @@ const RegionFilter = ({ filter, onChange }: Props) => {
   const { ref, isOverflow } = useIsOverflow<HTMLDivElement>('x');
 
   const options: SelectOption<ValidRegion>[] = object
-    .entries(map)
+    .entries(regions.map)
     .map(([value, label]) => ({
       value,
       label: (

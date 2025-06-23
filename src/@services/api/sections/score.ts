@@ -75,6 +75,10 @@ const defaultScores: ScoreResponse = {
   VILNIUS: defaultScoreItem,
   WARSAW: defaultScoreItem,
   ZURICH: defaultScoreItem,
+  HAARLEM: defaultScoreItem,
+  POTSDAM: defaultScoreItem,
+  READING: defaultScoreItem,
+  UTRECHT: defaultScoreItem,
 };
 
 const get = (): Promise<ScoreResponse> => http.get(getUrl('score'));

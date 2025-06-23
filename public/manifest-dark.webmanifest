@@ -1,0 +1,23 @@
+{
+  "name": "Restart",
+  "short_name": "Restart",
+  "description": "A relocation planning app that helps you compare cities by income, cost of living, and quality of life - plus store personal notes, research, and preferences in one place.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#4FC3F7",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

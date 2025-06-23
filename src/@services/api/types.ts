@@ -8,6 +8,7 @@ import {
   type NoteScope,
   type NoteType,
   type Region,
+  type Religion,
   type UserType,
   type VisaLevel,
 } from '@root/types';
@@ -51,18 +52,7 @@ export type ScoreKey =
   | 'average'
   | 'urbanism';
 
-export type ScoreList = Record<City, number>;
-
 export type ScoreResponse = Record<City, Record<ScoreKey, number>>;
-
-export enum Religion {
-  CHRISTIANITY = 'CHRISTIANITY',
-  ISLAM = 'ISLAM',
-  HINDUISM = 'HINDUISM',
-  BUDDHISM = 'BUDDHISM',
-  JUDAISM = 'JUDAISM',
-  NO_RELIGION = 'NO_RELIGION',
-}
 
 export type ElectricitySocketType =
   | 'A'

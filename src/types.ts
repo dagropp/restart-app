@@ -226,3 +226,12 @@ export enum EuUnionStatus {
   Yes = 'Yes',
   Proxy = 'Proxy',
 }
+
+export enum Religion {
+  CHRISTIANITY = 'CHRISTIANITY',
+  ISLAM = 'ISLAM',
+  HINDUISM = 'HINDUISM',
+  BUDDHISM = 'BUDDHISM',
+  JUDAISM = 'JUDAISM',
+  NO_RELIGION = 'NO_RELIGION',
+}

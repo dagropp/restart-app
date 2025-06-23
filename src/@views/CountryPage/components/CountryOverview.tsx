@@ -6,6 +6,7 @@ import WikiData from '@shared/WikiData';
 import { useCountryContext } from '../context';
 import { CityList } from './CityList';
 import { CountryGeneralData } from './CountryGeneralData';
+import { ReligionChart } from './ReligionChart';
 
 interface Props {
   loading: boolean;
@@ -18,6 +19,7 @@ const OverviewWithData = () => {
     <Overview>
       <WikiData wikipediaKey={item.wikipediaKey} />
       <CityList />
+      <ReligionChart />
       <CountryGeneralData />
       <Prices cost={cost} currency={item.currency} />
       <GoogleMapCard params={{ place: item.name }} />

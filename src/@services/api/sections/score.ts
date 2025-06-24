@@ -1,9 +1,9 @@
-import { City } from '@root/types.ts';
+import { City } from '@root/types';
 import { ScoreResponse } from '@services/api';
 import { getUrl } from '@services/api/utils';
 import { http } from '@services/http.service';
 import { useQuery } from '@tanstack/react-query';
-import { object } from '@utils/object.utils.ts';
+import { object } from '@utils/object.utils';
 
 const defaultScoreItem = {
   average: 0,

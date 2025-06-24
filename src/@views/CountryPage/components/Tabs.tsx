@@ -1,5 +1,9 @@
+import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
+import ArrowLeftRoundedIcon from '@mui/icons-material/ArrowLeftRounded';
+import ArrowRightRoundedIcon from '@mui/icons-material/ArrowRightRounded';
 import { Skeleton } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import MuiTab from '@mui/material/Tab';
 import MuiTabs from '@mui/material/Tabs';
 import apiService, { CountryResponse } from '@services/api';
@@ -7,6 +11,7 @@ import titleService from '@services/title';
 import { CountryImage } from '@shared/CountryDisplay';
 import { Note } from '@shared/Notes';
 import { format } from '@utils/format.utils';
+import { list } from '@utils/list.utils';
 import { useLayoutEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 
@@ -49,6 +54,12 @@ export const GeneralTabs = ({
   loading,
 }: GeneralTabsProps) => {
   const { pathname } = useLocation();
+  const { data: countries } = apiService.countries.useList();
+  const [prevCountry, nextCountry] = list.getListNavigation<CountryResponse>(
+    item,
+    countries,
+    (a, b) => a.name.localeCompare(b.name),
+  );
 
   const key = pathname?.includes('overview') ? 'overview' : 'notes';
 
@@ -83,8 +94,17 @@ export const GeneralTabs = ({
       </MuiTabs>
       <div className="pt-5">
         {item ? (
-          <div className="flex pb-5 items-center justify-center gap-4">
-            <CountryImage country={item.id} className="h-14" />
+          <div className="flex pb-5 items-center justify-center gap-2">
+            <Tooltip title={prevCountry?.name}>
+              <IconButton
+                size="small"
+                component={Link}
+                to={`/countries/${prevCountry?.id}`}
+              >
+                <ArrowLeftRoundedIcon />
+              </IconButton>
+            </Tooltip>
+            <CountryImage country={item.id} className="h-14 mr-2" />
             <div className="flex flex-col">
               <Typography
                 variant="h6"
@@ -94,6 +114,15 @@ export const GeneralTabs = ({
                 {item.name}
               </Typography>
             </div>
+            <Tooltip title={nextCountry?.name}>
+              <IconButton
+                size="small"
+                component={Link}
+                to={`/countries/${nextCountry?.id}`}
+              >
+                <ArrowRightRoundedIcon />
+              </IconButton>
+            </Tooltip>
           </div>
         ) : (
           <div className="flex pb-5 items-center justify-center gap-4">

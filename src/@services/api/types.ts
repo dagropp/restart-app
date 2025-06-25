@@ -362,6 +362,7 @@ export interface NoteResponse {
   pinned: SqlBoolean;
   parent?: number;
   cityId: City;
+  countryId?: Country;
   groupId: string;
   scope: NoteScope;
   type: NoteType;

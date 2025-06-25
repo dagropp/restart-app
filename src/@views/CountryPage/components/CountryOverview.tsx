@@ -1,4 +1,6 @@
+import FunFacts from '@shared/FunFacts';
 import GoogleMapCard from '@shared/GoogleMapCard';
+import Landmarks from '@shared/Landmarks';
 import Overview from '@shared/Overview';
 import Prices from '@shared/Prices';
 import WikiData from '@shared/WikiData';
@@ -23,6 +25,8 @@ const OverviewWithData = () => {
       <CountryGeneralData />
       <Prices cost={cost} currency={item.currency} />
       <GoogleMapCard params={{ place: item.name }} />
+      {item.landmarks && <Landmarks items={item.landmarks} />}
+      {item.funFacts && <FunFacts items={item.funFacts} />}
     </Overview>
   );
 };

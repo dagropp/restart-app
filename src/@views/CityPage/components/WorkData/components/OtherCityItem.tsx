@@ -18,10 +18,10 @@ import { Item } from './Item';
 interface Props {
   value: City;
   onChange: (value: City) => void;
-  marks: IncomeItem[];
+  marks?: IncomeItem[];
 }
 
-export const OtherCityItem = ({ value, onChange, marks }: Props) => {
+export const OtherCityItem = ({ value, onChange, marks = [] }: Props) => {
   const { user } = useUserContext();
   const { item, cost } = useCityContext();
   const { currencies } = useAppContext();

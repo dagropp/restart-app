@@ -9,8 +9,8 @@ export const CityPopulation = () => {
   const {
     item: { population, country },
   } = useCityContext();
-  const percentage = number.percentage(population, country.population);
-  const tooltip = `${Math.round(population).toLocaleString()} / ${percentage} of the country`;
+  const percentage = number.toFixed((population / country.population) * 100);
+  const tooltip = `${Math.round(population).toLocaleString()} / ${percentage}% of the country`;
 
   return (
     <Tooltip title={tooltip} placement="left">

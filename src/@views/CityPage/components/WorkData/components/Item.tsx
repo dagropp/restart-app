@@ -1,6 +1,7 @@
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import { useAppContext } from '@context/app';
+import Skeleton from '@mui/material/Skeleton';
 import { Currency } from '@root/types';
 import InfoTooltip from '@shared/InfoTooltip';
 import { convertCurrency, formatCurrency } from '@utils/format.utils';
@@ -41,17 +42,21 @@ export const Item = ({ label, gross, net, description, currency }: Props) => {
           key={section.label}
         >
           <Typography variant="body2">{section.label}</Typography>
-          <Tooltip
-            title={formatCurrency(
-              section.value,
-              currency ?? item.country.currency,
-            )}
-            placement="left"
-          >
-            <Typography variant="body2">
-              {currencyConverter(section.value)}
-            </Typography>
-          </Tooltip>
+          {isNaN(section.value) ? (
+            <Skeleton variant="text" width="20%" />
+          ) : (
+            <Tooltip
+              title={formatCurrency(
+                section.value,
+                currency ?? item.country.currency,
+              )}
+              placement="left"
+            >
+              <Typography variant="body2">
+                {currencyConverter(section.value)}
+              </Typography>
+            </Tooltip>
+          )}
         </div>
       ))}
 

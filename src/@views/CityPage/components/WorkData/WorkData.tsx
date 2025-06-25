@@ -57,13 +57,11 @@ export const WorkData = () => {
             net={marks[mark].net}
           />
         )}
-        {otherCityMarks && (
-          <OtherCityItem
-            value={otherCity}
-            onChange={setOtherCity}
-            marks={otherCityMarks}
-          />
-        )}
+        <OtherCityItem
+          value={otherCity}
+          onChange={setOtherCity}
+          marks={otherCityMarks}
+        />
       </div>
       {income.jobs.length > 0 && (
         <div className="flex items-center gap-4 w-full mt-2">
@@ -73,12 +71,10 @@ export const WorkData = () => {
               item.satelliteCity ? cities[item.satelliteCity].name : item.name
             }
           />
-          {!!otherCityIncome?.jobs.length && (
-            <JobsChart
-              jobs={otherCityIncome.jobs}
-              name={cities[otherCity].name}
-            />
-          )}
+          <JobsChart
+            jobs={otherCityIncome?.jobs}
+            name={cities[otherCity].name}
+          />
         </div>
       )}
     </SectionCard>

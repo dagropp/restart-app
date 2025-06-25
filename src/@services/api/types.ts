@@ -146,9 +146,25 @@ export interface CountryResponse extends CountryData {
   isBookmark: boolean;
 }
 
+export type CityCountryResponse = Pick<
+  CountryResponse,
+  | 'id'
+  | 'capital'
+  | 'regions'
+  | 'visaLevel'
+  | 'language'
+  | 'englishSpeakersPercentage'
+  | 'currency'
+  | 'name'
+  | 'isEu'
+  | 'population'
+  | 'socketTypes'
+  | 'voltage'
+>;
+
 export interface CityData {
   id: City;
-  country: CountryResponse;
+  country: CityCountryResponse;
   state?: string;
   name: string;
   airport: string;

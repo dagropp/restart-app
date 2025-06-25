@@ -131,7 +131,7 @@ export const GeneralTabs = ({
       </MuiTabs>
       <div className="pt-5">
         {item ? (
-          <div className="flex pb-5 items-center justify-center gap-4">
+          <div className="flex pb-5 items-center justify-center gap-2">
             <Tooltip title={prevCity?.name}>
               <IconButton
                 size="small"
@@ -141,7 +141,7 @@ export const GeneralTabs = ({
                 <ArrowLeftRoundedIcon />
               </IconButton>
             </Tooltip>
-            <CountryImage country={item.country.id} className="h-14" />
+            <CountryImage country={item.country.id} className="h-14 mr-2" />
             <div className="flex flex-col">
               <Typography
                 variant="h6"

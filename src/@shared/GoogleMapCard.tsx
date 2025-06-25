@@ -40,6 +40,8 @@ const getUrl = (params: MapParams, view: View, zoom?: number) => {
     case 'METRO':
       query.origin = params.place;
       query.destination = params.destination ?? '';
+      query.mode = 'transit';
+      query.units = 'metric';
       break;
     case 'AIRPORT':
       query.origin = `${params.airport} Airport`;

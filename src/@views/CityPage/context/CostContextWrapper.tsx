@@ -3,7 +3,7 @@ import { useAppContext } from '@context/app';
 import { useUserContext } from '@context/user';
 import { Currency, IncomeType } from '@root/types';
 import { IncomeItem } from '@services/api';
-import { useMemo, useReducer, useState } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 
 import CityIncomeSlider from '../components/CityIncomeSlider';
 import CostEditor from '../components/CostEditor';
@@ -67,6 +67,23 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
       },
     },
   );
+
+  useEffect(() => {
+    if (partnerMarks.length) {
+      updatePositiveState({
+        partner: {
+          value: partnerMarks[group.partner?.incomeMark ?? 0]?.gross ?? 0,
+          hidden: false,
+        },
+      });
+    }
+  }, [group.partner?.incomeMark, partnerMarks]);
+
+  useEffect(() => {
+    updatePositiveState({
+      user: { value: marks[user.incomeMark ?? 0].gross },
+    });
+  }, [marks, user.incomeMark]);
 
   const [negativeState, updateNegativeState] = useReducer(
     (state: CostNegativeState, update: Partial<CostNegativeState>) => {
@@ -190,9 +207,12 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
 
     return rows;
   }, [
+    adultCount,
     cheapest?.price,
+    childrenCount,
     cost.preSchool,
     cost.privateSchool,
+    group.bedrooms,
     group.children,
     group.partner,
     item.airport,
@@ -206,6 +226,7 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
     negativeState,
     updateNegativeState,
   };
+
   return (
     <CostContext value={value}>
       {children}

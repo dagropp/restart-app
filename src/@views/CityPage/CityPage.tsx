@@ -37,7 +37,7 @@ const CityPage = ({ tab }: Props) => {
     queryKey: ['getGroupIncome', item?.id, group.partner],
     queryFn: () =>
       apiService.income.get(item!.id, group.partner!.income, group.partner?.id),
-    enabled: !!group.partner && !!item,
+    enabled: !!group.partner && !!item?.id,
   });
 
   const { data: cost } = useQuery({

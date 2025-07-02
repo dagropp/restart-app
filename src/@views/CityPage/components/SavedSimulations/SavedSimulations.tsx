@@ -188,7 +188,7 @@ export const SavedSimulations = () => {
             />
           </div>
         )}
-        <ButtonGroup variant="contained" className="h-11">
+        <ButtonGroup variant="contained" className="h-11 !shadow-none">
           {hasActivePreset ? (
             <Button onClick={handleUpdate}>Update Simulation</Button>
           ) : (

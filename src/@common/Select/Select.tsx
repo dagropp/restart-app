@@ -25,7 +25,11 @@ const Select = <T = unknown,>({
 
   return (
     <FormControl fullWidth className="h-max">
-      <InputLabel id={labelId} size={size as InputLabelProps['size']}>
+      <InputLabel
+        id={labelId}
+        size={size as InputLabelProps['size']}
+        className={clsx(size === 'small' && 'mt-0.5')}
+      >
         {placeholder}
         {props.required && ' *'}
       </InputLabel>

@@ -8,4 +8,5 @@ export * from './insights';
 export * from './notes';
 export * from './quality';
 export * from './scraping';
+export * from './simulation';
 export * from './wiki';

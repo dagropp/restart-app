@@ -2,7 +2,12 @@ import Modal from '@common/Modal';
 import { useAppContext } from '@context/app';
 import { useUserContext } from '@context/user';
 import { Currency, IncomeType } from '@root/types';
-import { IncomeItem } from '@services/api';
+import {
+  type CostNegativeState,
+  type CostPositiveState,
+  type IncomeItem,
+} from '@services/api';
+import { array } from '@utils/array.utils';
 import { useEffect, useMemo, useReducer, useState } from 'react';
 
 import CityIncomeSlider from '../components/CityIncomeSlider';
@@ -11,10 +16,8 @@ import { useFlightsData, useIncomeData } from '../hooks';
 import { CostContext } from './CostContext';
 import {
   type CostContextWrapperProps,
-  CostNegativeState,
-  CostPositiveState,
-  CostRowsList,
-  ICostContext,
+  type CostRowsList,
+  type ICostContext,
 } from './types';
 import { useCityContext } from './useCityContext';
 
@@ -89,7 +92,10 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
     (state: CostNegativeState, update: Partial<CostNegativeState>) => {
       return { ...state, ...update };
     },
-    { general: { value: cost.generalCost }, rent: { value: cost.rentOuter } },
+    {
+      general: { value: cost.generalCost },
+      rent: { value: cost.rentOuter },
+    } as CostNegativeState,
   );
 
   const selectedUserIncome =
@@ -174,36 +180,58 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
     };
 
     if (cheapest?.price) {
-      const key = 'flights' as string;
-      const groupSize = (group.partner ? 1 : 0) + group.children.length;
-      rows[key] = {
+      const groupSize = (group.partner ? 1 : 0) + group.children.length + 1;
+      rows.flights = {
         label: `${item.airport}-TLV Flights / Year`,
         optional: true,
         mapper: (value) => (value * groupSize) / 12,
       };
       updateNegativeState({
-        [key]: { hidden: true, value: cheapest.price * 4, instances: 1 },
+        flights: { hidden: true, value: cheapest.price, instances: 1 },
       });
     }
 
-    group.children.forEach((child) => {
-      const key = `child-${child.name}`;
-      if (child.ageAtDeparture < 6) {
-        rows[key] = {
-          label: `${child.name}'s Pre-school`,
-          optional: true,
-        };
-        updateNegativeState({ [key]: { hidden: true, value: cost.preSchool } });
-      } else if (child.ageAtDeparture <= 18) {
-        rows[key] = {
-          label: `${child.name}'s Private School`,
-          optional: true,
-        };
-        updateNegativeState({
-          [key]: { hidden: true, value: cost.privateSchool },
-        });
-      }
-    });
+    const { preschool, school } = Object.groupBy(group.children, (child) =>
+      child.ageAtDeparture < 6 ? 'preschool' : 'school',
+    );
+
+    if (preschool?.length) {
+      rows.preschool = {
+        label: `Private Preschool (${array.joinWithLast(
+          preschool.map((child) => child.name),
+          ', ',
+          ' and ',
+        )})`,
+        optional: true,
+      };
+      updateNegativeState({
+        preschool: {
+          hidden: true,
+          value: cost.preSchool,
+          instances: preschool.length > 1 ? preschool.length : undefined,
+          maxInstances: preschool.length,
+        },
+      });
+    }
+
+    if (school?.length) {
+      rows.school = {
+        label: `Private School (${array.joinWithLast(
+          school.map((child) => child.name),
+          ', ',
+          ' and ',
+        )})`,
+        optional: true,
+      };
+      updateNegativeState({
+        school: {
+          hidden: true,
+          value: cost.privateSchool,
+          instances: school.length > 1 ? school.length : undefined,
+          maxInstances: school.length,
+        },
+      });
+    }
 
     return rows;
   }, [

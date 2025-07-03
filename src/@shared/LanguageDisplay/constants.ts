@@ -1,0 +1,28 @@
+import { Language } from '@root/types.ts';
+
+export const languageMap: Record<Language, string> = {
+  [Language.AR]: 'العربية',
+  [Language.CS]: 'Čeština',
+  [Language.DA]: 'Dansk',
+  [Language.DE]: 'Deutsche',
+  [Language.EL]: 'Ελληνικά',
+  [Language.EN]: 'English',
+  [Language.ES]: 'Español',
+  [Language.FI]: 'Suomen',
+  [Language.FR]: 'Français',
+  [Language.HE]: 'עברית',
+  [Language.HI]: 'हिन्दी',
+  [Language.HU]: 'Magyar',
+  [Language.NL]: 'Nederlands',
+  [Language.NO]: 'Norsk',
+  [Language.PL]: 'Polski',
+  [Language.PT]: 'Português',
+  [Language.SL]: 'Slovenčina',
+  [Language.SV]: 'Svenska',
+  [Language.IT]: 'Italiano',
+  [Language.ET]: 'Eesti',
+  [Language.LT]: 'Lietuvių',
+  [Language.TR]: 'Türkçe',
+  [Language.IS]: 'Íslenska',
+  [Language.LV]: 'Latviešu',
+};

@@ -1,3 +1,3 @@
-import AppToolbar from './AppToolbar.tsx';
+import AppToolbar from './AppToolbar';
 
 export default AppToolbar;

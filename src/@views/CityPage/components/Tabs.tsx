@@ -1,5 +1,9 @@
+import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
+import ArrowLeftRoundedIcon from '@mui/icons-material/ArrowLeftRounded';
+import ArrowRightRoundedIcon from '@mui/icons-material/ArrowRightRounded';
 import { Skeleton } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import MuiTab from '@mui/material/Tab';
 import MuiTabs from '@mui/material/Tabs';
 import apiService, { CityData } from '@services/api';
@@ -8,6 +12,7 @@ import { CountryImage } from '@shared/CountryDisplay';
 import { Note } from '@shared/Notes';
 import { interpolateTranslations, useTranslations } from '@translations';
 import { format } from '@utils/format.utils';
+import { list } from '@utils/list.utils';
 import { useLayoutEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router';
 
@@ -36,6 +41,17 @@ export const GeneralTabs = ({
   loading,
 }: GeneralTabsProps) => {
   const { pathname } = useLocation();
+  const { data: cities } = apiService.useCities();
+  const [prevCity, nextCity] = list.getListNavigation<CityData>(
+    item,
+    cities,
+    (a, b) => {
+      const byCountry = a.country.name.localeCompare(b.country.name);
+      const byCity = a.name.localeCompare(b.name);
+      return byCountry || byCity;
+    },
+  );
+
   const translations = useTranslations().menu;
 
   const routes = {
@@ -74,6 +90,7 @@ export const GeneralTabs = ({
       translations.tabs.simulation,
     ],
   );
+
 
   const key = pathname.includes('overview')
     ? 'overview'
@@ -128,8 +145,17 @@ export const GeneralTabs = ({
       </MuiTabs>
       <div className="pt-5">
         {item ? (
-          <div className="flex pb-5 items-center justify-center gap-4">
-            <CountryImage country={item.country.id} className="h-14" />
+          <div className="flex pb-5 items-center justify-center gap-2">
+            <Tooltip title={prevCity?.name}>
+              <IconButton
+                size="small"
+                component={Link}
+                to={`/city/${prevCity?.id}`}
+              >
+                <ArrowLeftRoundedIcon />
+              </IconButton>
+            </Tooltip>
+            <CountryImage country={item.country.id} className="h-14 mr-2" />
             <div className="flex flex-col">
               <Typography
                 variant="h6"
@@ -147,6 +173,15 @@ export const GeneralTabs = ({
                 {item.country.name}
               </Typography>
             </div>
+            <Tooltip title={nextCity?.name}>
+              <IconButton
+                size="small"
+                component={Link}
+                to={`/city/${nextCity?.id}`}
+              >
+                <ArrowRightRoundedIcon />
+              </IconButton>
+            </Tooltip>
           </div>
         ) : (
           <div className="flex pb-5 items-center justify-center gap-4">

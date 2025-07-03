@@ -1,11 +1,6 @@
 import Masonry from '@mui/lab/Masonry';
-import apiService, {
-  City,
-  Country,
-  NoteResponse,
-  NoteScope,
-  UseNotesActions,
-} from '@services/api';
+import { City, Country, NoteScope } from '@root/types';
+import apiService, { NoteResponse, UseNotesActions } from '@services/api';
 import { style } from '@utils/style.utils';
 
 import {

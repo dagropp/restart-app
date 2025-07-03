@@ -1,8 +1,8 @@
 import Link from '@common/Link';
 import Typography from '@common/Typography';
-import useIsOverflow from '@hooks/useIsOverflow.ts';
+import useIsOverflow from '@hooks/useIsOverflow';
 import { NoteResponse } from '@services/api';
-import { string } from '@utils/string.utils.ts';
+import { string } from '@utils/string.utils';
 import clsx from 'clsx';
 import { useMemo } from 'react';
 

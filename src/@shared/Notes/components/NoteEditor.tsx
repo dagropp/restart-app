@@ -4,16 +4,11 @@ import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import { TextFieldProps } from '@mui/material/TextField';
-import {
-  City,
-  Country,
-  NoteResponse,
-  NoteType,
-  UseNotesActions,
-} from '@services/api';
-import { NoteData } from '@shared/Notes/components/NoteForm.tsx';
-import { NoteTypeToggle } from '@shared/Notes/components/NoteTypeToggle.tsx';
-import { Todo } from '@shared/Notes/components/Todo.tsx';
+import { City, Country, NoteType } from '@root/types';
+import { NoteResponse, UseNotesActions } from '@services/api';
+import { NoteData } from '@shared/Notes/components/NoteForm';
+import { NoteTypeToggle } from '@shared/Notes/components/NoteTypeToggle';
+import { Todo } from '@shared/Notes/components/Todo';
 import { string } from '@utils/string.utils';
 import clsx from 'clsx';
 import { useEffect } from 'react';

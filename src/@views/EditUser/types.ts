@@ -1,4 +1,5 @@
-import { ChildrenPayload, City, type IncomeType } from '@services/api';
+import { type City, type IncomeType } from '@root/types';
+import { type ChildrenPayload } from '@services/api';
 
 export enum InputName {
   FirstName = 'first_name',

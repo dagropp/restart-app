@@ -5,9 +5,10 @@ import { useUserContext } from '@context/user';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import { FormControlLabel } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
-import apiService, { City, IncomeItem, IncomeType } from '@services/api';
-import CityMenu from '@shared/CityMenu.tsx';
-import InfoTooltip from '@shared/InfoTooltip.tsx';
+import { City, IncomeType } from '@root/types';
+import apiService, { IncomeItem } from '@services/api';
+import CityMenu from '@shared/CityMenu';
+import InfoTooltip from '@shared/InfoTooltip';
 import { useQuery } from '@tanstack/react-query';
 import { interpolateTranslations, useTranslations } from '@translations';
 import { useCityContext } from '@views/CityPage/context';
@@ -18,10 +19,10 @@ import { Item } from './Item';
 interface Props {
   value: City;
   onChange: (value: City) => void;
-  marks: IncomeItem[];
+  marks?: IncomeItem[];
 }
 
-export const OtherCityItem = ({ value, onChange, marks }: Props) => {
+export const OtherCityItem = ({ value, onChange, marks = [] }: Props) => {
   const { user } = useUserContext();
   const { item, cost } = useCityContext();
   const { currencies } = useAppContext();

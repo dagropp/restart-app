@@ -3,7 +3,7 @@ import { useUserContext } from '@context/user';
 import apiService, { ScrapingData } from '@services/api';
 import dateService from '@services/date.service';
 import titleService from '@services/title';
-import { format } from '@utils/format.utils.ts';
+import { format } from '@utils/format.utils';
 import { useLayoutEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 

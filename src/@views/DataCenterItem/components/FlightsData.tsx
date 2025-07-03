@@ -5,9 +5,9 @@ import apiService, {
 } from '@services/api';
 import dateService from '@services/date.service';
 import { CityDisplay } from '@shared/CityDisplay';
-import CurrencyDisplay from '@shared/CurrencyDisplay.tsx';
+import CurrencyDisplay from '@shared/CurrencyDisplay';
 import { useQuery } from '@tanstack/react-query';
-import { formatCurrency } from '@utils/format.utils.ts';
+import { formatCurrency } from '@utils/format.utils';
 
 const columns: TableColumn<ScrapingRecordsFlights>[] = [
   {

@@ -3,7 +3,8 @@ import Tooltip from '@common/Tooltip';
 import useIsOverflow from '@hooks/useIsOverflow';
 import Checkbox from '@mui/material/Checkbox';
 import { useTheme } from '@mui/material/styles';
-import apiService, { Country } from '@services/api';
+import { Country } from '@root/types';
+import apiService from '@services/api';
 import { object } from '@utils/object.utils';
 import { useMemo } from 'react';
 

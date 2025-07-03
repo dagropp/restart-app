@@ -1,5 +1,6 @@
-import { City, CityData } from '@services/api';
-import { object } from '@utils/object.utils.ts';
+import { City } from '@root/types';
+import { CityData } from '@services/api';
+import { object } from '@utils/object.utils';
 
 export const findComparisonCity = (
   item: CityData,
@@ -7,7 +8,10 @@ export const findComparisonCity = (
 ) => {
   const list = object.values(cities).filter((city) => item.id !== city.id);
 
-  const inCountry = list.find((city) => city.country.id === item.country.id);
+  const inCountry = list.find(
+    (city) =>
+      city.country.id === item.country.id && city.id !== item.satelliteCity,
+  );
   if (inCountry) return inCountry.id;
 
   const inRegion = list.find((city) =>

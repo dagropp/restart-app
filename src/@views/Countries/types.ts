@@ -1,4 +1,4 @@
-import { ValidRegion, VisaLevel } from '@services/api';
+import { type ValidRegion, type VisaLevel } from '@root/types';
 
 export interface CountriesFilters {
   regions: ValidRegion[];

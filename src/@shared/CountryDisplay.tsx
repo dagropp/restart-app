@@ -1,5 +1,6 @@
 import Typography from '@common/Typography';
-import apiService, { Country } from '@services/api';
+import { Country } from '@root/types';
+import apiService from '@services/api';
 import clsx from 'clsx';
 import { RefObject } from 'react';
 

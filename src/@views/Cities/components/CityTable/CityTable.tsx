@@ -2,14 +2,15 @@ import Rating from '@common/Rating';
 import Table, { TableCellRenderer, type TableColumn } from '@common/Table';
 import { alpha } from '@mui/material';
 import Box from '@mui/material/Box';
-import apiService, { City, type CityData, EuUnionStatus } from '@services/api';
+import { City, EuUnionStatus } from '@root/types';
+import apiService, { type CityData } from '@services/api';
 import { BookmarkCell } from '@shared/BookmarkCell';
 import CountryDisplay from '@shared/CountryDisplay';
 import CurrencyDisplay from '@shared/CurrencyDisplay';
 import LanguageDisplay from '@shared/LanguageDisplay';
 import VisaDisplay from '@shared/VisaDisplay';
 import { useTranslations } from '@translations';
-import { number } from '@utils/number.utils.ts';
+import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
 import { tableSort } from '@utils/table-sort.utils';
 import { useMemo } from 'react';
@@ -100,7 +101,7 @@ export const CityTable = ({
         label: translations.table.cells.score,
         cellRenderer: ScoreCell,
         sorter: (direction) => (a, b) =>
-          (scores[b.id].average - scores[a.id].average) * direction,
+          (scores[b.id]?.average - scores[a.id]?.average) * direction,
       },
       {
         key: 'isEu',
@@ -149,7 +150,7 @@ export const CityTable = ({
             ? Number(b.isDestination) - Number(a.isDestination)
             : a.isBookmark !== b.isBookmark
               ? Number(b.isBookmark) - Number(a.isBookmark)
-              : scores[b.id].average - scores[a.id].average,
+              : scores[b.id]?.average - scores[a.id]?.average,
         ),
     [data, filteredIds, scores],
   );

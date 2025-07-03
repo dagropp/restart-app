@@ -1,4 +1,4 @@
-import { is } from '@utils/is.utils.ts';
+import { is } from '@utils/is.utils';
 import { useCallback, useState } from 'react';
 
 interface BooleanStateActions {

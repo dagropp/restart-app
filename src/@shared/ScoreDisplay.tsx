@@ -3,7 +3,8 @@ import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import Divider from '@mui/material/Divider';
-import apiService, { City, ScoreKey } from '@services/api';
+import { City } from '@root/types';
+import apiService, { ScoreKey } from '@services/api';
 import { useTranslations } from '@translations';
 import { object } from '@utils/object.utils';
 import clsx from 'clsx';
@@ -45,7 +46,7 @@ const ScoreItemComponent = ({ value, scoreKey }: ScoreItemComponentProps) => {
 
 const ScoreDisplay = ({ city, averageHidden, className }: Props) => {
   const { data: scores } = apiService.score.use();
-  const { average, ...sections } = scores[city];
+  const { average, ...sections } = scores[city] ?? {};
 
   return (
     <div

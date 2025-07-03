@@ -1,9 +1,10 @@
 import Modal from '@common/Modal';
 import { useAppContext } from '@context/app';
 import { useUserContext } from '@context/user';
-import { Currency, IncomeItem, IncomeType } from '@services/api';
+import { Currency, IncomeType } from '@root/types';
+import { IncomeItem } from '@services/api';
 import { interpolateTranslations, useTranslations } from '@translations';
-import { useMemo, useReducer, useState } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 
 import CityIncomeSlider from '../components/CityIncomeSlider';
 import CostEditor from '../components/CostEditor';
@@ -69,6 +70,23 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
       },
     },
   );
+
+  useEffect(() => {
+    if (partnerMarks.length) {
+      updatePositiveState({
+        partner: {
+          value: partnerMarks[group.partner?.incomeMark ?? 0]?.gross ?? 0,
+          hidden: false,
+        },
+      });
+    }
+  }, [group.partner?.incomeMark, partnerMarks]);
+
+  useEffect(() => {
+    updatePositiveState({
+      user: { value: marks[user.incomeMark ?? 0].gross },
+    });
+  }, [marks, user.incomeMark]);
 
   const [negativeState, updateNegativeState] = useReducer(
     (state: CostNegativeState, update: Partial<CostNegativeState>) => {
@@ -258,7 +276,7 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
     translations.group.adultSingle,
     translations.group.adults,
     translations.group.childSingle,
-    translations.group.children,
+    translations.group.children
   ]);
 
   const value: ICostContext = {
@@ -269,6 +287,7 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
     negativeState,
     updateNegativeState,
   };
+
   return (
     <CostContext value={value}>
       {children}

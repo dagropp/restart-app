@@ -2,7 +2,8 @@ import Rating from '@common/Rating';
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import RoomRoundedIcon from '@mui/icons-material/RoomRounded';
-import apiService, { City, CityData, Region } from '@services/api';
+import { City, Region } from '@root/types';
+import apiService, { CityData } from '@services/api';
 import CountryDisplay from '@shared/CountryDisplay';
 import MapElement from '@shared/MapElement';
 import { object } from '@utils/object.utils';
@@ -72,12 +73,20 @@ const regionMap: Record<Region, RegionData> = {
       {
         x: 45.7,
         y: 16.3,
-        cities: [City.AMSTERDAM, City.EINDHOVEN, City.BRUSSELS],
+        cities: [
+          City.AMSTERDAM,
+          City.EINDHOVEN,
+          City.BRUSSELS,
+          City.UTRECHT,
+          City.HAARLEM,
+          City.ROTTERDAM,
+          City.DEN_HAAG,
+        ],
       },
       {
         x: 45.5,
         y: 21.5,
-        cities: [City.LONDON, City.CAMBRIDGE, City.MANCHESTER],
+        cities: [City.LONDON, City.CAMBRIDGE, City.MANCHESTER, City.READING],
       },
       { x: 51.2, y: 14.5, cities: [City.VILNIUS] },
       { x: 46.1, y: 18.1, cities: [City.LUXEMBOURG_CITY] },
@@ -90,12 +99,12 @@ const regionMap: Record<Region, RegionData> = {
       { x: 47.8, y: 13.7, cities: [City.COPENHAGEN] },
       { x: 50.9, y: 10.8, cities: [City.HELSINKI, City.TALLINN] },
       { x: 44.9, y: 18.9, cities: [City.PARIS] },
-      { x: 48, y: 15.9, cities: [City.BERLIN, City.HAMBURG] },
+      { x: 48, y: 15.9, cities: [City.BERLIN, City.HAMBURG, City.POTSDAM] },
       { x: 47.6, y: 19, cities: [City.FRANKFURT, City.MUNICH] },
       {
         x: 46.7,
         y: 20.2,
-        cities: [City.ZURICH, City.BERN, City.BASEL, City.GENEVA],
+        cities: [City.ZURICH, City.BERN, City.BASEL, City.GENEVA, City.LUGANO],
       },
     ],
   },
@@ -113,10 +122,20 @@ const regionMap: Record<Region, RegionData> = {
       { x: 26.4, y: 36.7, cities: [City.EDINBURGH] },
       { x: 25.1, y: 37.4, cities: [City.GLASGOW] },
       { x: 22.9, y: 43.1, cities: [City.DUBLIN] },
-      { x: 33.8, y: 44.6, cities: [City.AMSTERDAM] },
+      {
+        x: 33.8,
+        y: 44.6,
+        cities: [
+          City.AMSTERDAM,
+          City.UTRECHT,
+          City.HAARLEM,
+          City.ROTTERDAM,
+          City.DEN_HAAG,
+        ],
+      },
       { x: 34.7, y: 48.3, cities: [City.EINDHOVEN] },
       { x: 33.7, y: 50.6, cities: [City.BRUSSELS] },
-      { x: 29.7, y: 47.8, cities: [City.LONDON, City.CAMBRIDGE] },
+      { x: 29.7, y: 47.8, cities: [City.LONDON, City.CAMBRIDGE, City.READING] },
       { x: 26.8, y: 42.5, cities: [City.MANCHESTER] },
       { x: 35.3, y: 53, cities: [City.LUXEMBOURG_CITY] },
       { x: 46.6, y: 56.8, cities: [City.BRATISLAVA, City.VIENNA] },
@@ -128,11 +147,12 @@ const regionMap: Record<Region, RegionData> = {
       { x: 52, y: 26, cities: [City.HELSINKI] },
       { x: 51.9, y: 28.6, cities: [City.TALLINN] },
       { x: 31.7, y: 54.9, cities: [City.PARIS] },
-      { x: 42.4, y: 45.6, cities: [City.BERLIN] },
+      { x: 42.4, y: 45.6, cities: [City.BERLIN, City.POTSDAM] },
       { x: 38.6, y: 42.6, cities: [City.HAMBURG] },
       { x: 41.3, y: 57, cities: [City.MUNICH] },
       { x: 37.6, y: 52, cities: [City.FRANKFURT] },
       { x: 38, y: 59.7, cities: [City.ZURICH] },
+      { x: 38, y: 62.7, cities: [City.LUGANO] },
       { x: 37.2, y: 58.2, cities: [City.BASEL] },
       { x: 36.5, y: 60.2, cities: [City.BERN] },
       // fixed
@@ -209,7 +229,7 @@ const Mark = ({ x, y, cities, data }: MarkProps) => {
             </Typography>
             <CountryDisplay country={item.country.id} />
             <Rating
-              value={scores[city].average}
+              value={scores[city]?.average}
               base={10}
               readOnly
               className="pt-2 scale-75"

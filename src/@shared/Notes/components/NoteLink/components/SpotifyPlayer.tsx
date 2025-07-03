@@ -1,4 +1,4 @@
-import { SpotifyPlayerProps } from '@shared/Notes/components/NoteLink/types.ts';
+import { SpotifyPlayerProps } from '@shared/Notes/components/NoteLink/types';
 import { memo } from 'react';
 
 export const SpotifyPlayer = memo(

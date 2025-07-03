@@ -1,5 +1,10 @@
 import type { TableColumn } from '@common/Table';
-import { Currency, EuUnionStatus, Language, VisaLevel } from '@services/api';
+import {
+  type Currency,
+  EuUnionStatus,
+  type Language,
+  VisaLevel,
+} from '@root/types';
 import { languageMap } from '@shared/LanguageDisplay';
 import { ITranslations } from '@translations';
 

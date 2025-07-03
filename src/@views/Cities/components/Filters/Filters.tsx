@@ -4,11 +4,11 @@ import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import EnglishFilter from '@shared/EnglishFilter';
-import FiltersMenu from '@shared/FiltersMenu.tsx';
+import FiltersMenu from '@shared/FiltersMenu';
 import RegionFilter from '@shared/RegionFilter';
 import VisaFilter from '@shared/VisaFilter';
 import { useTranslations } from '@translations';
-import { style } from '@utils/style.utils.ts';
+import { style } from '@utils/style.utils';
 
 import { CitiesFilters } from '../../types';
 import { CountryFilter, RatingFilter } from './components';

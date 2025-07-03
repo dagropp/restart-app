@@ -1,7 +1,8 @@
+import { type Country } from '@root/types';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import { http } from '../../http.service';
-import { type Country, type CountryData, CountryResponse } from '../types';
+import { type CountryData, CountryResponse } from '../types';
 import { getUrl } from '../utils';
 
 const get = (): Promise<Record<Country, CountryData>> =>

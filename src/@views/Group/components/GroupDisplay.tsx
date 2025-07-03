@@ -8,7 +8,8 @@ import EscalatorWarningRoundedIcon from '@mui/icons-material/EscalatorWarningRou
 import FlightTakeoffRoundedIcon from '@mui/icons-material/FlightTakeoffRounded';
 import TollRoundedIcon from '@mui/icons-material/TollRounded';
 import IconButton from '@mui/material/IconButton';
-import { ChildrenResponse, IncomeType } from '@services/api';
+import { IncomeType } from '@root/types';
+import { ChildrenResponse } from '@services/api';
 import SectionCard from '@shared/SectionCard';
 import { useTranslations } from '@translations';
 import { incomeUtils } from '@utils/income.utils';

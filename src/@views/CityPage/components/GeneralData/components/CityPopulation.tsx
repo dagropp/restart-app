@@ -12,7 +12,7 @@ export const CityPopulation = () => {
   } = useCityContext();
   const translations = useTranslations().generalSection;
 
-  const percentage = number.percentage(population, country.population);
+  const percentage = number.toFixed((population / country.population) * 100);
   const tooltip = interpolateTranslations(translations.populationRelativity, {
     population: Math.round(population).toLocaleString(),
     percentage,

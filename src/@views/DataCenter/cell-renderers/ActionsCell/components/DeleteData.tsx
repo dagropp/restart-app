@@ -1,9 +1,9 @@
 import Button from '@common/Button';
 import Dialog from '@common/Dialog';
-import useBooleanState from '@hooks/useBooleanState.ts';
+import useBooleanState from '@hooks/useBooleanState';
 import apiService, { ScrapingType } from '@services/api';
 import { useMutation } from '@tanstack/react-query';
-import { scrapingTypeMap } from '@views/DataCenter/utils.ts';
+import { scrapingTypeMap } from '@views/DataCenter/utils';
 
 interface Props {
   type: ScrapingType;

@@ -1,5 +1,5 @@
 import Select, { type SelectProps } from '@common/Select';
-import { Currency } from '@services/api';
+import { Currency } from '@root/types';
 import currencyService from '@services/currency';
 
 import CurrencyDisplay from './CurrencyDisplay';

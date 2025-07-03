@@ -1,6 +1,7 @@
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import IconButton from '@mui/material/IconButton';
-import apiService, { City, Country } from '@services/api';
+import { City, Country } from '@root/types';
+import apiService from '@services/api';
 import { NoteCard } from '@shared/Notes/components';
 import { useLocation, useNavigate, useParams } from 'react-router';
 

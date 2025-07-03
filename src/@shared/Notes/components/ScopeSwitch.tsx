@@ -5,8 +5,8 @@ import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import { type OverridableComponent } from '@mui/material/OverridableComponent';
 import { type Theme } from '@mui/material/styles';
 import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
-import { NoteScope } from '@services/api';
-import { NoteData } from '@shared/Notes/components/NoteForm.tsx';
+import { NoteScope } from '@root/types';
+import { NoteData } from '@shared/Notes/components/NoteForm';
 import clsx from 'clsx';
 import { useFormContext } from 'react-hook-form';
 

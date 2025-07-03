@@ -1,11 +1,12 @@
 import { useUserContext } from '@context/user';
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
-import apiService, { IncomeType } from '@services/api';
+import { IncomeType } from '@root/types';
+import apiService from '@services/api';
 import SectionCard from '@shared/SectionCard';
 import { useQuery } from '@tanstack/react-query';
 import { interpolateTranslations, useTranslations } from '@translations';
 import { incomeUtils } from '@utils/income.utils';
-import { findComparisonCity } from '@views/CityPage/components/WorkData/utils.ts';
+import { findComparisonCity } from '@views/CityPage/components/WorkData/utils';
 import { useCityContext } from '@views/CityPage/context';
 import { useIncomeData } from '@views/CityPage/hooks';
 import { useState } from 'react';
@@ -64,23 +65,24 @@ export const WorkData = () => {
             net={marks[mark].net}
           />
         )}
-        {otherCityMarks && (
-          <OtherCityItem
-            value={otherCity}
-            onChange={setOtherCity}
-            marks={otherCityMarks}
-          />
-        )}
+        <OtherCityItem
+          value={otherCity}
+          onChange={setOtherCity}
+          marks={otherCityMarks}
+        />
       </div>
       {income.jobs.length > 0 && (
         <div className="flex items-center gap-4 w-full mt-2">
-          <JobsChart jobs={income.jobs} name={item.name} />{' '}
-          {!!otherCityIncome?.jobs.length && (
-            <JobsChart
-              jobs={otherCityIncome.jobs}
-              name={cities[otherCity].name}
-            />
-          )}
+          <JobsChart
+            jobs={income.jobs}
+            name={
+              item.satelliteCity ? cities[item.satelliteCity].name : item.name
+            }
+          />
+          <JobsChart
+            jobs={otherCityIncome?.jobs}
+            name={cities[otherCity].name}
+          />
         </div>
       )}
     </SectionCard>

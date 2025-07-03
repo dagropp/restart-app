@@ -1,6 +1,7 @@
 import { toastService } from '@common/Toast';
 import { useUserContext } from '@context/user';
-import apiService, { Currency } from '@services/api';
+import { Currency } from '@root/types';
+import apiService from '@services/api';
 import titleService from '@services/title';
 import { useMutation } from '@tanstack/react-query';
 import { useLayoutEffect } from 'react';

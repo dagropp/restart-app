@@ -1,5 +1,7 @@
 import { useUserContext } from '@context/user';
-import { IncomeItem, IncomeResponse, IncomeType } from '@services/api';
+import { IncomeType } from '@root/types';
+import { IncomeItem, IncomeResponse } from '@services/api';
+import { useMemo } from 'react';
 
 import { useCityContext } from '../context';
 
@@ -41,10 +43,14 @@ export const useIncomeData = (
 
   const income = cityContext[key] ?? defaultIncome;
 
-  const marks: IncomeItemData[] = income?.marks
-    .map((item) => ({ ...item, isMajor: true }))
-    .concat(income.increments.map((item) => ({ ...item, isMajor: false })))
-    .toSorted((a, b) => a.gross - b.gross);
+  const marks: IncomeItemData[] = useMemo(
+    () =>
+      income?.marks
+        .map((item) => ({ ...item, isMajor: true }))
+        .concat(income.increments.map((item) => ({ ...item, isMajor: false })))
+        .toSorted((a, b) => a.gross - b.gross),
+    [income?.increments, income?.marks],
+  );
 
   if (incomeType === IncomeType.None) {
     return { income, marks, incomeType: IncomeType.None };

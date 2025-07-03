@@ -2,8 +2,8 @@ import CopyToClipboard from '@common/CopyToClipboard';
 import Table, { type TableColumn } from '@common/Table';
 import { useUserContext } from '@context/user';
 import apiService, { type CompactUserResponse } from '@services/api';
-import UserAvatar from '@shared/UserAvatar.tsx';
-import { object } from '@utils/object.utils.ts';
+import UserAvatar from '@shared/UserAvatar';
+import { object } from '@utils/object.utils';
 import { Navigate } from 'react-router';
 
 const columns: TableColumn<CompactUserResponse>[] = [

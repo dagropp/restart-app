@@ -22,13 +22,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Skeleton from '@mui/material/Skeleton';
 import { SxProps } from '@mui/system';
-import apiService, {
-  type NoteResponse,
-  NoteScope,
-  NoteType,
-  UseNotesActions,
-} from '@services/api';
-import { Todo } from '@shared/Notes/components/Todo.tsx';
+import { NoteScope, NoteType } from '@root/types';
+import apiService, { type NoteResponse, UseNotesActions } from '@services/api';
+import { Todo } from '@shared/Notes/components/Todo';
 import { string } from '@utils/string.utils';
 import clsx from 'clsx';
 import { type MouseEvent, useMemo, useState } from 'react';

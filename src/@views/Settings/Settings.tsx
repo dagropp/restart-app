@@ -1,13 +1,13 @@
 import { useUserContext } from '@context/user';
 import MuiTab from '@mui/material/Tab';
 import MuiTabs from '@mui/material/Tabs';
-import { UserResponse, UserType } from '@services/api';
+import { SettingsTabKey, UserType } from '@root/types';
+import { UserResponse } from '@services/api';
 import titleService from '@services/title';
 import { object } from '@utils/object.utils';
 import { useLayoutEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 
-import { SettingsTabKey } from '../../types';
 import DataCenter from '../DataCenter';
 import DataCenterItem from '../DataCenterItem';
 import { EditExistingGroup, EditExistingUser } from '../EditUser';

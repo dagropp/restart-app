@@ -1,5 +1,6 @@
 import useFilters from '@hooks/useFilters';
-import apiService, { City, Language } from '@services/api';
+import { City, Language } from '@root/types';
+import apiService from '@services/api';
 import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
 import { style } from '@utils/style.utils';
@@ -37,7 +38,7 @@ const Cities = () => {
           !filters.visa.length || filters.visa.includes(city.country.visaLevel);
         const isRating =
           !filters.minRating ||
-          number.roundBy(scores[key].average / 2, 2) >= filters.minRating;
+          number.roundBy(scores[key]?.average / 2, 2) >= filters.minRating;
         const isCountry =
           !countriesSet.size || countriesSet.has(city.country.id);
         const isEnglish =

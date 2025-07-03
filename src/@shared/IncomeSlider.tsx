@@ -1,15 +1,13 @@
 import Slider, { CurrencyMarkItem } from '@common/Slider';
 import { useAppContext } from '@context/app';
-import {
-  type Currency,
-  type IncomeItem,
-  type IncomeResponse,
-} from '@services/api';
+import { Currency } from '@root/types';
+import { type IncomeItem, type IncomeResponse } from '@services/api';
 import { convertCurrency, formatCurrency } from '@utils/format.utils';
+import { ReactNode } from 'react';
 
 interface Mark {
   value: number;
-  label?: React.ReactNode;
+  label?: ReactNode;
 }
 
 interface Props {

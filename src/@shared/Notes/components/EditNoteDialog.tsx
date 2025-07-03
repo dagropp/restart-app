@@ -3,13 +3,8 @@ import MuiDialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import apiService, {
-  City,
-  Country,
-  type NoteResponse,
-  NoteType,
-  UseNotesActions,
-} from '@services/api';
+import { City, Country, NoteType } from '@root/types';
+import apiService, { type NoteResponse, UseNotesActions } from '@services/api';
 
 import { NoteEditor } from './NoteEditor';
 import { type NoteData, NoteForm } from './NoteForm';

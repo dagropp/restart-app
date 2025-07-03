@@ -5,17 +5,11 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
-import apiService, {
-  City,
-  Country,
-  NoteResponse,
-  NoteScope,
-  NoteType,
-  UseNotesActions,
-} from '@services/api';
-import { NoteData } from '@shared/Notes/components/NoteForm.tsx';
+import { City, Country, NoteScope, NoteType } from '@root/types';
+import apiService, { NoteResponse, UseNotesActions } from '@services/api';
+import { NoteData } from '@shared/Notes/components/NoteForm';
 import { useMutation } from '@tanstack/react-query';
-import { is } from '@utils/is.utils.ts';
+import { is } from '@utils/is.utils';
 import clsx from 'clsx';
 import { type KeyboardEvent, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';

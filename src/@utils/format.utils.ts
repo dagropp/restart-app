@@ -1,4 +1,5 @@
-import { Currency, CurrencyList } from '@services/api';
+import { Currency } from '@root/types';
+import { CurrencyList } from '@services/api';
 import currencyService from '@services/currency';
 
 import { number } from './number.utils';

@@ -1,4 +1,6 @@
-import { type Currency, type LoginResponse, ThemeType } from '../api';
+import { Currency, ThemeType } from '@root/types';
+
+import { type LoginResponse } from '../api';
 import { defaultAppStorage } from './storage.const';
 import { type AppStorage, DefaultReturn } from './storage.types';
 

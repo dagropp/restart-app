@@ -3,7 +3,7 @@ import { alpha, Theme } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Currency } from '@services/api';
+import { Currency } from '@root/types';
 import currencyService from '@services/currency';
 import { useTranslations } from '@translations';
 import { type MouseEvent, useState } from 'react';

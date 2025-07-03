@@ -1,9 +1,9 @@
 import Select, { SelectOption } from '@common/Select';
 import Tooltip from '@common/Tooltip';
-import useIsOverflow from '@hooks/useIsOverflow.ts';
+import useIsOverflow from '@hooks/useIsOverflow';
 import Checkbox from '@mui/material/Checkbox';
 import { useTheme } from '@mui/material/styles';
-import { VisaLevel } from '@services/api';
+import { VisaLevel } from '@root/types';
 import VisaDisplay from '@shared/VisaDisplay';
 import { useTranslations } from '@translations';
 

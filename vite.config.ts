@@ -14,6 +14,7 @@ export default defineConfig(() => {
         '@services': '/src/@services',
         '@utils': '/src/@utils',
         '@views': '/src/@views',
+        '@root': '/src',
         '@translations': '/src/@translations',
       },
     },

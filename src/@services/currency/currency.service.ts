@@ -1,7 +1,7 @@
-import { Currency } from '@services/api';
-import { object } from '@utils/object.utils.ts';
+import { Currency } from '@root/types';
+import { object } from '@utils/object.utils';
 
-import { map, order } from './currency.const.tsx';
+import { map, order } from './currency.const';
 
 class CurrencyService {
   map = map;

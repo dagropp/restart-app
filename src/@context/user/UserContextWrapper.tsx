@@ -1,7 +1,7 @@
+import { UserType } from '@root/types';
 import apiService, {
   type GroupResponse,
   type UserResponse,
-  UserType,
 } from '@services/api';
 import storageService from '@services/storage';
 import { type ReactNode, useCallback, useState } from 'react';

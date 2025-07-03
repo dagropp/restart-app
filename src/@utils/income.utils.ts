@@ -1,4 +1,5 @@
-import { CityData, IncomeType } from '@services/api';
+import { IncomeType } from '@root/types';
+import { CityData } from '@services/api';
 import { type ITranslations } from '@translations';
 
 interface IncomeTypeData {

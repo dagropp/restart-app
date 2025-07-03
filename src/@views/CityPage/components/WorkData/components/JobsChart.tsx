@@ -1,20 +1,21 @@
+import SparkLineChart from '@common/SparkLineChart';
 import Typography from '@common/Typography';
-import { alpha } from '@mui/material';
+import { alpha, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { SparkLineChart } from '@mui/x-charts';
-import dateService from '@services/date.service.ts';
+import dateService from '@services/date.service';
 import { interpolateTranslations, useTranslations } from '@translations';
 import { format } from '@utils/format.utils';
-import { number } from '@utils/number.utils.ts';
+import { is } from '@utils/is.utils';
+import { number } from '@utils/number.utils';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 
 interface Props {
   name: string;
-  jobs: number[];
+  jobs?: number[];
 }
 
-export const JobsChart = ({ jobs, name }: Props) => {
+export const JobsChart = ({ jobs = [], name }: Props) => {
   const theme = useTheme();
   const translations = useTranslations().city.jobData;
 
@@ -39,33 +40,44 @@ export const JobsChart = ({ jobs, name }: Props) => {
       ? `+${number.toFixed(trendRate, 2)}%`
       : `${number.toFixed(trendRate, 2)}%`;
 
-  if (!jobs.length) return null;
-
   const range = `${dateService.formatDate(dayjs().subtract(jobs.length - 1, 'day'))} - ${dateService.formatDate(dayjs())}`;
+  const latest = jobs.at(-1);
+  const isLoading = is.nullOrUndefined(latest);
 
   return (
     <div
       className="w-full rounded-lg border p-2 flex flex-col items-start"
       style={{
         borderColor: theme.palette.divider,
-        backgroundColor: alpha(trend.light, 0.1),
+        backgroundColor: isLoading
+          ? theme.palette.action.hover
+          : alpha(trend.light, 0.1),
       }}
     >
       <Typography variant="body2">
         <strong>{name}</strong>
       </Typography>
-      <Typography variant="caption">
-        {interpolateTranslations(translations.jobsPosted, {
-          jobs: format.shortNumber(jobs.at(-1)!),
-        })}
-        <span
-          className="px-1 py-0.5 rounded scale-90 inline-block ml-1"
-          style={{ backgroundColor: trend.light, color: trend.contrastText }}
-        >
-          {trendRateDisplay}
-        </span>
-      </Typography>
-      <Typography variant="caption">{range}</Typography>
+      {isLoading ? (
+        <Skeleton variant="text" width="65%" />
+      ) : (
+        <Typography variant="caption">
+          {interpolateTranslations(translations.jobsPosted, {
+            jobs: format.shortNumber(jobs.at(-1)!),
+          })}
+          <span
+            className="px-1 py-0.5 rounded scale-90 inline-block ml-1"
+            style={{ backgroundColor: trend.light, color: trend.contrastText }}
+          >
+            {trendRateDisplay}
+          </span>
+        </Typography>
+      )}
+      {isLoading ? (
+        <Skeleton variant="text" width="60%" />
+      ) : (
+        <Typography variant="caption">{range}</Typography>
+      )}
+
       <SparkLineChart
         data={jobs}
         height={100}
@@ -74,6 +86,7 @@ export const JobsChart = ({ jobs, name }: Props) => {
         showHighlight
         className="mt-2"
         valueFormatter={(value) => `${format.shortNumber(value!)}`}
+        isLoading={isLoading}
       />
     </div>
   );

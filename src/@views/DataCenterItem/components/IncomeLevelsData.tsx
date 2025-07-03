@@ -6,7 +6,7 @@ import apiService, {
 import dateService from '@services/date.service';
 import { CityDisplay } from '@shared/CityDisplay';
 import { useQuery } from '@tanstack/react-query';
-import { format } from '@utils/format.utils.ts';
+import { format } from '@utils/format.utils';
 
 import { CurrencyValueCell, IncomeTypeJobCell } from './cell-renderers';
 

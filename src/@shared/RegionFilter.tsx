@@ -3,9 +3,9 @@ import Tooltip from '@common/Tooltip';
 import useIsOverflow from '@hooks/useIsOverflow';
 import Checkbox from '@mui/material/Checkbox';
 import { useTheme } from '@mui/material/styles';
-import { Region, ValidRegion } from '@services/api';
-import { ITranslations, useTranslations } from '@translations';
+import { Region, ValidRegion } from '@root/types';
 import { object } from '@utils/object.utils';
+import { ITranslations, useTranslations } from '@translations';
 
 interface Props {
   onChange: (value: ValidRegion[]) => void;

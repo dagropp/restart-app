@@ -1,5 +1,7 @@
+import { type City, type IncomeType } from '@root/types';
+
 import { http } from '../../http.service';
-import { City, IncomeResponse, IncomeType } from '../types';
+import { IncomeResponse } from '../types';
 import { getUrl } from '../utils';
 
 const all = (): Promise<IncomeResponse[]> => http.get(getUrl('income'));

@@ -1,12 +1,13 @@
 import Rating from '@common/Rating';
 import Table, { TableColumn } from '@common/Table';
 import Box from '@mui/material/Box';
-import apiService, { City, Country } from '@services/api';
+import { City, Country } from '@root/types';
+import apiService from '@services/api';
 import { BookmarkCell } from '@shared/BookmarkCell';
-import { CityDisplay } from '@shared/CityDisplay.tsx';
-import CountryDisplay from '@shared/CountryDisplay.tsx';
+import { CityDisplay } from '@shared/CityDisplay';
+import CountryDisplay from '@shared/CountryDisplay';
 import SectionCard from '@shared/SectionCard';
-import { number } from '@utils/number.utils.ts';
+import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
 import { FavoriteItem } from '@views/Group/components/types';
 import { useMemo } from 'react';
@@ -37,10 +38,10 @@ const columns: TableColumn<FavoriteItem>[] = [
 
       return (
         <Rating
-          value={score.average}
+          value={score?.average}
           base={10}
           readOnly
-          tooltip={number.toFixed(score.average / 2)}
+          tooltip={number.toFixed(score?.average / 2)}
         />
       );
     },

@@ -3,7 +3,7 @@ import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import IconButton from '@mui/material/IconButton';
 import { ScrapingType } from '@services/api';
 import titleService from '@services/title';
-import { scrapingTypeMap } from '@views/DataCenter/utils.ts';
+import { scrapingTypeMap } from '@views/DataCenter/utils';
 import { useLayoutEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 

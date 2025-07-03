@@ -4,11 +4,11 @@ import apiService, {
   ScrapingType,
 } from '@services/api';
 import dateService from '@services/date.service';
-import CurrencyDisplay from '@shared/CurrencyDisplay.tsx';
+import CurrencyDisplay from '@shared/CurrencyDisplay';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from '@translations';
-import { formatCurrency } from '@utils/format.utils.ts';
-import { tableSort } from '@utils/table-sort.utils.ts';
+import { formatCurrency } from '@utils/format.utils';
+import { tableSort } from '@utils/table-sort.utils';
 import { useMemo } from 'react';
 
 export const CurrenciesData = () => {

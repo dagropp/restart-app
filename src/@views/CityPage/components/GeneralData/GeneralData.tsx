@@ -8,17 +8,24 @@ import FilterHdrRoundedIcon from '@mui/icons-material/FilterHdrRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import PaymentsRoundedIcon from '@mui/icons-material/PaymentsRounded';
 import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
+import RadarIcon from '@mui/icons-material/Radar';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
-import { EuUnionStatus } from '@services/api';
+import { EuUnionStatus } from '@root/types';
 import CurrencyDisplay from '@shared/CurrencyDisplay';
-import GeneralDataCard, { GeneralItemProps } from '@shared/GeneralDataCard';
+import GeneralDataCard, {
+  type GeneralItemProps,
+} from '@shared/GeneralDataCard';
 import LanguageDisplay from '@shared/LanguageDisplay';
 import TimeDifferenceDisplay from '@shared/TimeDifferenceDisplay';
 import { useTranslations } from '@translations';
-import { format } from '@utils/format.utils.ts';
+import { format } from '@utils/format.utils';
 
 import { useCityContext } from '../../context';
-import { CityPopulation } from './components';
+import {
+  CityPopulation,
+  SatelliteCard,
+  SatelliteCitiesList,
+} from './components';
 
 export const GeneralData = () => {
   const { item } = useCityContext();
@@ -64,6 +71,12 @@ export const GeneralData = () => {
         </Typography>
       ),
       Icon: AccountBalanceRoundedIcon,
+    },
+    {
+      label: 'Satellite Cities',
+      display: <SatelliteCitiesList />,
+      Icon: RadarIcon,
+      hidden: !item.satelliteChildren?.length,
     },
     {
       label: translations.table.cells.isEu,
@@ -121,5 +134,9 @@ export const GeneralData = () => {
     },
   ];
 
-  return <GeneralDataCard items={items} />;
+  return (
+    <GeneralDataCard items={items}>
+      <SatelliteCard />
+    </GeneralDataCard>
+  );
 };

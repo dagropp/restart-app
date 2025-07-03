@@ -1,6 +1,6 @@
 import Tooltip from '@common/Tooltip';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
-import { VisaLevel } from '@services/api';
+import { VisaLevel } from '@root/types';
 import { useTranslations } from '@translations';
 
 type DisplayType = 'short' | 'regular';

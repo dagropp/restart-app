@@ -10,7 +10,8 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import { type OverridableComponent } from '@mui/material/OverridableComponent';
 import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
-import { CostResponse, Currency } from '@services/api';
+import { Currency } from '@root/types';
+import { CostResponse } from '@services/api';
 import {
   convertCurrency,
   CurrencyConverter,

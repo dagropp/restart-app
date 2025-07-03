@@ -1,7 +1,8 @@
 import Link from '@common/Link';
 import Typography from '@common/Typography';
 import Box from '@mui/material/Box';
-import apiService from '@services/api';
+import Skeleton from '@mui/material/Skeleton';
+import apiService, { InsightType } from '@services/api';
 import InsightsIcon from '@shared/InsightsIcon';
 import SectionCard from '@shared/SectionCard';
 import { useQuery } from '@tanstack/react-query';
@@ -31,11 +32,39 @@ const Item = ({ insightKey, label, link }: ItemProps) => {
   );
 };
 
+const InsightsSkeleton = () => {
+  const translations = useTranslations();
+
+  const groups = [
+    getItemTypeData(InsightType.Good, translations),
+    getItemTypeData(InsightType.Neutral, translations),
+    getItemTypeData(InsightType.Bad, translations),
+  ];
+
+  return groups.map(({ bgcolor, label, Icon }) => (
+    <Box
+      key={label}
+      className="p-2 flex flex-col gap-2 rounded-lg"
+      sx={{ bgcolor }}
+    >
+      <Typography className="flex gap-3" variant="subtitle2">
+        <Icon fontSize="small" />
+        {label}
+      </Typography>
+      <Skeleton variant="text" width="90%" />
+      <Skeleton variant="text" width="50%" />
+      <Skeleton variant="text" width="70%" />
+      <Skeleton variant="text" width="50%" />
+      <Skeleton variant="text" width="70%" />
+    </Box>
+  ));
+};
+
 const Insights = () => {
   const { item } = useCityContext();
   const translations = useTranslations();
 
-  const { data: insights = {} } = useQuery({
+  const { data: insights = {}, isLoading } = useQuery({
     queryKey: ['getInsights', item.id],
     queryFn: () => apiService.insights.get(item.id),
   });
@@ -43,24 +72,28 @@ const Insights = () => {
   return (
     <SectionCard theme="dark">
       <div className="flex flex-col gap-4">
-        {object.entries(insights).map(([key, items]) => {
-          const { bgcolor, Icon, label } = getItemTypeData(key, translations);
-          return (
-            <Box
-              className="p-2 flex flex-col gap-2 rounded-lg"
-              key={key}
-              sx={{ bgcolor }}
-            >
-              <Typography className="flex gap-3" variant="subtitle2">
-                <Icon fontSize="small" />
-                {label}
-              </Typography>
-              {items?.map(({ key, label, link }) => (
-                <Item key={key} insightKey={key} label={label} link={link} />
-              ))}
-            </Box>
-          );
-        })}
+        {isLoading ? (
+          <InsightsSkeleton />
+        ) : (
+          object.entries(insights).map(([key, items]) => {
+            const { bgcolor, Icon, label } = getItemTypeData(key, translations);
+            return (
+              <Box
+                className="p-2 flex flex-col gap-2 rounded-lg"
+                key={key}
+                sx={{ bgcolor }}
+              >
+                <Typography className="flex gap-3" variant="subtitle2">
+                  <Icon fontSize="small" />
+                  {label}
+                </Typography>
+                {items?.map(({ key, label, link }) => (
+                  <Item key={key} insightKey={key} label={label} link={link} />
+                ))}
+              </Box>
+            );
+          })
+        )}
       </div>
     </SectionCard>
   );

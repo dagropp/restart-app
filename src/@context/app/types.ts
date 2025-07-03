@@ -1,4 +1,5 @@
-import { type Currency, type CurrencyList, ThemeType } from '@services/api';
+import { Currency, ThemeType } from '@root/types';
+import { type CurrencyList } from '@services/api';
 
 export interface IAppContext {
   currency: Currency;

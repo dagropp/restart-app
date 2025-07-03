@@ -1,6 +1,6 @@
 import { LoginPayload, LoginResponse, ValidateResponse } from '@services/api';
-import { getUrl } from '@services/api/utils.ts';
-import { http } from '@services/http.service.ts';
+import { getUrl } from '@services/api/utils';
+import { http } from '@services/http.service';
 
 const login = (payload: LoginPayload): Promise<LoginResponse> =>
   http.post(getUrl('login'), payload);

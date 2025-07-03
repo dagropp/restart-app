@@ -1,5 +1,7 @@
+import { City } from '@root/types';
+
 import { http } from '../../http.service';
-import { City, InsightsResponse } from '../types';
+import { InsightsResponse } from '../types';
 import { getUrl } from '../utils';
 
 const get = (id: City): Promise<InsightsResponse> =>

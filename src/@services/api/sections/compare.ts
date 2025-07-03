@@ -1,5 +1,7 @@
+import { City } from '@root/types';
+
 import { http } from '../../http.service';
-import { City, CompareData } from '../types';
+import { CompareData } from '../types';
 import { getUrl } from '../utils';
 
 const get = (id: City, other: City): Promise<CompareData[]> =>

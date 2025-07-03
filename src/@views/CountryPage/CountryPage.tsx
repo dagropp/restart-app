@@ -1,11 +1,10 @@
-import apiService, { Country } from '@services/api';
+import { Country, CountryTabKey } from '@root/types';
+import apiService from '@services/api';
 import { useQuery } from '@tanstack/react-query';
-import { useTranslationsContext } from '@translations';
 import { object } from '@utils/object.utils';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
-import { CountryTabKey } from '../../types';
 import { GeneralTabs, Tabs } from './components';
 import { CountryContextWrapper } from './context';
 
@@ -13,7 +12,6 @@ interface Props {
   tab: CountryTabKey;
 }
 const CountryPage = ({ tab }: Props) => {
-  const { language } = useTranslationsContext();
   const id = useParams().id as Country;
   const { data } = apiService.countries.useList();
 
@@ -25,11 +23,6 @@ const CountryPage = ({ tab }: Props) => {
     enabled: !!item?.id,
   });
 
-  const { isLoading: wikiDataLoading } = apiService.wiki.useSummary(
-    language,
-    item?.wikipediaKey,
-  );
-
   const { data: cities } = apiService.useCities();
   const { data: scores } = apiService.score.use();
 
@@ -39,11 +32,11 @@ const CountryPage = ({ tab }: Props) => {
       object
         .values(cities)
         .filter(({ country }) => country.id === id)
-        .toSorted((a, b) => scores[b.id].average - scores[a.id].average),
+        .toSorted((a, b) => scores[b.id]?.average - scores[a.id]?.average),
     [cities, id, scores],
   );
 
-  const isLoading = !item || !cost || !countryCities || wikiDataLoading;
+  const isLoading = !item || !cost || !countryCities;
 
   return isLoading ? (
     <GeneralTabs tab={tab} item={item} loading={isLoading} />

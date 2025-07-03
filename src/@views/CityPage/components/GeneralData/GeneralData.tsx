@@ -73,7 +73,7 @@ export const GeneralData = () => {
       Icon: AccountBalanceRoundedIcon,
     },
     {
-      label: 'Satellite Cities',
+      label: translations.generalSection.satelliteCities,
       display: <SatelliteCitiesList />,
       Icon: RadarIcon,
       hidden: !item.satelliteChildren?.length,

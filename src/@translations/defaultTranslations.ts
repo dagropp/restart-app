@@ -50,6 +50,9 @@ export const defaultTranslations = {
     isCapital: 'Is Capital City',
     elevation: 'Elevation',
     metersAbbrev: 'm',
+    satelliteCities: 'Satellite Cities',
+    metropolitanCenter: 'Metropolitan Center',
+    commuteTime: 'Commute Time',
   },
   city: {
     flight: {

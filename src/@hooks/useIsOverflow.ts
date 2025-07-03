@@ -20,6 +20,7 @@ const useIsOverflow = <T extends HTMLElement>(
 
   useEffect(() => {
     setIsOverflow(getIsOverflow(ref.current, direction));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [direction, ref.current]);
 
   return { ref, isOverflow };

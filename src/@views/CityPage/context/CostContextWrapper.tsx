@@ -276,7 +276,7 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
     translations.group.adultSingle,
     translations.group.adults,
     translations.group.childSingle,
-    translations.group.children
+    translations.group.children,
   ]);
 
   const value: ICostContext = {

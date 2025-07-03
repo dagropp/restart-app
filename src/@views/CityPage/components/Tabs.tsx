@@ -91,7 +91,6 @@ export const GeneralTabs = ({
     ],
   );
 
-
   const key = pathname.includes('overview')
     ? 'overview'
     : pathname.includes('cost')

@@ -69,6 +69,8 @@ const ratioMap: Record<City, number> = {
   [City.ROTTERDAM]: 1000 / 666,
   [City.DEN_HAAG]: 1000 / 667,
   [City.LUGANO]: 1000 / 667,
+  [City.CHRISTCHURCH]: 1000 / 684,
+  [City.WELLINGTON]: 1000 / 400,
 };
 
 export const CityWikiData = () => {

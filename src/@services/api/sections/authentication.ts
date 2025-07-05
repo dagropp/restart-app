@@ -5,7 +5,7 @@ import { http } from '@services/http.service';
 const login = (payload: LoginPayload): Promise<LoginResponse> =>
   http.post(getUrl('login'), payload);
 
-const validate = (): Promise<ValidateResponse> => http.post(getUrl('validate'));
+const validate = (): Promise<LoginResponse> => http.post(getUrl('validate'));
 
 const logout = (): Promise<ValidateResponse> => http.post(getUrl('logout'));
 

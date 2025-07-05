@@ -25,6 +25,11 @@ import { SxProps } from '@mui/system';
 import { NoteScope, NoteType } from '@root/types';
 import apiService, { type NoteResponse, UseNotesActions } from '@services/api';
 import { Todo } from '@shared/Notes/components/Todo';
+import {
+  interpolateTranslations,
+  useTranslations,
+  useTranslationsContext,
+} from '@translations';
 import { string } from '@utils/string.utils';
 import clsx from 'clsx';
 import { type MouseEvent, useMemo, useState } from 'react';
@@ -49,6 +54,8 @@ interface NoteCardSkeletonProps {
 }
 
 export const NoteCardSkeleton = ({ rows }: NoteCardSkeletonProps) => {
+  const translations = useTranslations().notes;
+
   return (
     <Card variant="outlined">
       <CardHeader
@@ -86,7 +93,7 @@ export const NoteCardSkeleton = ({ rows }: NoteCardSkeletonProps) => {
             color="textDisabled"
             className="flex items-center gap-1"
           >
-            No Comments
+            {translations.noComments}
           </Typography>
         </div>
       </CardActions>
@@ -96,6 +103,9 @@ export const NoteCardSkeleton = ({ rows }: NoteCardSkeletonProps) => {
 
 export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
   const { data: users = {} } = apiService.useUsers();
+  const translations = useTranslations().notes;
+  const { isRtl } = useTranslationsContext();
+
   const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -150,19 +160,21 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
   };
 
   const commentsCounter = !note.replies
-    ? 'No comments'
+    ? translations.noComments
     : note.replies === 1
-      ? '1 comment'
-      : `${note.replies} comments`;
+      ? translations.commentSingle
+      : interpolateTranslations(translations.commentsCount, {
+          comments: note.replies,
+        });
 
   const menuItems = [
     {
-      label: 'Edit',
+      label: translations.edit.title,
       Icon: EditRoundedIcon,
       action: handleOpenEditDialog,
     },
     {
-      label: 'Delete',
+      label: translations.delete.title,
       Icon: DeleteRoundedIcon,
       action: handleOpenDeleteDialog,
     },
@@ -211,7 +223,7 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
                 </IconButton>
               )}
               {!fullPage && !note.parent && (
-                <Tooltip title="Full Page View">
+                <Tooltip title={translations.fullPageView}>
                   <IconButton
                     component={Link}
                     href={String(note.id)}
@@ -285,6 +297,7 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
                   variant="subtitle2"
                   color="textSecondary"
                   className="flex items-center gap-1"
+                  dir={isRtl ? 'rtl' : 'ltr'}
                 >
                   {fullPage ? (
                     commentsCounter
@@ -317,7 +330,9 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
                 {repliesDisplay.length < replies.length && (
                   <div className="p-4">
                     <Link href={String(note.id)}>
-                      <Typography variant="body2">Show More...</Typography>
+                      <Typography variant="body2">
+                        {translations.showMore}
+                      </Typography>
                     </Link>
                   </div>
                 )}
@@ -351,7 +366,7 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
             onClose={handleCloseDeleteDialog}
             success={{ onAction: handleDelete }}
           >
-            Are you sure you want to delete this note?
+            {translations.delete.dialog}
           </Dialog>
 
           <EditNoteDialog

@@ -6,7 +6,7 @@ import apiService, { InsightType } from '@services/api';
 import InsightsIcon from '@shared/InsightsIcon';
 import SectionCard from '@shared/SectionCard';
 import { useQuery } from '@tanstack/react-query';
-import { useTranslations } from '@translations';
+import { useTranslations, useTranslationsContext } from '@translations';
 import { object } from '@utils/object.utils';
 
 import { useCityContext } from '../../context';
@@ -63,10 +63,11 @@ const InsightsSkeleton = () => {
 const Insights = () => {
   const { item } = useCityContext();
   const translations = useTranslations();
+  const { language } = useTranslationsContext();
 
   const { data: insights = {}, isLoading } = useQuery({
     queryKey: ['getInsights', item.id],
-    queryFn: () => apiService.insights.get(item.id),
+    queryFn: () => apiService.insights.get(item.id, language),
   });
 
   return (

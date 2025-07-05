@@ -5,6 +5,7 @@ import Typography from '@common/Typography';
 import PushPinRoundedIcon from '@mui/icons-material/PushPinRounded';
 import Skeleton from '@mui/material/Skeleton';
 import apiService, { LandmarkItem } from '@services/api';
+import { useTranslations } from '@translations';
 import { useState } from 'react';
 
 import SectionCard from './SectionCard';
@@ -29,6 +30,8 @@ const LandmarkItemComponent = ({
     item.key,
     expanded,
   );
+  const translations = useTranslations().city;
+  const compTranslations = translations.landmarks;
 
   return (
     <Accordion
@@ -51,14 +54,14 @@ const LandmarkItemComponent = ({
             dangerouslySetInnerHTML={{ __html: data.extract_html }}
           />
         ) : (
-          <Typography variant="body2">Could not fetch data</Typography>
+          <Typography variant="body2">{compTranslations.error}</Typography>
         )}
         <Link
           external
           href={`https://en.wikipedia.org/wiki/${item.key}`}
           className="w-max"
         >
-          <Typography variant="body2">Wikipedia</Typography>
+          <Typography variant="body2">{translations.wiki.wikipedia}</Typography>
         </Link>
       </div>
     </Accordion>
@@ -67,12 +70,13 @@ const LandmarkItemComponent = ({
 
 const Landmarks = ({ items }: Props) => {
   const [selected, setSelected] = useState<string | null>(null);
+  const translations = useTranslations().city.landmarks;
 
   const handleExpand = (key: string) => () =>
     setSelected((prev) => (prev === key ? null : key));
 
   return (
-    <SectionCard title="Landmarks" TitleIcon={PushPinRoundedIcon}>
+    <SectionCard title={translations.title} TitleIcon={PushPinRoundedIcon}>
       {items.map((item) => (
         <LandmarkItemComponent
           key={item.key}

@@ -187,6 +187,7 @@ export const BreakdownGridSkeleton = ({
   title,
 }: Pick<Props<BaseState>, 'title'>) => {
   const translations = useTranslations().common;
+
   return (
     <div className="flex-1">
       <div className="flex items-center gap-2 pb-3 justify-between">

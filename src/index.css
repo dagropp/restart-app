@@ -11,6 +11,11 @@
     box-sizing: border-box;
     line-height: normal;
   }
+  html[lang='he'] {
+    * {
+      font-family: 'Open Sans', sans-serif !important;
+    }
+  }
 }
 
 @theme {

@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import apiService from '@services/api';
 import { useMutation } from '@tanstack/react-query';
+import { interpolateTranslations, useTranslations } from '@translations';
 import type { FormEvent } from 'react';
 
 interface Props {
@@ -18,6 +19,8 @@ interface Props {
 
 export const UserInviteDialog = ({ open, onClose, isGroupInvite }: Props) => {
   const { user } = useUserContext();
+  const translations = useTranslations();
+  const compTranslation = translations.menu.invite;
 
   const sendInvite = useMutation({
     mutationKey: ['sendInvite', isGroupInvite, user.groupId],
@@ -32,7 +35,9 @@ export const UserInviteDialog = ({ open, onClose, isGroupInvite }: Props) => {
     const { email } = Object.fromEntries(new FormData(form));
     if (isValid && email) {
       toastService.showToast({
-        message: `Sending invitation email to ${email}`,
+        message: interpolateTranslations(compTranslation.statusPending, {
+          email,
+        }),
         severity: 'pending',
         autoHide: false,
       });
@@ -41,12 +46,16 @@ export const UserInviteDialog = ({ open, onClose, isGroupInvite }: Props) => {
       const { status } = await sendInvite.mutateAsync(String(email));
       if (status) {
         toastService.showToast({
-          message: `Successfully sent email to ${email}`,
+          message: interpolateTranslations(compTranslation.statusSuccess, {
+            email,
+          }),
           severity: 'success',
         });
       } else {
         toastService.showToast({
-          message: `Couldn't send email to ${email}`,
+          message: interpolateTranslations(compTranslation.statusFailed, {
+            email,
+          }),
           severity: 'error',
         });
       }
@@ -57,11 +66,13 @@ export const UserInviteDialog = ({ open, onClose, isGroupInvite }: Props) => {
     <MuiDialog open={open} onClose={onClose} aria-hidden={!open}>
       <form onSubmit={handleInviteSubmit} className="w-[400px] max-w-full">
         <DialogTitle>
-          {isGroupInvite ? 'Add User to Group' : 'Invite User'}
+          {isGroupInvite
+            ? compTranslation.addToGroup
+            : compTranslation.inviteUser}
         </DialogTitle>
         <DialogContent>
           <TextField
-            placeholder="Enter email..."
+            placeholder={compTranslation.enterEmail}
             fullWidth
             variant="outlined"
             type="email"
@@ -71,14 +82,14 @@ export const UserInviteDialog = ({ open, onClose, isGroupInvite }: Props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} variant="outlined">
-            Cancel
+            {translations.common.cancel}
           </Button>
           <Button
             variant="contained"
             type="submit"
             loading={sendInvite.isPending}
           >
-            Send
+            {compTranslation.send}
           </Button>
         </DialogActions>
       </form>

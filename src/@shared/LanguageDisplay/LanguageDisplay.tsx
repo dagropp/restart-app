@@ -1,7 +1,11 @@
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import { Language } from '@root/types';
-import { interpolateTranslations, useTranslations } from '@translations';
+import {
+  interpolateTranslations,
+  useTranslations,
+  useTranslationsContext,
+} from '@translations';
 import { useMemo } from 'react';
 
 import { languageMap } from './constants';
@@ -20,6 +24,7 @@ const LanguageDisplay = ({
   englishLabelOnly,
 }: Props) => {
   const translations = useTranslations();
+  const { isRtl } = useTranslationsContext();
 
   const formattedLanguages = useMemo(
     () =>
@@ -47,7 +52,11 @@ const LanguageDisplay = ({
       <Typography variant="body2" className="flex flex-col">
         {formattedLanguages}
         {!captionAsTooltip && englishSpeakersLabel && (
-          <Typography variant="caption" color="textDisabled">
+          <Typography
+            variant="caption"
+            color="textDisabled"
+            dir={isRtl ? 'rtl' : 'ltr'}
+          >
             ({englishSpeakersLabel})
           </Typography>
         )}

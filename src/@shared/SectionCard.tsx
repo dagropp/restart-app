@@ -6,6 +6,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
+import { useTranslationsContext } from '@translations';
 import clsx from 'clsx';
 import { type CSSProperties, type ReactNode } from 'react';
 
@@ -37,6 +38,8 @@ const SectionCard = ({
   style,
   media,
 }: Props) => {
+  const { isRtl } = useTranslationsContext();
+
   const headerSx =
     theme === 'dark'
       ? (theme: Theme) => ({
@@ -83,7 +86,11 @@ const SectionCard = ({
           title={
             <Typography
               variant="h6"
-              className="flex gap-2 items-center justify-center"
+              className={clsx(
+                'flex gap-2 items-center justify-center',
+                isRtl && 'flex-row-reverse',
+              )}
+              dir={isRtl ? 'rtl' : 'ltr'}
             >
               {title}
               {TitleIcon && <TitleIcon fontSize="small" />}

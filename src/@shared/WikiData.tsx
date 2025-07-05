@@ -3,7 +3,7 @@ import Link from '@common/Link';
 import Typography from '@common/Typography';
 import Skeleton from '@mui/material/Skeleton';
 import apiService from '@services/api';
-import { useTranslationsContext } from '@translations';
+import { useTranslations } from '@translations';
 
 import SectionCard from './SectionCard';
 
@@ -19,11 +19,9 @@ interface Props {
 }
 
 const WikiData = ({ wikipediaKey, image, showTitle }: Props) => {
-  const { language } = useTranslationsContext();
-  const { data, isLoading } = apiService.wiki.useSummary(
-    language,
-    wikipediaKey,
-  );
+  const translations = useTranslations().city.wiki;
+
+  const { data, isLoading } = apiService.wiki.useSummary('en', wikipediaKey);
 
   return (
     <SectionCard
@@ -54,11 +52,11 @@ const WikiData = ({ wikipediaKey, image, showTitle }: Props) => {
             href={data.content_urls.desktop.page}
             className="w-max"
           >
-            <Typography variant="body2">Wikipedia</Typography>
+            <Typography variant="body2">{translations.wikipedia}</Typography>
           </Link>
         </div>
       ) : (
-        <div>Not Available</div>
+        <div>{translations.notAvailable}</div>
       )}
     </SectionCard>
   );

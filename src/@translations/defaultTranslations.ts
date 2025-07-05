@@ -145,12 +145,26 @@ export const defaultTranslations = {
       sunlightMin: '{{count}} min sun hours',
       sunlightSubtitle: '{{percent}}% of the day',
     },
+    map: {
+      city: 'City',
+      metropolitan: 'Metropolitan',
+      airport: 'Airport',
+    },
+    wiki: {
+      wikipedia: 'Wikipedia',
+      notAvailable: 'Not Available',
+    },
+    landmarks: {
+      title: 'Landmarks',
+      error: 'Could not fetch data',
+    },
   },
   compare: {
     vs: 'VS.',
   },
   common: {
     cancel: 'Cancel',
+    save: 'Save',
     ok: 'OK',
     yes: 'Yes',
     no: 'No',
@@ -203,6 +217,46 @@ export const defaultTranslations = {
       simulation: 'Simulation',
       notes: 'Notes ({{notes}})',
     },
+    invite: {
+      addToGroup: 'Add User to Group',
+      inviteUser: 'Invite User',
+      enterEmail: 'Enter email...',
+      send: 'Send',
+      statusPending: 'Sending invitation email to {{email}}',
+      statusSuccess: 'Successfully sent email to {{email}}',
+      statusFailed: "Couldn't send email to {{email}}",
+    },
+  },
+  notes: {
+    add: {
+      comment: 'Add Comment...',
+      note: 'Add a Note...',
+      link: 'Add a Link...',
+      checklist: 'Add a Checklist...',
+      title: 'Add Title...',
+      todoItem: 'Add Item...',
+    },
+    edit: {
+      reply: 'Edit Comment',
+      note: 'Edit Note',
+      checklist: 'Edit Checklist',
+      link: 'Edit Link',
+      title: 'Edit',
+    },
+    delete: {
+      title: 'Delete',
+      dialog: 'Are you sure you want to delete this note?',
+    },
+    noComments: 'No Comments',
+    commentSingle: '1 comment',
+    commentsCount: '{{comments}} comments',
+    fullPageView: 'Full Page View',
+    showMore: 'Show More...',
+    generalNote: 'General note for ',
+    createdOn: 'Created on {{date}}',
+    textNote: 'Text Note',
+    link: 'Link',
+    checklist: 'Checklist',
   },
   enum: {
     visa: {
@@ -337,6 +391,10 @@ export const defaultTranslations = {
       Fall: 'Fall',
       Winter: 'Winter',
       Spring: 'Spring',
+    },
+    noteScope: {
+      Private: 'Private',
+      Public: 'Public',
     },
   },
 };

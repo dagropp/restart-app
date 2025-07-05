@@ -7,6 +7,7 @@ import { type Theme } from '@mui/material/styles';
 import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
 import { NoteScope } from '@root/types';
 import { NoteData } from '@shared/Notes/components/NoteForm';
+import { useTranslations } from '@translations';
 import clsx from 'clsx';
 import { useFormContext } from 'react-hook-form';
 
@@ -43,11 +44,16 @@ const IndicatorIcon = ({ Icon, checked, side }: IndicatorIconProps) => (
 
 export const ScopeSwitch = () => {
   const { watch } = useFormContext<NoteData>();
+  const translations = useTranslations().enum.noteScope;
 
   const scope = watch('scope') ?? true;
 
   return (
-    <Tooltip title={scope ? NoteScope.Private : NoteScope.Public}>
+    <Tooltip
+      title={
+        scope ? translations[NoteScope.Private] : translations[NoteScope.Public]
+      }
+    >
       <div className="relative">
         <FormSwitch<NoteData> checked={scope} color="default" name="scope" />
         <IndicatorIcon side="right" Icon={HttpsRoundedIcon} checked={scope} />

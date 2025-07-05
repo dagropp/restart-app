@@ -1,4 +1,5 @@
 import { Tab, Tabs } from '@mui/material';
+import { useTranslations } from '@translations';
 import { is } from '@utils/is.utils';
 import clsx from 'clsx';
 import { memo, useState } from 'react';
@@ -56,15 +57,27 @@ const getUrl = (params: MapParams, view: View, zoom?: number) => {
 
 const GoogleMapCard = memo(
   ({ params, zoom }: Props) => {
+    const translations = useTranslations().city.map;
+
     const [view, setView] = useState<View>(() =>
       params.destination ? 'METRO' : 'PLACE',
     );
     const url = getUrl(params, view, zoom);
 
     const tabsData: TabData[] = [
-      { key: 'PLACE', label: 'City' },
-      { key: 'METRO', label: 'Metropolitan', hidden: !params.destination },
-      { key: 'AIRPORT', label: 'Airport' },
+      {
+        key: 'PLACE',
+        label: translations.city,
+      },
+      {
+        key: 'METRO',
+        label: translations.metropolitan,
+        hidden: !params.destination,
+      },
+      {
+        key: 'AIRPORT',
+        label: translations.airport,
+      },
     ];
 
     const isPlaceOnly = !params.destination && !params.airport;

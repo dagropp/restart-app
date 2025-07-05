@@ -5,6 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { City, Country, NoteType } from '@root/types';
 import apiService, { type NoteResponse, UseNotesActions } from '@services/api';
+import { useTranslations } from '@translations';
 
 import { NoteEditor } from './NoteEditor';
 import { type NoteData, NoteForm } from './NoteForm';
@@ -24,13 +25,16 @@ export const EditNoteDialog = ({
   actions,
   placeId,
 }: Props) => {
+  const translations = useTranslations();
+  const compTranslations = translations.notes;
+
   const dialogTitle = note.parent
-    ? 'Edit Reply'
+    ? compTranslations.edit.reply
     : note.type === NoteType.Note
-      ? 'Edit Note'
+      ? compTranslations.edit.note
       : note.type === NoteType.Todo
-        ? 'Edit Checklist'
-        : 'Edit Link';
+        ? compTranslations.edit.checklist
+        : compTranslations.edit.link;
 
   const handleSave = async ({ note: value, title }: NoteData) => {
     const response = await apiService.notes.edit(note.id, value, title);
@@ -59,10 +63,10 @@ export const EditNoteDialog = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} variant="outlined">
-            Cancel
+            {translations.common.cancel}
           </Button>
           <Button variant="contained" type="submit">
-            Save
+            {translations.common.save}
           </Button>
         </DialogActions>
       </NoteForm>

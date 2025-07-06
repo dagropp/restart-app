@@ -6,12 +6,19 @@ interface Props {
   open: boolean;
   onClose: () => void;
   id: number;
+  onDeleteSuccess: () => void;
 }
 
-export const DeleteSimulationDialog = ({ open, onClose, id }: Props) => {
+export const DeleteSimulationDialog = ({
+  open,
+  onClose,
+  id,
+  onDeleteSuccess,
+}: Props) => {
   const handleDelete = useMutation({
     mutationKey: ['deleteSimulation', id],
     mutationFn: () => apiService.simulation.delete(id),
+    onSuccess: onDeleteSuccess,
   });
 
   return (

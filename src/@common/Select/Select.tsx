@@ -45,7 +45,11 @@ const Select = <T = unknown,>({
         {...props}
       >
         {options.map((option) => (
-          <MenuItem key={String(option.value)} value={option.value as string}>
+          <MenuItem
+            key={String(option.value)}
+            value={option.value as string}
+            disabled={option.disabled}
+          >
             {option.label ?? String(option.value)}
           </MenuItem>
         ))}

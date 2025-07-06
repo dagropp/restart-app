@@ -1,7 +1,8 @@
+import { CostStateItem } from '@services/api';
 import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
 
-import { CostRow, CostStateItem } from '../context';
+import { CostRow } from '../context';
 
 export const getSimulationStateSum = <T extends Record<string, CostStateItem>>(
   rows: Record<keyof T | string, CostRow>,

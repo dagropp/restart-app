@@ -1,8 +1,10 @@
 import {
   type CityData,
-  CommunityResponse,
+  type CommunityResponse,
+  type CostNegativeState,
+  type CostPositiveState,
   type CostResponse,
-  FlightsResponse,
+  type FlightsResponse,
   type IncomeResponse,
 } from '@services/api';
 import { CurrencyConverter } from '@utils/format.utils';
@@ -45,21 +47,3 @@ export interface CityContextWrapperProps {
 export interface CostContextWrapperProps {
   children: ReactNode;
 }
-
-export interface CostStateItem {
-  value: number;
-  instances?: number;
-  hidden?: boolean;
-}
-
-export type CostNegativeState = Record<'general' | 'rent', CostStateItem>;
-
-export type CostPositiveState = Record<
-  | 'user'
-  | 'partner'
-  | 'userTax'
-  | 'partnerTax'
-  | 'userStipend'
-  | 'partnerStipend',
-  CostStateItem
->;

@@ -122,6 +122,8 @@ export enum City {
   ROTTERDAM = 'ROTTERDAM',
   DEN_HAAG = 'DEN_HAAG',
   LUGANO = 'LUGANO',
+  CHRISTCHURCH = 'CHRISTCHURCH',
+  WELLINGTON = 'WELLINGTON',
 }
 
 export enum Country {

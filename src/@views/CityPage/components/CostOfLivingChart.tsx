@@ -66,7 +66,7 @@ const CostOfLivingChart = () => {
   const negativeSeries: Omit<PieValueType, 'id'>[] = object
     .entries(negativeState)
     .map(([key, { value, hidden, instances = 1 }], index) => {
-      const { mapper, label } = negative[key];
+      const { mapper, label } = negative[key] ?? {};
       const mappedValue = hidden
         ? 0
         : mapper

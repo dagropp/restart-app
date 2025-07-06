@@ -7,6 +7,7 @@ export interface AppStorage {
   user: LoginResponse;
   theme: ThemeType;
   filters: Record<string, string>;
+  savedSimulation: number;
 }
 
 export type DefaultReturn = AppStorage[keyof AppStorage];

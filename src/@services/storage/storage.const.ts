@@ -22,4 +22,5 @@ export const defaultAppStorage: AppStorage = {
   },
   theme: ThemeType.System,
   filters: {},
+  savedSimulation: -1,
 };

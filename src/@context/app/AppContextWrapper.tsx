@@ -71,8 +71,14 @@ export const AppContextWrapper = ({ children }: Props) => {
 
   useEffect(() => {
     if (storedUser.sessionId) {
-      apiService.authentication.validate().then((res) => {
-        setIsLoggedIn(res.isValid ? LoginState.Valid : LoginState.Invalid);
+      apiService.authentication.validate().then((response) => {
+        if (response) {
+          storageService.set('user', response);
+          setIsLoggedIn(LoginState.Valid);
+        } else {
+          storageService.reset('user');
+          setIsLoggedIn(LoginState.Invalid);
+        }
       });
     } else {
       setIsLoggedIn(LoginState.Invalid);

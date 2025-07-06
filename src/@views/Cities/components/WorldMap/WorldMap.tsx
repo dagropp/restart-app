@@ -48,6 +48,9 @@ const regionMap: Record<Region, RegionData> = {
       { x: 88.5, y: 83.4, cities: [City.MELBOURNE] },
       { x: 92.8, y: 75.5, cities: [City.BRISBANE] },
       { x: 97.9, y: 82.6, cities: [City.AUCKLAND] },
+      { x: 97.9, y: 83.6, cities: [City.WELLINGTON] },
+      { x: 97.9, y: 84.6, cities: [City.CHRISTCHURCH] },
+
       // ASIA
       { x: 69.7, y: 46, cities: [City.BENGALURU] },
       { x: 62, y: 36.6, cities: [City.DUBAI] },
@@ -207,6 +210,8 @@ const regionMap: Record<Region, RegionData> = {
       { x: 46.4, y: 70.8, cities: [City.MELBOURNE] },
       { x: 60.3, y: 44.8, cities: [City.BRISBANE] },
       { x: 76.6, y: 68.7, cities: [City.AUCKLAND] },
+      { x: 76.6, y: 69.7, cities: [City.WELLINGTON] },
+      { x: 76.6, y: 67.7, cities: [City.CHRISTCHURCH] },
     ],
   },
 };

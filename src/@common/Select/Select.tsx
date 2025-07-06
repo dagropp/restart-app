@@ -25,7 +25,11 @@ const Select = <T = unknown,>({
 
   return (
     <FormControl fullWidth className="h-max">
-      <InputLabel id={labelId} size={size as InputLabelProps['size']}>
+      <InputLabel
+        id={labelId}
+        size={size as InputLabelProps['size']}
+        className={clsx(size === 'small' && 'mt-0.5')}
+      >
         {placeholder}
         {props.required && ' *'}
       </InputLabel>
@@ -41,7 +45,11 @@ const Select = <T = unknown,>({
         {...props}
       >
         {options.map((option) => (
-          <MenuItem key={String(option.value)} value={option.value as string}>
+          <MenuItem
+            key={String(option.value)}
+            value={option.value as string}
+            disabled={option.disabled}
+          >
             {option.label ?? String(option.value)}
           </MenuItem>
         ))}

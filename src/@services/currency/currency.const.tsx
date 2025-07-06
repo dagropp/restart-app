@@ -65,9 +65,8 @@ export const map: Record<Currency, CurrencyData> = {
   },
   [Currency.NZD]: {
     name: 'NZ Dollar',
-    symbol: 'NZ$',
+    symbol: 'N$',
     flag: Country.NEW_ZEALAND,
-    element: <span className="text-[70%]">NZ$</span>,
   },
   [Currency.PLN]: {
     name: 'Polish Złoty',

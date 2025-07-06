@@ -25,6 +25,7 @@ class StorageService {
   get(key: 'user'): LoginResponse;
   get(key: 'theme'): ThemeType;
   get(key: 'filters'): Record<string, string>;
+  get(key: 'savedSimulation'): number;
   get(key: keyof AppStorage): DefaultReturn {
     const item = localStorage.getItem(key);
     if (item !== null && item !== undefined)

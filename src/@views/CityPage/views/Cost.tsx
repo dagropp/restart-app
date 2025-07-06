@@ -10,6 +10,7 @@ import BreakdownGrid, {
   BreakdownGridSkeleton,
 } from '../components/BreakdownGrid';
 import CostOfLivingChart from '../components/CostOfLivingChart';
+import { SavedSimulations } from '../components/SavedSimulations';
 import { useCostContext } from '../context';
 
 interface Props {
@@ -51,6 +52,7 @@ const CostWithData = () => {
 
   return (
     <>
+      <SavedSimulations />
       <SectionCard style={{ background: getCardBg(theme) }}>
         <div className="flex justify-stretch">
           <BreakdownGrid

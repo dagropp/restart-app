@@ -8,6 +8,7 @@ import Checkbox, { CheckboxProps } from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Skeleton from '@mui/material/Skeleton';
+import { CostStateItem } from '@services/api';
 import InfoTooltip from '@shared/InfoTooltip';
 import {
   convertCurrency,
@@ -17,14 +18,9 @@ import {
 import { is } from '@utils/is.utils';
 import { object } from '@utils/object.utils';
 import clsx from 'clsx';
-import { ActionDispatch, ChangeEvent, useMemo } from 'react';
+import { ActionDispatch, ChangeEvent, useId, useMemo } from 'react';
 
-import {
-  CostRow,
-  CostRowsList,
-  CostStateItem,
-  useCityContext,
-} from '../context';
+import { CostRow, CostRowsList, useCityContext } from '../context';
 import { getSimulationStateSum } from './simulation-utils';
 
 type BaseState = Record<string, CostStateItem>;
@@ -41,6 +37,7 @@ interface BaseGridRowProps {
   hidden?: boolean;
   isCheckbox?: boolean;
   instances?: number;
+  maxInstances?: number;
   handleCheckboxChange?: CheckboxProps['onChange'];
   handleInstanceChange?: (value: 1 | -1) => void;
   label: string;
@@ -65,7 +62,7 @@ const GridRow = <T extends BaseState>({
   field,
 }: GridRowProps<T>) => {
   const stateData = state[field];
-  const { value, hidden, instances } = stateData;
+  const { value, hidden, instances, maxInstances } = stateData;
 
   const isInstances = is.nullOrUndefined(instances);
 
@@ -114,6 +111,7 @@ const GridRow = <T extends BaseState>({
       value={mappedValue}
       currencyConverter={currencyConverter}
       instances={instances}
+      maxInstances={maxInstances}
       handleInstanceChange={handleInstanceChange}
     />
   );
@@ -128,10 +126,12 @@ const BaseGridRow = ({
   value,
   currencyConverter,
   instances,
+  maxInstances,
   handleInstanceChange,
   tooltip,
 }: BaseGridRowProps) => {
   const { item } = useCityContext();
+  const id = useId();
 
   const hiddenClass = hidden && 'opacity-50 select-none';
 
@@ -146,11 +146,15 @@ const BaseGridRow = ({
           className={clsx('!p-0 !pb-0.5', !isCheckbox && 'invisible')}
           checked={!hidden}
           onChange={handleCheckboxChange}
+          id={isCheckbox ? id : undefined}
         />
-        <span className="inline-flex items-center gap-2">
+        <label
+          className="inline-flex items-center gap-2"
+          htmlFor={isCheckbox ? id : undefined}
+        >
           <strong>{label}</strong>
           {tooltip && <InfoTooltip title={tooltip} placement="top" />}
-        </span>
+        </label>
         {!is.nullOrUndefined(instances) && handleInstanceChange && (
           <span className="flex items-center">
             <IconButton
@@ -161,7 +165,11 @@ const BaseGridRow = ({
               <RemoveRoundedIcon fontSize="small" />
             </IconButton>
             <strong>{instances}</strong>
-            <IconButton size="small" onClick={() => handleInstanceChange(1)}>
+            <IconButton
+              size="small"
+              onClick={() => handleInstanceChange(1)}
+              disabled={!!maxInstances && instances >= maxInstances}
+            >
               <AddRoundedIcon fontSize="small" />
             </IconButton>
           </span>

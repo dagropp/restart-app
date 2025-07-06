@@ -14,6 +14,7 @@ import {
   notes,
   quality,
   scraping,
+  simulation,
   wiki,
 } from './sections';
 import {
@@ -138,6 +139,7 @@ const apiService = {
   compare,
   notes,
   score,
+  simulation,
 };
 
 export default apiService;

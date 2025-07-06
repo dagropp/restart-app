@@ -599,3 +599,45 @@ export interface CompareData {
   city: CompareItem;
   other: CompareItem;
 }
+
+export interface CostStateItem {
+  value: number;
+  instances?: number;
+  hidden?: boolean;
+  maxInstances?: number;
+}
+
+export type CostNegativeState = Record<
+  'general' | 'rent' | 'flights' | 'school' | 'preschool',
+  CostStateItem
+>;
+
+export type CostPositiveState = Record<
+  | 'user'
+  | 'partner'
+  | 'userTax'
+  | 'partnerTax'
+  | 'userStipend'
+  | 'partnerStipend',
+  CostStateItem
+>;
+
+export interface SavedCostStateItem extends Omit<CostStateItem, 'value'> {
+  mark?: number;
+}
+
+export interface SavedSimulation {
+  id: number;
+  name: string;
+  created: string;
+  updated: string;
+  positiveState: Partial<Record<keyof CostPositiveState, SavedCostStateItem>>;
+  negativeState: Partial<Record<keyof CostNegativeState, SavedCostStateItem>>;
+}
+
+export type UpdateSimulationPayload = Omit<
+  SavedSimulation,
+  'created' | 'updated'
+>;
+
+export type SaveSimulationPayload = Omit<UpdateSimulationPayload, 'id'>;

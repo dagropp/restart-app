@@ -12,10 +12,16 @@ const toFixed = (value: number, fractionDigits: number = 1): string => {
   return asNumber === Math.round(asNumber) ? value.toFixed(0) : fixed;
 };
 
-const percentage = (value: number, total?: number): string => {
-  if (total !== undefined) return percentage(value / total);
-  if (value <= 1 && value > 0) return percentage(value * 100);
-  return `${toFixed(value)}%`;
+const percentage = (
+  value: number,
+  total?: number,
+  fractionDigits?: number,
+): string => {
+  if (total !== undefined)
+    return percentage(value / total, undefined, fractionDigits);
+  if (value <= 1 && value > 0)
+    return percentage(value * 100, undefined, fractionDigits);
+  return `${toFixed(value, fractionDigits)}%`;
 };
 
 export const number = { roundBy, average, sum, percentage, toFixed };

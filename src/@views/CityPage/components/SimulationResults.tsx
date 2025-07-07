@@ -84,6 +84,10 @@ export const SimulationResults = () => {
       label: yearlyBalance > 0 ? 'Yearly Savings' : 'Yearly Losses',
       value: <SavingsDisplay value={yearlyBalance} />,
     },
+    {
+      label: 'Rent / Income Ratio',
+      value: number.percentage(negativeState.rent.value, positiveSum, 0),
+    },
     { label: 'Incomes', value: incomeCount },
   ];
 

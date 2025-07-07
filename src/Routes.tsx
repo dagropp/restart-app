@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import apiService from '@services/api';
 import AppToolbar from '@shared/AppHeader';
 import { object } from '@utils/object.utils';
+import { style } from '@utils/style.utils';
 import CityPage from '@views/CityPage';
 import CompareView from '@views/CompareView';
 import Countries from '@views/Countries/Countries';
@@ -14,7 +15,7 @@ import Login from '@views/Login';
 import NotesView from '@views/NotesView';
 import NoteView from '@views/NoteView';
 import Settings from '@views/Settings';
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import {
   BrowserRouter,
   Navigate,
@@ -27,9 +28,24 @@ import { CityTabKey, CountryTabKey, SettingsTabKey } from './types';
 
 const overlay = document.getElementById('overlay');
 
+interface ScrollToTopProps {
+  scrollElement: HTMLDivElement | null;
+}
+
+const ScrollToTop = ({ scrollElement }: ScrollToTopProps) => {
+  useEffect(() => {
+    const container =
+      style.isLargerThanTablet && scrollElement ? scrollElement : window;
+    container.scrollTo({ top: 0 });
+  }, [scrollElement]);
+
+  return null;
+};
+
 const Routes = () => {
   const { isLoggedIn } = useAppContext();
   const theme = useTheme();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const Wrapper =
     isLoggedIn === LoginState.Valid ? UserContextWrapper : Fragment;
@@ -47,13 +63,17 @@ const Routes = () => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop scrollElement={scrollRef.current} />
       <Wrapper>
         <div
           className="flex flex-col w-full lg:flex-row"
           style={{ backgroundColor: theme.palette.background.default }}
         >
           {isLoggedIn === LoginState.Valid && <AppToolbar />}
-          <div className="w-full lg:overflow-x-hidden lg:h-screen lg:overflow-y-auto">
+          <div
+            className="w-full lg:overflow-x-hidden lg:h-screen lg:overflow-y-auto"
+            ref={scrollRef}
+          >
             <div className="w-[1600px] mx-auto max-w-full box-border">
               {isLoggedIn === LoginState.Valid ? (
                 <LibRoutes>

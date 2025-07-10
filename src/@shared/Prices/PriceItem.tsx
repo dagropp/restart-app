@@ -2,6 +2,7 @@ import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import type { OverridableComponent } from '@mui/material/OverridableComponent';
 import type { SvgIconTypeMap } from '@mui/material/SvgIcon';
+import { useTranslationsContext } from '@translations';
 import clsx from 'clsx';
 
 interface Props {
@@ -19,6 +20,8 @@ export const PriceItem = ({
   formattedValue,
   convertedValue,
 }: Props) => {
+  const { isRtl } = useTranslationsContext();
+
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-2">
@@ -27,6 +30,7 @@ export const PriceItem = ({
           variant="body2"
           lineHeight="normal"
           className={clsx('flex items-center gap-1', !Icon && 'pl-7')}
+          dir={isRtl ? 'rtl' : 'ltr'}
         >
           {label}
           {caption && (

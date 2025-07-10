@@ -9,13 +9,13 @@ import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
-import { City, ValidRegion } from '@root/types';
+import { City } from '@root/types';
 import apiService from '@services/api';
 import CurrencyDisplay from '@shared/CurrencyDisplay';
 import GeneralDataCard, { GeneralItemProps } from '@shared/GeneralDataCard';
 import LanguageDisplay from '@shared/LanguageDisplay';
 import TimeDifferenceDisplay from '@shared/TimeDifferenceDisplay';
-import { regions } from '@utils/regions.utils';
+import { useTranslations } from '@translations';
 import { useMemo } from 'react';
 
 import { useCountryContext } from '../context';
@@ -40,6 +40,7 @@ const CapitalDisplay = () => {
 
 export const CountryGeneralData = () => {
   const { item, cities } = useCountryContext();
+  const translations = useTranslations();
 
   const timeData = useMemo(() => {
     if (
@@ -59,7 +60,7 @@ export const CountryGeneralData = () => {
       label: 'Region',
       display: (
         <Typography variant="body2">
-          {regions.map[item.regions.at(0) as ValidRegion]}
+          {translations.enum.region[item.regions[0]]}
         </Typography>
       ),
       Icon: PublicRoundedIcon,
@@ -70,7 +71,7 @@ export const CountryGeneralData = () => {
       Icon: AccountBalanceRoundedIcon,
     },
     {
-      label: 'Population',
+      label: translations.generalSection.population,
       display: (
         <Typography variant="body2">
           <LargeNumberDisplay value={item.population} showTooltip />
@@ -79,7 +80,7 @@ export const CountryGeneralData = () => {
       Icon: GroupsRoundedIcon,
     },
     {
-      label: 'Language',
+      label: translations.table.cells.language,
       display: (
         <LanguageDisplay
           languages={item.language}
@@ -91,14 +92,14 @@ export const CountryGeneralData = () => {
       Icon: TranslateRoundedIcon,
     },
     {
-      label: 'Currency',
+      label: translations.table.cells.currency,
       display: (
         <CurrencyDisplay currency={item.currency} flagHidden showConversion />
       ),
       Icon: PaymentsRoundedIcon,
     },
     {
-      label: 'Time Difference',
+      label: translations.city.timeDifference.title,
       display: timeData && (
         <TimeDifferenceDisplay
           timezoneDiff={timeData.timezoneDiff}

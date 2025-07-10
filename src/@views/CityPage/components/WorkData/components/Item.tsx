@@ -4,7 +4,7 @@ import { useAppContext } from '@context/app';
 import Skeleton from '@mui/material/Skeleton';
 import { Currency } from '@root/types';
 import InfoTooltip from '@shared/InfoTooltip';
-import { useTranslations } from '@translations';
+import { useTranslations, useTranslationsContext } from '@translations';
 import { convertCurrency, formatCurrency } from '@utils/format.utils';
 import { useCityContext } from '@views/CityPage/context';
 import { ReactNode, useMemo } from 'react';
@@ -21,6 +21,7 @@ export const Item = ({ label, gross, net, description, currency }: Props) => {
   const { currencies, currency: ctxCurrency } = useAppContext();
   const { item, currencyConverter: ctxCurrencyConverter } = useCityContext();
   const translations = useTranslations().city.jobData;
+  const { isRtl } = useTranslationsContext();
 
   const currencyConverter = useMemo(() => {
     if (!currency) return ctxCurrencyConverter;
@@ -39,9 +40,10 @@ export const Item = ({ label, gross, net, description, currency }: Props) => {
         {description && <InfoTooltip title={description} placement="right" />}
       </Typography>
       {sections.map((section) => (
-        <div
+        <Typography
           className="flex items-center justify-between gap-2"
           key={section.label}
+          dir={isRtl ? 'rtl' : 'ltr'}
         >
           <Typography variant="body2">{section.label}</Typography>
           {isNaN(section.value) ? (
@@ -59,7 +61,7 @@ export const Item = ({ label, gross, net, description, currency }: Props) => {
               </Typography>
             </Tooltip>
           )}
-        </div>
+        </Typography>
       ))}
     </div>
   );

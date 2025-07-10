@@ -2,6 +2,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MuiAccordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
+import { useTranslationsContext } from '@translations';
 import clsx from 'clsx';
 
 import Typography from '../Typography';
@@ -15,6 +16,8 @@ const Accordion = ({
   Icon,
   children,
 }: AccordionProps) => {
+  const { isRtl } = useTranslationsContext();
+
   return (
     <MuiAccordion
       expanded={expanded}
@@ -31,7 +34,9 @@ const Accordion = ({
       >
         <div className="flex items-center gap-2">
           {Icon && <Icon fontSize="small" />}
-          <Typography variant="subtitle2">{title}</Typography>
+          <Typography variant="subtitle2" dir={isRtl ? 'rtl' : 'ltr'}>
+            {title}
+          </Typography>
         </div>
       </AccordionSummary>
       <AccordionDetails className="!p-0">

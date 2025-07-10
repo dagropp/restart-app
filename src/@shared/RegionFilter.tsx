@@ -17,12 +17,12 @@ interface ListProps {
 }
 
 const getRegions = (t: ITranslations): Record<ValidRegion, string> => {
-  const translations = t.table.map.regions;
+  const translations = t.enum.region;
   return {
-    [Region.EUROPE]: translations.europe,
-    [Region.NORTH_AMERICA]: translations.northAmerica,
-    [Region.ASIA]: translations.emea,
-    [Region.OCEANIA]: translations.oceania,
+    [Region.EUROPE]: translations[Region.EUROPE],
+    [Region.NORTH_AMERICA]: translations[Region.NORTH_AMERICA],
+    [Region.ASIA]: translations[Region.ASIA],
+    [Region.OCEANIA]: translations[Region.OCEANIA],
   };
 };
 

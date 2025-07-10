@@ -26,12 +26,14 @@ const LandmarkItemComponent = ({
   handleExpand,
 }: LandmarkItemComponentProps) => {
   const { data, isLoading } = apiService.wiki.useSummary(
-    'en',
+    item.language,
     item.key,
     expanded,
   );
   const translations = useTranslations().city;
   const compTranslations = translations.landmarks;
+
+  const dir = item.language === 'he' ? 'rtl' : 'ltr';
 
   return (
     <Accordion
@@ -42,7 +44,7 @@ const LandmarkItemComponent = ({
     >
       <div className="flex flex-col gap-2">
         {isLoading ? (
-          <Typography variant="body2">
+          <Typography variant="body2" dir={dir}>
             <CloneElement times={6}>
               <Skeleton variant="text" />
             </CloneElement>
@@ -52,13 +54,15 @@ const LandmarkItemComponent = ({
           <Typography
             variant="body2"
             dangerouslySetInnerHTML={{ __html: data.extract_html }}
+            align="justify"
+            dir={dir}
           />
         ) : (
           <Typography variant="body2">{compTranslations.error}</Typography>
         )}
         <Link
           external
-          href={`https://en.wikipedia.org/wiki/${item.key}`}
+          href={`https://${item.language}.wikipedia.org/wiki/${item.key}`}
           className="w-max"
         >
           <Typography variant="body2">{translations.wiki.wikipedia}</Typography>

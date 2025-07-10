@@ -10,7 +10,11 @@ import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
 import dateService from '@services/date.service';
 import SectionCard from '@shared/SectionCard';
-import { interpolateTranslations, useTranslations } from '@translations';
+import {
+  interpolateTranslations,
+  useTranslations,
+  useTranslationsContext,
+} from '@translations';
 import { array } from '@utils/array.utils';
 import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
@@ -103,8 +107,13 @@ const WeatherItem = ({ season }: WeatherItemProps) => {
 };
 
 const StatsItem = ({ label, Icon, caption }: StatsItemProps) => {
+  const { isRtl } = useTranslationsContext();
   return (
-    <Typography variant="body2" className="contents">
+    <Typography
+      variant="body2"
+      className="contents text-left"
+      dir={isRtl ? 'rtl' : 'ltr'}
+    >
       <Icon fontSize="small" />
       <span>
         {label} <Typography variant="caption">({caption})</Typography>

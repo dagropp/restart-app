@@ -14,10 +14,17 @@ import { getItemTypeData } from './constants';
 import { ItemProps } from './types';
 
 const Item = ({ insightKey, label, link }: ItemProps) => {
+  const { isRtl } = useTranslationsContext();
+
   return (
     <div className="flex gap-3 items-center">
       <InsightsIcon insightKey={insightKey} fontSize="small" />
-      <Typography variant="body2" className="text-balance" lineHeight="normal">
+      <Typography
+        variant="body2"
+        className="text-balance text-left"
+        lineHeight="normal"
+        dir={isRtl ? 'rtl' : 'ltr'}
+      >
         <span dangerouslySetInnerHTML={{ __html: label }} />{' '}
         {link && (
           <Link

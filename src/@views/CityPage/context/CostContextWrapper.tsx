@@ -239,11 +239,13 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
 
     if (preschool?.length) {
       rows.preschool = {
-        label: `Private Preschool (${array.joinWithLast(
-          preschool.map((child) => child.name),
-          ', ',
-          ' and ',
-        )})`,
+        label: interpolateTranslations(compTranslations.preschool, {
+          names: array.joinWithLast(
+            preschool.map((child) => child.name),
+            ', ',
+            compTranslations.childConnector,
+          ),
+        }),
         optional: true,
       };
       updateNegativeState({
@@ -258,11 +260,13 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
 
     if (school?.length) {
       rows.school = {
-        label: `Private School (${array.joinWithLast(
-          school.map((child) => child.name),
-          ', ',
-          ' and ',
-        )})`,
+        label: interpolateTranslations(compTranslations.school, {
+          names: array.joinWithLast(
+            school.map((child) => child.name),
+            ', ',
+            compTranslations.childConnector,
+          ),
+        }),
         optional: true,
       };
       updateNegativeState({
@@ -280,6 +284,7 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
     adultCount,
     cheapest?.price,
     childrenCount,
+    compTranslations.childConnector,
     compTranslations.couple,
     compTranslations.familyLabel,
     compTranslations.flights,

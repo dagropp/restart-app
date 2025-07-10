@@ -14,6 +14,7 @@ import apiService, { UserResponse } from '@services/api';
 import { CountryImage } from '@shared/CountryDisplay';
 import SectionCard from '@shared/SectionCard';
 import UserAvatar from '@shared/UserAvatar';
+import { useTranslations } from '@translations';
 import { incomeUtils } from '@utils/income.utils';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
@@ -36,6 +37,7 @@ const getAge = (diff: number) => {
 
 export const UserDisplay = ({ user, editLink }: Props) => {
   const { group } = useUserContext();
+  const translations = useTranslations();
   const { data: countries } = apiService.countries.use();
 
   const userAge = useMemo(
@@ -49,6 +51,8 @@ export const UserDisplay = ({ user, editLink }: Props) => {
       ),
     [group.departureDate, user.dateOfBirth],
   );
+
+  const incomeData = incomeUtils.getTypeData(user.income, translations);
 
   const items: ListItem[] = [
     {
@@ -64,8 +68,8 @@ export const UserDisplay = ({ user, editLink }: Props) => {
     {
       key: 'profession',
       label: 'Profession',
-      value: incomeUtils.typeMap[user.income].title,
-      tooltip: incomeUtils.typeMap[user.income].subtitle,
+      value: incomeData.title,
+      tooltip: incomeData.subtitle,
       Icon: BusinessCenterRoundedIcon,
     },
     {

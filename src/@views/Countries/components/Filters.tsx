@@ -1,3 +1,4 @@
+import Tooltip from '@common/Tooltip';
 import { FiltersContextWrapper, IFiltersContext } from '@context/filters';
 import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 import IconButton from '@mui/material/IconButton';
@@ -6,6 +7,7 @@ import EnglishFilter from '@shared/EnglishFilter';
 import FiltersMenu from '@shared/FiltersMenu';
 import RegionFilter from '@shared/RegionFilter';
 import VisaFilter from '@shared/VisaFilter';
+import { useTranslations } from '@translations';
 import { style } from '@utils/style.utils';
 
 import { type CountriesFilters } from '../types';
@@ -13,6 +15,7 @@ import { type CountriesFilters } from '../types';
 export const Filters = (props: IFiltersContext<CountriesFilters>) => {
   const { resetFilters, isFiltered, filters, updateFilters } = props;
   const theme = useTheme();
+  const translations = useTranslations().table.filters;
 
   const list = (
     <>
@@ -41,9 +44,11 @@ export const Filters = (props: IFiltersContext<CountriesFilters>) => {
           <>
             {list}
             {isFiltered && (
-              <IconButton onClick={resetFilters}>
-                <ReplayRoundedIcon />
-              </IconButton>
+              <Tooltip title={translations.resetFilters}>
+                <IconButton onClick={resetFilters}>
+                  <ReplayRoundedIcon />
+                </IconButton>
+              </Tooltip>
             )}
           </>
         ) : (

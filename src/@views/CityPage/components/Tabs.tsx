@@ -10,9 +10,10 @@ import apiService, { CityData } from '@services/api';
 import titleService from '@services/title';
 import { CountryImage } from '@shared/CountryDisplay';
 import { Note } from '@shared/Notes';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { format } from '@utils/format.utils';
 import { list } from '@utils/list.utils';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router';
 
 import { CityTabKey } from '../../../types';
@@ -21,35 +22,6 @@ import CityCompare from '../views/CityCompare';
 import CityNotes from '../views/CityNotes';
 import CityOverview from '../views/CityOverview';
 import Cost from '../views/Cost';
-
-const routes = {
-  [CityTabKey.OVERVIEW]: {
-    label: 'Overview',
-    Component: CityOverview,
-  },
-  [CityTabKey.COST]: {
-    label: 'Simulation',
-    Component: Cost,
-  },
-  [CityTabKey.NOTES]: {
-    label: 'Notes',
-    Component: CityNotes,
-  },
-  [CityTabKey.NOTE]: {
-    Component: Note,
-  },
-  [CityTabKey.COMPARE]: {
-    label: 'Compare',
-    Component: CityCompare,
-  },
-};
-
-const keyMap: Record<string, string> = {
-  overview: 'Overview',
-  cost: 'Simulation',
-  notes: 'Notes',
-  compare: 'Compare',
-};
 
 interface Props {
   tab: CityTabKey;
@@ -80,6 +52,45 @@ export const GeneralTabs = ({
     },
   );
 
+  const translations = useTranslations().menu;
+
+  const routes = {
+    [CityTabKey.OVERVIEW]: {
+      label: translations.tabs.overview,
+      Component: CityOverview,
+    },
+    [CityTabKey.COST]: {
+      label: translations.tabs.simulation,
+      Component: Cost,
+    },
+    [CityTabKey.NOTES]: {
+      label: translations.tabs.notes,
+      Component: CityNotes,
+    },
+    [CityTabKey.NOTE]: {
+      Component: Note,
+    },
+    [CityTabKey.COMPARE]: {
+      label: translations.primary.compare,
+      Component: CityCompare,
+    },
+  };
+
+  const keyMap: Record<string, string> = useMemo(
+    () => ({
+      overview: translations.tabs.overview,
+      cost: translations.tabs.simulation,
+      notes: translations.primary.notes,
+      compare: translations.primary.compare,
+    }),
+    [
+      translations.primary.compare,
+      translations.primary.notes,
+      translations.tabs.overview,
+      translations.tabs.simulation,
+    ],
+  );
+
   const key = pathname.includes('overview')
     ? 'overview'
     : pathname.includes('cost')
@@ -93,7 +104,7 @@ export const GeneralTabs = ({
   useLayoutEffect(() => {
     const keyTitle = key ? keyMap[key] : '';
     titleService.setTitle(item?.name, keyTitle);
-  }, [item?.name, key]);
+  }, [item?.name, key, keyMap]);
 
   const { Component } = routes[tab];
 
@@ -124,7 +135,9 @@ export const GeneralTabs = ({
         />
         <MuiTab
           value={CityTabKey.NOTES}
-          label={`${routes[CityTabKey.NOTES].label} (${format.shortNumber(notes, 1000)})`}
+          label={interpolateTranslations(routes[CityTabKey.NOTES].label, {
+            notes: format.shortNumber(notes, 1000),
+          })}
           component={Link}
           to={getPath(CityTabKey.NOTES)}
         />

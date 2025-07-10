@@ -4,6 +4,11 @@ import Typography from '@common/Typography';
 import { useTheme } from '@mui/material/styles';
 import { PieChart, type PieValueType } from '@mui/x-charts';
 import SectionCard from '@shared/SectionCard';
+import {
+  interpolateTranslations,
+  useTranslations,
+  useTranslationsContext,
+} from '@translations';
 import { format } from '@utils/format.utils';
 import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
@@ -22,10 +27,24 @@ const RELIGIOUS_IMPORTANCE_LINK =
 
 const LegendItem = ({ label, percentage }: LegendItemProps) => {
   const { item } = useCountryContext();
+  const translations = useTranslations().country.religion;
+  const { isRtl } = useTranslationsContext();
 
   return (
     <Tooltip
-      title={`${format.shortNumber(Math.ceil(item.population * (percentage / 100)))} People`}
+      title={
+        <Typography
+          variant="body2"
+          className="px-2 py-1"
+          dir={isRtl ? 'rtl' : 'ltr'}
+        >
+          {interpolateTranslations(translations.peopleCount, {
+            count: format.shortNumber(
+              Math.ceil(item.population * (percentage / 100)),
+            ),
+          })}
+        </Typography>
+      }
       placement="top"
     >
       <span>
@@ -38,6 +57,8 @@ const LegendItem = ({ label, percentage }: LegendItemProps) => {
 export const ReligionChart = () => {
   const { item } = useCountryContext();
   const theme = useTheme();
+  const translations = useTranslations().country.religion;
+  const { isRtl } = useTranslationsContext();
 
   const { CHRISTIANITY, ISLAM, JUDAISM, NO_RELIGION, BUDDHISM, HINDUISM } =
     item.religion;
@@ -47,39 +68,48 @@ export const ReligionChart = () => {
     {
       value: CHRISTIANITY,
       color: theme.palette.error.light,
-      label: <LegendItem label="Christians" percentage={CHRISTIANITY} />,
+      label: (
+        <LegendItem label={translations.christians} percentage={CHRISTIANITY} />
+      ),
     },
     {
       value: ISLAM,
       color: theme.palette.success.light,
-      label: <LegendItem label="Muslims" percentage={ISLAM} />,
+      label: <LegendItem label={translations.muslims} percentage={ISLAM} />,
     },
     {
       value: JUDAISM,
       color: theme.palette.info.light,
-      label: <LegendItem label="Jews" percentage={JUDAISM} />,
+      label: <LegendItem label={translations.jews} percentage={JUDAISM} />,
     },
     {
       value: NO_RELIGION,
       color: theme.palette.warning.light,
-      label: <LegendItem label="Not Religious" percentage={NO_RELIGION} />,
+      label: (
+        <LegendItem
+          label={translations.notReligious}
+          percentage={NO_RELIGION}
+        />
+      ),
     },
     {
       value: BUDDHISM,
       color: theme.palette.error.dark,
-      label: <LegendItem label="Buddhists" percentage={BUDDHISM} />,
+      label: (
+        <LegendItem label={translations.buddhists} percentage={BUDDHISM} />
+      ),
     },
     {
       value: HINDUISM,
       color: theme.palette.warning.dark,
-      label: <LegendItem label="Hindus" percentage={HINDUISM} />,
+      label: <LegendItem label={translations.hindus} percentage={HINDUISM} />,
     },
     {
       value: other,
       color: theme.palette.action.disabled,
       label: (
         <LegendItem
-          label="Other"
+          label={translations.other}
           percentage={Number(number.toFixed(other, 2))}
         />
       ),
@@ -90,12 +120,17 @@ export const ReligionChart = () => {
 
   return (
     <SectionCard
-      title="Religion"
+      title={translations.title}
       subtitle={
         item.religionImportance && (
-          <Typography variant="body2" className="text-center pt-2 text-balance">
-            {item.religionImportance}% of the population consider religion
-            important in their daily life.{' '}
+          <Typography
+            variant="body2"
+            className="text-center pt-2 text-balance"
+            dir={isRtl ? 'rtl' : 'ltr'}
+          >
+            {interpolateTranslations(translations.importance, {
+              percent: item.religionImportance,
+            })}
             <Link href={RELIGIOUS_IMPORTANCE_LINK} external />
           </Typography>
         )

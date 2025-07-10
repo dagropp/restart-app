@@ -4,6 +4,7 @@ import { IncomeType } from '@root/types';
 import apiService from '@services/api';
 import SectionCard from '@shared/SectionCard';
 import { useQuery } from '@tanstack/react-query';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { incomeUtils } from '@utils/income.utils';
 import { findComparisonCity } from '@views/CityPage/components/WorkData/utils';
 import { useCityContext } from '@views/CityPage/context';
@@ -16,13 +17,15 @@ export const WorkData = () => {
   const { user } = useUserContext();
   const { marks, mark, income } = useIncomeData('income');
   const { item } = useCityContext();
+  const translations = useTranslations();
+  const compTranslations = translations.city.jobData;
   const { data: cities } = apiService.useCities();
 
   const [otherCity, setOtherCity] = useState(() =>
     findComparisonCity(item, cities!),
   );
 
-  const userIncome = incomeUtils.typeMap[user.income];
+  const userIncome = incomeUtils.getTypeData(user.income, translations);
 
   const { data: otherCityIncome } = useQuery({
     queryKey: ['getOtherCityIncome', otherCity, user.income],
@@ -39,19 +42,24 @@ export const WorkData = () => {
   const remoteCity = user.incomeRemote && cities[user.incomeRemote];
 
   const description = remoteCity
-    ? `Based on working remotely from ${remoteCity.name}, ${remoteCity.country.name}`
-    : 'Based on current compensation and industry standards';
+    ? interpolateTranslations(compTranslations.remoteDescription, {
+        cityName: remoteCity.name,
+        countryName: remoteCity.country.name,
+      })
+    : compTranslations.localDescription;
 
   return (
     <SectionCard
-      title="Job Data"
-      subtitle={`As a ${userIncome.title}`}
+      title={compTranslations.title}
+      subtitle={interpolateTranslations(compTranslations.subtitle, {
+        incomeTitle: userIncome.title,
+      })}
       TitleIcon={BusinessCenterRoundedIcon}
     >
       <div>
         {!!mark && (
           <Item
-            label="Expected Salary"
+            label={compTranslations.expectedSalary}
             description={description}
             gross={marks[mark].gross}
             net={marks[mark].net}

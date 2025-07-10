@@ -7,26 +7,13 @@ import apiService from '@services/api';
 import CitySelect from '@shared/CitySelect';
 import IncomeSlider from '@shared/IncomeSlider';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslations } from '@translations';
 import { incomeUtils } from '@utils/income.utils';
 import { is } from '@utils/is.utils';
 import { object } from '@utils/object.utils';
 import { useEffect, useMemo, useState } from 'react';
 
 import { InputName } from '../../types';
-
-const options: SelectOption<IncomeType>[] = object
-  .entries(incomeUtils.typeMap)
-  .map(([value, data]) => ({
-    value,
-    label: (
-      <div className="min-h-8 flex flex-col justify-center">
-        <div>{data.title}</div>
-        {data.subtitle && (
-          <Typography variant="caption">{data.subtitle}</Typography>
-        )}
-      </div>
-    ),
-  }));
 
 interface Props {
   defaultIncome?: IncomeType;
@@ -41,6 +28,7 @@ const IncomeSelect = ({
   defaultRemote,
   required,
 }: Props) => {
+  const translations = useTranslations();
   const [type, setType] = useState<IncomeType>(
     defaultIncome ?? IncomeType.None,
   );
@@ -50,6 +38,25 @@ const IncomeSelect = ({
   const { data: cities } = apiService.useCities();
   const currency =
     isRemote && cities ? cities[remoteCity].country.currency : Currency.ILS;
+
+  const options: SelectOption<IncomeType>[] = useMemo(
+    () =>
+      object.values(IncomeType).map((value) => {
+        const data = incomeUtils.getTypeData(value, translations);
+        return {
+          value,
+          label: (
+            <div className="min-h-8 flex flex-col justify-center">
+              <div>{data.title}</div>
+              {data.subtitle && (
+                <Typography variant="caption">{data.subtitle}</Typography>
+              )}
+            </div>
+          ),
+        };
+      }),
+    [translations],
+  );
 
   const { data: income } = useQuery({
     queryKey: ['getIncome', type, isRemote, remoteCity],

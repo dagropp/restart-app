@@ -1,6 +1,7 @@
 import { type City, type Country, type Currency } from '@root/types';
 import { score } from '@services/api/sections/score';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { Language, useTranslationsContext } from '@translations';
 
 import { http } from '../http.service';
 import {
@@ -65,8 +66,8 @@ const signUp = (payload: UserPayload): Promise<StatusResponse> =>
 const editUser = (payload: EditUserPayload): Promise<UserResponse> =>
   http.patch(getUrl('users'), payload);
 
-const getData = (): Promise<Record<City, CityData>> =>
-  http.get<Record<City, CityData>>(getUrl('cities'));
+const getData = (language: Language): Promise<Record<City, CityData>> =>
+  http.get<Record<City, CityData>>(getUrl('cities'), { language });
 
 const getCost = (id: City | Country): Promise<CostResponse> =>
   http.get(getUrl('cost', id));
@@ -104,13 +105,18 @@ const useGroup = (group?: string, token?: string, email?: string) =>
     enabled: !!group,
   });
 
-const useCities = (enabled?: boolean): UseQueryResult<Record<City, CityData>> =>
-  useQuery({
-    queryKey: ['cities', enabled],
-    queryFn: () => getData(),
+const useCities = (
+  enabled?: boolean,
+): UseQueryResult<Record<City, CityData>> => {
+  const { language } = useTranslationsContext();
+
+  return useQuery({
+    queryKey: ['cities', language, enabled],
+    queryFn: () => getData(language),
     staleTime: Infinity,
     enabled,
   });
+};
 
 const apiService = {
   useUsers,

@@ -13,6 +13,7 @@ import {
   type VisaLevel,
 } from '@root/types';
 import { type UseQueryResult } from '@tanstack/react-query';
+import { Language as TranslatedLanguage } from '@translations';
 
 export type CurrencyList = Record<Currency, number>;
 
@@ -108,12 +109,12 @@ export type FunFactType =
 export interface FunFactItem {
   label: string;
   type: FunFactType;
-  link?: string;
 }
 
 export interface LandmarkItem {
   title: string;
   key: string;
+  language: TranslatedLanguage;
 }
 
 export interface CountryData {

@@ -2,6 +2,7 @@ import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import dateService from '@services/date.service';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslations } from '@translations';
 import dayjs from 'dayjs';
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
 }
 
 const TimeDifferenceDisplay = ({ timezoneDiff, timezone }: Props) => {
+  const translations = useTranslations().common;
+
   const formatted = dateService.getTimeByMinutes(Math.abs(timezoneDiff * 60));
 
   const label =
@@ -17,7 +20,7 @@ const TimeDifferenceDisplay = ({ timezoneDiff, timezone }: Props) => {
       ? `+${formatted}`
       : timezoneDiff < 0
         ? `-${formatted}`
-        : 'None';
+        : translations.none;
 
   const { data: localTime = dayjs() } = useQuery({
     queryKey: ['currentTime'],

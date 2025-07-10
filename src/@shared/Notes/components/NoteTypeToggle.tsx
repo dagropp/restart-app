@@ -7,6 +7,7 @@ import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
 import { NoteType } from '@root/types';
 import { NoteData } from '@shared/Notes/components/NoteForm';
+import { useTranslations } from '@translations';
 import { useFormContext } from 'react-hook-form';
 
 interface NoteTypeOptions {
@@ -16,25 +17,33 @@ interface NoteTypeOptions {
   disabled?: boolean;
 }
 
-const types: NoteTypeOptions[] = [
-  { type: NoteType.Note, Icon: TextSnippetRoundedIcon, label: 'Text Note' },
-  { type: NoteType.Link, Icon: LinkRoundedIcon, label: 'Link' },
-  {
-    type: NoteType.Todo,
-    Icon: ChecklistRoundedIcon,
-    label: 'Checklist',
-    // disabled: true,
-  },
-];
-
 export const NoteTypeToggle = () => {
   const { setValue, watch, resetField } = useFormContext<NoteData>();
   const selected = watch('type');
+  const translations = useTranslations().notes;
 
   const handleClick = (type: NoteType) => () => {
     setValue('type', type);
     resetField('note');
   };
+
+  const types: NoteTypeOptions[] = [
+    {
+      type: NoteType.Note,
+      Icon: TextSnippetRoundedIcon,
+      label: translations.textNote,
+    },
+    {
+      type: NoteType.Link,
+      Icon: LinkRoundedIcon,
+      label: translations.link,
+    },
+    {
+      type: NoteType.Todo,
+      Icon: ChecklistRoundedIcon,
+      label: translations.checklist,
+    },
+  ];
 
   return types.map(({ type, label, Icon, disabled }) => (
     <Tooltip key={label} title={label}>

@@ -8,6 +8,7 @@ import WbTwilightRoundedIcon from '@mui/icons-material/WbTwilightRounded';
 import Box from '@mui/material/Box';
 import dateService from '@services/date.service';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslations } from '@translations';
 import dayjs, { type Dayjs } from 'dayjs';
 import { type ReactNode } from 'react';
 
@@ -97,6 +98,7 @@ const TimeDisplay = ({ hour }: Props) => {
   const {
     item: { timezone },
   } = useCityContext();
+
   const timezoneHour = dateService.getDateByHour(hour, timezone);
   const localHour = dateService.getDateByTimezone(
     timezoneHour,
@@ -122,6 +124,8 @@ export const CurrentTimeDisplay = () => {
   const {
     item: { timezone },
   } = useCityContext();
+  const translations = useTranslations().city.timeDifference;
+
   const { data: time = dayjs() } = useQuery({
     queryKey: ['currentTime'],
     queryFn: () => dayjs(),
@@ -133,7 +137,7 @@ export const CurrentTimeDisplay = () => {
   const timezoneHour = getClosestHour(timezoneTime);
 
   return (
-    <Tooltip title="Current Time" placement="top">
+    <Tooltip title={translations.current} placement="top">
       <div
         className="flex items-center flex-col w-fit rounded p-2 mx-auto border border-solid"
         style={{

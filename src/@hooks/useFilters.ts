@@ -16,6 +16,7 @@ const useFilters = <T extends object>(
   useLayoutEffect(() => {
     const storedParams = getStoredParams(key);
     if (storedParams.size) setSearchParams(storedParams);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
   const [filters, setFilters] = useState<T>(() => {

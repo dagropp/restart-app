@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Currency } from '@root/types';
 import currencyService from '@services/currency';
+import { useTranslations } from '@translations';
 import { type MouseEvent, useState } from 'react';
 
 import CurrencyDisplay from './CurrencyDisplay';
@@ -18,6 +19,7 @@ const selectedBg = (theme: Theme) =>
   alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity);
 
 export const CurrencyMenu = ({ value, onChange }: Props) => {
+  const translations = useTranslations().enum.currency;
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
 
   const openMenu = (event: MouseEvent<HTMLButtonElement>) =>
@@ -30,7 +32,8 @@ export const CurrencyMenu = ({ value, onChange }: Props) => {
     closeMenu();
   };
 
-  const { symbol, name } = currencyService.map[value];
+  const { symbol } = currencyService.map[value];
+  const name = translations[value];
 
   return (
     <>

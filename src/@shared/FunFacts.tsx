@@ -1,4 +1,3 @@
-import Link from '@common/Link';
 import Typography from '@common/Typography';
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
@@ -37,6 +36,7 @@ import WineBarRoundedIcon from '@mui/icons-material/WineBarRounded';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
 import { FunFactItem, FunFactType } from '@services/api';
+import { useTranslations, useTranslationsContext } from '@translations';
 
 import SectionCard from './SectionCard';
 
@@ -79,34 +79,32 @@ interface Props {
   items: FunFactItem[];
 }
 
-const Item = ({ label, link, type }: FunFactItem) => {
+const Item = ({ label, type }: FunFactItem) => {
   const Icon = iconMap[type] ?? AutoAwesomeRoundedIcon;
+  const { isRtl } = useTranslationsContext();
 
   return (
     <li key={label} className="list-none flex items-center gap-4">
       <Icon fontSize="small" />
-      <Typography variant="body2">
-        {label}{' '}
-        {link && (
-          <Link
-            external
-            href={link}
-            color="inherit"
-            className="align-text-top"
-          />
-        )}
+      <Typography variant="body2" dir={isRtl ? 'rtl' : 'ltr'}>
+        {label}
       </Typography>
     </li>
   );
 };
 
-const FunFacts = ({ items }: Props) => (
-  <SectionCard title="Fun Facts" TitleIcon={HistoryEduRoundedIcon}>
-    <ul className="flex flex-col gap-2">
-      {items.map((item) => (
-        <Item key={item.label} {...item} />
-      ))}
-    </ul>
-  </SectionCard>
-);
+const FunFacts = ({ items }: Props) => {
+  const translations = useTranslations().city.funFacts;
+
+  return (
+    <SectionCard title={translations.title} TitleIcon={HistoryEduRoundedIcon}>
+      <ul className="flex flex-col gap-2">
+        {items.map((item) => (
+          <Item key={item.label} {...item} />
+        ))}
+      </ul>
+    </SectionCard>
+  );
+};
+
 export default FunFacts;

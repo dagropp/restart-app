@@ -71,6 +71,7 @@ const ratioMap: Record<City, number> = {
   [City.LUGANO]: 1000 / 667,
   [City.CHRISTCHURCH]: 1000 / 684,
   [City.WELLINGTON]: 1000 / 400,
+  [City.JERSEY_CITY]: 1000 / 457,
 };
 
 export const CityWikiData = () => {

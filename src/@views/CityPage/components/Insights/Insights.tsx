@@ -6,17 +6,25 @@ import apiService, { InsightType } from '@services/api';
 import InsightsIcon from '@shared/InsightsIcon';
 import SectionCard from '@shared/SectionCard';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslations, useTranslationsContext } from '@translations';
 import { object } from '@utils/object.utils';
 
 import { useCityContext } from '../../context';
-import { itemTypeMap } from './constants';
+import { getItemTypeData } from './constants';
 import { ItemProps } from './types';
 
 const Item = ({ insightKey, label, link }: ItemProps) => {
+  const { isRtl } = useTranslationsContext();
+
   return (
     <div className="flex gap-3 items-center">
       <InsightsIcon insightKey={insightKey} fontSize="small" />
-      <Typography variant="body2" className="text-balance" lineHeight="normal">
+      <Typography
+        variant="body2"
+        className="text-balance text-left"
+        lineHeight="normal"
+        dir={isRtl ? 'rtl' : 'ltr'}
+      >
         <span dangerouslySetInnerHTML={{ __html: label }} />{' '}
         {link && (
           <Link
@@ -32,10 +40,12 @@ const Item = ({ insightKey, label, link }: ItemProps) => {
 };
 
 const InsightsSkeleton = () => {
+  const translations = useTranslations();
+
   const groups = [
-    itemTypeMap[InsightType.Good],
-    itemTypeMap[InsightType.Neutral],
-    itemTypeMap[InsightType.Bad],
+    getItemTypeData(InsightType.Good, translations),
+    getItemTypeData(InsightType.Neutral, translations),
+    getItemTypeData(InsightType.Bad, translations),
   ];
 
   return groups.map(({ bgcolor, label, Icon }) => (
@@ -59,10 +69,12 @@ const InsightsSkeleton = () => {
 
 const Insights = () => {
   const { item } = useCityContext();
+  const translations = useTranslations();
+  const { language } = useTranslationsContext();
 
   const { data: insights = {}, isLoading } = useQuery({
     queryKey: ['getInsights', item.id],
-    queryFn: () => apiService.insights.get(item.id),
+    queryFn: () => apiService.insights.get(item.id, language),
   });
 
   return (
@@ -72,7 +84,7 @@ const Insights = () => {
           <InsightsSkeleton />
         ) : (
           object.entries(insights).map(([key, items]) => {
-            const { bgcolor, Icon, label } = itemTypeMap[key];
+            const { bgcolor, Icon, label } = getItemTypeData(key, translations);
             return (
               <Box
                 className="p-2 flex flex-col gap-2 rounded-lg"

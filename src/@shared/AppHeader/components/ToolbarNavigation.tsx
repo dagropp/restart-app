@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { useTheme } from '@mui/material/styles';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
+import { useTranslations } from '@translations';
 import { style } from '@utils/style.utils';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router';
 
@@ -20,52 +21,6 @@ interface NavigationButton {
   getIsActive?: (path?: string) => boolean;
 }
 
-const buttons: NavigationButton[] = [
-  {
-    Icon: LocationCityRoundedIcon,
-    label: 'Cities',
-    path: '/',
-    getIsActive: (path?: string) => path === '/' || !!path?.startsWith('/city'),
-  },
-  {
-    Icon: FlagRoundedIcon,
-    label: 'Countries',
-    path: '/countries',
-  },
-  {
-    Icon: CompareRoundedIcon,
-    label: 'Compare',
-    path: '/compare',
-  },
-  {
-    Icon: DashboardRoundedIcon,
-    label: 'Notes',
-    path: '/notes',
-  },
-  {
-    Icon: Diversity3RoundedIcon,
-    label: 'Group',
-    path: '/group',
-  },
-  {
-    Icon: SettingsRoundedIcon,
-    label: 'Settings',
-    path: '/settings',
-  },
-];
-
-const options: SelectOption<string>[] = buttons.map(
-  ({ path, label, Icon }) => ({
-    value: path,
-    label: (
-      <div className="flex items-center gap-2">
-        <Icon fontSize="small" />
-        {label}
-      </div>
-    ),
-  }),
-);
-
 const isLargeScreen = style.isMediaQuery('sm');
 
 const getPathValue = (pathname: string) => {
@@ -75,8 +30,56 @@ const getPathValue = (pathname: string) => {
 
 export const ToolbarNavigation = () => {
   const { pathname } = useLocation();
+  const translations = useTranslations().menu.primary;
   const navigate = useNavigate();
   const theme = useTheme();
+
+  const buttons: NavigationButton[] = [
+    {
+      Icon: LocationCityRoundedIcon,
+      label: translations.cities,
+      path: '/',
+      getIsActive: (path?: string) =>
+        path === '/' || !!path?.startsWith('/city'),
+    },
+    {
+      Icon: FlagRoundedIcon,
+      label: translations.countries,
+      path: '/countries',
+    },
+    {
+      Icon: CompareRoundedIcon,
+      label: translations.compare,
+      path: '/compare',
+    },
+    {
+      Icon: DashboardRoundedIcon,
+      label: translations.notes,
+      path: '/notes',
+    },
+    {
+      Icon: Diversity3RoundedIcon,
+      label: translations.group,
+      path: '/group',
+    },
+    {
+      Icon: SettingsRoundedIcon,
+      label: translations.settings,
+      path: '/settings',
+    },
+  ];
+
+  const options: SelectOption<string>[] = buttons.map(
+    ({ path, label, Icon }) => ({
+      value: path,
+      label: (
+        <div className="flex items-center gap-2">
+          <Icon fontSize="small" />
+          {label}
+        </div>
+      ),
+    }),
+  );
 
   const buttonStyle = {
     color:

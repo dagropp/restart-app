@@ -2,6 +2,7 @@ import Link from '@common/Link';
 import Typography from '@common/Typography';
 import useIsOverflow from '@hooks/useIsOverflow';
 import { NoteResponse } from '@services/api';
+import { useTranslations } from '@translations';
 import { string } from '@utils/string.utils';
 import clsx from 'clsx';
 import { useMemo } from 'react';
@@ -13,6 +14,7 @@ interface Props {
 
 export const TextNote = ({ note, fullPage }: Props) => {
   const { ref, isOverflow } = useIsOverflow<HTMLDivElement>('y');
+  const translations = useTranslations().notes;
 
   const display = useMemo(
     () =>
@@ -37,7 +39,7 @@ export const TextNote = ({ note, fullPage }: Props) => {
       {isOverflow && !fullPage && (
         <div className="pt-2">
           <Link href={String(note.id)}>
-            <Typography variant="body2">Show More...</Typography>
+            <Typography variant="body2">{translations.showMore}</Typography>
           </Link>
         </div>
       )}

@@ -7,6 +7,7 @@ import {
   type CostPositiveState,
   type IncomeItem,
 } from '@services/api';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { array } from '@utils/array.utils';
 import { useEffect, useMemo, useReducer, useState } from 'react';
 
@@ -31,6 +32,8 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
   const { marks } = useIncomeData('income');
   const { marks: partnerMarks, income: partnerIncome } =
     useIncomeData('partnerIncome');
+  const translations = useTranslations();
+  const compTranslations = translations.city.cost.simulation;
 
   const [showIncomeModal, setShowIncomeModal] = useState(false);
   const [showPartnerIncomeModal, setShowPartnerIncomeModal] = useState(false);
@@ -118,46 +121,63 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
   const positiveRows = useMemo(() => {
     const rows: CostRowsList<CostPositiveState> = {
       user: {
-        label: `${user.firstName}'s Gross Income`,
+        label: interpolateTranslations(compTranslations.grossIncome, {
+          name: user.firstName,
+        }),
         onEdit: () => setShowIncomeModal(true),
         optional: true,
         mapper: (value) => value / 12,
       },
       userTax: {
-        label: 'Tax',
+        label: compTranslations.tax,
         mapper: () => userTax,
       },
     };
 
     if (user.stipendValue) {
       rows.userStipend = {
-        label: `${user.firstName}'s Stipend / Scholarship`,
+        label: interpolateTranslations(compTranslations.stipend, {
+          name: user.firstName,
+        }),
         optional: true,
       };
     }
 
     if (group.partner?.stipendValue) {
       rows.partnerStipend = {
-        label: `${group.partner.firstName}'s Stipend / Scholarship`,
+        label: interpolateTranslations(compTranslations.stipend, {
+          name: group.partner.firstName,
+        }),
         optional: true,
       };
     }
 
     if (group.partner && group.partner.income !== IncomeType.None) {
       rows.partner = {
-        label: `${group.partner?.firstName}'s Gross Income`,
+        label: interpolateTranslations(compTranslations.grossIncome, {
+          name: group.partner?.firstName,
+        }),
         onEdit: () => setShowPartnerIncomeModal(true),
         optional: true,
         mapper: (value) => value / 12,
       };
       rows.partnerTax = {
-        label: 'Tax',
+        label: compTranslations.tax,
         mapper: () => partnerTax,
       };
     }
 
     return rows;
-  }, [group.partner, partnerTax, user.firstName, user.stipendValue, userTax]);
+  }, [
+    compTranslations.grossIncome,
+    compTranslations.stipend,
+    compTranslations.tax,
+    group.partner,
+    partnerTax,
+    user.firstName,
+    user.stipendValue,
+    userTax,
+  ]);
 
   const childrenCount = group.children.length;
   const adultCount = group.partner ? 2 : 1;
@@ -165,24 +185,46 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
   const negativeRows = useMemo(() => {
     const rows: CostRowsList<CostNegativeState> = {
       rent: {
-        label: 'Rent',
+        label: translations.city.cost.rent.title,
         onEdit: () => setShowCostModal(true),
-        tooltip: `For a ${group.bedrooms === 1 ? '1 bedroom' : `${group.bedrooms} bedrooms`} apartment`,
+        tooltip: interpolateTranslations(compTranslations.rentDescription, {
+          bedrooms:
+            group.bedrooms === 1
+              ? translations.city.cost.rent.bedroomSingle
+              : interpolateTranslations(translations.city.cost.rent.bedrooms, {
+                  bedrooms: group.bedrooms,
+                }),
+        }),
       },
       general: {
-        label: 'General Cost',
+        label: compTranslations.generalCost,
         tooltip: childrenCount
-          ? `For a family of ${adultCount === 1 ? '1 adult' : '2 adults'} and ${childrenCount === 1 ? '1 child' : `${childrenCount} children`}`
+          ? interpolateTranslations(compTranslations.familyLabel, {
+              adults:
+                adultCount === 1
+                  ? translations.group.adultSingle
+                  : interpolateTranslations(translations.group.adults, {
+                      adults: adultCount,
+                    }),
+              children:
+                childrenCount === 1
+                  ? translations.group.childSingle
+                  : interpolateTranslations(translations.group.children, {
+                      children: childrenCount,
+                    }),
+            })
           : adultCount === 1
-            ? 'For a single adult'
-            : 'For a couple',
+            ? compTranslations.singleAdult
+            : compTranslations.couple,
       },
     };
 
     if (cheapest?.price) {
       const groupSize = (group.partner ? 1 : 0) + group.children.length + 1;
       rows.flights = {
-        label: `${item.airport}-TLV Flights / Year`,
+        label: interpolateTranslations(compTranslations.flights, {
+          airport: item.airport,
+        }),
         optional: true,
         mapper: (value) => (value * groupSize) / 12,
       };
@@ -197,11 +239,13 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
 
     if (preschool?.length) {
       rows.preschool = {
-        label: `Private Preschool (${array.joinWithLast(
-          preschool.map((child) => child.name),
-          ', ',
-          ' and ',
-        )})`,
+        label: interpolateTranslations(compTranslations.preschool, {
+          names: array.joinWithLast(
+            preschool.map((child) => child.name),
+            ', ',
+            compTranslations.childConnector,
+          ),
+        }),
         optional: true,
       };
       updateNegativeState({
@@ -216,11 +260,13 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
 
     if (school?.length) {
       rows.school = {
-        label: `Private School (${array.joinWithLast(
-          school.map((child) => child.name),
-          ', ',
-          ' and ',
-        )})`,
+        label: interpolateTranslations(compTranslations.school, {
+          names: array.joinWithLast(
+            school.map((child) => child.name),
+            ', ',
+            compTranslations.childConnector,
+          ),
+        }),
         optional: true,
       };
       updateNegativeState({
@@ -238,12 +284,28 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
     adultCount,
     cheapest?.price,
     childrenCount,
+    compTranslations.childConnector,
+    compTranslations.couple,
+    compTranslations.familyLabel,
+    compTranslations.flights,
+    compTranslations.generalCost,
+    compTranslations.preschool,
+    compTranslations.rentDescription,
+    compTranslations.school,
+    compTranslations.singleAdult,
     cost.preSchool,
     cost.privateSchool,
     group.bedrooms,
     group.children,
     group.partner,
     item.airport,
+    translations.city.cost.rent.bedroomSingle,
+    translations.city.cost.rent.bedrooms,
+    translations.city.cost.rent.title,
+    translations.group.adultSingle,
+    translations.group.adults,
+    translations.group.childSingle,
+    translations.group.children,
   ]);
 
   const value: ICostContext = {

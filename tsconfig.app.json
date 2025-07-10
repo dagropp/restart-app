@@ -31,7 +31,8 @@
       "@services/*": ["src/@services/*"],
       "@utils/*": ["src/@utils/*"],
       "@views/*": ["src/@views/*"],
-      "@root/*": ["src/*"]
+      "@root/*": ["src/*"],
+      "@translations": ["src/@translations"]
     }
   },
   "include": ["src"]

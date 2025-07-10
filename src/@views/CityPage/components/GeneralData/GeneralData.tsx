@@ -17,6 +17,7 @@ import GeneralDataCard, {
 } from '@shared/GeneralDataCard';
 import LanguageDisplay from '@shared/LanguageDisplay';
 import TimeDifferenceDisplay from '@shared/TimeDifferenceDisplay';
+import { useTranslations } from '@translations';
 import { format } from '@utils/format.utils';
 
 import { useCityContext } from '../../context';
@@ -28,10 +29,11 @@ import {
 
 export const GeneralData = () => {
   const { item } = useCityContext();
+  const translations = useTranslations();
 
   const items: GeneralItemProps[] = [
     {
-      label: 'Country',
+      label: translations.table.cells.country,
       display: (
         <Typography variant="body2">
           <Link href={`/countries/${item.country.id}`}>
@@ -42,48 +44,53 @@ export const GeneralData = () => {
       Icon: PublicRoundedIcon,
     },
     {
-      label: 'Population',
+      label: translations.generalSection.population,
       display: <CityPopulation />,
       Icon: GroupsRoundedIcon,
     },
     {
-      label: 'Density',
+      label: translations.generalSection.density,
       display: (
         <Typography variant="body2">
           {format.shortNumber(item.density, 10_000, 2)}{' '}
           <Typography variant="caption">
-            / km<sup>2</sup>
+            {translations.generalSection.perKm}
+            <sup>2</sup>
           </Typography>
         </Typography>
       ),
       Icon: ApartmentRoundedIcon,
     },
     {
-      label: 'Is Capital City',
+      label: translations.generalSection.isCapital,
       display: (
         <Typography variant="body2">
-          {item.country.capital === item.id ? 'Yes' : 'No'}
+          {item.country.capital === item.id
+            ? translations.common.yes
+            : translations.common.no}
         </Typography>
       ),
       Icon: AccountBalanceRoundedIcon,
     },
     {
-      label: 'Satellite Cities',
+      label: translations.generalSection.satelliteCities,
       display: <SatelliteCitiesList />,
       Icon: RadarIcon,
       hidden: !item.satelliteChildren?.length,
     },
     {
-      label: 'Is European Union',
+      label: translations.table.cells.isEu,
       display: (
         <Typography variant="body2">
-          {item.country.isEu === EuUnionStatus.Yes ? 'Yes' : 'No'}
+          {item.country.isEu === EuUnionStatus.Yes
+            ? translations.common.yes
+            : translations.common.no}
         </Typography>
       ),
       Icon: EuroRoundedIcon,
     },
     {
-      label: 'Language',
+      label: translations.table.cells.language,
       display: (
         <LanguageDisplay
           languages={[item.language]}
@@ -95,7 +102,7 @@ export const GeneralData = () => {
       Icon: TranslateRoundedIcon,
     },
     {
-      label: 'Currency',
+      label: translations.table.cells.currency,
       display: (
         <CurrencyDisplay
           currency={item.country.currency}
@@ -106,7 +113,7 @@ export const GeneralData = () => {
       Icon: PaymentsRoundedIcon,
     },
     {
-      label: 'Time Difference',
+      label: translations.city.timeDifference.title,
       display: (
         <TimeDifferenceDisplay
           timezoneDiff={item.timezoneDiff}
@@ -116,8 +123,13 @@ export const GeneralData = () => {
       Icon: AccessTimeFilledRoundedIcon,
     },
     {
-      label: 'Elevation',
-      display: <Typography variant="body2">{item.elevation}m</Typography>,
+      label: translations.generalSection.elevation,
+      display: (
+        <Typography variant="body2">
+          {item.elevation}
+          {translations.generalSection.metersAbbrev}
+        </Typography>
+      ),
       Icon: FilterHdrRoundedIcon,
     },
   ];

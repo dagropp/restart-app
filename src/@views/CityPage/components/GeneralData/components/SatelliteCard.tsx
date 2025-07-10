@@ -8,6 +8,7 @@ import apiService from '@services/api';
 import dateService from '@services/date.service';
 import { GeneralDataItem } from '@shared/GeneralDataCard';
 import SectionCard from '@shared/SectionCard';
+import { useTranslations } from '@translations';
 
 import { useCityContext } from '../../../context';
 
@@ -16,6 +17,7 @@ export const SatelliteCard = () => {
     item: { satelliteCity, satelliteDistance },
   } = useCityContext();
   const theme = useTheme();
+  const translations = useTranslations().generalSection;
 
   const { data: cities } = apiService.useCities();
 
@@ -30,7 +32,7 @@ export const SatelliteCard = () => {
     >
       <div className="flex flex-col gap-4">
         <GeneralDataItem
-          label="Metropolitan Center"
+          label={translations.metropolitanCenter}
           display={
             <Typography variant="body2">
               <Link href={`/city/${city.id}`}>{city.name}</Link>
@@ -39,7 +41,7 @@ export const SatelliteCard = () => {
           Icon={EmojiTransportationRoundedIcon}
         />
         <GeneralDataItem
-          label="Commute Time"
+          label={translations.commuteTime}
           display={
             <Typography variant="body2">
               {dateService.getTimeByMinutes(satelliteDistance)}

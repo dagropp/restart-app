@@ -2,6 +2,7 @@ import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
 import { useTheme } from '@mui/material/styles';
 import SectionCard from '@shared/SectionCard';
+import { useTranslations } from '@translations';
 import { formatCurrency } from '@utils/format.utils';
 import { number } from '@utils/number.utils';
 import clsx from 'clsx';
@@ -51,6 +52,8 @@ const SavingsDisplay = ({ value }: SavingsDisplayProps) => {
 
 export const SimulationResults = () => {
   const { positive, positiveState, negative, negativeState } = useCostContext();
+  const translations = useTranslations();
+  const compTranslations = translations.city.cost.simulation;
 
   const positiveSum = useMemo(
     () => getSimulationStateSum(positive, positiveState),
@@ -64,8 +67,8 @@ export const SimulationResults = () => {
     () =>
       positiveSum
         ? `${number.toFixed(100 - (negativeSum / positiveSum) * 100)}%`
-        : 'N/A',
-    [negativeSum, positiveSum],
+        : translations.common.notAvailable,
+    [negativeSum, positiveSum, translations.common.notAvailable],
   );
   const yearlyBalance = (positiveSum - negativeSum) * 12;
 
@@ -77,18 +80,20 @@ export const SimulationResults = () => {
 
   const items: ItemProps[] = [
     {
-      label: yearlyBalance > 0 ? 'Surplus Rate' : 'Deficit Rate',
+      label:
+        yearlyBalance > 0 ? compTranslations.surplus : compTranslations.deficit,
       value: colBalance,
     },
     {
-      label: yearlyBalance > 0 ? 'Yearly Savings' : 'Yearly Losses',
+      label:
+        yearlyBalance > 0 ? compTranslations.savings : compTranslations.losses,
       value: <SavingsDisplay value={yearlyBalance} />,
     },
     {
-      label: 'Rent / Income Ratio',
+      label: compTranslations.rentIncomeRatio,
       value: number.percentage(negativeState.rent.value, positiveSum, 0),
     },
-    { label: 'Incomes', value: incomeCount },
+    { label: compTranslations.incomes, value: incomeCount },
   ];
 
   return (

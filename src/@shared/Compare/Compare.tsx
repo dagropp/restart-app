@@ -2,6 +2,7 @@ import Typography from '@common/Typography';
 import useFilters from '@hooks/useFilters';
 import apiService from '@services/api';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslations, useTranslationsContext } from '@translations';
 
 import CitySelect, { CitySelectProps } from '../CitySelect';
 import { List, ListSkeleton } from './components';
@@ -18,10 +19,13 @@ const Compare = ({
     city: defaultCity,
     other: defaultOther,
   });
+  const translations = useTranslations().compare;
+  const { language } = useTranslationsContext();
 
   const { data = [], isLoading } = useQuery({
-    queryKey: ['getCompare', filters.city, filters.other, loading],
-    queryFn: () => apiService.compare.get(filters.city!, filters.other!),
+    queryKey: ['getCompare', filters.city, filters.other, loading, language],
+    queryFn: () =>
+      apiService.compare.get(filters.city!, filters.other!, language),
     enabled: !loading && !!filters.city && !!filters.other,
   });
 
@@ -46,7 +50,7 @@ const Compare = ({
     <div className="h-full grid grid-cols-[1fr_max-content_1fr] px-5 gap-x-5">
       <CitySelect {...getProps('city')} disabled={readOnly} />
       <Typography className="flex items-center h-full pb-5" variant="subtitle2">
-        VS.
+        {translations.vs}
       </Typography>
       <CitySelect {...getProps('other')} />
       {loading || isLoading ? <ListSkeleton /> : <List data={data} />}

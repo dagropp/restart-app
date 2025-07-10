@@ -3,6 +3,7 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import FilterAltRoundedIcon from '@mui/icons-material/FilterAltRounded';
 import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 import Menu from '@mui/material/Menu';
+import { useTranslations } from '@translations';
 import { type ReactNode, useState } from 'react';
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const FiltersMenu = ({ isFiltered, children, reset }: Props) => {
+  const translations = useTranslations().table.filters;
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleCloseMenu = () => setAnchorEl(null);
@@ -23,7 +25,7 @@ const FiltersMenu = ({ isFiltered, children, reset }: Props) => {
         endIcon={isFiltered ? <FilterAltRoundedIcon /> : <AddRoundedIcon />}
         variant="contained"
       >
-        {isFiltered ? 'Edit Filters' : 'Add Filters'}
+        {isFiltered ? translations.editFilters : translations.addFilters}
       </Button>
       {isFiltered && (
         <Button
@@ -31,7 +33,7 @@ const FiltersMenu = ({ isFiltered, children, reset }: Props) => {
           onClick={reset}
           endIcon={<ReplayRoundedIcon />}
         >
-          Reset Filters
+          {translations.resetFilters}
         </Button>
       )}
       <Menu

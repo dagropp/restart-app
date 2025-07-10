@@ -12,6 +12,7 @@ import { type OverridableComponent } from '@mui/material/OverridableComponent';
 import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
 import { Currency } from '@root/types';
 import { CostResponse } from '@services/api';
+import { useTranslations } from '@translations';
 import {
   convertCurrency,
   CurrencyConverter,
@@ -42,15 +43,24 @@ type DisplayableFields = Omit<
 
 interface FieldData {
   Icon?: OverridableComponent<SvgIconTypeMap>;
-  label: string;
   rangeKey?: keyof CostResponse;
-  caption?: string;
   mapper?: (value: number) => number;
   isFloat?: boolean;
 }
 
+interface TranslatedFieldData {
+  label: string;
+  caption?: string;
+}
+
 interface Group {
-  title: string;
+  id:
+    | 'realEstate'
+    | 'eatingOut'
+    | 'groceryShopping'
+    | 'transportation'
+    | 'bills'
+    | 'education';
   fields: (keyof DisplayableFields)[];
   Icon: OverridableComponent<SvgIconTypeMap>;
 }
@@ -71,69 +81,56 @@ interface CostGroupProps extends Group {
 }
 
 const map: Record<keyof DisplayableFields, FieldData> = {
-  generalCost: {
-    Icon: CreditCardRoundedIcon,
-    label: 'General Cost',
-    caption: '/ Month',
-  },
+  generalCost: { Icon: CreditCardRoundedIcon },
   // real estate
-  rentOuter: { label: 'Rent', caption: '/ Month', rangeKey: 'rentCentral' },
-  buyOuter: {
-    label: 'Buy',
-    rangeKey: 'buyCentral',
-    caption: '/ 120sqm.',
-    mapper: (value) => value * 120,
-  },
+  rentOuter: { rangeKey: 'rentCentral' },
+  buyOuter: { rangeKey: 'buyCentral', mapper: (value) => value * 120 },
   // food
-  beer: { label: 'Draught Beer', caption: '/ 0.5L' },
-  mealDate: { label: 'Dinner Out', caption: '/ Couple' },
-  mealSingle: { label: 'Lunch Out', caption: '/ Person' },
-  mcDonalds: { label: 'McDonalds Combo Meal', caption: '/ Person' },
-  coffee: { label: 'Cappuccino', caption: '/ Cup' },
+  beer: {},
+  mealDate: {},
+  mealSingle: {},
+  mcDonalds: {},
+  coffee: {},
   // groceries
-  milk: { label: 'Milk', caption: '/ 1L' },
-  bread: { label: 'Bread', caption: '/ Loaf' },
-  eggs: { label: 'Eggs', caption: '/ Dozen' },
-  cheese: { label: 'Cheese', caption: '/ 1Kg' },
-  chicken: { label: 'Chicken Fillets', caption: '/ 1Kg' },
-  beef: { label: 'Ground Beef', caption: '/ 1Kg' },
-  apples: { label: 'Apples', caption: '/ 1Kg' },
-  tomatoes: { label: 'Tomatoes', caption: '/ 1Kg' },
-  wine: { label: 'Wine', caption: '/ 0.75L' },
-  beerBottle: { label: 'Beer Bottle', caption: '/ 0.5L' },
+  milk: {},
+  bread: {},
+  eggs: {},
+  cheese: {},
+  chicken: {},
+  beef: {},
+  apples: {},
+  tomatoes: {},
+  wine: {},
+  beerBottle: {},
   // transportation
-  ticketSingle: { label: 'Public Transport', caption: '/ Single Ticket' },
-  ticketMonth: { label: 'Public Transport', caption: '/ Monthly Pass' },
-  germanCar: { label: 'Family Car', rangeKey: 'japanCar' },
-  gasoline: { label: 'Gasoline', caption: '/ 1L', isFloat: true },
-  stopsFlight: {
-    label: 'Flight to TLV',
-    caption: '/ Person',
-    rangeKey: 'directFlight',
-  },
+  ticketSingle: {},
+  ticketMonth: {},
+  germanCar: { rangeKey: 'japanCar' },
+  gasoline: { isFloat: true },
+  stopsFlight: { rangeKey: 'directFlight' },
   // bills
-  bills: { label: 'Utility Bills', caption: '/ Month' },
-  internet: { label: 'Internet', caption: '/ Month' },
-  mobile: { label: 'Cellphone', caption: '/ Month' },
+  bills: {},
+  internet: {},
+  mobile: {},
   // education
-  preSchool: { label: 'Preschool', caption: '/ Month' },
-  privateSchool: { label: 'Private School', caption: '/ Month' },
+  preSchool: {},
+  privateSchool: {},
 };
 
 const groups: Group[] = [
   {
+    id: 'realEstate',
     Icon: MapsHomeWorkRoundedIcon,
-    title: 'Real Estate',
     fields: ['rentOuter', 'buyOuter'],
   },
   {
+    id: 'eatingOut',
     Icon: DinnerDiningRoundedIcon,
-    title: 'Dining',
     fields: ['mealSingle', 'mealDate', 'mcDonalds', 'coffee', 'beer'],
   },
   {
+    id: 'groceryShopping',
     Icon: ShoppingCartRoundedIcon,
-    title: 'Grocery Shopping',
     fields: [
       'milk',
       'bread',
@@ -148,8 +145,8 @@ const groups: Group[] = [
     ],
   },
   {
+    id: 'transportation',
     Icon: DirectionsCarFilledRoundedIcon,
-    title: 'Transportation',
     fields: [
       'ticketSingle',
       'ticketMonth',
@@ -159,13 +156,13 @@ const groups: Group[] = [
     ],
   },
   {
+    id: 'bills',
     Icon: ReceiptRoundedIcon,
-    title: 'Bills',
     fields: ['bills', 'internet', 'mobile'],
   },
   {
+    id: 'education',
     Icon: SchoolRoundedIcon,
-    title: 'Education',
     fields: ['preSchool', 'privateSchool'],
   },
 ];
@@ -177,15 +174,10 @@ const CostItem = ({
   currencyConverter,
 }: CostItemProps) => {
   const { currency: ctxCurrency } = useAppContext();
+  const translations = useTranslations().enum.cost;
 
-  const {
-    rangeKey,
-    mapper = (v) => v,
-    Icon,
-    label,
-    caption,
-    isFloat,
-  } = map[field];
+  const { rangeKey, mapper = (v) => v, Icon, isFloat } = map[field];
+  const { label, caption } = translations[field] as TranslatedFieldData;
 
   const value = mapper(cost[field]);
   let range = rangeKey && mapper(cost[rangeKey] as number);
@@ -219,7 +211,6 @@ const CostItem = ({
 };
 
 export const CostGroup = ({
-  title,
   fields,
   expanded,
   handleExpand,
@@ -227,12 +218,15 @@ export const CostGroup = ({
   currency,
   currencyConverter,
   cost,
+  id,
 }: CostGroupProps) => {
+  const translations = useTranslations().enum.priceGroup;
+
   return (
     <Accordion
       expanded={expanded}
       handleExpand={handleExpand}
-      title={title}
+      title={translations[id]}
       Icon={Icon}
     >
       {fields
@@ -251,8 +245,9 @@ export const CostGroup = ({
 };
 
 const Prices = ({ cost, currency }: Props) => {
-  const [expanded, setExpanded] = useState<string | null>(groups[0].title);
+  const [expanded, setExpanded] = useState<string | null>(groups[0].id);
   const { currencies, currency: ctxCurrency } = useAppContext();
+  const translations = useTranslations().city.prices;
 
   const currencyConverter = useMemo(
     () => convertCurrency(currencies, ctxCurrency, currency),
@@ -263,7 +258,7 @@ const Prices = ({ cost, currency }: Props) => {
     setExpanded((prev) => (prev === group ? null : group));
 
   return (
-    <SectionCard title="Prices" TitleIcon={PointOfSaleRoundedIcon}>
+    <SectionCard title={translations.title} TitleIcon={PointOfSaleRoundedIcon}>
       <CostItem
         field="generalCost"
         cost={cost}
@@ -272,9 +267,9 @@ const Prices = ({ cost, currency }: Props) => {
       />
       {groups.map((group) => (
         <CostGroup
-          key={group.title}
-          expanded={expanded === group.title}
-          handleExpand={handleExpand(group.title)}
+          key={group.id}
+          expanded={expanded === group.id}
+          handleExpand={handleExpand(group.id)}
           cost={cost}
           currency={currency}
           currencyConverter={currencyConverter}

@@ -9,6 +9,7 @@ import { NoteResponse, UseNotesActions } from '@services/api';
 import { NoteData } from '@shared/Notes/components/NoteForm';
 import { NoteTypeToggle } from '@shared/Notes/components/NoteTypeToggle';
 import { Todo } from '@shared/Notes/components/Todo';
+import { ITranslations, useTranslations } from '@translations';
 import { string } from '@utils/string.utils';
 import clsx from 'clsx';
 import { useEffect } from 'react';
@@ -39,14 +40,20 @@ const isValidUrl = (value: string) =>
   !value ||
   /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(:[0-9]{1,5})?(\/[^\s]*)?$/.test(value);
 
-const getPlaceholder = (variant: EditorVariant, type: NoteType): string => {
+const getPlaceholder = (
+  variant: EditorVariant,
+  type: NoteType,
+  translations: ITranslations,
+): string => {
   switch (type) {
     case NoteType.Note:
-      return variant === 'reply' ? 'Add Comment...' : 'Add a Note...';
+      return variant === 'reply'
+        ? translations.notes.add.comment
+        : translations.notes.add.note;
     case NoteType.Link:
-      return variant === 'reply' ? '' : 'Add a Link...';
+      return variant === 'reply' ? '' : translations.notes.add.link;
     case NoteType.Todo:
-      return variant === 'add' ? 'Add a Checklist...' : '';
+      return variant === 'add' ? translations.notes.add.checklist : '';
   }
 };
 
@@ -74,6 +81,7 @@ export const NoteEditor = ({
   ...props
 }: Props) => {
   const { watch, setValue } = useFormContext<NoteData>();
+  const translations = useTranslations();
 
   const [value, title, scope, type] = watch(['note', 'title', 'scope', 'type']);
 
@@ -91,14 +99,14 @@ export const NoteEditor = ({
   const isError = !isEmpty && type === NoteType.Link && !isValidUrl(value);
   const isTextual = type === NoteType.Note || type === NoteType.Link;
 
-  const placeholder = getPlaceholder(variant, type);
+  const placeholder = getPlaceholder(variant, type, translations);
 
   return (
     <div className="relative" key={type}>
       {(variant === 'add' || variant === 'edit') && (
         <FormTextField<NoteData>
           variant="standard"
-          placeholder="Add Title..."
+          placeholder={translations.notes.add.title}
           className="!absolute top-0 z-10 !px-3.5 !pt-3"
           fullWidth
           name="title"

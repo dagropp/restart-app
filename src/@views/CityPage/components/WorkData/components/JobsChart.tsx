@@ -3,6 +3,11 @@ import Typography from '@common/Typography';
 import { alpha, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import dateService from '@services/date.service';
+import {
+  interpolateTranslations,
+  useTranslations,
+  useTranslationsContext,
+} from '@translations';
 import { format } from '@utils/format.utils';
 import { is } from '@utils/is.utils';
 import { number } from '@utils/number.utils';
@@ -16,6 +21,8 @@ interface Props {
 
 export const JobsChart = ({ jobs = [], name }: Props) => {
   const theme = useTheme();
+  const translations = useTranslations().city.jobData;
+  const { isRtl } = useTranslationsContext();
 
   const trend = useMemo(() => {
     const isBetterThanInitial = jobs.at(-1)! > jobs.at(0)!;
@@ -59,7 +66,11 @@ export const JobsChart = ({ jobs = [], name }: Props) => {
         <Skeleton variant="text" width="65%" />
       ) : (
         <Typography variant="caption">
-          {format.shortNumber(latest)} Jobs Posted
+          <Typography variant="caption" dir={isRtl ? 'rtl' : 'ltr'}>
+            {interpolateTranslations(translations.jobsPosted, {
+              jobs: format.shortNumber(jobs.at(-1)!),
+            })}
+          </Typography>
           <span
             className="px-1 py-0.5 rounded scale-90 inline-block ml-1"
             style={{ backgroundColor: trend.light, color: trend.contrastText }}
@@ -76,7 +87,6 @@ export const JobsChart = ({ jobs = [], name }: Props) => {
 
       <SparkLineChart
         data={jobs}
-        disableAxisListener
         height={100}
         color={trend.light}
         showTooltip

@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Skeleton from '@mui/material/Skeleton';
 import { CostStateItem } from '@services/api';
 import InfoTooltip from '@shared/InfoTooltip';
+import { useTranslations, useTranslationsContext } from '@translations';
 import {
   convertCurrency,
   type CurrencyConverter,
@@ -132,6 +133,7 @@ const BaseGridRow = ({
 }: BaseGridRowProps) => {
   const { item } = useCityContext();
   const id = useId();
+  const { isRtl } = useTranslationsContext();
 
   const hiddenClass = hidden && 'opacity-50 select-none';
 
@@ -151,6 +153,7 @@ const BaseGridRow = ({
         <label
           className="inline-flex items-center gap-2"
           htmlFor={isCheckbox ? id : undefined}
+          dir={isRtl ? 'rtl' : 'ltr'}
         >
           <strong>{label}</strong>
           {tooltip && <InfoTooltip title={tooltip} placement="top" />}
@@ -193,13 +196,15 @@ const BaseGridRow = ({
 export const BreakdownGridSkeleton = ({
   title,
 }: Pick<Props<BaseState>, 'title'>) => {
+  const translations = useTranslations().common;
+
   return (
     <div className="flex-1">
       <div className="flex items-center gap-2 pb-3 justify-between">
         <Typography variant="h6">
           {title}{' '}
           <Typography variant="caption" color="textSecondary">
-            <strong>/ Month</strong>
+            <strong>{translations.perMonth}</strong>
           </Typography>
         </Typography>
       </div>
@@ -224,6 +229,7 @@ const BreakdownGrid = <T extends BaseState>({
 }: Props<T>) => {
   const { currency: ctxCurrency, currencies } = useAppContext();
   const { item } = useCityContext();
+  const translations = useTranslations().common;
   const currencyConverter = convertCurrency(
     currencies,
     ctxCurrency,
@@ -241,7 +247,7 @@ const BreakdownGrid = <T extends BaseState>({
         <Typography variant="h6">
           {title}{' '}
           <Typography variant="caption" color="textSecondary">
-            <strong>/ Month</strong>
+            <strong>{translations.perMonth}</strong>
           </Typography>
         </Typography>
       </div>
@@ -258,7 +264,7 @@ const BreakdownGrid = <T extends BaseState>({
         ))}
         <Divider className="col-span-3" />
         <BaseGridRow
-          label="Total"
+          label={translations.total}
           currencyConverter={currencyConverter}
           value={total}
         />

@@ -5,6 +5,7 @@ import { alpha, Theme } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
 import { InsightType, ValidInsightType } from '@services/api';
+import { ITranslations } from '@translations';
 
 interface IconTypeData {
   Icon: OverridableComponent<SvgIconTypeMap>;
@@ -12,20 +13,25 @@ interface IconTypeData {
   label: string;
 }
 
-export const itemTypeMap: Record<ValidInsightType, IconTypeData> = {
+const itemTypeMap: Record<ValidInsightType, Omit<IconTypeData, 'label'>> = {
   [InsightType.Good]: {
     Icon: SentimentSatisfiedAltRoundedIcon,
     bgcolor: (theme) => alpha(theme.palette.success.light, 0.4),
-    label: 'The Good',
   },
   [InsightType.Bad]: {
     Icon: SentimentDissatisfiedRoundedIcon,
     bgcolor: (theme) => alpha(theme.palette.error.light, 0.4),
-    label: 'The Bad',
   },
   [InsightType.Neutral]: {
     Icon: SentimentNeutralRoundedIcon,
     bgcolor: (theme) => alpha(theme.palette.success.contrastText, 0.2),
-    label: 'The So-So',
   },
+};
+
+export const getItemTypeData = (
+  type: ValidInsightType,
+  translations: ITranslations,
+): IconTypeData => {
+  const label = translations.enum.insights[type];
+  return { ...itemTypeMap[type], label };
 };

@@ -5,8 +5,8 @@ import {
   type Language,
   VisaLevel,
 } from '@root/types';
-import currencyService from '@services/currency';
 import { languageMap } from '@shared/LanguageDisplay';
+import { ITranslations } from '@translations';
 
 const visaLevelScore: Record<VisaLevel, number> = {
   [VisaLevel.None]: 2,
@@ -39,26 +39,32 @@ const getVisaLevelSorter =
 const getCurrencySorter =
   <T extends object>(
     getValue: (row: T) => Currency,
+    translations: ITranslations,
   ): TableColumn<T>['sorter'] =>
   (direction) =>
   (a, b) => {
-    const { name: aValue } = currencyService.map[getValue(a)];
-    const { name: bValue } = currencyService.map[getValue(b)];
+    const aValue = translations.enum.currency[getValue(a)];
+    const bValue = translations.enum.currency[getValue(b)];
     return aValue.localeCompare(bValue) * direction;
   };
 
 const getLanguageSorter =
   <T extends object>(
     getValue: (row: T) => Language | Language[],
+    translations: ITranslations,
   ): TableColumn<T>['sorter'] =>
   (direction) =>
   (a, b) => {
     const languageA = getValue(a);
     const languageB = getValue(b);
-    const { localLabel: localA, englishLabel: aValue = localA } =
-      languageMap[Array.isArray(languageA) ? languageA[0] : languageA];
-    const { localLabel: localB, englishLabel: bValue = localB } =
-      languageMap[Array.isArray(languageB) ? languageB[0] : languageB];
+    const parsedLanguageA = Array.isArray(languageA) ? languageA[0] : languageA;
+    const parsedLanguageB = Array.isArray(languageB) ? languageB[0] : languageB;
+    const aValue =
+      translations.enum.language[parsedLanguageA] ||
+      languageMap[parsedLanguageA];
+    const bValue =
+      translations.enum.language[parsedLanguageB] ||
+      languageMap[parsedLanguageB];
     return aValue.localeCompare(bValue) * direction;
   };
 

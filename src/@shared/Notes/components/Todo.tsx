@@ -9,6 +9,7 @@ import { City, Country, NoteScope, NoteType } from '@root/types';
 import apiService, { NoteResponse, UseNotesActions } from '@services/api';
 import { NoteData } from '@shared/Notes/components/NoteForm';
 import { useMutation } from '@tanstack/react-query';
+import { useTranslations } from '@translations';
 import { is } from '@utils/is.utils';
 import clsx from 'clsx';
 import { type KeyboardEvent, useMemo, useState } from 'react';
@@ -99,6 +100,7 @@ const Item = ({
 };
 
 export const Todo = ({ note, placeId, actions, title, scope }: Props) => {
+  const translations = useTranslations().notes;
   const [error, setError] = useState('');
   const initialValue = useMemo(
     () => getInitialValue(setError, note?.data),
@@ -202,7 +204,7 @@ export const Todo = ({ note, placeId, actions, title, scope }: Props) => {
           fullWidth
           value={newValue}
           onChange={(event) => setNewValue(event.target.value)}
-          placeholder="Add Item..."
+          placeholder={translations.add.todoItem}
           onKeyDown={handleKeyDown}
           disabled={isDisabled}
         />

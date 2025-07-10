@@ -10,6 +10,11 @@ import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
 import dateService from '@services/date.service';
 import SectionCard from '@shared/SectionCard';
+import {
+  interpolateTranslations,
+  useTranslations,
+  useTranslationsContext,
+} from '@translations';
 import { array } from '@utils/array.utils';
 import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
@@ -40,11 +45,11 @@ const getTempColor = (temp: number) => {
   return `hsl(${Math.max(0, hue)}, 100%, 50%, 0.5)`;
 };
 
-const map: Record<Season, { label: string; indices: number[] }> = {
-  [Season.Fall]: { label: 'Fall', indices: [8, 9, 10] },
-  [Season.Winter]: { label: 'Winter', indices: [11, 0, 1] },
-  [Season.Spring]: { label: 'Spring', indices: [2, 3, 4] },
-  [Season.Summer]: { label: 'Summer', indices: [5, 6, 7] },
+const map: Record<Season, number[]> = {
+  [Season.Fall]: [8, 9, 10],
+  [Season.Winter]: [11, 0, 1],
+  [Season.Spring]: [2, 3, 4],
+  [Season.Summer]: [5, 6, 7],
 };
 
 interface WeatherItemProps {
@@ -61,7 +66,9 @@ const WeatherItem = ({ season }: WeatherItemProps) => {
   const {
     item: { weather },
   } = useCityContext();
-  const { label, indices } = map[season];
+  const translations = useTranslations().enum.season;
+  const indices = map[season];
+  const label = translations[season];
   const min = Math.round(
     number.average(...array.getIndices(weather.minTemp, indices)),
   );
@@ -100,8 +107,13 @@ const WeatherItem = ({ season }: WeatherItemProps) => {
 };
 
 const StatsItem = ({ label, Icon, caption }: StatsItemProps) => {
+  const { isRtl } = useTranslationsContext();
   return (
-    <Typography variant="body2" className="contents">
+    <Typography
+      variant="body2"
+      className="contents text-left"
+      dir={isRtl ? 'rtl' : 'ltr'}
+    >
       <Icon fontSize="small" />
       <span>
         {label} <Typography variant="caption">({caption})</Typography>
@@ -114,6 +126,7 @@ export const WeatherDisplay = () => {
   const {
     item: { weather },
   } = useCityContext();
+  const translations = useTranslations().city.weather;
 
   const rainDays = number.sum(...weather.rainyDays);
   const maxSunHours = dateService.getTimeByMinutes(
@@ -126,23 +139,35 @@ export const WeatherDisplay = () => {
   );
 
   return (
-    <SectionCard title="Weather" TitleIcon={AirRoundedIcon}>
+    <SectionCard title={translations.title} TitleIcon={AirRoundedIcon}>
       <div className="mx-auto w-max">
         <div className="mx-auto w-max grid grid-cols-[max-content_1fr] gap-2">
           <StatsItem
             Icon={ThunderstormRoundedIcon}
-            label={`${rainDays} rain days per year`}
-            caption={`${Math.round((rainDays / 365) * 100)}% of the year`}
+            label={interpolateTranslations(translations.rainTitle, {
+              count: rainDays,
+            })}
+            caption={interpolateTranslations(translations.rainSubtitle, {
+              percent: Math.round((rainDays / 365) * 100),
+            })}
           />
           <StatsItem
             Icon={LightModeRoundedIcon}
-            label={`${maxSunHours} max sun hours`}
-            caption={`${Math.round((weather.sunHours[5] / 24) * 100)}% of the day`}
+            label={interpolateTranslations(translations.sunlightMax, {
+              count: maxSunHours,
+            })}
+            caption={interpolateTranslations(translations.sunlightSubtitle, {
+              percent: Math.round((weather.sunHours[5] / 24) * 100),
+            })}
           />
           <StatsItem
             Icon={DarkModeRoundedIcon}
-            label={`${minSunHours} min sun hours`}
-            caption={`${Math.round((weather.sunHours[11] / 24) * 100)}% of the day`}
+            label={interpolateTranslations(translations.sunlightMin, {
+              count: minSunHours,
+            })}
+            caption={interpolateTranslations(translations.sunlightSubtitle, {
+              percent: Math.round((weather.sunHours[11] / 24) * 100),
+            })}
           />
         </div>
 

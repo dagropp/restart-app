@@ -27,7 +27,6 @@ interface RegionData {
   translate: string;
   scale: number;
   marks: MarkData[];
-  label: string;
   strokeWidth: number;
 }
 
@@ -40,7 +39,6 @@ const regionMap: Record<Region, RegionData> = {
   [Region.ALL]: {
     scale: 1,
     translate: '0 0',
-    label: 'All',
     strokeWidth: 0.7,
     marks: [
       // OCEANIA
@@ -57,7 +55,7 @@ const regionMap: Record<Region, RegionData> = {
       // NORTH AMERICA
       { x: 9.2, y: 18.3, cities: [City.VANCOUVER] },
       { x: 8.9, y: 19.8, cities: [City.SEATTLE] },
-      { x: 21.9, y: 24.8, cities: [City.NEW_YORK] },
+      { x: 21.9, y: 24.8, cities: [City.NEW_YORK, City.JERSEY_CITY] },
       { x: 23.1, y: 23.5, cities: [City.BOSTON] },
       { x: 13.3, y: 33.8, cities: [City.AUSTIN] },
       { x: 6.9, y: 26.1, cities: [City.SAN_FRANCISCO] },
@@ -115,7 +113,6 @@ const regionMap: Record<Region, RegionData> = {
   [Region.EUROPE]: {
     scale: 3.6,
     translate: '-3% 109%',
-    label: 'Europe',
     strokeWidth: 0.3,
     marks: [
       { x: 65.8, y: 92, cities: [City.NICOSIA, City.LARNACA] },
@@ -170,11 +167,10 @@ const regionMap: Record<Region, RegionData> = {
   [Region.NORTH_AMERICA]: {
     scale: 2.9,
     translate: '100% 78%',
-    label: 'North America',
     strokeWidth: 0.4,
     marks: [
       { x: 74.2, y: 58.1, cities: [City.BOSTON] },
-      { x: 71.2, y: 60.6, cities: [City.NEW_YORK] },
+      { x: 71.2, y: 60.6, cities: [City.NEW_YORK, City.JERSEY_CITY] },
       { x: 33.2, y: 42.5, cities: [City.VANCOUVER] },
       { x: 33.1, y: 45.3, cities: [City.SEATTLE] },
       { x: 45.3, y: 86.8, cities: [City.AUSTIN] },
@@ -188,7 +184,6 @@ const regionMap: Record<Region, RegionData> = {
   [Region.ASIA]: {
     scale: 3,
     translate: '-50% 33%',
-    label: 'Asia and Middle-East',
     strokeWidth: 0.4,
     marks: [
       { x: 60.7, y: 79, cities: [City.BENGALURU] },
@@ -202,7 +197,6 @@ const regionMap: Record<Region, RegionData> = {
   [Region.OCEANIA]: {
     scale: 3.2,
     translate: '-129% -94%',
-    label: 'Oceania',
     strokeWidth: 0.4,
     marks: [
       { x: 53.9, y: 63.7, cities: [City.SYDNEY] },

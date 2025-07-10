@@ -55,7 +55,7 @@ const regionMap: Record<Region, RegionData> = {
       // NORTH AMERICA
       { x: 9.2, y: 18.3, cities: [City.VANCOUVER] },
       { x: 8.9, y: 19.8, cities: [City.SEATTLE] },
-      { x: 21.9, y: 24.8, cities: [City.NEW_YORK] },
+      { x: 21.9, y: 24.8, cities: [City.NEW_YORK, City.JERSEY_CITY] },
       { x: 23.1, y: 23.5, cities: [City.BOSTON] },
       { x: 13.3, y: 33.8, cities: [City.AUSTIN] },
       { x: 6.9, y: 26.1, cities: [City.SAN_FRANCISCO] },
@@ -170,7 +170,7 @@ const regionMap: Record<Region, RegionData> = {
     strokeWidth: 0.4,
     marks: [
       { x: 74.2, y: 58.1, cities: [City.BOSTON] },
-      { x: 71.2, y: 60.6, cities: [City.NEW_YORK] },
+      { x: 71.2, y: 60.6, cities: [City.NEW_YORK, City.JERSEY_CITY] },
       { x: 33.2, y: 42.5, cities: [City.VANCOUVER] },
       { x: 33.1, y: 45.3, cities: [City.SEATTLE] },
       { x: 45.3, y: 86.8, cities: [City.AUSTIN] },

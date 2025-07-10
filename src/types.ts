@@ -124,6 +124,7 @@ export enum City {
   LUGANO = 'LUGANO',
   CHRISTCHURCH = 'CHRISTCHURCH',
   WELLINGTON = 'WELLINGTON',
+  JERSEY_CITY = 'JERSEY_CITY',
 }
 
 export enum Country {

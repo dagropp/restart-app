@@ -3,7 +3,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useTranslations } from '@translations';
+import { useTranslations, useTranslationsContext } from '@translations';
 
 import Button from '../Button';
 import { type DialogProps } from './types';
@@ -18,6 +18,7 @@ const Dialog = ({
   ...props
 }: DialogProps) => {
   const translations = useTranslations().common;
+  const { isRtl } = useTranslationsContext();
 
   const handleSuccess = () => {
     if (typeof success !== 'boolean') success?.onAction?.();
@@ -34,7 +35,9 @@ const Dialog = ({
       {title && <DialogTitle>{title}</DialogTitle>}
       <DialogContent>
         {typeof children === 'string' ? (
-          <DialogContentText>{children}</DialogContentText>
+          <DialogContentText dir={isRtl ? 'rtl' : 'ltr'}>
+            {children}
+          </DialogContentText>
         ) : (
           children
         )}

@@ -14,7 +14,12 @@ import apiService, { UserResponse } from '@services/api';
 import { CountryImage } from '@shared/CountryDisplay';
 import SectionCard from '@shared/SectionCard';
 import UserAvatar from '@shared/UserAvatar';
-import { useTranslations } from '@translations';
+import {
+  interpolateTranslations,
+  ITranslations,
+  useTranslations,
+  useTranslationsContext,
+} from '@translations';
 import { incomeUtils } from '@utils/income.utils';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
@@ -26,12 +31,16 @@ interface Props {
   editLink?: string;
 }
 
-const getAge = (diff: number) => {
+const getAge = (diff: number, translations: ITranslations) => {
   const months = Math.abs(diff % 12);
-  const years = Math.abs(Math.floor(diff / 12));
+  const years = Math.abs(Math.floor(diff / 12)) - 1;
+  const t = translations.group.details;
   return {
     value: years,
-    label: months ? `${years} years and ${months} months` : `${years} years`,
+    label: interpolateTranslations(months ? t.exactAgeAndMonths : t.exactAge, {
+      months,
+      years,
+    }),
   };
 };
 
@@ -39,17 +48,20 @@ export const UserDisplay = ({ user, editLink }: Props) => {
   const { group } = useUserContext();
   const translations = useTranslations();
   const { data: countries } = apiService.countries.use();
+  const compTranslations = translations.group.details;
+  const { isRtl } = useTranslationsContext();
 
   const userAge = useMemo(
-    () => getAge(dayjs(user.dateOfBirth).diff(dayjs(), 'months')),
-    [user.dateOfBirth],
+    () => getAge(dayjs(user.dateOfBirth).diff(dayjs(), 'months'), translations),
+    [translations, user.dateOfBirth],
   );
   const ageAtDeparture = useMemo(
     () =>
       getAge(
         dayjs(user.dateOfBirth).diff(dayjs(group.departureDate), 'months'),
+        translations,
       ),
-    [group.departureDate, user.dateOfBirth],
+    [group.departureDate, translations, user.dateOfBirth],
   );
 
   const incomeData = incomeUtils.getTypeData(user.income, translations);
@@ -57,7 +69,7 @@ export const UserDisplay = ({ user, editLink }: Props) => {
   const items: ListItem[] = [
     {
       key: 'email',
-      label: 'Email',
+      label: compTranslations.email,
       value: (
         <Link href={`mailto:${user.email}`} external externalIconHidden>
           {user.email}
@@ -67,28 +79,28 @@ export const UserDisplay = ({ user, editLink }: Props) => {
     },
     {
       key: 'profession',
-      label: 'Profession',
+      label: compTranslations.profession,
       value: incomeData.title,
       tooltip: incomeData.subtitle,
       Icon: BusinessCenterRoundedIcon,
     },
     {
       key: 'age',
-      label: 'Current Age',
+      label: compTranslations.currentAge,
       value: userAge.value,
       tooltip: userAge.label,
       Icon: DateRangeRoundedIcon,
     },
     {
       key: 'departureDate',
-      label: 'Age at Departure',
+      label: compTranslations.ageAtDeparture,
       value: ageAtDeparture.value,
       tooltip: `${ageAtDeparture.label}`,
       Icon: CalendarMonthRoundedIcon,
     },
     {
       key: 'citizenship',
-      label: 'Citizenship',
+      label: compTranslations.citizenship,
       Icon: PublicRoundedIcon,
       value: (
         <span className="flex gap-2 items-center">
@@ -106,9 +118,9 @@ export const UserDisplay = ({ user, editLink }: Props) => {
     },
     {
       key: 'type',
-      label: 'User Type',
+      label: compTranslations.userType,
       Icon: SecurityRoundedIcon,
-      value: user.type,
+      value: translations.enum.userType[user.type],
     },
   ];
 
@@ -143,7 +155,11 @@ export const UserDisplay = ({ user, editLink }: Props) => {
               <Icon fontSize="small" />
               <strong>{label}</strong>
             </span>
-            <Tooltip title={tooltip} placement="left">
+            <Tooltip
+              title={tooltip}
+              placement="left"
+              dir={isRtl ? 'rtl' : 'ltr'}
+            >
               <span>{value}</span>
             </Tooltip>
           </Typography>

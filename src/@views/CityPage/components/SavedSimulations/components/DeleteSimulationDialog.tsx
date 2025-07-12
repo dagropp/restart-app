@@ -1,6 +1,7 @@
 import Dialog from '@common/Dialog';
 import apiService from '@services/api';
 import { useMutation } from '@tanstack/react-query';
+import { useTranslations } from '@translations';
 
 interface Props {
   open: boolean;
@@ -15,6 +16,8 @@ export const DeleteSimulationDialog = ({
   id,
   onDeleteSuccess,
 }: Props) => {
+  const translations = useTranslations().city.cost.simulation.savedSimulations;
+
   const handleDelete = useMutation({
     mutationKey: ['deleteSimulation', id],
     mutationFn: () => apiService.simulation.delete(id),
@@ -28,7 +31,7 @@ export const DeleteSimulationDialog = ({
       success={{ onAction: handleDelete.mutate }}
       cancel={{ onAction: onClose }}
     >
-      Are you sure you want to delete this simulation?
+      {translations.deleteDialog}
     </Dialog>
   );
 };

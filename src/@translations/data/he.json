@@ -2,7 +2,7 @@
   "table": {
     "empty": {
       "title": "לא נמצאו תוצאות",
-      "subtitle": "נסה לשנות את המסננים כדי לראות נתונים נוספים"
+      "subtitle": "נסו לשנות את המסננים כדי לראות נתונים נוספים"
     },
     "cells": {
       "city": "עיר",
@@ -13,11 +13,11 @@
       "language": "שפה",
       "currency": "מטבע",
       "favorites": {
-        "bookmark": { "add": "הוסף סימנייה", "remove": "הסר סימנייה" },
+        "bookmark": { "add": "הוספת סימנייה", "remove": "הסרת סימנייה" },
         "destination": {
-          "add": "הוסף יעד",
-          "remove": "הסר יעד",
-          "replace": "החלף יעד",
+          "add": "הוספת יעד",
+          "remove": "הסרת יעד",
+          "replace": "החלפת יעד",
           "isDerived": "היעד נגזר מהעיר"
         }
       }
@@ -28,28 +28,32 @@
       "visa": "דרישות ויזה",
       "minEnglishSpeakers": "מינימום דוברי אנגלית",
       "englishNative": "שפת אם",
-      "addFilters": "הוסף מסננים",
-      "editFilters": "ערוך מסננים",
-      "resetFilters": "אפס מסננים"
+      "addFilters": "הוספת מסננים",
+      "editFilters": "עריכת מסננים",
+      "resetFilters": "איפוס"
     }
   },
   "generalSection": {
     "population": "אוכלוסייה",
-    "populationRelativity": "{{population}} / {{percentage}} מהמדינה",
+    "populationRelativity": "{{population}} / {{percentage}}% מהמדינה",
     "density": "צפיפות",
     "perKm": "/ ק\"מ",
     "isCapital": "האם עיר בירה",
     "elevation": "גובה",
-    "metersAbbrev": "מ'",
-    "satelliteCities": "ערי לוויין",
+    "metersAbbrev": " מטרים",
+    "satelliteCities": "פרברים",
     "metropolitanCenter": "מרכז מטרופוליני",
-    "commuteTime": "זמן נסיעה"
+    "commuteTime": "זמן נסיעה",
+    "region": "אזור",
+    "capital": "עיר הבירה",
+    "highestElevation": "הנקודה הגבוהה ביותר",
+    "lowestElevation": "הנקודה הנמוכה ביותר"
   },
   "city": {
     "flight": {
       "airport": "שדה תעופה",
       "city": "עיר",
-      "title": "טיסה {{airport}}-TLV"
+      "title": "טיסה לישראל"
     },
     "timeDifference": {
       "title": "הפרש שעות",
@@ -85,23 +89,34 @@
         "familyLabel": "למשפחה של {{adults}} ו-{{children}}",
         "singleAdult": "למבוגר יחיד",
         "couple": "לזוג",
-        "flights": "טיסות {{airport}}-TLV / שנה",
+        "flights": "טיסות לישראל / שנה",
         "preschool": "גן פרטי ({{names}})",
         "school": "בית ספר פרטי ({{names}})",
-        "childConnector": " ו-",
+        "childConnector": " ו",
         "expenses": "הוצאות",
         "income": "הכנסה",
         "errorTitle": "לא זמין במסכים קטנים",
-        "errorSubtitle": "סימולציית עלויות נתמכת כרגע רק במכשירים גדולים יותר. אנא השתמש בטאבלט או במחשב שולחני לחוויה הטובה ביותר."
+        "errorSubtitle": "סימולציית עלויות נתמכת כרגע רק במכשירים גדולים יותר. אנא השתמשו בטאבלט או במחשב שולחני לחוויה הטובה ביותר.",
+        "savedSimulations": {
+          "title": "סימולציות שמורות",
+          "reset": "איפוס",
+          "select": "בחירת סימולציה",
+          "update": "עדכון",
+          "save": "שמירה",
+          "saveNew": "שמירת סימולציה חדשה",
+          "delete": "מחיקה",
+          "name": "שם הסימולציה",
+          "deleteDialog": "האם אתם בטוחים שברצונכם למחוק את הסימולציה הזו?"
+        }
       }
     },
     "jobData": {
-      "title": "נתוני משרות",
+      "title": "שוק העבודה",
       "subtitle": "כ{{incomeTitle}}",
       "expectedSalary": "שכר צפוי",
       "localDescription": "מבוסס על שכר נוכחי וסטנדרטים בתעשייה",
       "remoteDescription": "מבוסס על עבודה מרחוק מ{{cityName}}, {{countryName}}",
-      "comparedWith": "בהשוואה ל-",
+      "comparedWith": "בהשוואה ל",
       "colAdjusted": "מותאם לעלות המחיה",
       "colAdjustedDescription": "התאמה להבדלי עלות המחיה בין {{city}} ל-{{other}}",
       "jobsPosted": "{{jobs}} משרות פורסמו",
@@ -117,7 +132,7 @@
       "wikipedia": "דף ויקיפדיה"
     },
     "plan": {
-      "title": "תכנן מראש",
+      "title": "תכנון מראש",
       "generalCost": "עלות כללית",
       "rent": "שכר דירה",
       "flight": "טיסה לכיוון אחד",
@@ -131,8 +146,8 @@
       "title": "מזג אוויר",
       "rainTitle": "{{count}} ימי גשם בשנה",
       "rainSubtitle": "{{percent}}% מהשנה",
-      "sunlightMax": "{{count}} שעות שמש מקסימליות",
-      "sunlightMin": "{{count}} שעות שמש מינימליות",
+      "sunlightMax": "{{count}} שעות אור ביום הארוך ביותר",
+      "sunlightMin": "{{count}} שעות אור ביום הקצר ביותר",
       "sunlightSubtitle": "{{percent}}% מהיום"
     },
     "map": {
@@ -152,41 +167,119 @@
       "title": "מחירים"
     },
     "funFacts": {
-      "title": "עובדות מהנות"
+      "title": "הידעת?"
     }
   },
   "compare": {
-    "vs": "נגד"
+    "vs": "נגד",
+    "city": "עיר",
+    "selectCity": "בחירת עיר",
+    "total": "סה\"כ {{score}}/{{total}}",
+    "breakdown": {
+      "colIndexSingle": "מדד יוקר מחיה - מפרנס יחיד",
+      "colIndexCouple": "מדד יוקר מחיה - שני מפרנסים",
+      "community": "קהילת ישראלים בפייסבוק",
+      "electricity": "התאמה לחשמל",
+      "flightDuration": "משך טיסה לישראל",
+      "flightPrice": "מחיר טיסה לישראל",
+      "language": "שפה",
+      "qolRank": "מדד איכות חיים",
+      "rainfall": "כמות גשמים",
+      "sunlight": "משך שעות שמש",
+      "visa": "דרישות ויזה",
+      "weather": "מזג אוויר",
+      "timezone": "הפרש שעות עם ישראל"
+    }
   },
   "common": {
     "cancel": "ביטול",
-    "save": "שמור",
+    "save": "שמירה",
     "ok": "אישור",
     "yes": "כן",
     "no": "לא",
     "none": "ללא",
     "total": "סה\"כ",
-    "perMonth": "/ M",
+    "perMonth": "/ חודש",
     "and": "ו",
     "notAvailable": "לא זמין"
   },
   "group": {
-    "adultSingle": "מבוגר 1",
+    "adultSingle": "מבוגר אחד",
     "adults": "{{adults}} מבוגרים",
-    "childSingle": "ילד 1",
-    "children": "{{children}} ילדים"
+    "childSingle": "ילד אחד",
+    "children": "{{children}} ילדים",
+    "progress": {
+      "title": "התקדמות",
+      "setupPartner": "הגדרת שותפים",
+      "invitePartner": "הזמינו שותפים",
+      "partnerSet": "השותפים הוגדרו",
+      "setDepartureDate": "הגדרת תאריך יציאה",
+      "setDepartureDateAction": "הגדירו תאריך יציאה",
+      "yearSingle": "שנה אחת",
+      "years": "{{years}} שנים",
+      "monthSingle": "חודש אחד",
+      "months": "{{months}} חודשים",
+      "daySingle": "יום אחד",
+      "days": "{{days}} ימים",
+      "countdownResult": " - נותרו עוד {{countdown}}!",
+      "countdownConnector": " ו-",
+      "goTime": "זה הזמן לצאת לדרך!",
+      "markPlaces": "סימון מקומות מעניינים",
+      "selectedDestination": "יעד נבחר",
+      "markPlacesAction1": "סמנו ",
+      "markPlacesAction2": "מדינות",
+      "markPlacesAction3": " או ",
+      "markPlacesAction4": "ערים",
+      "markPlacesAction5": " מעניינות",
+      "chooseDestination": "בחירת יעד",
+      "chooseDestinationPartialAction1": "רק מדינת יעד נבחרה (",
+      "chooseDestinationPartialAction2": "), בחרו עיר מתוך ",
+      "chooseDestinationPartialAction3": "הרשימה",
+      "chooseDestinationAction": "בחרו יעד מתוך ",
+      "researchDestination": "חקרו את היעד ואספו הערות",
+      "addedNotes": "{{notes}} הערות נוספו",
+      "addMoreNotes": "הוסיפו עוד הערות",
+      "startAddingNotes": "התחילו להוסיף הערות",
+      "notes": "{{notes}} הערות",
+      "noDestination": "לא נבחר יעד",
+      "addedSingleNote": "הערה אחת נוספה - ",
+      "addedNotesFull": "{{notes}} הערות נוספו -",
+      "toYourDestination": " ליעד שלכם"
+    },
+    "placesOfInterest": {
+      "title": "מקומות מסומנים"
+    },
+    "details": {
+      "email": "דואר אלקטרוני",
+      "profession": "מקצוע",
+      "currentAge": "גיל נוכחי",
+      "ageAtDeparture": "גיל במעבר",
+      "citizenship": "אזרחות",
+      "userType": "סוג משתמש",
+      "departureDate": "תאריך יציאה",
+      "numberOfChildren": "מספר ילדים",
+      "numberOfIncomes": "מספר הכנסות",
+      "apartmentSize": "גודל הדירה",
+      "apartmentBedrooms": "{{bedrooms}} חדרי שינה",
+      "apartmentBedroomsSingle": "חדר שינה אחד",
+      "childrenNameConnector": " ו",
+      "exactAge": "{{years}} שנים",
+      "exactAgeAndMonths": "{{years}} שנים ו-{{months}} חודשים",
+      "name": "שם",
+      "children": "ילדים"
+    }
   },
   "shared": {
     "englishSpeakers": "{{speakers}}% דוברי אנגלית"
   },
   "user": {
     "login": {
-      "title": "הזן את כתובת האימייל והסיסמה שלך",
-      "action": "התחבר",
-      "error": "ההתחברות נכשלה. אנא בדוק את כתובת האימייל והסיסמה שלך ונסה שוב."
+      "title": "הזינו את כתובת האימייל והסיסמה שלכם",
+      "action": "התחברות",
+      "error": "ההתחברות נכשלה. אנא בדקו את כתובת האימייל והסיסמה שלכם ונסו שנית."
     },
     "inputs": {
-      "email": "אימייל",
+      "email": "דואר אלקטרוני",
       "password": "סיסמה"
     }
   },
@@ -194,16 +287,16 @@
     "primary": {
       "cities": "ערים",
       "countries": "מדינות",
-      "compare": "השווה",
+      "compare": "השוואה",
       "notes": "הערות",
       "group": "קבוצה",
       "settings": "הגדרות"
     },
     "secondary": {
-      "openSettings": "פתח הגדרות",
-      "inviteUser": "הזמן משתמש",
-      "addUserToGroup": "הוסף משתמש לקבוצה",
-      "logout": "התנתק",
+      "openSettings": "פתיחת הגדרות",
+      "inviteUser": "הזמנת משתמש",
+      "addUserToGroup": "הוספת משתמש לקבוצה",
+      "logout": "התנתקות",
       "lightTheme": "ערכת נושא בהירה",
       "darkTheme": "ערכת נושא כהה"
     },
@@ -213,45 +306,48 @@
       "notes": "הערות ({{notes}})"
     },
     "invite": {
-      "addToGroup": "הוסף משתמש לקבוצה",
-      "inviteUser": "הזמן משתמש",
-      "enterEmail": "הזן אימייל...",
-      "send": "שלח",
+      "addToGroup": "הוספת משתמש לקבוצה",
+      "inviteUser": "הזמנת משתמש",
+      "enterEmail": "דואר אלקטרוני",
+      "send": "שליחה",
       "statusPending": "שולח הזמנה ל{{email}}",
-      "statusSuccess": "נשלח בהצלחה אימייל ל-{{email}}",
-      "statusFailed": "לא ניתן היה לשלוח אימייל ל-{{email}}"
+      "statusSuccess": "נשלח בהצלחה דואר אלקטרוני ל-{{email}}",
+      "statusFailed": "לא ניתן היה לשלוח דואר אלקטרוני ל-{{email}}"
     }
   },
   "notes": {
     "add": {
-      "comment": "הוסף תגובה...",
-      "note": "הוסף הערה...",
-      "link": "הוסף קישור...",
-      "checklist": "הוסף רשימת בדיקה...",
-      "title": "הוסף כותרת...",
-      "todoItem": "הוסף פריט..."
+      "comment": "הוספת תגובה",
+      "note": "הוספת הערה",
+      "link": "הוספת קישור",
+      "checklist": "הוספת רשימת מטלות",
+      "title": "הוספת כותרת",
+      "todoItem": "הוספת פריט"
     },
     "edit": {
-      "reply": "ערוך תגובה",
-      "note": "ערוך הערה",
-      "checklist": "ערוך רשימת בדיקה",
-      "link": "ערוך קישור",
-      "title": "ערוך"
+      "reply": "עריכת תגובה",
+      "note": "עריכת הערה",
+      "checklist": "עריכת רשימת מטלות",
+      "link": "עריכת קישור",
+      "title": "עריכה"
     },
     "delete": {
-      "title": "מחק",
-      "dialog": "האם אתה בטוח שברצונך למחוק הערה זו?"
+      "title": "מחיקה",
+      "dialog": "האם אתם בטוחים שברצונכם למחוק הערה זו?"
     },
     "noComments": "אין תגובות",
     "commentSingle": "תגובה אחת",
     "commentsCount": "{{comments}} תגובות",
     "fullPageView": "תצוגת עמוד מלא",
-    "showMore": "הצג עוד...",
+    "showMore": "הצגת עוד...",
     "generalNote": "הערה כללית עבור",
     "createdOn": "נוצר ב-{{date}}",
     "textNote": "הערת טקסט",
     "link": "קישור",
-    "checklist": "רשימת בדיקה"
+    "checklist": "רשימת מטלות",
+    "comments": "תגובות",
+    "pin": "נעיצה",
+    "removePin": "הסרת נעיצה"
   },
   "country": {
     "religion": {
@@ -352,7 +448,7 @@
     },
     "insights": {
       "1": "הטוב",
-      "2": "ככה-ככה",
+      "2": "הלא נורא",
       "3": "הרע"
     },
     "score": {
@@ -405,12 +501,15 @@
     },
     "cost": {
       "generalCost": { "label": "עלות כללית", "caption": "/ חודש" },
-      "rentOuter": { "label": "שכר דירה", "caption": "/ חודש" },
+      "rentOuter": {
+        "label": "שכר דירה",
+        "caption": "/ {{bedrooms}} חדרי שינה / חודש"
+      },
       "buyOuter": { "label": "קנייה", "caption": "/ 120 מ\"ר" },
-      "beer": { "label": "בירה מהחבית", "caption": "/ 0.5 ליטר" },
+      "beer": { "label": "בירה מהחבית", "caption": "/ 500 מ\"ל" },
       "mealDate": { "label": "ארוחת ערב בחוץ", "caption": "/ זוג" },
       "mealSingle": { "label": "ארוחת צהריים בחוץ", "caption": "/ אדם" },
-      "mcDonalds": { "label": "ארוחת מקדונלד'ס קומבו", "caption": "/ אדם" },
+      "mcDonalds": { "label": "ארוחת מקדונלד'ס", "caption": "/ אדם" },
       "coffee": { "label": "קפוצ'ינו", "caption": "/ כוס" },
       "milk": { "label": "חלב", "caption": "/ 1 ליטר" },
       "bread": { "label": "לחם", "caption": "/ כיכר" },
@@ -420,19 +519,19 @@
       "beef": { "label": "בשר טחון", "caption": "/ 1 ק\"ג" },
       "apples": { "label": "תפוחים", "caption": "/ 1 ק\"ג" },
       "tomatoes": { "label": "עגבניות", "caption": "/ 1 ק\"ג" },
-      "wine": { "label": "יין", "caption": "/ 0.75 ליטר" },
-      "beerBottle": { "label": "בקבוק בירה", "caption": "/ 0.5 ליטר" },
+      "wine": { "label": "יין", "caption": "/ 750 מ\"ל" },
+      "beerBottle": { "label": "בקבוק בירה", "caption": "/ 500 מ\"ל" },
       "ticketSingle": {
         "label": "תחבורה ציבורית",
         "caption": "/ כרטיס בודד"
       },
       "ticketMonth": {
         "label": "תחבורה ציבורית",
-        "caption": "/ כרטיס חודשי"
+        "caption": "/ חופשי חודשי"
       },
       "germanCar": { "label": "מכונית משפחתית", "rangeKey": "japanCar" },
       "gasoline": { "label": "בנזין", "caption": "/ 1 ליטר" },
-      "stopsFlight": { "label": "טיסה לתל אביב", "caption": "/ אדם" },
+      "stopsFlight": { "label": "טיסה לישראל", "caption": "/ אדם" },
       "bills": { "label": "חשבונות", "caption": "/ חודש" },
       "internet": { "label": "אינטרנט", "caption": "/ חודש" },
       "mobile": { "label": "טלפון נייד", "caption": "/ חודש" },
@@ -453,6 +552,11 @@
       "ASIA": "אסיה והמזרח התיכון",
       "OCEANIA": "אוקיאניה",
       "ALL": "הכל"
+    },
+    "userType": {
+      "Admin": "מנהל מערכת",
+      "GroupOwner": "מנהל קבוצה",
+      "Standard": "משתמש רגיל"
     }
   }
 }

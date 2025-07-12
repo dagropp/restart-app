@@ -17,7 +17,7 @@ import GeneralDataCard, {
 } from '@shared/GeneralDataCard';
 import LanguageDisplay from '@shared/LanguageDisplay';
 import TimeDifferenceDisplay from '@shared/TimeDifferenceDisplay';
-import { useTranslations } from '@translations';
+import { useTranslations, useTranslationsContext } from '@translations';
 import { format } from '@utils/format.utils';
 
 import { useCityContext } from '../../context';
@@ -30,6 +30,7 @@ import {
 export const GeneralData = () => {
   const { item } = useCityContext();
   const translations = useTranslations();
+  const { isRtl } = useTranslationsContext();
 
   const items: GeneralItemProps[] = [
     {
@@ -51,7 +52,7 @@ export const GeneralData = () => {
     {
       label: translations.generalSection.density,
       display: (
-        <Typography variant="body2">
+        <Typography variant="body2" dir={isRtl ? 'rtl' : 'ltr'}>
           {format.shortNumber(item.density, 10_000, 2)}{' '}
           <Typography variant="caption">
             {translations.generalSection.perKm}
@@ -125,8 +126,8 @@ export const GeneralData = () => {
     {
       label: translations.generalSection.elevation,
       display: (
-        <Typography variant="body2">
-          {item.elevation}
+        <Typography variant="body2" dir={isRtl ? 'rtl' : 'ltr'}>
+          {item.elevation.toLocaleString()}
           {translations.generalSection.metersAbbrev}
         </Typography>
       ),

@@ -16,6 +16,7 @@ import apiService, {
 } from '@services/api';
 import storageService from '@services/storage';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { useTranslations } from '@translations';
 import {
   useCallback,
   useEffect,
@@ -50,6 +51,8 @@ export const SavedSimulations = () => {
   } = useUserContext();
   const { item, cost } = useCityContext();
   const { currencies } = useAppContext();
+  const translations = useTranslations().city.cost.simulation.savedSimulations;
+
   const [selected, setSelected] = useReducer((_, update: number) => {
     storageService.set('savedSimulation', update);
     return update;
@@ -227,15 +230,15 @@ export const SavedSimulations = () => {
                 color="info"
                 className="flex gap-2 items-center"
               >
-                Reset
+                {translations.reset}
                 <ReplayRoundedIcon fontSize="small" />
               </Typography>
             ),
             value: -1,
           }
-        : { label: 'Select Simulation...', value: -1, disabled: true };
+        : { label: translations.select, value: -1, disabled: true };
     return [defaultOption, ...list];
-  }, [data, selected]);
+  }, [data, selected, translations.reset, translations.select]);
 
   const hasPresets = data.length > 0;
   const hasActivePreset = selected !== -1;
@@ -249,17 +252,17 @@ export const SavedSimulations = () => {
               options={options}
               onChange={handleChange}
               value={selected}
-              label="Saved Simulations"
-              placeholder="Saved Simulations"
+              label={translations.title}
+              placeholder={translations.title}
               size="small"
             />
           </div>
         )}
         <ButtonGroup variant="contained" className="h-11 !shadow-none">
           {hasActivePreset ? (
-            <Button onClick={handleUpdate}>Update Simulation</Button>
+            <Button onClick={handleUpdate}>{translations.update}</Button>
           ) : (
-            <Button onClick={openSaveDialog}>Save Simulation</Button>
+            <Button onClick={openSaveDialog}>{translations.save}</Button>
           )}
           {hasActivePreset && (
             <Button onClick={(event) => setMenuAnchorEl(event.currentTarget)}>
@@ -276,10 +279,10 @@ export const SavedSimulations = () => {
         onClose={() => setMenuAnchorEl(null)}
       >
         <MenuItem onClick={openSaveDialog}>
-          <Typography variant="button">Save New Simulation</Typography>
+          <Typography variant="button">{translations.saveNew}</Typography>
         </MenuItem>
         <MenuItem onClick={openDeleteDialog}>
-          <Typography variant="button">Delete Simulation</Typography>
+          <Typography variant="button">{translations.delete}</Typography>
         </MenuItem>
       </Menu>
       <SaveSimulationDialog

@@ -7,6 +7,7 @@ import { BookmarkCell } from '@shared/BookmarkCell';
 import { CityDisplay } from '@shared/CityDisplay';
 import CountryDisplay from '@shared/CountryDisplay';
 import SectionCard from '@shared/SectionCard';
+import { useTranslations } from '@translations';
 import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
 import { FavoriteItem } from '@views/Group/components/types';
@@ -50,6 +51,7 @@ const columns: TableColumn<FavoriteItem>[] = [
 
 export const TopWidget = () => {
   const navigate = useNavigate();
+  const translations = useTranslations().group.placesOfInterest;
 
   const { data: cities } = apiService.useCities();
   const { data: countries } = apiService.countries.useList();
@@ -91,7 +93,7 @@ export const TopWidget = () => {
 
   return (
     <SectionCard
-      title="Places of Interest"
+      title={translations.title}
       contentClassName="md:max-h-[325px] flex flex-col"
     >
       <Box

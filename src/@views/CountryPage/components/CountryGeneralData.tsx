@@ -15,7 +15,7 @@ import CurrencyDisplay from '@shared/CurrencyDisplay';
 import GeneralDataCard, { GeneralItemProps } from '@shared/GeneralDataCard';
 import LanguageDisplay from '@shared/LanguageDisplay';
 import TimeDifferenceDisplay from '@shared/TimeDifferenceDisplay';
-import { useTranslations } from '@translations';
+import { useTranslations, useTranslationsContext } from '@translations';
 import { useMemo } from 'react';
 
 import { useCountryContext } from '../context';
@@ -41,6 +41,8 @@ const CapitalDisplay = () => {
 export const CountryGeneralData = () => {
   const { item, cities } = useCountryContext();
   const translations = useTranslations();
+  const compTranslations = translations.generalSection;
+  const { isRtl } = useTranslationsContext();
 
   const timeData = useMemo(() => {
     if (
@@ -57,7 +59,7 @@ export const CountryGeneralData = () => {
 
   const items: GeneralItemProps[] = [
     {
-      label: 'Region',
+      label: compTranslations.region,
       display: (
         <Typography variant="body2">
           {translations.enum.region[item.regions[0]]}
@@ -66,7 +68,7 @@ export const CountryGeneralData = () => {
       Icon: PublicRoundedIcon,
     },
     {
-      label: 'Capital',
+      label: compTranslations.capital,
       display: <CapitalDisplay />,
       Icon: AccountBalanceRoundedIcon,
     },
@@ -110,19 +112,21 @@ export const CountryGeneralData = () => {
       hidden: !timeData,
     },
     {
-      label: 'Highest Elevation',
+      label: compTranslations.highestElevation,
       display: (
-        <Typography variant="body2">
-          {item.highestElevation.toLocaleString()}m
+        <Typography variant="body2" dir={isRtl ? 'rtl' : 'ltr'}>
+          {item.highestElevation.toLocaleString()}
+          {translations.generalSection.metersAbbrev}
         </Typography>
       ),
       Icon: TrendingUpRoundedIcon,
     },
     {
-      label: 'Lowest Elevation',
+      label: compTranslations.lowestElevation,
       display: (
-        <Typography variant="body2">
-          {item.lowestElevation.toLocaleString()}m
+        <Typography variant="body2" dir={isRtl ? 'rtl' : 'ltr'}>
+          {item.lowestElevation.toLocaleString()}
+          {translations.generalSection.metersAbbrev}
         </Typography>
       ),
       Icon: TrendingDownRoundedIcon,

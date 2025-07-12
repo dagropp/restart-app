@@ -1,3 +1,6 @@
+import 'dayjs/locale/he';
+
+import { Language } from '@translations';
 import dayjs, { type ConfigType, type Dayjs } from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -93,6 +96,10 @@ class DateService {
     if (isLessThanHour) return m;
     if (isRound) return h;
     return `${h} ${m}`;
+  }
+
+  formatReadableDate(date: ConfigType, language: Language): string {
+    return dayjs(date).locale(language).format('MMMM YYYY');
   }
 }
 

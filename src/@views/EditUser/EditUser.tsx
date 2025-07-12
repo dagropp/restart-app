@@ -74,6 +74,7 @@ export const EditUser = () => {
   });
 
   const loginRequest = useMutation({
+    mutationKey: ['loginRequest', email],
     mutationFn: (data: SignUpData) =>
       apiService.authentication.login({
         email,

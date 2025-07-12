@@ -76,8 +76,14 @@ const useNotes = ({
     setNotes((prev) => prev.map((item) => (item.id === note.id ? note : item)));
   const remove = (id: number) =>
     setNotes((prev) => prev.filter((item) => item.id !== id));
+  const modifyReplyCount = (noteId: number, count: number) =>
+    setNotes((prev) =>
+      prev.map((item) =>
+        item.id === noteId ? { ...item, replies: item.replies + count } : item,
+      ),
+    );
 
-  return { query, notes, actions: { add, update, remove } };
+  return { query, notes, actions: { add, update, remove, modifyReplyCount } };
 };
 
 const useCount = (placeId: City | Country, enabled?: boolean) =>

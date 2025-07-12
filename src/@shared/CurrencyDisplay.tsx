@@ -38,7 +38,7 @@ const CurrencyDisplay = ({
         <Typography
           variant="caption"
           color="textSecondary"
-          className="flex w-6 h-6 rounded-2xl border border-solid border-gray-300 justify-center items-center"
+          className="flex min-w-6 w-6 h-6 rounded-2xl border border-solid border-gray-300 justify-center items-center"
           dir="ltr"
         >
           <span className="h-full w-full flex items-center justify-center">

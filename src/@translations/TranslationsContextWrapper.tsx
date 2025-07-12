@@ -1,3 +1,4 @@
+import storageService from '@services/storage';
 import { useQuery } from '@tanstack/react-query';
 import { type PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
@@ -7,7 +8,9 @@ import { TranslationsContext } from './TranslationsContext';
 import { ITranslations, Language } from './types';
 
 export const TranslationsContextWrapper = ({ children }: PropsWithChildren) => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>(
+    storageService.get('language'),
+  );
 
   const isRtl = useMemo(() => rtlLanguages.has(language), [language]);
 
@@ -20,6 +23,7 @@ export const TranslationsContextWrapper = ({ children }: PropsWithChildren) => {
   });
 
   useEffect(() => {
+    storageService.set('language', language);
     document.documentElement.lang = language;
   }, [language]);
 

@@ -15,6 +15,7 @@ import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
 import Toolbar from '@mui/material/Toolbar';
 import apiService from '@services/api';
 import storageService from '@services/storage';
+import LanguageSelect from '@shared/LanguageSelect.tsx';
 import { UserInviteDialog } from '@shared/UserInviteDialog';
 import { useTranslations } from '@translations';
 import clsx from 'clsx';
@@ -121,6 +122,9 @@ const AppToolbar = () => {
                     onChange={setCurrency}
                     size="small"
                   />
+                </div>
+                <div className="px-2 pb-2">
+                  <LanguageSelect size="small" />
                 </div>
                 <div className="px-1 pb-2 items-center h-12 flex lg:hidden">
                   <ThemeSwitch />

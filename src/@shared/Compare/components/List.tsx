@@ -1,5 +1,6 @@
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded';
 import { CompareData, CompareStatus } from '@services/api';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { useMemo } from 'react';
 
 import InsightsIcon from '../../InsightsIcon';
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export const List = ({ data }: Props) => {
+  const translations = useTranslations().compare;
+
   const result = useMemo(() => {
     const cityTotal = data
       .map((item) => item.city.status)
@@ -62,7 +65,10 @@ export const List = ({ data }: Props) => {
       ))}
       <Item
         rtl={true}
-        label={`Total ${result.city.total}/${data.length}`}
+        label={interpolateTranslations(translations.total, {
+          score: result.city.total,
+          total: data.length,
+        })}
         status={result.city.status}
         isIsolated
       />
@@ -71,7 +77,10 @@ export const List = ({ data }: Props) => {
       </div>
       <Item
         rtl={false}
-        label={`Total ${result.other.total}/${data.length}`}
+        label={interpolateTranslations(translations.total, {
+          score: result.other.total,
+          total: data.length,
+        })}
         status={result.other.status}
         isIsolated
       />

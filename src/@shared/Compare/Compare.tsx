@@ -32,7 +32,7 @@ const Compare = ({
   const getProps = (key: 'city' | 'other'): CitySelectProps => {
     const value = filters[key];
     const otherKey = key === 'city' ? 'other' : 'city';
-    const label = value ? 'City' : 'Select City';
+    const label = value ? translations.city : translations.selectCity;
 
     return {
       value: value ?? '',

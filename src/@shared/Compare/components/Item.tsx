@@ -36,8 +36,9 @@ export const Item = ({
         variant="body2"
         className={clsx('text-balance', rtl && 'text-right')}
         lineHeight="normal"
-        dangerouslySetInnerHTML={{ __html: label }}
-      />
+      >
+        {label}
+      </Typography>
       <Icon fontSize="small" className={clsx(!rtl && '-order-1')} />
     </Box>
   );

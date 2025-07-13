@@ -25,7 +25,7 @@ const Item = ({ insightKey, label, link }: ItemProps) => {
         lineHeight="normal"
         dir={isRtl ? 'rtl' : 'ltr'}
       >
-        <span dangerouslySetInnerHTML={{ __html: label }} />{' '}
+        {label}{' '}
         {link && (
           <Link
             external

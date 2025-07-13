@@ -13,7 +13,11 @@
   }
   html[lang='he'] {
     * {
-      font-family: 'Open Sans', sans-serif !important;
+      font-family: 'Rubik', sans-serif !important;
+      .force-en,
+      .force-en * {
+        font-family: 'Roboto', sans-serif !important;
+      }
     }
   }
 }

@@ -36,6 +36,7 @@ const LandmarkItemComponent = ({
   const { language, isRtl } = useTranslationsContext();
 
   const dir = item.language === 'he' ? 'rtl' : 'ltr';
+  const isNotSystemLang = language !== item.language;
 
   return (
     <Accordion
@@ -43,7 +44,7 @@ const LandmarkItemComponent = ({
       expanded={expanded}
       handleExpand={handleExpand}
       title={
-        language !== item.language ? (
+        isNotSystemLang ? (
           <span
             className={clsx(
               'flex items-center gap-2',
@@ -79,6 +80,7 @@ const LandmarkItemComponent = ({
             dangerouslySetInnerHTML={{ __html: data.extract_html }}
             align="justify"
             dir={dir}
+            className={clsx(isNotSystemLang && 'force-en')}
           />
         ) : (
           <Typography variant="body2">{compTranslations.error}</Typography>

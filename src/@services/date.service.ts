@@ -89,7 +89,7 @@ class DateService {
         ? value.format('m')
         : isRound
           ? value.format('H')
-          : value.format('H:m');
+          : value.format('H:mm');
     }
     const h = `${value.format('H')}h`;
     const m = `${value.format('m')}m`;

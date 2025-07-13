@@ -1,0 +1,4 @@
+.rtl [class*='MuiPickersSectionList'] {
+  direction: rtl;
+  justify-content: flex-end;
+}

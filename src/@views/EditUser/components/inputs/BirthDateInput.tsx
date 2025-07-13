@@ -1,4 +1,5 @@
-import { DatePicker } from '@mui/x-date-pickers';
+import DatePicker from '@common/DatePicker';
+import { useTranslations } from '@translations';
 import dayjs from 'dayjs';
 
 import { InputName } from '../../types';
@@ -9,11 +10,13 @@ interface Props {
 }
 
 const BirthDateInput = ({ defaultValue, required }: Props) => {
+  const translations = useTranslations().settings.form;
+
   return (
     <DatePicker
       name={InputName.DateOfBirth}
       defaultValue={dayjs(defaultValue)}
-      label={`Date of Birth${required ? ' *' : ''}`}
+      label={`${translations.dateOfBirth}${required ? ' *' : ''}`}
     />
   );
 };

@@ -2,6 +2,7 @@ import Button from '@common/Button';
 import Tooltip from '@common/Tooltip';
 import CloudUploadRoundedIcon from '@mui/icons-material/CloudUploadRounded';
 import UserAvatar from '@shared/UserAvatar';
+import { useTranslations } from '@translations';
 import { image } from '@utils/image.utils';
 import { type ChangeEvent, useId, useState } from 'react';
 
@@ -13,6 +14,8 @@ interface Props {
 
 const AvatarUpload = ({ firstName, lastName, defaultValue = '' }: Props) => {
   const id = useId();
+  const translations = useTranslations().settings.form;
+
   const [src, setSrc] = useState(defaultValue);
   const [resized, setResized] = useState(defaultValue);
 
@@ -41,7 +44,7 @@ const AvatarUpload = ({ firstName, lastName, defaultValue = '' }: Props) => {
           accept="image/*"
           onChange={handleUpload}
         />
-        Upload Avatar
+        {translations.uploadAvatar}
       </Button>
       <input type="hidden" name="avatar" value={resized} />
       <Tooltip

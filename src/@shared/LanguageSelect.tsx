@@ -15,7 +15,7 @@ const TranslatedLanguageDisplay = ({
   id,
 }: TranslatedLanguageDisplayProps) => {
   return (
-    <div className="flex gap-2 items-center justify-between w-full">
+    <div className="flex gap-2 items-center justify-between w-full h-7">
       <Typography variant="body2">{name}</Typography>
       <img
         src={`/assets/language-flags/${id}.svg`}

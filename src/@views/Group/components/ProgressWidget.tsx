@@ -3,6 +3,7 @@ import Typography from '@common/Typography';
 import { useUserContext } from '@context/user';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
+import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import { alpha, Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
@@ -24,8 +25,10 @@ import dayjs from 'dayjs';
 import { ReactNode, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 
+type ItemStatus = 'done' | 'pending' | 'none';
+
 interface ItemProps {
-  isDone: boolean;
+  status: ItemStatus;
   label: string;
   children?: ReactNode;
 }
@@ -78,8 +81,13 @@ const getCardBg = (theme: Theme) =>
 
 const getIndicatorColor = (theme: Theme) => theme.palette.info.light;
 
-const Item = ({ isDone, label, children }: ItemProps) => {
-  const Icon = isDone ? CheckRoundedIcon : ClearRoundedIcon;
+const Item = ({ status, label, children }: ItemProps) => {
+  const Icon =
+    status === 'done'
+      ? CheckRoundedIcon
+      : status === 'none'
+        ? ClearRoundedIcon
+        : MoreHorizRoundedIcon;
   const { isRtl } = useTranslationsContext();
 
   return (
@@ -93,9 +101,9 @@ const Item = ({ isDone, label, children }: ItemProps) => {
             fontSize="small"
             sx={{
               color: (theme) =>
-                isDone
-                  ? theme.palette.primary.contrastText
-                  : alpha(theme.palette.background.default, 0.6),
+                status === 'none'
+                  ? alpha(theme.palette.background.default, 0.6)
+                  : theme.palette.primary.contrastText,
             }}
           />
         </Box>
@@ -121,16 +129,19 @@ const GroupSetupItem = () => {
   } = useUserContext();
   const translations = useTranslations().group.progress;
 
-  const isDone = children.length ? !!partner : true;
+  const hasChildren = children.length > 0;
+  const status = hasChildren ? (partner ? 'done' : 'none') : 'done';
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => setIsDialogOpen(false);
 
   return (
-    <Item isDone={isDone} label={translations.setupPartner}>
-      {isDone ? (
-        <span>{translations.partnerSet}</span>
+    <Item status={status} label={translations.setupPartner}>
+      {status === 'done' ? (
+        <span>
+          {hasChildren ? translations.partnerSet : translations.partnerNoNeed}
+        </span>
       ) : (
         <span>
           <Link onClick={openDialog}>{translations.invitePartner}</Link>
@@ -151,13 +162,13 @@ const DepartureDateItem = () => {
   } = useUserContext();
   const translations = useTranslations();
   const compTranslations = translations.group.progress;
-  const isDone = !!departureDate;
+  const status = departureDate ? 'done' : 'none';
   const countdown = getCountdownDisplay(departureDate, translations);
   const { language } = useTranslationsContext();
 
   return (
-    <Item isDone={isDone} label={compTranslations.setDepartureDate}>
-      {isDone ? (
+    <Item status={status} label={compTranslations.setDepartureDate}>
+      {status === 'done' ? (
         <span>
           {dateService.formatReadableDate(departureDate, language)}
           {countdown
@@ -183,11 +194,17 @@ const FavoritesItem = () => {
 
   const isDestination = !!group.destination && group.destination in City;
   const isDone =
-    !!cities && !!countries && (group.bookmarks.length > 0 || isDestination);
+    !!cities &&
+    !!countries &&
+    (group.bookmarks.length > 0 || !!group.destination);
 
   const list: FavoritesListItem[] = useMemo(() => {
-    if (!isDone) return [];
-    return group.bookmarks
+    if (!cities || !countries) return [];
+
+    const favorites = group.destination
+      ? [...group.bookmarks, group.destination]
+      : group.bookmarks;
+    return favorites
       .map((item) => {
         const isCity = item in City;
         const { name, id } = isCity
@@ -201,17 +218,19 @@ const FavoritesItem = () => {
           ? Number(a.isCity) - Number(b.isCity)
           : a.name.localeCompare(b.name),
       );
-  }, [cities, countries, group.bookmarks, isDone]);
+  }, [cities, countries, group.bookmarks, group.destination]);
+
+  const status = isDone ? 'done' : 'none';
 
   return (
-    <Item isDone={isDone} label={translations.markPlaces}>
+    <Item status={status} label={translations.markPlaces}>
       {isDestination ? (
         <span>{translations.selectedDestination}</span>
       ) : isDone ? (
         list.map(({ id, name, path }, index) => (
           <span
             className={clsx(
-              index !== list.length - 1 && 'after:content-[","] after:mr-1',
+              index !== list.length - 1 && 'after:content-[","] after:me-1',
             )}
           >
             <Link key={id} href={path}>
@@ -248,29 +267,32 @@ const DestinationItem = () => {
     navigate('/');
   };
 
-  const isDone = !!destination && destination in City;
+  const status = !destination
+    ? 'none'
+    : destination in City
+      ? 'done'
+      : 'pending';
 
   return (
-    <Item isDone={isDone} label={translations.chooseDestination}>
-      {isDone ? (
+    <Item status={status} label={translations.chooseDestination}>
+      {status === 'done' ? (
         <Link href={`/city/${destination}`}>
           {cities?.[destination as City].name}
         </Link>
-      ) : destination ? (
+      ) : status === 'pending' ? (
         <span>
-          {translations.chooseDestinationPartialAction1}
           <Link href={`/city/${destination}`}>
             {countries?.[destination as Country].name}
           </Link>
-          {translations.chooseDestinationPartialAction2}
+          {translations.chooseDestinationPartialAction1}
           <Link onClick={handleListClick}>
-            {translations.chooseDestinationPartialAction3}
+            {translations.chooseDestinationPartialAction2}
           </Link>
         </span>
       ) : (
         <span>
           {translations.chooseDestinationAction}
-          <Link href="/">{translations.chooseDestinationPartialAction3}</Link>
+          <Link href="/">{translations.chooseDestinationPartialAction2}</Link>
         </span>
       )}
     </Item>
@@ -289,13 +311,14 @@ const ResearchItem = () => {
     isDestination,
   );
 
-  const isDone = isDestination && notes > 10;
+  const status =
+    !isDestination || !notes ? 'none' : notes > 10 ? 'done' : 'pending';
 
   const link = `/city/${destination}/notes`;
 
   return (
-    <Item isDone={isDone} label={translations.researchDestination}>
-      {isDone ? (
+    <Item status={status} label={translations.researchDestination}>
+      {status === 'done' ? (
         <span>
           {translations.addedNotes}
           <Link href={link}>

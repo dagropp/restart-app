@@ -2,20 +2,17 @@ import { toastService } from '@common/Toast';
 import { useUserContext } from '@context/user';
 import { Currency } from '@root/types';
 import apiService from '@services/api';
-import titleService from '@services/title';
 import { useMutation } from '@tanstack/react-query';
-import { useLayoutEffect } from 'react';
+import { useTranslations } from '@translations';
 
 import EditUserForm from './components/EditUserForm';
 import { InputName, SignUpData } from './types';
 
 export const EditExistingUser = () => {
-  useLayoutEffect(() => {
-    titleService.setTitle('Settings', 'Edit User');
-  }, []);
-
   const { user, updateUser } = useUserContext();
   const { refetch: refetchCities } = apiService.useCities();
+  const translations = useTranslations();
+  const compTranslations = translations.settings.editUser;
 
   const editUserRequest = useMutation({
     mutationKey: ['signUpRequest'],
@@ -40,7 +37,7 @@ export const EditExistingUser = () => {
 
   const handleSubmit = async (data: SignUpData) => {
     toastService.showToast({
-      message: 'Editing user',
+      message: compTranslations.pending,
       severity: 'pending',
       autoHide: false,
     });
@@ -49,12 +46,12 @@ export const EditExistingUser = () => {
       updateUser(update);
       await refetchCities();
       toastService.showToast({
-        message: 'Successfully edited user',
+        message: compTranslations.success,
         severity: 'success',
       });
     } else {
       toastService.showToast({
-        message: 'Failed to edit user',
+        message: compTranslations.error,
         severity: 'error',
       });
     }
@@ -65,7 +62,10 @@ export const EditExistingUser = () => {
       <EditUserForm
         user={user}
         onSubmit={handleSubmit}
-        submitButton={{ label: 'Save', loading: editUserRequest.isPending }}
+        submitButton={{
+          label: translations.common.save,
+          loading: editUserRequest.isPending,
+        }}
       />
     </div>
   );

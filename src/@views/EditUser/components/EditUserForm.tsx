@@ -3,6 +3,8 @@ import Typography from '@common/Typography';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import { type UserResponse } from '@services/api';
+import LanguageSelect from '@shared/LanguageSelect';
+import { useTranslations, useTranslationsContext } from '@translations';
 import { useState } from 'react';
 
 import { InputName, type SignUpData } from '../types';
@@ -11,9 +13,7 @@ import { EditGroupFormInputs } from './EditGroupFormInputs';
 import { handleFormSubmit, StipendSelect } from './inputs';
 import BirthDateInput from './inputs/BirthDateInput';
 import CitizenshipSelect from './inputs/CitizenshipSelect';
-import FirstNameInput from './inputs/FirstNameInput';
 import IncomeSelect from './inputs/IncomeSelect';
-import LastNameInput from './inputs/LastNameInput';
 import PasswordInput from './inputs/PasswordInput';
 
 interface Props {
@@ -38,13 +38,16 @@ const EditUserForm = ({
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const theme = useTheme();
+  const translations = useTranslations().settings.form;
+  const { isRtl } = useTranslationsContext();
+  const isSignUp = !user;
 
   const handleSubmit = handleFormSubmit<SignUpData>(onSubmit);
 
   return (
     <>
       {(title || subtitle) && (
-        <div className="text-center">
+        <div className="text-center" dir={isRtl ? 'rtl' : 'ltr'}>
           {title && <Typography variant="h6">{title}</Typography>}
           {subtitle && (
             <Typography variant="body2" className="pb-5">
@@ -53,38 +56,59 @@ const EditUserForm = ({
           )}
         </div>
       )}
+
+      {isSignUp && (
+        <div className="pt-4 pb-6 w-full sm:w-1/2">
+          <LanguageSelect />
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full pb-5">
         <TextField
           name={InputName.Email}
           type="email"
-          label="Email"
+          label={translations.email}
           variant="outlined"
           value={email ?? user?.email}
           disabled
           fullWidth
         />
-        <div className="flex gap-4">
-          <FirstNameInput
-            required={!user}
+        <div className="flex gap-4 flex-col sm:flex-row">
+          <TextField
+            name={InputName.FirstName}
+            type="text"
+            label={translations.firstName}
+            variant="outlined"
+            autoComplete="given-name"
+            fullWidth
+            required={isSignUp}
             onChange={(event) => setFirstName(event.target.value)}
             defaultValue={user?.firstName}
           />
-          <LastNameInput
-            required={!user}
+          <TextField
+            name={InputName.LastName}
+            type="text"
+            label={translations.lastName}
+            variant="outlined"
+            autoComplete="family-name"
+            fullWidth
+            required={isSignUp}
             onChange={(event) => setLastName(event.target.value)}
             defaultValue={user?.lastName}
           />
         </div>
-        <CitizenshipSelect defaultValue={user?.citizenship} required={!user} />
-        <BirthDateInput defaultValue={user?.dateOfBirth} required={!user} />
-        {!user && <PasswordInput required isCreate />}
+        <BirthDateInput defaultValue={user?.dateOfBirth} required={isSignUp} />
+        {isSignUp && <PasswordInput required isCreate />}
+        <CitizenshipSelect
+          defaultValue={user?.citizenship}
+          required={isSignUp}
+        />
         <IncomeSelect
           defaultIncome={user?.income}
           defaultMark={user?.incomeMark}
           defaultRemote={user?.incomeRemote}
-          required={!user}
+          required={isSignUp}
         />
-        <StipendSelect user={user} />
+        <StipendSelect user={user} isSignUp={isSignUp} />
         <AvatarUpload
           firstName={firstName}
           lastName={lastName}

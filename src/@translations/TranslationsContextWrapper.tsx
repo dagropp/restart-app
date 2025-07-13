@@ -1,3 +1,5 @@
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import storageService from '@services/storage';
 import { useQuery } from '@tanstack/react-query';
 import { type PropsWithChildren, useEffect, useMemo, useState } from 'react';
@@ -29,7 +31,9 @@ export const TranslationsContextWrapper = ({ children }: PropsWithChildren) => {
 
   return (
     <TranslationsContext value={{ language, setLanguage, translations, isRtl }}>
-      {children}
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={language}>
+        {children}
+      </LocalizationProvider>
     </TranslationsContext>
   );
 };

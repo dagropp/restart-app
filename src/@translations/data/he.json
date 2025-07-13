@@ -9,7 +9,7 @@
       "country": "מדינה",
       "score": "ציון ממוצע",
       "isEu": "האם באיחוד האירופי",
-      "visa": "דרישות ויזה",
+      "visa": "אשרת עבודה",
       "language": "שפה",
       "currency": "מטבע",
       "favorites": {
@@ -25,7 +25,7 @@
     "filters": {
       "minRating": "דירוג מינימלי",
       "region": "אזור",
-      "visa": "דרישות ויזה",
+      "visa": "אשרת עבודה",
       "minEnglishSpeakers": "מינימום דוברי אנגלית",
       "englishNative": "שפת אם",
       "addFilters": "הוספת מסננים",
@@ -64,7 +64,11 @@
         "title": "הכנסה שנתית",
         "subtitle": "כ{{incomeTitle}}",
         "remoteTitle": ", עבודה מרחוק ב{{cityName}}, {{countryName}}",
-        "linkDescription": ", מבוסס על"
+        "linkDescription": ", מבוסס על",
+        "low": "נמוך",
+        "median": "חציוני",
+        "high": "גבוה",
+        "extreme": "קיצוני"
       },
       "rent": {
         "title": "שכר דירה",
@@ -186,7 +190,7 @@
       "qolRank": "מדד איכות חיים",
       "rainfall": "כמות גשמים",
       "sunlight": "משך שעות שמש",
-      "visa": "דרישות ויזה",
+      "visa": "אשרת עבודה",
       "weather": "מזג אוויר",
       "timezone": "הפרש שעות עם ישראל"
     }
@@ -213,6 +217,7 @@
       "setupPartner": "הגדרת שותפים",
       "invitePartner": "הזמינו שותפים",
       "partnerSet": "השותפים הוגדרו",
+      "partnerNoNeed": "אין צורך בהגדרת שותפים",
       "setDepartureDate": "הגדרת תאריך יציאה",
       "setDepartureDateAction": "הגדירו תאריך יציאה",
       "yearSingle": "שנה אחת",
@@ -232,18 +237,17 @@
       "markPlacesAction4": "ערים",
       "markPlacesAction5": " מעניינות",
       "chooseDestination": "בחירת יעד",
-      "chooseDestinationPartialAction1": "רק מדינת יעד נבחרה (",
-      "chooseDestinationPartialAction2": "), בחרו עיר מתוך ",
-      "chooseDestinationPartialAction3": "הרשימה",
+      "chooseDestinationPartialAction1": " נבחרה כמדינת היעד - בחרו עיר מתוך ",
+      "chooseDestinationPartialAction2": "הרשימה",
       "chooseDestinationAction": "בחרו יעד מתוך ",
       "researchDestination": "חקרו את היעד ואספו הערות",
-      "addedNotes": "{{notes}} הערות נוספו",
+      "addedNotes": "נוספו ",
       "addMoreNotes": "הוסיפו עוד הערות",
       "startAddingNotes": "התחילו להוסיף הערות",
       "notes": "{{notes}} הערות",
-      "noDestination": "לא נבחר יעד",
+      "noDestination": "לא נבחרה עיר יעד",
       "addedSingleNote": "הערה אחת נוספה - ",
-      "addedNotesFull": "{{notes}} הערות נוספו -",
+      "addedNotesFull": " {{notes}} הערות נוספו -",
       "toYourDestination": " ליעד שלכם"
     },
     "placesOfInterest": {
@@ -311,7 +315,7 @@
       "enterEmail": "דואר אלקטרוני",
       "send": "שליחה",
       "statusPending": "שולח הזמנה ל{{email}}",
-      "statusSuccess": "נשלח בהצלחה דואר אלקטרוני ל-{{email}}",
+      "statusSuccess": "דואר אלקטרוני נשלח בהצלחה ל-{{email}}",
       "statusFailed": "לא ניתן היה לשלוח דואר אלקטרוני ל-{{email}}"
     }
   },
@@ -363,11 +367,95 @@
       "peopleCount": "{{count}} אנשים"
     }
   },
+  "settings": {
+    "title": "הגדרות",
+    "tabs": {
+      "editUser": "עריכת משתמש",
+      "editGroup": "עריכת קבוצה",
+      "dataCenter": "מרכז נתונים",
+      "users": "משתמשים"
+    },
+    "form": {
+      "email": "דואר אלקטרוני",
+      "firstName": "שם פרטי",
+      "lastName": "שם משפחה",
+      "citizenship": "אזרחות",
+      "dateOfBirth": "תאריך לידה",
+      "expectedJob": "מקצוע",
+      "isRemoteJob": "עבודה מרחוק",
+      "remoteCity": "עיר עבודה מרחוק",
+      "monthlyStipend": "קצבה / מלגה חודשית",
+      "uploadAvatar": "העלאת תמונת פרופיל",
+      "children": "ילדים",
+      "name": "שם",
+      "removeChild": "הסרה",
+      "addChild": "הוספה",
+      "preferences": "העדפות",
+      "departureDate": "תאריך עזיבה",
+      "apartmentSize": "גודל דירה",
+      "bedroomSingle": "חדר שינה אחד",
+      "bedrooms": "{{bedrooms}} חדרי שינה",
+      "password": {
+        "title": "סיסמה",
+        "verify": "אימות סיסמה",
+        "noMatch": "הסיסמאות אינן תואמות",
+        "weakPasswordPrefix": "הסיסמה חייבת להכיל ",
+        "weakPasswordChars": "לפחות 8 תווים",
+        "weakPasswordUppercase": "אות גדולה אחת",
+        "weakPasswordLowercase": "אות קטנה אחת",
+        "weakPasswordNumber": "ספרה אחת",
+        "weakPasswordSpecial": "תו מיוחד אחד",
+        "weakPasswordConnector": " ו"
+      },
+      "helper": {
+        "citizenship": "עוזר לנו לבדוק האם אתם או בן/בת הזוג שלכם פטורים מצורך באשרת עבודה",
+        "profession": "בחרו את תפקידכם וטווח השכר וכך נוכל להעריך את ההכנסה הפוטנציאלית שלכם בחו\"ל",
+        "stipend": "הוסיפו כל תמיכה קבועה (כמו מלגה או עזרה מהמשפחה) - אנחנו נמיר אותה למטבע היעד ונוסיף אותה לתקציב שלכם",
+        "password": "השתמשו בסיסמה חזקה בכדי להגן על החשבון והמידע האישי שלכם"
+      }
+    },
+    "editUser": {
+      "pending": "עורך משתמש",
+      "success": "המשתמש נערך בהצלחה",
+      "error": "עריכת המשתמש נכשלה"
+    },
+    "editGroup": {
+      "pending": "עורך קבוצה",
+      "success": "הקבוצה נערכה בהצלחה",
+      "error": "עריכת הקבוצה נכשלה"
+    },
+    "signUp": {
+      "signUp": "הרשמה",
+      "welcome": "ברוכים הבאים!",
+      "description": "הזינו את הפרטים שלכם שלכם",
+      "status": {
+        "pending": "יוצר משתמש חדש",
+        "success": "המשתמש נוצר בהצלחה",
+        "error": "יצירת המשתמש נכשלה"
+      },
+      "stateInvalid": {
+        "title": "קישור ההרשמה שלכם תקול",
+        "description": "אם הבעיה נמשכת, אנא פנו לצוות התמיכה שלנו."
+      },
+      "stateExpired": {
+        "title": "קישור ההרשמה שלכם פג תוקף",
+        "description": "הקישור שבו השתמשתם אינו תקף עוד מכיוון שפג לאחר שעה. אנא בקשו קישור הרשמה חדש כדי להמשיך.",
+        "refresh": "שליחה מחדש",
+        "remediation": "אם הבעיה נמשכת, אנא פנו לצוות התמיכה שלנו.",
+        "status": {
+          "successTitle": "קישור ההרשמה שלכם רוענן בהצלחה",
+          "successDescription": "כעת תוכלו להשתמש שוב בקישור בדואר האלקטרוני כדי להשלים את ההרשמה. הוא יהיה תקף למשך שעה נוספת.",
+          "errorTitle": "לא הצלחנו לרענן את קישור ההרשמה שלכם",
+          "errorDescription": "ייתכן שהבקשה פגה או שמדובר בתקלה טכנית. אנא פנו לתמיכה."
+        }
+      }
+    }
+  },
   "enum": {
     "visa": {
-      "0": { "short": "לא נדרש", "regular": "לא נדרשת ויזה" },
-      "1": { "short": "קל", "regular": "דרישות ויזה קלות" },
-      "2": { "short": "בינוני", "regular": "דרישות ויזה בינוניות" }
+      "0": { "short": "לא נדרשת", "regular": "לא נדרשת אשרת עבודה" },
+      "1": { "short": "קלה להנפקה", "regular": "קל להנפיק אשרת עבודה" },
+      "2": { "short": "נדרשת", "regular": "נדרשת אשרת עבודה" }
     },
     "language": {
       "AR": "ערבית",
@@ -422,28 +510,28 @@
         "subtitle": "מבוסס על ההכנסה הממוצעת בעיר"
       },
       "SocialWorker": {
-        "title": "עובד סוציאלי"
+        "title": "עבודה סוציאלית"
       },
       "Doctor": {
-        "title": "רופא"
+        "title": "רפואה"
       },
       "SoftwareEngineerEntry": {
-        "title": "מהנדס תוכנה",
-        "subtitle": "ג'וניור/ביניים"
+        "title": "הנדסת תוכנה",
+        "subtitle": "Junior/Mid"
       },
       "SoftwareEngineerSenior": {
-        "title": "מהנדס תוכנה",
-        "subtitle": "בכיר/פרינסיפל"
+        "title": "הנדסת תוכנה",
+        "subtitle": "Senior/Principle"
       },
       "SoftwareEngineerManager": {
-        "title": "מנהל הנדסת תוכנה"
+        "title": "ניהול הנדסת תוכנה"
       },
       "ProductDesigner": {
-        "title": "מעצב מוצר",
-        "subtitle": "UI / UX"
+        "title": "עיצוב מוצר",
+        "subtitle": "UI/UX"
       },
       "ProductManager": {
-        "title": "מנהל מוצר"
+        "title": "ניהול מוצר"
       }
     },
     "insights": {
@@ -477,8 +565,8 @@
         "description": "השוואת הבדלי אזורי זמן עם ישראל"
       },
       "visa": {
-        "label": "דרישות ויזה",
-        "description": "השוואת זכאות ודרישות לוויזת עבודה"
+        "label": "אשרת עבודה",
+        "description": "השוואת זכאות ודרישות לאשרת עבודה"
       },
       "weather": {
         "label": "מזג אוויר",

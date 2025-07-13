@@ -6,6 +6,7 @@ import apiService, { TokenStatus, UserPayload } from '@services/api';
 import storageService from '@services/storage';
 import titleService from '@services/title';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { useTranslations } from '@translations';
 import { useCallback, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -16,13 +17,14 @@ import { GroupInputName, InputName, SignUpData } from './types';
 import { useTokenParams } from './utils';
 
 export const EditUser = () => {
-  useLayoutEffect(() => {
-    titleService.setTitle('Sign Up');
-  }, []);
-
   const navigate = useNavigate();
   const { setIsLoggedIn } = useAppContext();
   const { token, email, group } = useTokenParams();
+  const translations = useTranslations().settings.signUp;
+
+  useLayoutEffect(() => {
+    titleService.setTitle(translations.signUp);
+  }, [translations.signUp]);
 
   const { data, refetch } = useQuery({
     queryKey: ['validateToken'],
@@ -85,14 +87,14 @@ export const EditUser = () => {
   const handleSubmit = useCallback(
     async (data: SignUpData) => {
       toastService.showToast({
-        message: 'Creating a new user',
+        message: translations.status.pending,
         severity: 'pending',
         autoHide: false,
       });
       const { status } = await signUpRequest.mutateAsync(data);
       if (status) {
         toastService.showToast({
-          message: 'Successfully created user',
+          message: translations.status.success,
           severity: 'success',
         });
         const user = await loginRequest.mutateAsync(data);
@@ -104,28 +106,37 @@ export const EditUser = () => {
         }
       } else {
         toastService.showToast({
-          message: 'Failed to create user',
+          message: translations.status.error,
           severity: 'error',
         });
       }
     },
-    [loginRequest, navigate, refetchCities, setIsLoggedIn, signUpRequest],
+    [
+      loginRequest,
+      navigate,
+      refetchCities,
+      setIsLoggedIn,
+      signUpRequest,
+      translations.status.error,
+      translations.status.pending,
+      translations.status.success,
+    ],
   );
 
   const status = data?.status;
 
   return (
-    <div className="w-[500px] flex flex-col justify-center items-center mx-auto pt-5 max-w-full">
+    <div className="w-[600px] flex flex-col justify-center items-center mx-auto p-5 max-w-full">
       {status === TokenStatus.Valid ? (
         <EditUserForm
           email={email}
           onSubmit={handleSubmit}
           submitButton={{
-            label: 'Sign Up',
+            label: translations.signUp,
             loading: signUpRequest.isPending || loginRequest.isPending,
           }}
-          title="Welcome aboard!"
-          subtitle="Enter your user's details"
+          title={translations.welcome}
+          subtitle={translations.description}
           createNewGroup={!group}
         />
       ) : status === TokenStatus.Expired ? (

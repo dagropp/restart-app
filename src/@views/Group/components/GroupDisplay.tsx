@@ -58,14 +58,15 @@ export const GroupDisplay = () => {
     {
       key: 'childrenCount',
       label: compTranslations.numberOfChildren,
-      value: group.children.length,
+      value: group.children.length || translations.common.none,
       Icon: EscalatorWarningRoundedIcon,
       tooltip: getChildrenTooltip(group.children, translations),
+      hidden: !group.children.length,
     },
     {
       key: 'incomeCount',
       label: compTranslations.numberOfIncomes,
-      value: incomes.length,
+      value: incomes.length || translations.common.none,
       Icon: TollRoundedIcon,
       tooltip: incomes
         .map((income) => incomeUtils.getTypeData(income!, translations).title)

@@ -3,6 +3,7 @@ import useMapState from '@hooks/useMapState';
 import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
 import IconButton from '@mui/material/IconButton';
 import { ChildrenPayload } from '@services/api';
+import { useTranslations } from '@translations';
 import { useEffect, useRef } from 'react';
 
 import { NewChildInput } from './ChildInput';
@@ -15,6 +16,7 @@ export const CreateChildrenList = () => {
     ChildrenPayload
   >();
   const ref = useRef<HTMLButtonElement>(null);
+  const translations = useTranslations().settings.form;
 
   useEffect(() => {
     const form = ref.current?.form;
@@ -35,7 +37,7 @@ export const CreateChildrenList = () => {
         />
       ))}
 
-      <Tooltip title="Add Child" placement="right">
+      <Tooltip title={translations.addChild} placement="right">
         <IconButton
           onClick={() => add(crypto.randomUUID(), emptyChild)}
           className="w-max"

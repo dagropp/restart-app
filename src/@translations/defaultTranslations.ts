@@ -65,6 +65,10 @@ export const defaultTranslations = {
         subtitle: 'As a {{incomeTitle}}',
         remoteTitle: ', Working remotely in {{cityName}}, {{countryName}}',
         linkDescription: ', based on ',
+        low: 'Low',
+        median: 'Median',
+        high: 'High',
+        extreme: 'Extreme',
       },
       rent: {
         title: 'Rent',
@@ -215,7 +219,8 @@ export const defaultTranslations = {
       title: 'Progress',
       setupPartner: 'Setup Partner',
       invitePartner: 'Invite Partner',
-      partnerSet: 'Partner is set to {{firstName}} {{lastName}}',
+      partnerSet: 'Partner is set',
+      partnerNoNeed: 'No need to set a partner',
       setDepartureDate: 'Set Departure Date',
       setDepartureDateAction: 'Set departure date',
       yearSingle: '1 year',
@@ -235,9 +240,9 @@ export const defaultTranslations = {
       markPlacesAction4: 'cities',
       markPlacesAction5: ' of interest.',
       chooseDestination: 'Choose Destination',
-      chooseDestinationPartialAction1: 'Only a destination country was set (',
-      chooseDestinationPartialAction2: '), choose a city from the ',
-      chooseDestinationPartialAction3: 'list',
+      chooseDestinationPartialAction1:
+        ' was has been selected as the destination country - please select a city from the ',
+      chooseDestinationPartialAction2: 'list',
       chooseDestinationAction: 'Choose destination from ',
       researchDestination: 'Research Destination and Collect Notes',
       addedNotes: 'Added ',
@@ -366,6 +371,99 @@ export const defaultTranslations = {
       hindus: 'Hindus',
       other: 'Other',
       peopleCount: '{{count}} People',
+    },
+  },
+  settings: {
+    title: 'Settings',
+    tabs: {
+      editUser: 'Edit User',
+      editGroup: 'Edit Group',
+      dataCenter: 'Data Center',
+      users: 'Users',
+    },
+    form: {
+      email: 'Email',
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      citizenship: 'Citizenship',
+      dateOfBirth: 'Date of Birth',
+      expectedJob: 'Expected Job',
+      isRemoteJob: 'Is Remote Job',
+      remoteCity: 'Remote City',
+      monthlyStipend: 'Monthly Scholarship / Stipend',
+      uploadAvatar: 'Upload Avatar',
+      children: 'Children',
+      name: 'Name',
+      removeChild: 'Remove Child',
+      addChild: 'Add Child',
+      preferences: 'Preferences',
+      departureDate: 'Departure Date',
+      apartmentSize: 'Apartment Size',
+      bedroomSingle: '1 Bedroom',
+      bedrooms: '{{bedrooms}} Bedrooms',
+      password: {
+        title: 'Password',
+        verify: 'Verify Password',
+        noMatch: 'Passwords do not match, please try again',
+        weakPasswordPrefix: 'Password must contain ',
+        weakPasswordChars: 'at least 8 characters',
+        weakPasswordUppercase: 'one uppercase letter',
+        weakPasswordLowercase: 'one lowercase letter',
+        weakPasswordNumber: 'one number',
+        weakPasswordSpecial: 'one special character',
+        weakPasswordConnector: ' and ',
+      },
+      helper: {
+        citizenship:
+          'Helps us check if you or your spouse are exempt from needing a work visa.',
+        profession:
+          'Helps us check if you or your spouse are exempt from needing a work visa.',
+        stipend:
+          "Include any steady support (like a scholarship or help from family). We'll convert it and add it to your budget.",
+        password:
+          'Use a strong password to help protect your account and personal data',
+      },
+    },
+    editUser: {
+      pending: 'Editing user',
+      success: 'Successfully edited user',
+      error: 'Failed to edit user',
+    },
+    editGroup: {
+      pending: 'Editing group',
+      success: 'Successfully edited group',
+      error: 'Failed to edit group',
+    },
+    signUp: {
+      signUp: 'Sign Up',
+      welcome: 'Welcome Aboard!',
+      description: "Enter your user's details",
+      status: {
+        pending: 'Creating a new user',
+        success: 'Successfully created user',
+        error: 'Failed to create user',
+      },
+      stateInvalid: {
+        title: 'Your sign-up link is invalid',
+        description:
+          'If you continue to experience issues, please contact our support team.',
+      },
+      stateExpired: {
+        title: 'Your sign-up link has expired',
+        description:
+          'The link you used is no longer valid because it expired after 1 hour. Please request a new sign-up link to continue.',
+        refresh: 'Refresh token',
+        remediation:
+          'If you continue to experience issues, please contact our support team.',
+        status: {
+          successTitle: 'Your sign-up token has been refreshed',
+          successDescription:
+            'You can now use the same email link to complete your sign-up. It will remain valid for another hour.',
+          errorTitle: "We couldn't refresh your sign-up token",
+          errorDescription:
+            'This may be due to an expired request or a system issue. Please contact support.',
+        },
+      },
     },
   },
   enum: {

@@ -1,5 +1,6 @@
 import Typography from '@common/Typography';
 import { GroupResponse } from '@services/api';
+import { useTranslations } from '@translations';
 import clsx from 'clsx';
 
 import classes from './edit-group-form.module.css';
@@ -15,17 +16,19 @@ interface Props {
 }
 
 export const EditGroupFormInputs = ({ group }: Props) => {
+  const translations = useTranslations().settings.form;
+
   return (
     <div className="flex flex-col gap-4 w-full">
       <div className={clsx('flex gap-4', classes.children)}>
-        <Typography variant="button">Children</Typography>
+        <Typography variant="button">{translations.children}</Typography>
         {group?.children?.map((child) => (
           <ExistingChildInput key={child.id} defaultValue={child} />
         ))}
         <CreateChildrenList />
       </div>
       <Typography variant="button" className="pb-2">
-        Preferences
+        {translations.preferences}
       </Typography>
       <DepartureDateInput defaultValue={group?.departureDate} />
       <ApartmentSelect defaultValue={group?.bedrooms} />

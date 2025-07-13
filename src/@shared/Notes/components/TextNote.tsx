@@ -38,7 +38,7 @@ export const TextNote = ({ note, fullPage }: Props) => {
       </div>
       {isOverflow && !fullPage && (
         <div className="pt-2">
-          <Link href={String(note.id)}>
+          <Link href={String(note.parent ?? note.id)}>
             <Typography variant="body2">{translations.showMore}</Typography>
           </Link>
         </div>

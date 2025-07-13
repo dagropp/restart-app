@@ -30,26 +30,30 @@
       "englishNative": "Native Language",
       "addFilters": "Add Filters",
       "editFilters": "Edit Filters",
-      "resetFilters": "Reset Filters"
+      "resetFilters": "Reset"
     }
   },
   "generalSection": {
     "population": "Population",
-    "populationRelativity": "{{population}} / {{percentage}} of the country",
+    "populationRelativity": "{{population}} / {{percentage}}% of the country",
     "density": "Density",
     "perKm": "/ km",
     "isCapital": "Is Capital City",
     "elevation": "Elevation",
     "metersAbbrev": "m",
-    "satelliteCities": "Satellite Cities",
+    "satelliteCities": "Suburbs",
     "metropolitanCenter": "Metropolitan Center",
-    "commuteTime": "Commute Time"
+    "commuteTime": "Commute Time",
+    "region": "Region",
+    "capital": "Capital",
+    "highestElevation": "Highest Elevation",
+    "lowestElevation": "Lowest Elevation"
   },
   "city": {
     "flight": {
       "airport": "Airport",
       "city": "City",
-      "title": "{{airport}}-TLV Flight"
+      "title": "Flight to Israel"
     },
     "timeDifference": {
       "title": "Time Difference",
@@ -60,7 +64,11 @@
         "title": "Annual Income",
         "subtitle": "As a {{incomeTitle}}",
         "remoteTitle": ", Working remotely in {{cityName}}, {{countryName}}",
-        "linkDescription": ", based on "
+        "linkDescription": ", based on ",
+        "low": "Low",
+        "median": "Median",
+        "high": "High",
+        "extreme": "Extreme"
       },
       "rent": {
         "title": "Rent",
@@ -85,14 +93,25 @@
         "familyLabel": "For a family of {{adults}} and {{children}}",
         "singleAdult": "For a single adult",
         "couple": "For a couple",
-        "flights": "{{airport}}-TLV Flights / Year",
+        "flights": "Flights to Israel / Year",
         "preschool": "Private Preschool ({{names}})",
         "school": "Private School ({{names}})",
         "childConnector": " and ",
         "expenses": "Expenses",
         "income": "Income",
         "errorTitle": "Not Available on Small Screens",
-        "errorSubtitle": "Cost simulation is currently only supported on larger devices. Please use a tablet or desktop for the best experience."
+        "errorSubtitle": "Cost simulation is currently only supported on larger devices. Please use a tablet or desktop for the best experience.",
+        "savedSimulations": {
+          "title": "Saved Simulations",
+          "reset": "Reset",
+          "select": "Select Simulation",
+          "update": "Update",
+          "save": "Save",
+          "saveNew": "Save New Simulation",
+          "delete": "Delete",
+          "name": "Simulation Name",
+          "deleteDialog": "Are you sure you want to delete this simulation?"
+        }
       }
     },
     "jobData": {
@@ -156,7 +175,25 @@
     }
   },
   "compare": {
-    "vs": "VS."
+    "vs": "VS.",
+    "city": "City",
+    "selectCity": "Select City",
+    "total": "Total {{score}}/{{total}}",
+    "breakdown": {
+      "colIndexSingle": "Cost of Living Index - Single Provider",
+      "colIndexCouple": "Cost of Living Index - Two Providers",
+      "community": "Facebook Community",
+      "electricity": "Electricity Compatability",
+      "flightDuration": "Flight Duration",
+      "flightPrice": "Flight Price",
+      "language": "Language",
+      "qolRank": "Quality of Life Rank",
+      "rainfall": "Rainfall Amount",
+      "sunlight": "Sunlight Duration",
+      "visa": "Visa Requirements",
+      "weather": "Weather",
+      "timezone": "Timezone Difference"
+    }
   },
   "common": {
     "cancel": "Cancel",
@@ -174,7 +211,68 @@
     "adultSingle": "1 adult",
     "adults": "{{adults}} adults",
     "childSingle": "1 child",
-    "children": "{{children}} children"
+    "children": "{{children}} children",
+    "progress": {
+      "title": "Progress",
+      "setupPartner": "Setup Partner",
+      "invitePartner": "Invite Partner",
+      "partnerSet": "Partner is set",
+      "partnerNoNeed": "No need to set a partner",
+      "setDepartureDate": "Set Departure Date",
+      "setDepartureDateAction": "Set departure date",
+      "yearSingle": "1 year",
+      "years": "{{years}} years",
+      "monthSingle": "1 month",
+      "months": "{{months}} months",
+      "daySingle": "1 day",
+      "days": "{{days}} days",
+      "countdownResult": " -️ only {{countdown}} to go!",
+      "countdownConnector": " and ",
+      "goTime": "it's go time!",
+      "markPlaces": "Mark Places of Interest",
+      "selectedDestination": "A destination was selected",
+      "markPlacesAction1": "Mark ",
+      "markPlacesAction2": "countries",
+      "markPlacesAction3": " or ",
+      "markPlacesAction4": "cities",
+      "markPlacesAction5": " of interest.",
+      "chooseDestination": "Choose Destination",
+      "chooseDestinationPartialAction1": " was has been selected as the destination country - please select a city from the ",
+      "chooseDestinationPartialAction2": "list",
+      "chooseDestinationAction": "Choose destination from ",
+      "researchDestination": "Research Destination and Collect Notes",
+      "addedNotes": "Added ",
+      "addMoreNotes": "add more notes",
+      "startAddingNotes": "Start adding notes",
+      "notes": "{{notes}} notes",
+      "noDestination": "No destination city selected",
+      "addedSingleNote": "Added 1 note - ",
+      "addedNotesFull": "Added {{notes}} notes -",
+      "toYourDestination": " to your destination"
+    },
+    "placesOfInterest": {
+      "title": "Places of Interest"
+    },
+    "details": {
+      "email": "Email",
+      "profession": "Profession",
+      "currentAge": "Current Age",
+      "ageAtDeparture": "Age at Departure",
+      "citizenship": "Citizenship",
+      "userType": "User Type",
+      "departureDate": "Departure Date",
+      "numberOfChildren": "Number of Children",
+      "numberOfIncomes": "Number of Incomes",
+      "apartmentSize": "Apartment Size",
+      "apartmentBedrooms": "{{bedrooms}} bedrooms",
+      "apartmentBedroomsSingle": "1 bedroom",
+      "childrenNameConnector": " and ",
+      "ageConnector": " and ",
+      "exactAge": "{{years}} years",
+      "exactAgeAndMonths": "{{years}} years and {{months}} months",
+      "name": "Name",
+      "children": "Children"
+    }
   },
   "shared": {
     "englishSpeakers": "{{speakers}}% English speakers"
@@ -251,7 +349,10 @@
     "createdOn": "Created on {{date}}",
     "textNote": "Text Note",
     "link": "Link",
-    "checklist": "Checklist"
+    "checklist": "Checklist",
+    "comments": "Comments",
+    "pin": "Pin",
+    "removePin": "Remove Pin"
   },
   "country": {
     "religion": {
@@ -265,6 +366,90 @@
       "hindus": "Hindus",
       "other": "Other",
       "peopleCount": "{{count}} People"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "tabs": {
+      "editUser": "Edit User",
+      "editGroup": "Edit Group",
+      "dataCenter": "Data Center",
+      "users": "Users"
+    },
+    "form": {
+      "email": "Email",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "citizenship": "Citizenship",
+      "dateOfBirth": "Date of Birth",
+      "expectedJob": "Profession",
+      "isRemoteJob": "Is Remote Job",
+      "remoteCity": "Remote City",
+      "monthlyStipend": "Monthly Stipend / Scholarship",
+      "uploadAvatar": "Upload Avatar",
+      "children": "Children",
+      "name": "Name",
+      "removeChild": "Remove",
+      "addChild": "Add",
+      "preferences": "Preferences",
+      "departureDate": "Departure Date",
+      "apartmentSize": "Apartment Size",
+      "bedroomSingle": "1 Bedroom",
+      "bedrooms": "{{bedrooms}} Bedrooms",
+      "password": {
+        "title": "Password",
+        "verify": "Verify Password",
+        "noMatch": "Passwords do not match, please try again",
+        "weakPasswordPrefix": "Password must contain ",
+        "weakPasswordChars": "at least 8 characters",
+        "weakPasswordUppercase": "one uppercase letter",
+        "weakPasswordLowercase": "one lowercase letter",
+        "weakPasswordNumber": "one number",
+        "weakPasswordSpecial": "one special character",
+        "weakPasswordConnector": " and "
+      },
+      "helper": {
+        "citizenship": "Helps us check if you or your spouse are exempt from needing a work visa",
+        "profession": "Helps us check if you or your spouse are exempt from needing a work visa",
+        "stipend": "Include any steady support (like a scholarship or help from family) - we'll convert it and add it to your budget",
+        "password": "Use a strong password to help protect your account and personal data"
+      }
+    },
+    "editUser": {
+      "pending": "Editing user",
+      "success": "Successfully edited user",
+      "error": "Failed to edit user"
+    },
+    "editGroup": {
+      "pending": "Editing group",
+      "success": "Successfully edited group",
+      "error": "Failed to edit group"
+    },
+    "signUp": {
+      "signUp": "Sign Up",
+      "welcome": "Welcome Aboard!",
+      "description": "Enter your user's details",
+      "status": {
+        "pending": "Creating a new user",
+        "success": "Successfully created user",
+        "error": "Failed to create user"
+      },
+      "stateInvalid": {
+        "title": "Your sign-up link is invalid",
+        "description": "If you continue to experience issues, please contact our support team."
+      },
+      "stateExpired": {
+        "title": "Your sign-up link has expired",
+        "description": "The link you used is no longer valid because it expired after 1 hour. Please request a new sign-up link to continue.",
+        "refresh": "Refresh token",
+        "remediation": "If you continue to experience issues, please contact our support team.",
+        "status": {
+          "successTitle": "Your sign-up token has been refreshed",
+          "successDescription": "You can now use the same email link to complete your sign-up. It will remain valid for another hour.",
+          "errorTitle": "We couldn't refresh your sign-up token",
+          "errorDescription": "This may be due to an expired request or a system issue. Please contact support."
+        }
+      }
     }
   },
   "enum": {
@@ -333,7 +518,7 @@
       },
       "SoftwareEngineerEntry": {
         "title": "Software Engineer",
-        "subtitle": "Junior/Mid-senior"
+        "subtitle": "Junior/Mid"
       },
       "SoftwareEngineerSenior": {
         "title": "Software Engineer",
@@ -344,7 +529,7 @@
       },
       "ProductDesigner": {
         "title": "Product Designer",
-        "subtitle": "UI / UX"
+        "subtitle": "UI/UX"
       },
       "ProductManager": {
         "title": "Product Manager"
@@ -405,12 +590,15 @@
     },
     "cost": {
       "generalCost": { "label": "General Cost", "caption": "/ Month" },
-      "rentOuter": { "label": "Rent", "caption": "/ Month" },
+      "rentOuter": {
+        "label": "Rent",
+        "caption": "/ {{bedrooms}} Bedrooms / Month"
+      },
       "buyOuter": { "label": "Buy", "caption": "/ 120sqm." },
-      "beer": { "label": "Draught Beer", "caption": "/ 0.5L" },
+      "beer": { "label": "Draught Beer", "caption": "/ 500ml" },
       "mealDate": { "label": "Dinner Out", "caption": "/ Couple" },
       "mealSingle": { "label": "Lunch Out", "caption": "/ Person" },
-      "mcDonalds": { "label": "McDonalds Combo Meal", "caption": "/ Person" },
+      "mcDonalds": { "label": "McDonalds Meal", "caption": "/ Person" },
       "coffee": { "label": "Cappuccino", "caption": "/ Cup" },
       "milk": { "label": "Milk", "caption": "/ 1L" },
       "bread": { "label": "Bread", "caption": "/ Loaf" },
@@ -420,8 +608,8 @@
       "beef": { "label": "Ground Beef", "caption": "/ 1Kg" },
       "apples": { "label": "Apples", "caption": "/ 1Kg" },
       "tomatoes": { "label": "Tomatoes", "caption": "/ 1Kg" },
-      "wine": { "label": "Wine", "caption": "/ 0.75L" },
-      "beerBottle": { "label": "Beer Bottle", "caption": "/ 0.5L" },
+      "wine": { "label": "Wine", "caption": "/ 750ml" },
+      "beerBottle": { "label": "Beer Bottle", "caption": "/ 500ml" },
       "ticketSingle": {
         "label": "Public Transport",
         "caption": "/ Single Ticket"
@@ -432,7 +620,7 @@
       },
       "germanCar": { "label": "Family Car", "rangeKey": "japanCar" },
       "gasoline": { "label": "Gasoline", "caption": "/ 1L" },
-      "stopsFlight": { "label": "Flight to TLV", "caption": "/ Person" },
+      "stopsFlight": { "label": "Flight to Israel", "caption": "/ Person" },
       "bills": { "label": "Utility Bills", "caption": "/ Month" },
       "internet": { "label": "Internet", "caption": "/ Month" },
       "mobile": { "label": "Cellphone", "caption": "/ Month" },
@@ -453,6 +641,11 @@
       "ASIA": "Asia and Middle-East",
       "OCEANIA": "Oceania",
       "ALL": "All"
+    },
+    "userType": {
+      "Admin": "Administrator",
+      "GroupOwner": "Group Owner",
+      "Standard": "Standard User"
     }
   }
 }

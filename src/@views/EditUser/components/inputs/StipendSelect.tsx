@@ -2,16 +2,19 @@ import TextField from '@common/TextField';
 import { Currency } from '@root/types';
 import { UserResponse } from '@services/api';
 import { CurrencyMenu } from '@shared/index';
+import { useTranslations } from '@translations';
+import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper.tsx';
 import { InputName } from '@views/EditUser/types';
 import { ChangeEvent, useState } from 'react';
 
 interface Props {
   user?: UserResponse;
+  isSignUp: boolean;
 }
 
-const LABEL = 'Monthly Scholarship / Stipend';
+export const StipendSelect = ({ user, isSignUp }: Props) => {
+  const translations = useTranslations().settings.form;
 
-export const StipendSelect = ({ user }: Props) => {
   const [currency, setCurrency] = useState(
     user?.stipendCurrency ?? Currency.ILS,
   );
@@ -29,32 +32,34 @@ export const StipendSelect = ({ user }: Props) => {
   };
 
   return (
-    <div className="flex gap-4 w-full items-center relative">
-      <TextField
-        label={LABEL}
-        fullWidth
-        inputMode="numeric"
-        name={InputName.StipendValue}
-        slotProps={{
-          htmlInput: { min: 0 },
-          input: {
-            startAdornment: (
-              <div className="pr-1">
-                <CurrencyMenu value={currency} onChange={setCurrency} />
-              </div>
-            ),
-          },
-        }}
-        value={value}
-        onChange={handleChange}
-      />
-      {!!value && (
-        <input
-          type="hidden"
-          value={currency}
-          name={InputName.StipendCurrency}
+    <InputHelperWrapper text={translations.helper.stipend} show={isSignUp}>
+      <div className="flex gap-4 w-full items-center relative">
+        <TextField
+          label={translations.monthlyStipend}
+          fullWidth
+          inputMode="numeric"
+          name={InputName.StipendValue}
+          slotProps={{
+            htmlInput: { min: 0 },
+            input: {
+              startAdornment: (
+                <div className="pr-1">
+                  <CurrencyMenu value={currency} onChange={setCurrency} />
+                </div>
+              ),
+            },
+          }}
+          value={value}
+          onChange={handleChange}
         />
-      )}
-    </div>
+        {!!value && (
+          <input
+            type="hidden"
+            value={currency}
+            name={InputName.StipendCurrency}
+          />
+        )}
+      </div>
+    </InputHelperWrapper>
   );
 };

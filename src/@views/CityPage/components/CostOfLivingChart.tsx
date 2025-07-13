@@ -5,7 +5,6 @@ import { useAppContext } from '@context/app';
 import { darken } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { PieChart, PieValueType } from '@mui/x-charts';
-import { useTranslations } from '@translations';
 import { convertCurrency, formatCurrency } from '@utils/format.utils';
 import { number } from '@utils/number.utils';
 import { object } from '@utils/object.utils';
@@ -16,7 +15,6 @@ import { useCityContext, useCostContext } from '../context';
 const CostOfLivingChart = () => {
   const { currency, currencies } = useAppContext();
   const { item } = useCityContext();
-  const translations = useTranslations().common;
 
   const { negative, positive, negativeState, positiveState } = useCostContext();
   const theme = useTheme();
@@ -123,7 +121,7 @@ const CostOfLivingChart = () => {
         <Typography variant="h6">
           <span>
             {formatCurrency(remainder, item.country.currency)}
-            <Typography variant="caption"> {translations.perMonth}</Typography>
+            <Typography variant="caption"> / M</Typography>
           </span>
           <Typography variant="body2">
             {currencyConverter(remainder)}

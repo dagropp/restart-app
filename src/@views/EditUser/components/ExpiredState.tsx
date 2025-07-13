@@ -4,6 +4,7 @@ import Typography from '@common/Typography';
 import HeartBrokenRoundedIcon from '@mui/icons-material/HeartBrokenRounded';
 import apiService from '@services/api';
 import { useMutation, UseQueryResult } from '@tanstack/react-query';
+import { useTranslations, useTranslationsContext } from '@translations';
 import { useState } from 'react';
 
 interface Props {
@@ -17,6 +18,11 @@ enum RefreshStatus {
 }
 
 const ExpiredState = ({ refetch }: Props) => {
+  const translations = useTranslations();
+  const { isRtl } = useTranslationsContext();
+
+  const compTranslations = translations.settings.signUp.stateExpired;
+
   const [refreshStatus, setRefreshStatus] = useState(RefreshStatus.Default);
 
   const resendInvite = useMutation({
@@ -31,37 +37,37 @@ const ExpiredState = ({ refetch }: Props) => {
 
   const isRefreshSuccess = refreshStatus === RefreshStatus.Success;
   const isRefreshError = refreshStatus === RefreshStatus.Error;
+
   const closeToast = () => setRefreshStatus(RefreshStatus.Default);
+
+  const dir = isRtl ? 'rtl' : 'ltr';
 
   return (
     <div className="flex flex-col gap-2 w-full items-center text-center">
-      <Typography variant="h6">Your sign-up link has expired</Typography>
-      <Typography variant="body2" className="text-balance">
-        The link you used is no longer valid because it expired after 1 hour.
-        Please request a new sign-up link to continue.
+      <Typography variant="h6">{compTranslations.title}</Typography>
+      <Typography variant="body2" className="text-balance" dir={dir}>
+        {compTranslations.description}
       </Typography>
       <HeartBrokenRoundedIcon fontSize="large" className="mt-10 mb-5" />
-      <Button onClick={handleResendInvite}>Refresh token</Button>
-      <Button link="/">Login</Button>
-      <Typography variant="caption" className="text-balance">
-        If you continue to experience issues, please contact our support team.
+      <Button onClick={handleResendInvite}>{compTranslations.refresh}</Button>
+      <Button link="/">{translations.user.login.action}</Button>
+      <Typography variant="caption" className="text-balance" dir={dir}>
+        {compTranslations.remediation}
       </Typography>
       <Toast open={isRefreshSuccess} onClose={closeToast} severity="success">
         <Typography variant="body2">
-          Your sign-up token has been refreshed.
+          {compTranslations.status.successTitle}
         </Typography>
-        <Typography variant="caption">
-          You can now use the same email link to complete your sign-up. It will
-          remain valid for another hour.
+        <Typography variant="caption" dir={dir}>
+          {compTranslations.status.successDescription}
         </Typography>
       </Toast>
       <Toast open={isRefreshError} onClose={closeToast} severity="error">
         <Typography variant="body2">
-          We couldn’t refresh your sign-up token.
+          {compTranslations.status.errorTitle}
         </Typography>
-        <Typography variant="caption">
-          This may be due to an expired request or a system issue. Please
-          contact support.
+        <Typography variant="caption" dir={dir}>
+          {compTranslations.status.errorDescription}
         </Typography>
       </Toast>
     </div>

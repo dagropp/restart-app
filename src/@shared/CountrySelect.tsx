@@ -64,7 +64,9 @@ const CountrySelect = ({ defaultCountry, value, ...props }: Props) => {
   const options: SelectOption<Country>[] = useMemo(() => {
     if (!countries) return [];
 
-    const ids = object.keys(countries);
+    const ids = object
+      .keys(countries)
+      .toSorted((a, b) => countries[a].name.localeCompare(countries[b].name));
     const selectedSet = new Set(value);
     const sortFn = getSortFn(selectedSet);
     return ids.toSorted(sortFn).map((country) => ({

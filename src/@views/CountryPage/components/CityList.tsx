@@ -1,9 +1,9 @@
 import Rating from '@common/Rating';
 import Table, { TableCellRenderer, TableColumn } from '@common/Table';
-import Typography from '@common/Typography';
 import apiService, { CityData } from '@services/api';
 import { BookmarkCell } from '@shared/BookmarkCell';
 import SectionCard from '@shared/SectionCard';
+import { useTranslations } from '@translations';
 import { number } from '@utils/number.utils';
 import { useNavigate } from 'react-router';
 
@@ -38,6 +38,7 @@ const scoreCell = { key: 'score', cellRenderer: ScoreCell };
 export const CityList = () => {
   const { cities } = useCountryContext();
   const navigate = useNavigate();
+  const translations = useTranslations().menu.primary;
 
   const columns: TableColumn<CityData>[] = cities.some((item) => item.state)
     ? [bookmarkCell, nameCell, stateCell, scoreCell]
@@ -46,21 +47,15 @@ export const CityList = () => {
   const handleRowClick = (row: CityData) => navigate(`/city/${row.id}`);
 
   return (
-    <SectionCard title="Cities">
-      {cities.length ? (
-        <Table
-          rows={cities}
-          columns={columns}
-          rowKey="id"
-          headerHidden
-          defaultSort={{ key: 'country', direction: 'asc' }}
-          onRowClick={handleRowClick}
-        />
-      ) : (
-        <Typography variant="body2" className="text-center">
-          No featured cities
-        </Typography>
-      )}
+    <SectionCard title={translations.cities}>
+      <Table
+        rows={cities}
+        columns={columns}
+        rowKey="id"
+        headerHidden
+        defaultSort={{ key: 'country', direction: 'asc' }}
+        onRowClick={handleRowClick}
+      />
     </SectionCard>
   );
 };

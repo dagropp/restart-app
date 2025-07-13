@@ -9,49 +9,71 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import SectionCard from '@shared/SectionCard';
+import {
+  interpolateTranslations,
+  ITranslations,
+  useTranslations,
+  useTranslationsContext,
+} from '@translations';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 
 import { ListItemsGroup } from './types';
 
-const getChildAge = (dateOfBirth: string, ref?: string) => {
+const getChildAge = (
+  dateOfBirth: string,
+  translations: ITranslations,
+  ref?: string,
+) => {
   const diff = Math.abs(dayjs(dateOfBirth).diff(dayjs(ref), 'months'));
   const months = diff % 12;
   const years = Math.floor(diff / 12);
+  const t = translations.group.details;
+
   return {
     value: years,
-    label: months ? `${years} years and ${months} months` : `${years} years`,
+    label: interpolateTranslations(months ? t.exactAgeAndMonths : t.exactAge, {
+      months,
+      years,
+    }),
   };
 };
 
 export const ChildrenDisplay = () => {
   const { group } = useUserContext();
   const theme = useTheme();
+  const translations = useTranslations();
+  const compTranslations = translations.group.details;
+  const { isRtl } = useTranslationsContext();
 
   const groups: ListItemsGroup[] = group.children
     .toSorted((a, b) => a.dateOfBirth.localeCompare(b.dateOfBirth))
     .map((child) => {
-      const currentAge = getChildAge(child.dateOfBirth);
-      const departureAge = getChildAge(child.dateOfBirth, group.departureDate);
+      const currentAge = getChildAge(child.dateOfBirth, translations);
+      const departureAge = getChildAge(
+        child.dateOfBirth,
+        translations,
+        group.departureDate,
+      );
       return {
         key: child.id,
         items: [
           {
             key: `${child.id}-name`,
-            label: 'Name',
+            label: compTranslations.name,
             value: child.name,
             Icon: ChildCareRoundedIcon,
           },
           {
             key: `${child.id}-currentAge`,
-            label: 'Current Age',
+            label: compTranslations.currentAge,
             value: currentAge.value,
             tooltip: currentAge.label,
             Icon: DateRangeRoundedIcon,
           },
           {
             key: `${child.id}-departureAge`,
-            label: 'Age at Departure',
+            label: compTranslations.ageAtDeparture,
             value: departureAge.value,
             tooltip: departureAge.label,
             Icon: CalendarMonthRoundedIcon,
@@ -64,7 +86,9 @@ export const ChildrenDisplay = () => {
     <SectionCard
       title={
         <div className="flex justify-between items-center w-full">
-          <span className="flex items-center gap-4">Children</span>
+          <span className="flex items-center gap-4">
+            {compTranslations.children}
+          </span>
           <IconButton size="small" component={Link} href="/settings/group">
             <EditRoundedIcon fontSize="small" />
           </IconButton>
@@ -90,7 +114,11 @@ export const ChildrenDisplay = () => {
                 <Icon fontSize="small" />
                 <strong>{label}</strong>
               </span>
-              <Tooltip title={tooltip} placement="left">
+              <Tooltip
+                title={tooltip}
+                placement="left"
+                dir={isRtl ? 'rtl' : 'ltr'}
+              >
                 <span>{value}</span>
               </Tooltip>
             </Typography>

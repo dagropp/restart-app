@@ -2,6 +2,7 @@ import Slider, { CurrencyMarkItem } from '@common/Slider';
 import { useAppContext } from '@context/app';
 import { Currency } from '@root/types';
 import { type IncomeItem, type IncomeResponse } from '@services/api';
+import { useTranslations } from '@translations';
 import { convertCurrency, formatCurrency } from '@utils/format.utils';
 import { ReactNode } from 'react';
 
@@ -34,8 +35,6 @@ const getMark = (
   ),
 });
 
-const labels = ['Low', 'Median', 'High', 'Extreme'];
-
 const IncomeSlider = ({
   gross,
   setGross,
@@ -45,6 +44,14 @@ const IncomeSlider = ({
 }: Props) => {
   const { currency: ctxCurrency, currencies } = useAppContext();
   const currencyConverter = convertCurrency(currencies, ctxCurrency, currency);
+  const translations = useTranslations().city.cost.incomeSlider;
+
+  const labels = [
+    translations.low,
+    translations.median,
+    translations.high,
+    translations.extreme,
+  ];
 
   const marks: Mark[] = income.marks
     .map((mark, index) => getMark(mark, labels[index], currency))

@@ -1,5 +1,7 @@
 import { Country } from '@root/types';
 import CountrySelect from '@shared/CountrySelect';
+import { useTranslations } from '@translations';
+import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper.tsx';
 import { useState } from 'react';
 
 import { InputName } from '../../types';
@@ -16,17 +18,24 @@ const CitizenshipSelect = ({
   required,
 }: Props) => {
   const [selected, setSelected] = useState<Country[]>(defaultValue);
+  const translations = useTranslations().settings.form;
 
   return (
-    <CountrySelect
-      name={InputName.Citizenship}
-      value={selected}
-      onChange={setSelected}
-      label="Citizenship"
-      placeholder="Citizenship"
-      required={required}
-      defaultCountry={Country.ISRAEL}
-    />
+    <InputHelperWrapper
+      show={required}
+      text={translations.helper.citizenship}
+      bottomSpacing
+    >
+      <CountrySelect
+        name={InputName.Citizenship}
+        value={selected}
+        onChange={setSelected}
+        label={translations.citizenship}
+        placeholder={translations.citizenship}
+        required={required}
+        defaultCountry={Country.ISRAEL}
+      />
+    </InputHelperWrapper>
   );
 };
 

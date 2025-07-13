@@ -180,7 +180,7 @@ export const NoteEditor = ({
           defaultValue={note?.type ?? NoteType.Note}
         />
         {isTextual && !isEdit && (
-          <Tooltip title="Save">
+          <Tooltip title={translations.common.save}>
             <IconButton
               type="submit"
               className={clsx(isRtl && 'rotate-180')}

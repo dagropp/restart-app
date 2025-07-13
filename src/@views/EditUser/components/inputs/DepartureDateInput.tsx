@@ -1,6 +1,7 @@
+import DatePicker from '@common/DatePicker';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import IconButton from '@mui/material/IconButton';
-import { DatePicker } from '@mui/x-date-pickers';
+import { useTranslations } from '@translations';
 import dayjs, { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
 
@@ -11,11 +12,13 @@ interface Props {
 }
 
 export const DepartureDateInput = ({ defaultValue }: Props) => {
+  const translations = useTranslations().settings.form;
+
   const [value, setValue] = useState<Dayjs | null>(dayjs(defaultValue));
 
   const handleChange = (update: Dayjs | null) => setValue(update);
 
-  const pickerValue = dayjs(dayjs(value).format('YYYY-MM'));
+  const pickerValue = dayjs(dayjs(value).locale('en').format('YYYY-MM'));
 
   useEffect(() => {
     if (defaultValue) setValue(dayjs(defaultValue));
@@ -23,14 +26,15 @@ export const DepartureDateInput = ({ defaultValue }: Props) => {
 
   return (
     <>
-      <div className="relative border-red-400">
+      <div className="relative">
         <DatePicker
           className="w-full"
           value={pickerValue}
           onChange={handleChange}
           minDate={dayjs(dayjs().format('YYYY-MM'))}
-          label="Departure Date"
+          label={translations.departureDate}
           views={['month', 'year']}
+          isRtl
         />
         <IconButton
           className="!absolute right-8 top-2"

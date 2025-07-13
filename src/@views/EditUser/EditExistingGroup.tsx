@@ -2,6 +2,7 @@ import { toastService } from '@common/Toast';
 import { useUserContext } from '@context/user';
 import apiService, { GroupPayload } from '@services/api';
 import { useMutation } from '@tanstack/react-query';
+import { useTranslations } from '@translations';
 import { FormEventHandler } from 'react';
 
 import { EditGroupForm } from './components';
@@ -11,6 +12,8 @@ import { parseChildren } from './utils';
 export const EditExistingGroup = () => {
   const { group } = useUserContext();
   const { refetch } = apiService.useGroup(group.id);
+  const translations = useTranslations();
+  const compTranslations = translations.settings.editGroup;
 
   const editGroup = useMutation({
     mutationKey: ['editGroupRequest', group?.id],
@@ -19,6 +22,10 @@ export const EditExistingGroup = () => {
   });
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    toastService.showToast({
+      message: compTranslations.pending,
+      severity: 'pending',
+    });
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -33,13 +40,13 @@ export const EditExistingGroup = () => {
     if (status) {
       await refetch();
       toastService.showToast({
-        message: 'Successfully edited group',
+        message: compTranslations.success,
         severity: 'success',
       });
       form.reset();
     } else {
       toastService.showToast({
-        message: 'Failed to edit group',
+        message: compTranslations.error,
         severity: 'error',
       });
     }
@@ -52,7 +59,10 @@ export const EditExistingGroup = () => {
       <EditGroupForm
         handleSubmit={handleSubmit}
         group={group}
-        submitButton={{ label: 'Save', loading: editGroup.isPending }}
+        submitButton={{
+          label: translations.common.save,
+          loading: editGroup.isPending,
+        }}
       />
     </div>
   );

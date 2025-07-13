@@ -9,7 +9,7 @@ import SwitchRightRoundedIcon from '@mui/icons-material/SwitchRightRounded';
 import IconButton from '@mui/material/IconButton';
 import dateService from '@services/date.service';
 import SectionCard from '@shared/SectionCard';
-import { interpolateTranslations, useTranslations } from '@translations';
+import { useTranslations } from '@translations';
 import { convertCurrency, formatCurrency } from '@utils/format.utils';
 import clsx from 'clsx';
 import { cloneElement, JSX, useEffect, useState } from 'react';
@@ -76,9 +76,7 @@ const FlightData = () => {
     <SectionCard
       title={
         <div className="flex items-center  justify-center">
-          {interpolateTranslations(translations.title, {
-            airport: item.airport,
-          })}
+          {translations.title}
           {isRange && (
             <IconButton
               color="inherit"

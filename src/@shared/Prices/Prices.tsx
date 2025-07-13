@@ -1,5 +1,6 @@
 import Accordion from '@common/Accordion';
 import { useAppContext } from '@context/app';
+import { useUserContext } from '@context/user';
 import CreditCardRoundedIcon from '@mui/icons-material/CreditCardRounded';
 import DinnerDiningRoundedIcon from '@mui/icons-material/DinnerDiningRounded';
 import DirectionsCarFilledRoundedIcon from '@mui/icons-material/DirectionsCarFilledRounded';
@@ -12,7 +13,7 @@ import { type OverridableComponent } from '@mui/material/OverridableComponent';
 import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
 import { Currency } from '@root/types';
 import { CostResponse } from '@services/api';
-import { useTranslations } from '@translations';
+import { interpolateTranslations, useTranslations } from '@translations';
 import {
   convertCurrency,
   CurrencyConverter,
@@ -174,10 +175,17 @@ const CostItem = ({
   currencyConverter,
 }: CostItemProps) => {
   const { currency: ctxCurrency } = useAppContext();
+  const { group } = useUserContext();
   const translations = useTranslations().enum.cost;
 
   const { rangeKey, mapper = (v) => v, Icon, isFloat } = map[field];
-  const { label, caption } = translations[field] as TranslatedFieldData;
+  const { label, caption: tCaption } = translations[
+    field
+  ] as TranslatedFieldData;
+  const caption =
+    field === 'rentOuter'
+      ? interpolateTranslations(tCaption!, { bedrooms: group.bedrooms })
+      : tCaption;
 
   const value = mapper(cost[field]);
   let range = rangeKey && mapper(cost[rangeKey] as number);

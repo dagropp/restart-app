@@ -10,6 +10,7 @@ import apiService, { CountryResponse } from '@services/api';
 import titleService from '@services/title';
 import { CountryImage } from '@shared/CountryDisplay';
 import { Note } from '@shared/Notes';
+import { interpolateTranslations, useTranslations } from '@translations';
 import { format } from '@utils/format.utils';
 import { list } from '@utils/list.utils';
 import { useLayoutEffect } from 'react';
@@ -19,20 +20,6 @@ import { CityTabKey, CountryTabKey } from '../../../types';
 import { useCountryContext } from '../context';
 import CountryNotes from './CountryNotes';
 import { CountryOverview } from './CountryOverview';
-
-const routes = {
-  [CountryTabKey.OVERVIEW]: {
-    label: 'Overview',
-    Component: CountryOverview,
-  },
-  [CountryTabKey.NOTES]: {
-    label: 'Notes',
-    Component: CountryNotes,
-  },
-  [CountryTabKey.NOTE]: {
-    Component: Note,
-  },
-};
 
 const keyMap: Record<string, string> = { overview: 'Overview', notes: 'Notes' };
 
@@ -60,6 +47,23 @@ export const GeneralTabs = ({
     countries,
     (a, b) => a.name.localeCompare(b.name),
   );
+  const translations = useTranslations().menu.tabs;
+
+  const routes = {
+    [CountryTabKey.OVERVIEW]: {
+      label: translations.overview,
+      Component: CountryOverview,
+    },
+    [CountryTabKey.NOTES]: {
+      label: interpolateTranslations(translations.notes, {
+        notes: format.shortNumber(notes, 1000),
+      }),
+      Component: CountryNotes,
+    },
+    [CountryTabKey.NOTE]: {
+      Component: Note,
+    },
+  };
 
   const key = pathname?.includes('overview') ? 'overview' : 'notes';
 
@@ -87,7 +91,7 @@ export const GeneralTabs = ({
         />
         <MuiTab
           value={CityTabKey.NOTES}
-          label={`${routes[CityTabKey.NOTES].label} (${format.shortNumber(notes, 1000)})`}
+          label={routes[CityTabKey.NOTES].label}
           component={Link}
           to={getPath(CountryTabKey.NOTES)}
         />

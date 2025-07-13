@@ -32,19 +32,12 @@ const LegendItem = ({ label, percentage }: LegendItemProps) => {
 
   return (
     <Tooltip
-      title={
-        <Typography
-          variant="body2"
-          className="px-2 py-1"
-          dir={isRtl ? 'rtl' : 'ltr'}
-        >
-          {interpolateTranslations(translations.peopleCount, {
-            count: format.shortNumber(
-              Math.ceil(item.population * (percentage / 100)),
-            ),
-          })}
-        </Typography>
-      }
+      title={interpolateTranslations(translations.peopleCount, {
+        count: format.shortNumber(
+          Math.ceil(item.population * (percentage / 100)),
+        ),
+      })}
+      dir={isRtl ? 'rtl' : 'ltr'}
       placement="top"
     >
       <span>

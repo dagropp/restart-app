@@ -384,6 +384,7 @@ export interface UseNotesActions {
   add: (note: NoteResponse) => void;
   update: (note: NoteResponse) => void;
   remove: (id: number) => void;
+  modifyReplyCount: (noteId: number, count: number) => void;
 }
 
 export interface UseNotesHook {

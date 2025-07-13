@@ -4,8 +4,9 @@ import MuiTabs from '@mui/material/Tabs';
 import { SettingsTabKey, UserType } from '@root/types';
 import { UserResponse } from '@services/api';
 import titleService from '@services/title';
+import { useTranslations } from '@translations';
 import { object } from '@utils/object.utils';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router';
 
 import DataCenter from '../DataCenter';
@@ -14,31 +15,6 @@ import { EditExistingGroup, EditExistingUser } from '../EditUser';
 import UsersCenter from '../UsersCenter';
 import { SettingsTabData } from './types';
 
-const routes: Record<SettingsTabKey, SettingsTabData> = {
-  [SettingsTabKey.EDIT_USER]: {
-    label: 'Edit User',
-    element: <EditExistingUser />,
-  },
-  [SettingsTabKey.EDIT_GROUP]: {
-    label: 'Edit Group',
-    element: <EditExistingGroup />,
-  },
-  [SettingsTabKey.DATA_CENTER]: {
-    label: 'Data Center',
-    element: <DataCenter />,
-    shouldHide: (user: UserResponse) => user.type !== UserType.Admin,
-  },
-  [SettingsTabKey.DATA_CENTER_ITEM]: {
-    element: <DataCenterItem />,
-    shouldHide: () => true,
-  },
-  [SettingsTabKey.USERS]: {
-    label: 'Users',
-    element: <UsersCenter />,
-    shouldHide: (user: UserResponse) => user.type !== UserType.Admin,
-  },
-};
-
 interface Props {
   tab: SettingsTabKey;
 }
@@ -46,6 +22,8 @@ interface Props {
 const Settings = ({ tab }: Props) => {
   const { pathname } = useLocation();
   const { user } = useUserContext();
+  const translations = useTranslations().settings;
+  const compTranslations = translations.tabs;
 
   const key: SettingsTabKey = pathname?.includes(SettingsTabKey.DATA_CENTER)
     ? SettingsTabKey.DATA_CENTER
@@ -53,10 +31,43 @@ const Settings = ({ tab }: Props) => {
 
   const getPath = (path: SettingsTabKey) => `/settings/${path}`;
 
+  const routes: Record<SettingsTabKey, SettingsTabData> = useMemo(
+    () => ({
+      [SettingsTabKey.EDIT_USER]: {
+        label: compTranslations.editUser,
+        element: <EditExistingUser />,
+      },
+      [SettingsTabKey.EDIT_GROUP]: {
+        label: compTranslations.editGroup,
+        element: <EditExistingGroup />,
+      },
+      [SettingsTabKey.DATA_CENTER]: {
+        label: compTranslations.dataCenter,
+        element: <DataCenter />,
+        shouldHide: (user: UserResponse) => user.type !== UserType.Admin,
+      },
+      [SettingsTabKey.DATA_CENTER_ITEM]: {
+        element: <DataCenterItem />,
+        shouldHide: () => true,
+      },
+      [SettingsTabKey.USERS]: {
+        label: compTranslations.users,
+        element: <UsersCenter />,
+        shouldHide: (user: UserResponse) => user.type !== UserType.Admin,
+      },
+    }),
+    [
+      compTranslations.dataCenter,
+      compTranslations.editGroup,
+      compTranslations.editUser,
+      compTranslations.users,
+    ],
+  );
+
   useLayoutEffect(() => {
     const keyTitle = key && key in routes ? routes[key].label : '';
-    titleService.setTitle('Settings', keyTitle);
-  }, [key]);
+    titleService.setTitle(translations.title, keyTitle);
+  }, [key, routes, translations.title]);
 
   return (
     <div className="px-5">

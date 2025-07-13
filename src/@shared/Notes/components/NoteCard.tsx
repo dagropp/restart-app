@@ -47,6 +47,7 @@ interface Props {
   actions: UseNotesActions;
   showCity?: boolean;
   fullPage?: boolean;
+  onDelete?: () => void;
 }
 
 interface NoteCardSkeletonProps {
@@ -101,7 +102,13 @@ export const NoteCardSkeleton = ({ rows }: NoteCardSkeletonProps) => {
   );
 };
 
-export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
+export const NoteCard = ({
+  note,
+  actions,
+  showCity,
+  fullPage,
+  onDelete,
+}: Props) => {
   const { data: users = {} } = apiService.useUsers();
   const translations = useTranslations().notes;
   const { isRtl } = useTranslationsContext();
@@ -145,12 +152,20 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
   const handleDelete = async () => {
     await apiService.notes.delete(note.id);
     handleCloseDeleteDialog();
-    actions.remove(note.id);
+    onDelete?.();
+    if (note.parent) {
+      actions.modifyReplyCount(note.parent, -1);
+    } else {
+      actions.remove(note.id);
+    }
   };
 
   const handleReply = async ({ note: value }: NoteData) => {
     const { status } = await apiService.notes.reply(note.id, value);
-    if (status) await refetchReplies();
+    if (status) {
+      await refetchReplies();
+      actions.modifyReplyCount(note.id, 1);
+    }
   };
 
   const handlePin = async () => {
@@ -276,7 +291,11 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
             <CardActions disableSpacing>
               <div className="flex items-center w-full justify-between gap-2 pr-2">
                 <div className="flex items-center gap-1">
-                  <Tooltip title={note.pinned ? 'Remove pin' : 'Pin'}>
+                  <Tooltip
+                    title={
+                      note.pinned ? translations.removePin : translations.pin
+                    }
+                  >
                     <IconButton onClick={handlePin}>
                       {note.pinned ? (
                         <PushPinRoundedIcon />
@@ -286,7 +305,7 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
                     </IconButton>
                   </Tooltip>
                   {!fullPage && (
-                    <Tooltip title="Comments">
+                    <Tooltip title={translations.comments}>
                       <IconButton onClick={toggleReplies}>
                         <CommentRoundedIcon />
                       </IconButton>
@@ -325,6 +344,8 @@ export const NoteCard = ({ note, actions, showCity, fullPage }: Props) => {
                     key={`reply-${note.id}`}
                     note={note}
                     actions={actions}
+                    onDelete={refetchReplies}
+                    fullPage={fullPage}
                   />
                 ))}
                 {repliesDisplay.length < replies.length && (

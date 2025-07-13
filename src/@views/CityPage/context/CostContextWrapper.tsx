@@ -222,9 +222,7 @@ export const CostContextWrapper = ({ children }: CostContextWrapperProps) => {
     if (cheapest?.price) {
       const groupSize = (group.partner ? 1 : 0) + group.children.length + 1;
       rows.flights = {
-        label: interpolateTranslations(compTranslations.flights, {
-          airport: item.airport,
-        }),
+        label: compTranslations.flights,
         optional: true,
         mapper: (value) => (value * groupSize) / 12,
       };

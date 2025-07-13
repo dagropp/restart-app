@@ -1,9 +1,10 @@
+import DatePicker from '@common/DatePicker';
 import TextField from '@common/TextField';
 import Tooltip from '@common/Tooltip';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import IconButton from '@mui/material/IconButton';
-import { DatePicker } from '@mui/x-date-pickers';
 import { ChildrenPayload, ChildrenResponse } from '@services/api';
+import { useTranslations } from '@translations';
 import dayjs, { Dayjs } from 'dayjs';
 import { ChangeEvent, useState } from 'react';
 
@@ -35,6 +36,8 @@ const GenericChildInput = <T extends BaseChild>({
   onDelete,
   onChange,
 }: GenericChildInputProps<T>) => {
+  const translations = useTranslations().settings.form;
+
   const [name, setName] = useState(defaultValue.name);
   const [dateOfBirth, setDateOfBirth] = useState(
     defaultValue.dateOfBirth ? dayjs(defaultValue.dateOfBirth) : null,
@@ -70,8 +73,8 @@ const GenericChildInput = <T extends BaseChild>({
   return (
     <div className="flex items-center gap-4 w-full">
       <TextField
-        placeholder="Name"
-        label="Name"
+        placeholder={translations.name}
+        label={translations.name}
         value={name}
         onChange={handleNameChange}
         className="w-full"
@@ -79,11 +82,11 @@ const GenericChildInput = <T extends BaseChild>({
       <DatePicker
         defaultValue={dateOfBirth}
         onChange={handleDateChange}
-        label="Date of Birth"
+        label={translations.dateOfBirth}
         className="w-full"
       />
 
-      <Tooltip title="Remove Child">
+      <Tooltip title={translations.removeChild}>
         <IconButton onClick={handleDelete}>
           <DeleteRoundedIcon fontSize="small" />
         </IconButton>

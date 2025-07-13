@@ -11,11 +11,12 @@ import { type FormEvent, useLayoutEffect } from 'react';
 
 const Login = () => {
   const translations = useTranslations().user;
+  const { setIsLoggedIn } = useAppContext();
+
   useLayoutEffect(() => {
     titleService.setTitle('Login');
   }, []);
 
-  const { setIsLoggedIn } = useAppContext();
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;

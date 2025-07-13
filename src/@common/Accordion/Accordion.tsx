@@ -27,7 +27,6 @@ const Accordion = ({
       className={clsx(classes.accordion, '!bg-transparent !text-inherit')}
     >
       <AccordionSummary
-        title={title}
         expandIcon={<ExpandMoreIcon />}
         className="!p-0"
         classes={{ content: '!m-0' }}

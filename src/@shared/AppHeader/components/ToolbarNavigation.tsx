@@ -48,6 +48,11 @@ export const ToolbarNavigation = () => {
       path: '/countries',
     },
     {
+      Icon: Diversity3RoundedIcon,
+      label: translations.group,
+      path: '/group',
+    },
+    {
       Icon: CompareRoundedIcon,
       label: translations.compare,
       path: '/compare',
@@ -56,11 +61,6 @@ export const ToolbarNavigation = () => {
       Icon: DashboardRoundedIcon,
       label: translations.notes,
       path: '/notes',
-    },
-    {
-      Icon: Diversity3RoundedIcon,
-      label: translations.group,
-      path: '/group',
     },
     {
       Icon: SettingsRoundedIcon,

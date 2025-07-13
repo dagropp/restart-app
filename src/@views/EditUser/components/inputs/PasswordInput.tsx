@@ -1,5 +1,8 @@
 import TextField from '@common/TextField';
+import { ITranslations, useTranslations } from '@translations';
+import { array } from '@utils/array.utils.ts';
 import { string } from '@utils/string.utils';
+import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper.tsx';
 import { ChangeEvent, useState } from 'react';
 
 import { InputName } from '../../types';
@@ -9,29 +12,35 @@ interface Props {
   isCreate?: boolean;
 }
 
-const VERIFIED_PASSWORD_ERROR = 'Passwords do not match, please try again.';
-
-const getPasswordError = (password: string, isCreate?: boolean): string => {
+const getPasswordError = (
+  password: string,
+  translations: ITranslations,
+  isCreate?: boolean,
+): string => {
   if (!isCreate || !password) return '';
+  const t = translations.settings.form.password;
+
   const errorMessages = [];
-  if (password.length < 8) errorMessages.push('at least 8 characters');
-  if (!/[A-Z]/.test(password)) errorMessages.push('one uppercase letter');
-  if (!/[a-z]/.test(password)) errorMessages.push('one lowercase letter');
+  if (password.length < 8) errorMessages.push(t.weakPasswordChars);
+  if (!/[A-Z]/.test(password)) errorMessages.push(t.weakPasswordUppercase);
+  if (!/[a-z]/.test(password)) errorMessages.push(t.weakPasswordLowercase);
 
-  if (!/\d/.test(password)) errorMessages.push('one number');
+  if (!/\d/.test(password)) errorMessages.push(t.weakPasswordNumber);
 
-  if (!/[\W_]/.test(password)) errorMessages.push('one special character');
+  if (!/[\W_]/.test(password)) errorMessages.push(t.weakPasswordSpecial);
 
   return errorMessages.length > 0
-    ? `Password must contain ${errorMessages.join(', ')}.`
+    ? `${t.weakPasswordPrefix} ${array.joinWithLast(errorMessages, ', ', t.weakPasswordConnector)}`
     : '';
 };
 
 const PasswordInput = ({ required, isCreate }: Props) => {
   const [password, setPassword] = useState('');
   const [verify, setVerify] = useState('');
+  const translations = useTranslations();
+  const compTranslations = translations.settings.form.password;
 
-  const passwordError = getPasswordError(password, isCreate);
+  const passwordError = getPasswordError(password, translations, isCreate);
   const isVerified = string.isEmpty(verify) || password === verify;
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -40,36 +49,41 @@ const PasswordInput = ({ required, isCreate }: Props) => {
   };
 
   return (
-    <div className="flex gap-4">
-      <TextField
-        name={InputName.Password}
-        type="password"
-        label="Password"
-        variant="outlined"
-        autoComplete="off"
-        value={password}
-        onChange={handlePasswordChange}
-        required={required}
-        error={!!passwordError}
-        helperText={passwordError}
-        fullWidth
-      />
-      {isCreate && (
+    <InputHelperWrapper
+      text={translations.settings.form.helper.password}
+      show={required}
+    >
+      <div className="flex gap-4 flex-col sm:flex-row">
         <TextField
+          name={InputName.Password}
           type="password"
-          label="Verify password"
+          label={compTranslations.title}
           variant="outlined"
           autoComplete="off"
-          value={verify}
-          onChange={(event) => setVerify(event.target.value)}
-          error={!isVerified}
-          helperText={!isVerified && VERIFIED_PASSWORD_ERROR}
-          disabled={!password || !!passwordError}
+          value={password}
+          onChange={handlePasswordChange}
           required={required}
+          error={!!passwordError}
+          helperText={passwordError}
           fullWidth
         />
-      )}
-    </div>
+        {isCreate && (
+          <TextField
+            type="password"
+            label={compTranslations.verify}
+            variant="outlined"
+            autoComplete="off"
+            value={verify}
+            onChange={(event) => setVerify(event.target.value)}
+            error={!isVerified}
+            helperText={!isVerified && compTranslations.noMatch}
+            disabled={!password || !!passwordError}
+            required={required}
+            fullWidth
+          />
+        )}
+      </div>
+    </InputHelperWrapper>
   );
 };
 

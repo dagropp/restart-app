@@ -5,7 +5,8 @@ import Typography from '@common/Typography';
 import PushPinRoundedIcon from '@mui/icons-material/PushPinRounded';
 import Skeleton from '@mui/material/Skeleton';
 import apiService, { LandmarkItem } from '@services/api';
-import { useTranslations } from '@translations';
+import { useTranslations, useTranslationsContext } from '@translations';
+import clsx from 'clsx';
 import { useState } from 'react';
 
 import SectionCard from './SectionCard';
@@ -32,15 +33,38 @@ const LandmarkItemComponent = ({
   );
   const translations = useTranslations().city;
   const compTranslations = translations.landmarks;
+  const { language, isRtl } = useTranslationsContext();
 
   const dir = item.language === 'he' ? 'rtl' : 'ltr';
+  const isNotSystemLang = language !== item.language;
 
   return (
     <Accordion
       key={item.key}
       expanded={expanded}
       handleExpand={handleExpand}
-      title={item.title}
+      title={
+        isNotSystemLang ? (
+          <span
+            className={clsx(
+              'flex items-center gap-2',
+              isRtl && 'flex-row-reverse',
+            )}
+          >
+            {item.title}
+            <Typography
+              variant="caption"
+              className="rounded border scale-90 px-0.5"
+              lineHeight="normal"
+              color="textSecondary"
+            >
+              {item.language.toUpperCase()}
+            </Typography>
+          </span>
+        ) : (
+          item.title
+        )
+      }
     >
       <div className="flex flex-col gap-2">
         {isLoading ? (
@@ -56,6 +80,7 @@ const LandmarkItemComponent = ({
             dangerouslySetInnerHTML={{ __html: data.extract_html }}
             align="justify"
             dir={dir}
+            className={clsx(isNotSystemLang && 'force-en')}
           />
         ) : (
           <Typography variant="body2">{compTranslations.error}</Typography>

@@ -2,22 +2,22 @@
   "table": {
     "empty": {
       "title": "לא נמצאו תוצאות",
-      "subtitle": "נסה לשנות את המסננים כדי לראות נתונים נוספים"
+      "subtitle": "נסו לשנות את המסננים כדי לראות נתונים נוספים"
     },
     "cells": {
       "city": "עיר",
       "country": "מדינה",
       "score": "ציון ממוצע",
       "isEu": "האם באיחוד האירופי",
-      "visa": "דרישות ויזה",
+      "visa": "אשרת עבודה",
       "language": "שפה",
       "currency": "מטבע",
       "favorites": {
-        "bookmark": { "add": "הוסף סימנייה", "remove": "הסר סימנייה" },
+        "bookmark": { "add": "הוספת סימנייה", "remove": "הסרת סימנייה" },
         "destination": {
-          "add": "הוסף יעד",
-          "remove": "הסר יעד",
-          "replace": "החלף יעד",
+          "add": "הוספת יעד",
+          "remove": "הסרת יעד",
+          "replace": "החלפת יעד",
           "isDerived": "היעד נגזר מהעיר"
         }
       }
@@ -25,31 +25,35 @@
     "filters": {
       "minRating": "דירוג מינימלי",
       "region": "אזור",
-      "visa": "דרישות ויזה",
+      "visa": "אשרת עבודה",
       "minEnglishSpeakers": "מינימום דוברי אנגלית",
       "englishNative": "שפת אם",
-      "addFilters": "הוסף מסננים",
-      "editFilters": "ערוך מסננים",
-      "resetFilters": "אפס מסננים"
+      "addFilters": "הוספת מסננים",
+      "editFilters": "עריכת מסננים",
+      "resetFilters": "איפוס"
     }
   },
   "generalSection": {
     "population": "אוכלוסייה",
-    "populationRelativity": "{{population}} / {{percentage}} מהמדינה",
+    "populationRelativity": "{{population}} / {{percentage}}% מהמדינה",
     "density": "צפיפות",
     "perKm": "/ ק\"מ",
     "isCapital": "האם עיר בירה",
     "elevation": "גובה",
-    "metersAbbrev": "מ'",
-    "satelliteCities": "ערי לוויין",
+    "metersAbbrev": " מטרים",
+    "satelliteCities": "פרברים",
     "metropolitanCenter": "מרכז מטרופוליני",
-    "commuteTime": "זמן נסיעה"
+    "commuteTime": "זמן נסיעה",
+    "region": "אזור",
+    "capital": "עיר הבירה",
+    "highestElevation": "הנקודה הגבוהה ביותר",
+    "lowestElevation": "הנקודה הנמוכה ביותר"
   },
   "city": {
     "flight": {
       "airport": "שדה תעופה",
       "city": "עיר",
-      "title": "טיסה {{airport}}-TLV"
+      "title": "טיסה לישראל"
     },
     "timeDifference": {
       "title": "הפרש שעות",
@@ -60,7 +64,11 @@
         "title": "הכנסה שנתית",
         "subtitle": "כ{{incomeTitle}}",
         "remoteTitle": ", עבודה מרחוק ב{{cityName}}, {{countryName}}",
-        "linkDescription": ", מבוסס על"
+        "linkDescription": ", מבוסס על",
+        "low": "נמוך",
+        "median": "חציוני",
+        "high": "גבוה",
+        "extreme": "קיצוני"
       },
       "rent": {
         "title": "שכר דירה",
@@ -85,23 +93,34 @@
         "familyLabel": "למשפחה של {{adults}} ו-{{children}}",
         "singleAdult": "למבוגר יחיד",
         "couple": "לזוג",
-        "flights": "טיסות {{airport}}-TLV / שנה",
+        "flights": "טיסות לישראל / שנה",
         "preschool": "גן פרטי ({{names}})",
         "school": "בית ספר פרטי ({{names}})",
-        "childConnector": " ו-",
+        "childConnector": " ו",
         "expenses": "הוצאות",
         "income": "הכנסה",
         "errorTitle": "לא זמין במסכים קטנים",
-        "errorSubtitle": "סימולציית עלויות נתמכת כרגע רק במכשירים גדולים יותר. אנא השתמש בטאבלט או במחשב שולחני לחוויה הטובה ביותר."
+        "errorSubtitle": "סימולציית עלויות נתמכת כרגע רק במכשירים גדולים יותר. אנא השתמשו בטאבלט או במחשב שולחני לחוויה הטובה ביותר.",
+        "savedSimulations": {
+          "title": "סימולציות שמורות",
+          "reset": "איפוס",
+          "select": "בחירת סימולציה",
+          "update": "עדכון",
+          "save": "שמירה",
+          "saveNew": "שמירת סימולציה חדשה",
+          "delete": "מחיקה",
+          "name": "שם הסימולציה",
+          "deleteDialog": "האם אתם בטוחים שברצונכם למחוק את הסימולציה הזו?"
+        }
       }
     },
     "jobData": {
-      "title": "נתוני משרות",
+      "title": "שוק העבודה",
       "subtitle": "כ{{incomeTitle}}",
       "expectedSalary": "שכר צפוי",
       "localDescription": "מבוסס על שכר נוכחי וסטנדרטים בתעשייה",
       "remoteDescription": "מבוסס על עבודה מרחוק מ{{cityName}}, {{countryName}}",
-      "comparedWith": "בהשוואה ל-",
+      "comparedWith": "בהשוואה ל",
       "colAdjusted": "מותאם לעלות המחיה",
       "colAdjustedDescription": "התאמה להבדלי עלות המחיה בין {{city}} ל-{{other}}",
       "jobsPosted": "{{jobs}} משרות פורסמו",
@@ -117,7 +136,7 @@
       "wikipedia": "דף ויקיפדיה"
     },
     "plan": {
-      "title": "תכנן מראש",
+      "title": "תכנון מראש",
       "generalCost": "עלות כללית",
       "rent": "שכר דירה",
       "flight": "טיסה לכיוון אחד",
@@ -131,8 +150,8 @@
       "title": "מזג אוויר",
       "rainTitle": "{{count}} ימי גשם בשנה",
       "rainSubtitle": "{{percent}}% מהשנה",
-      "sunlightMax": "{{count}} שעות שמש מקסימליות",
-      "sunlightMin": "{{count}} שעות שמש מינימליות",
+      "sunlightMax": "{{count}} שעות אור ביום הארוך ביותר",
+      "sunlightMin": "{{count}} שעות אור ביום הקצר ביותר",
       "sunlightSubtitle": "{{percent}}% מהיום"
     },
     "map": {
@@ -152,41 +171,119 @@
       "title": "מחירים"
     },
     "funFacts": {
-      "title": "עובדות מהנות"
+      "title": "הידעת?"
     }
   },
   "compare": {
-    "vs": "נגד"
+    "vs": "נגד",
+    "city": "עיר",
+    "selectCity": "בחירת עיר",
+    "total": "סה\"כ {{score}}/{{total}}",
+    "breakdown": {
+      "colIndexSingle": "מדד יוקר מחיה - מפרנס יחיד",
+      "colIndexCouple": "מדד יוקר מחיה - שני מפרנסים",
+      "community": "קהילת ישראלים בפייסבוק",
+      "electricity": "התאמה לחשמל",
+      "flightDuration": "משך טיסה לישראל",
+      "flightPrice": "מחיר טיסה לישראל",
+      "language": "שפה",
+      "qolRank": "מדד איכות חיים",
+      "rainfall": "כמות גשמים",
+      "sunlight": "משך שעות שמש",
+      "visa": "אשרת עבודה",
+      "weather": "מזג אוויר",
+      "timezone": "הפרש שעות עם ישראל"
+    }
   },
   "common": {
     "cancel": "ביטול",
-    "save": "שמור",
+    "save": "שמירה",
     "ok": "אישור",
     "yes": "כן",
     "no": "לא",
     "none": "ללא",
     "total": "סה\"כ",
-    "perMonth": "/ M",
+    "perMonth": "/ חודש",
     "and": "ו",
     "notAvailable": "לא זמין"
   },
   "group": {
-    "adultSingle": "מבוגר 1",
+    "adultSingle": "מבוגר אחד",
     "adults": "{{adults}} מבוגרים",
-    "childSingle": "ילד 1",
-    "children": "{{children}} ילדים"
+    "childSingle": "ילד אחד",
+    "children": "{{children}} ילדים",
+    "progress": {
+      "title": "התקדמות",
+      "setupPartner": "הגדרת שותפים",
+      "invitePartner": "הזמינו שותפים",
+      "partnerSet": "השותפים הוגדרו",
+      "partnerNoNeed": "אין צורך בהגדרת שותפים",
+      "setDepartureDate": "הגדרת תאריך יציאה",
+      "setDepartureDateAction": "הגדירו תאריך יציאה",
+      "yearSingle": "שנה אחת",
+      "years": "{{years}} שנים",
+      "monthSingle": "חודש אחד",
+      "months": "{{months}} חודשים",
+      "daySingle": "יום אחד",
+      "days": "{{days}} ימים",
+      "countdownResult": " - נותרו עוד {{countdown}}!",
+      "countdownConnector": " ו-",
+      "goTime": "זה הזמן לצאת לדרך!",
+      "markPlaces": "סימון מקומות מעניינים",
+      "selectedDestination": "יעד נבחר",
+      "markPlacesAction1": "סמנו ",
+      "markPlacesAction2": "מדינות",
+      "markPlacesAction3": " או ",
+      "markPlacesAction4": "ערים",
+      "markPlacesAction5": " מעניינות",
+      "chooseDestination": "בחירת יעד",
+      "chooseDestinationPartialAction1": " נבחרה כמדינת היעד - בחרו עיר מתוך ",
+      "chooseDestinationPartialAction2": "הרשימה",
+      "chooseDestinationAction": "בחרו יעד מתוך ",
+      "researchDestination": "חקרו את היעד ואספו הערות",
+      "addedNotes": "נוספו ",
+      "addMoreNotes": "הוסיפו עוד הערות",
+      "startAddingNotes": "התחילו להוסיף הערות",
+      "notes": "{{notes}} הערות",
+      "noDestination": "לא נבחרה עיר יעד",
+      "addedSingleNote": "הערה אחת נוספה - ",
+      "addedNotesFull": " {{notes}} הערות נוספו -",
+      "toYourDestination": " ליעד שלכם"
+    },
+    "placesOfInterest": {
+      "title": "מקומות מסומנים"
+    },
+    "details": {
+      "email": "דואר אלקטרוני",
+      "profession": "מקצוע",
+      "currentAge": "גיל נוכחי",
+      "ageAtDeparture": "גיל במעבר",
+      "citizenship": "אזרחות",
+      "userType": "סוג משתמש",
+      "departureDate": "תאריך יציאה",
+      "numberOfChildren": "מספר ילדים",
+      "numberOfIncomes": "מספר הכנסות",
+      "apartmentSize": "גודל הדירה",
+      "apartmentBedrooms": "{{bedrooms}} חדרי שינה",
+      "apartmentBedroomsSingle": "חדר שינה אחד",
+      "childrenNameConnector": " ו",
+      "exactAge": "{{years}} שנים",
+      "exactAgeAndMonths": "{{years}} שנים ו-{{months}} חודשים",
+      "name": "שם",
+      "children": "ילדים"
+    }
   },
   "shared": {
     "englishSpeakers": "{{speakers}}% דוברי אנגלית"
   },
   "user": {
     "login": {
-      "title": "הזן את כתובת האימייל והסיסמה שלך",
-      "action": "התחבר",
-      "error": "ההתחברות נכשלה. אנא בדוק את כתובת האימייל והסיסמה שלך ונסה שוב."
+      "title": "הזינו את כתובת האימייל והסיסמה שלכם",
+      "action": "התחברות",
+      "error": "ההתחברות נכשלה. אנא בדקו את כתובת האימייל והסיסמה שלכם ונסו שנית."
     },
     "inputs": {
-      "email": "אימייל",
+      "email": "דואר אלקטרוני",
       "password": "סיסמה"
     }
   },
@@ -194,16 +291,16 @@
     "primary": {
       "cities": "ערים",
       "countries": "מדינות",
-      "compare": "השווה",
+      "compare": "השוואה",
       "notes": "הערות",
       "group": "קבוצה",
       "settings": "הגדרות"
     },
     "secondary": {
-      "openSettings": "פתח הגדרות",
-      "inviteUser": "הזמן משתמש",
-      "addUserToGroup": "הוסף משתמש לקבוצה",
-      "logout": "התנתק",
+      "openSettings": "פתיחת הגדרות",
+      "inviteUser": "הזמנת משתמש",
+      "addUserToGroup": "הוספת משתמש לקבוצה",
+      "logout": "התנתקות",
       "lightTheme": "ערכת נושא בהירה",
       "darkTheme": "ערכת נושא כהה"
     },
@@ -213,45 +310,48 @@
       "notes": "הערות ({{notes}})"
     },
     "invite": {
-      "addToGroup": "הוסף משתמש לקבוצה",
-      "inviteUser": "הזמן משתמש",
-      "enterEmail": "הזן אימייל...",
-      "send": "שלח",
+      "addToGroup": "הוספת משתמש לקבוצה",
+      "inviteUser": "הזמנת משתמש",
+      "enterEmail": "דואר אלקטרוני",
+      "send": "שליחה",
       "statusPending": "שולח הזמנה ל{{email}}",
-      "statusSuccess": "נשלח בהצלחה אימייל ל-{{email}}",
-      "statusFailed": "לא ניתן היה לשלוח אימייל ל-{{email}}"
+      "statusSuccess": "דואר אלקטרוני נשלח בהצלחה ל-{{email}}",
+      "statusFailed": "לא ניתן היה לשלוח דואר אלקטרוני ל-{{email}}"
     }
   },
   "notes": {
     "add": {
-      "comment": "הוסף תגובה...",
-      "note": "הוסף הערה...",
-      "link": "הוסף קישור...",
-      "checklist": "הוסף רשימת בדיקה...",
-      "title": "הוסף כותרת...",
-      "todoItem": "הוסף פריט..."
+      "comment": "הוספת תגובה",
+      "note": "הוספת הערה",
+      "link": "הוספת קישור",
+      "checklist": "הוספת רשימת מטלות",
+      "title": "הוספת כותרת",
+      "todoItem": "הוספת פריט"
     },
     "edit": {
-      "reply": "ערוך תגובה",
-      "note": "ערוך הערה",
-      "checklist": "ערוך רשימת בדיקה",
-      "link": "ערוך קישור",
-      "title": "ערוך"
+      "reply": "עריכת תגובה",
+      "note": "עריכת הערה",
+      "checklist": "עריכת רשימת מטלות",
+      "link": "עריכת קישור",
+      "title": "עריכה"
     },
     "delete": {
-      "title": "מחק",
-      "dialog": "האם אתה בטוח שברצונך למחוק הערה זו?"
+      "title": "מחיקה",
+      "dialog": "האם אתם בטוחים שברצונכם למחוק הערה זו?"
     },
     "noComments": "אין תגובות",
     "commentSingle": "תגובה אחת",
     "commentsCount": "{{comments}} תגובות",
     "fullPageView": "תצוגת עמוד מלא",
-    "showMore": "הצג עוד...",
+    "showMore": "הצגת עוד...",
     "generalNote": "הערה כללית עבור",
     "createdOn": "נוצר ב-{{date}}",
     "textNote": "הערת טקסט",
     "link": "קישור",
-    "checklist": "רשימת בדיקה"
+    "checklist": "רשימת מטלות",
+    "comments": "תגובות",
+    "pin": "נעיצה",
+    "removePin": "הסרת נעיצה"
   },
   "country": {
     "religion": {
@@ -267,11 +367,95 @@
       "peopleCount": "{{count}} אנשים"
     }
   },
+  "settings": {
+    "title": "הגדרות",
+    "tabs": {
+      "editUser": "עריכת משתמש",
+      "editGroup": "עריכת קבוצה",
+      "dataCenter": "מרכז נתונים",
+      "users": "משתמשים"
+    },
+    "form": {
+      "email": "דואר אלקטרוני",
+      "firstName": "שם פרטי",
+      "lastName": "שם משפחה",
+      "citizenship": "אזרחות",
+      "dateOfBirth": "תאריך לידה",
+      "expectedJob": "מקצוע",
+      "isRemoteJob": "עבודה מרחוק",
+      "remoteCity": "עיר עבודה מרחוק",
+      "monthlyStipend": "קצבה / מלגה חודשית",
+      "uploadAvatar": "העלאת תמונת פרופיל",
+      "children": "ילדים",
+      "name": "שם",
+      "removeChild": "הסרה",
+      "addChild": "הוספה",
+      "preferences": "העדפות",
+      "departureDate": "תאריך עזיבה",
+      "apartmentSize": "גודל דירה",
+      "bedroomSingle": "חדר שינה אחד",
+      "bedrooms": "{{bedrooms}} חדרי שינה",
+      "password": {
+        "title": "סיסמה",
+        "verify": "אימות סיסמה",
+        "noMatch": "הסיסמאות אינן תואמות",
+        "weakPasswordPrefix": "הסיסמה חייבת להכיל ",
+        "weakPasswordChars": "לפחות 8 תווים",
+        "weakPasswordUppercase": "אות גדולה אחת",
+        "weakPasswordLowercase": "אות קטנה אחת",
+        "weakPasswordNumber": "ספרה אחת",
+        "weakPasswordSpecial": "תו מיוחד אחד",
+        "weakPasswordConnector": " ו"
+      },
+      "helper": {
+        "citizenship": "עוזר לנו לבדוק האם אתם או בן/בת הזוג שלכם פטורים מצורך באשרת עבודה",
+        "profession": "בחרו את תפקידכם וטווח השכר וכך נוכל להעריך את ההכנסה הפוטנציאלית שלכם בחו\"ל",
+        "stipend": "הוסיפו כל תמיכה קבועה (כמו מלגה או עזרה מהמשפחה) - אנחנו נמיר אותה למטבע היעד ונוסיף אותה לתקציב שלכם",
+        "password": "השתמשו בסיסמה חזקה בכדי להגן על החשבון והמידע האישי שלכם"
+      }
+    },
+    "editUser": {
+      "pending": "עורך משתמש",
+      "success": "המשתמש נערך בהצלחה",
+      "error": "עריכת המשתמש נכשלה"
+    },
+    "editGroup": {
+      "pending": "עורך קבוצה",
+      "success": "הקבוצה נערכה בהצלחה",
+      "error": "עריכת הקבוצה נכשלה"
+    },
+    "signUp": {
+      "signUp": "הרשמה",
+      "welcome": "ברוכים הבאים!",
+      "description": "הזינו את הפרטים שלכם שלכם",
+      "status": {
+        "pending": "יוצר משתמש חדש",
+        "success": "המשתמש נוצר בהצלחה",
+        "error": "יצירת המשתמש נכשלה"
+      },
+      "stateInvalid": {
+        "title": "קישור ההרשמה שלכם תקול",
+        "description": "אם הבעיה נמשכת, אנא פנו לצוות התמיכה שלנו."
+      },
+      "stateExpired": {
+        "title": "קישור ההרשמה שלכם פג תוקף",
+        "description": "הקישור שבו השתמשתם אינו תקף עוד מכיוון שפג לאחר שעה. אנא בקשו קישור הרשמה חדש כדי להמשיך.",
+        "refresh": "שליחה מחדש",
+        "remediation": "אם הבעיה נמשכת, אנא פנו לצוות התמיכה שלנו.",
+        "status": {
+          "successTitle": "קישור ההרשמה שלכם רוענן בהצלחה",
+          "successDescription": "כעת תוכלו להשתמש שוב בקישור בדואר האלקטרוני כדי להשלים את ההרשמה. הוא יהיה תקף למשך שעה נוספת.",
+          "errorTitle": "לא הצלחנו לרענן את קישור ההרשמה שלכם",
+          "errorDescription": "ייתכן שהבקשה פגה או שמדובר בתקלה טכנית. אנא פנו לתמיכה."
+        }
+      }
+    }
+  },
   "enum": {
     "visa": {
-      "0": { "short": "לא נדרש", "regular": "לא נדרשת ויזה" },
-      "1": { "short": "קל", "regular": "דרישות ויזה קלות" },
-      "2": { "short": "בינוני", "regular": "דרישות ויזה בינוניות" }
+      "0": { "short": "לא נדרשת", "regular": "לא נדרשת אשרת עבודה" },
+      "1": { "short": "קלה להנפקה", "regular": "קל להנפיק אשרת עבודה" },
+      "2": { "short": "נדרשת", "regular": "נדרשת אשרת עבודה" }
     },
     "language": {
       "AR": "ערבית",
@@ -326,33 +510,33 @@
         "subtitle": "מבוסס על ההכנסה הממוצעת בעיר"
       },
       "SocialWorker": {
-        "title": "עובד סוציאלי"
+        "title": "עבודה סוציאלית"
       },
       "Doctor": {
-        "title": "רופא"
+        "title": "רפואה"
       },
       "SoftwareEngineerEntry": {
-        "title": "מהנדס תוכנה",
-        "subtitle": "ג'וניור/ביניים"
+        "title": "הנדסת תוכנה",
+        "subtitle": "Junior/Mid"
       },
       "SoftwareEngineerSenior": {
-        "title": "מהנדס תוכנה",
-        "subtitle": "בכיר/פרינסיפל"
+        "title": "הנדסת תוכנה",
+        "subtitle": "Senior/Principle"
       },
       "SoftwareEngineerManager": {
-        "title": "מנהל הנדסת תוכנה"
+        "title": "ניהול הנדסת תוכנה"
       },
       "ProductDesigner": {
-        "title": "מעצב מוצר",
-        "subtitle": "UI / UX"
+        "title": "עיצוב מוצר",
+        "subtitle": "UI/UX"
       },
       "ProductManager": {
-        "title": "מנהל מוצר"
+        "title": "ניהול מוצר"
       }
     },
     "insights": {
       "1": "הטוב",
-      "2": "ככה-ככה",
+      "2": "הלא נורא",
       "3": "הרע"
     },
     "score": {
@@ -381,8 +565,8 @@
         "description": "השוואת הבדלי אזורי זמן עם ישראל"
       },
       "visa": {
-        "label": "דרישות ויזה",
-        "description": "השוואת זכאות ודרישות לוויזת עבודה"
+        "label": "אשרת עבודה",
+        "description": "השוואת זכאות ודרישות לאשרת עבודה"
       },
       "weather": {
         "label": "מזג אוויר",
@@ -405,12 +589,15 @@
     },
     "cost": {
       "generalCost": { "label": "עלות כללית", "caption": "/ חודש" },
-      "rentOuter": { "label": "שכר דירה", "caption": "/ חודש" },
+      "rentOuter": {
+        "label": "שכר דירה",
+        "caption": "/ {{bedrooms}} חדרי שינה / חודש"
+      },
       "buyOuter": { "label": "קנייה", "caption": "/ 120 מ\"ר" },
-      "beer": { "label": "בירה מהחבית", "caption": "/ 0.5 ליטר" },
+      "beer": { "label": "בירה מהחבית", "caption": "/ 500 מ\"ל" },
       "mealDate": { "label": "ארוחת ערב בחוץ", "caption": "/ זוג" },
       "mealSingle": { "label": "ארוחת צהריים בחוץ", "caption": "/ אדם" },
-      "mcDonalds": { "label": "ארוחת מקדונלד'ס קומבו", "caption": "/ אדם" },
+      "mcDonalds": { "label": "ארוחת מקדונלד'ס", "caption": "/ אדם" },
       "coffee": { "label": "קפוצ'ינו", "caption": "/ כוס" },
       "milk": { "label": "חלב", "caption": "/ 1 ליטר" },
       "bread": { "label": "לחם", "caption": "/ כיכר" },
@@ -420,19 +607,19 @@
       "beef": { "label": "בשר טחון", "caption": "/ 1 ק\"ג" },
       "apples": { "label": "תפוחים", "caption": "/ 1 ק\"ג" },
       "tomatoes": { "label": "עגבניות", "caption": "/ 1 ק\"ג" },
-      "wine": { "label": "יין", "caption": "/ 0.75 ליטר" },
-      "beerBottle": { "label": "בקבוק בירה", "caption": "/ 0.5 ליטר" },
+      "wine": { "label": "יין", "caption": "/ 750 מ\"ל" },
+      "beerBottle": { "label": "בקבוק בירה", "caption": "/ 500 מ\"ל" },
       "ticketSingle": {
         "label": "תחבורה ציבורית",
         "caption": "/ כרטיס בודד"
       },
       "ticketMonth": {
         "label": "תחבורה ציבורית",
-        "caption": "/ כרטיס חודשי"
+        "caption": "/ חופשי חודשי"
       },
       "germanCar": { "label": "מכונית משפחתית", "rangeKey": "japanCar" },
       "gasoline": { "label": "בנזין", "caption": "/ 1 ליטר" },
-      "stopsFlight": { "label": "טיסה לתל אביב", "caption": "/ אדם" },
+      "stopsFlight": { "label": "טיסה לישראל", "caption": "/ אדם" },
       "bills": { "label": "חשבונות", "caption": "/ חודש" },
       "internet": { "label": "אינטרנט", "caption": "/ חודש" },
       "mobile": { "label": "טלפון נייד", "caption": "/ חודש" },
@@ -453,6 +640,11 @@
       "ASIA": "אסיה והמזרח התיכון",
       "OCEANIA": "אוקיאניה",
       "ALL": "הכל"
+    },
+    "userType": {
+      "Admin": "מנהל מערכת",
+      "GroupOwner": "מנהל קבוצה",
+      "Standard": "משתמש רגיל"
     }
   }
 }

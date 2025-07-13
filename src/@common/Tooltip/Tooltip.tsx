@@ -61,7 +61,7 @@ const Tooltip = ({
   const popper = isComponent ? (
     <div className="rounded-[inherit] overflow-hidden">{title}</div>
   ) : (
-    <Typography variant="body2" component="span">
+    <Typography variant="body2" component="span" dir={props.dir}>
       {title}
     </Typography>
   );

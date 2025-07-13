@@ -1,5 +1,6 @@
 import Dialog from '@common/Dialog';
 import TextField from '@common/TextField';
+import { useTranslations } from '@translations';
 import { useState } from 'react';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 
 export const SaveSimulationDialog = ({ open, onClose, onSave }: Props) => {
   const [name, setName] = useState('');
+  const translations = useTranslations().city.cost.simulation.savedSimulations;
 
   const handleClose = () => {
     setName('');
@@ -31,8 +33,8 @@ export const SaveSimulationDialog = ({ open, onClose, onSave }: Props) => {
       <TextField
         value={name}
         onChange={(event) => setName(event.target.value)}
-        placeholder="Simulation Name"
-        label="Simulation Name"
+        placeholder={translations.name}
+        label={translations.name}
         className="!min-w-60"
       />
     </Dialog>

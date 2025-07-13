@@ -3,21 +3,32 @@ import Typography from '@common/Typography';
 import { useUserContext } from '@context/user';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
+import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import { alpha, Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import { City, Country } from '@root/types';
 import apiService from '@services/api';
+import dateService from '@services/date.service.ts';
 import storageService from '@services/storage';
 import SectionCard from '@shared/SectionCard';
 import { UserInviteDialog } from '@shared/UserInviteDialog';
+import {
+  interpolateTranslations,
+  ITranslations,
+  useTranslations,
+  useTranslationsContext,
+} from '@translations';
+import { array } from '@utils/array.utils.ts';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { ReactNode, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 
+type ItemStatus = 'done' | 'pending' | 'none';
+
 interface ItemProps {
-  isDone: boolean;
+  status: ItemStatus;
   label: string;
   children?: ReactNode;
 }
@@ -29,10 +40,14 @@ interface FavoritesListItem {
   id: Country | City;
 }
 
-const getCountdownDisplay = (departureDate: string) => {
+const getCountdownDisplay = (
+  departureDate: string,
+  translations: ITranslations,
+) => {
   const start = dayjs();
   const end = dayjs(departureDate);
   let diff = dayjs.duration(end.diff(start));
+  const t = translations.group.progress;
 
   const years = diff.years();
   diff = diff.subtract(years, 'year');
@@ -41,16 +56,24 @@ const getCountdownDisplay = (departureDate: string) => {
   const days = diff.days();
 
   const list = [
-    years === 1 ? '1 year' : years ? `${years} years` : '',
-    months === 1 ? '1 month' : months ? `${months} months` : '',
-    days === 1 ? '1 day' : days ? `${days} days` : '',
+    years === 1
+      ? t.yearSingle
+      : years
+        ? interpolateTranslations(t.years, { years })
+        : '',
+    months === 1
+      ? t.monthSingle
+      : months
+        ? interpolateTranslations(t.months, { months })
+        : '',
+    days === 1
+      ? t.daySingle
+      : days
+        ? interpolateTranslations(t.days, { days })
+        : '',
   ].filter(Boolean);
 
-  return !list.length
-    ? ''
-    : list.length === 1
-      ? list[0]
-      : `${list.slice(0, -1).join(', ')} and ${list.at(-1)}`;
+  return array.joinWithLast(list, ', ', t.countdownConnector);
 };
 
 const getCardBg = (theme: Theme) =>
@@ -58,8 +81,14 @@ const getCardBg = (theme: Theme) =>
 
 const getIndicatorColor = (theme: Theme) => theme.palette.info.light;
 
-const Item = ({ isDone, label, children }: ItemProps) => {
-  const Icon = isDone ? CheckRoundedIcon : ClearRoundedIcon;
+const Item = ({ status, label, children }: ItemProps) => {
+  const Icon =
+    status === 'done'
+      ? CheckRoundedIcon
+      : status === 'none'
+        ? ClearRoundedIcon
+        : MoreHorizRoundedIcon;
+  const { isRtl } = useTranslationsContext();
 
   return (
     <div className="relative z-10 flex flex-col">
@@ -72,9 +101,9 @@ const Item = ({ isDone, label, children }: ItemProps) => {
             fontSize="small"
             sx={{
               color: (theme) =>
-                isDone
-                  ? theme.palette.primary.contrastText
-                  : alpha(theme.palette.background.default, 0.6),
+                status === 'none'
+                  ? alpha(theme.palette.background.default, 0.6)
+                  : theme.palette.primary.contrastText,
             }}
           />
         </Box>
@@ -85,7 +114,9 @@ const Item = ({ isDone, label, children }: ItemProps) => {
       </div>
       {children && (
         <div className="pl-7.5">
-          <Typography variant="body2">{children}</Typography>
+          <Typography variant="body2" dir={isRtl ? 'rtl' : 'ltr'} align="left">
+            {children}
+          </Typography>
         </div>
       )}
     </div>
@@ -96,21 +127,24 @@ const GroupSetupItem = () => {
   const {
     group: { partner, children },
   } = useUserContext();
-  const isDone = children.length ? !!partner : true;
+  const translations = useTranslations().group.progress;
+
+  const hasChildren = children.length > 0;
+  const status = hasChildren ? (partner ? 'done' : 'none') : 'done';
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => setIsDialogOpen(false);
 
   return (
-    <Item isDone={isDone} label="Setup Partner">
-      {isDone ? (
+    <Item status={status} label={translations.setupPartner}>
+      {status === 'done' ? (
         <span>
-          Partner is set to {partner?.firstName} {partner?.lastName}
+          {hasChildren ? translations.partnerSet : translations.partnerNoNeed}
         </span>
       ) : (
         <span>
-          <Link onClick={openDialog}>Invite partner</Link>
+          <Link onClick={openDialog}>{translations.invitePartner}</Link>
           <UserInviteDialog
             open={isDialogOpen}
             onClose={closeDialog}
@@ -126,24 +160,27 @@ const DepartureDateItem = () => {
   const {
     group: { departureDate },
   } = useUserContext();
-  const isDone = !!departureDate;
-  const countdown = getCountdownDisplay(departureDate);
+  const translations = useTranslations();
+  const compTranslations = translations.group.progress;
+  const status = departureDate ? 'done' : 'none';
+  const countdown = getCountdownDisplay(departureDate, translations);
+  const { language } = useTranslationsContext();
 
   return (
-    <Item isDone={isDone} label="Set Departure Date">
-      {isDone ? (
+    <Item status={status} label={compTranslations.setDepartureDate}>
+      {status === 'done' ? (
         <span>
-          {dayjs(departureDate).format('MMMM YYYY')} -{' '}
-          {countdown ? (
-            <>
-              only <strong>{countdown}</strong> to go!
-            </>
-          ) : (
-            "it's go time!"
-          )}
+          {dateService.formatReadableDate(departureDate, language)}
+          {countdown
+            ? interpolateTranslations(compTranslations.countdownResult, {
+                countdown,
+              })
+            : compTranslations.goTime}
         </span>
       ) : (
-        <Link href="/settings/group">Set departure date</Link>
+        <Link href="/settings/group">
+          {compTranslations.setDepartureDateAction}
+        </Link>
       )}
     </Item>
   );
@@ -153,14 +190,21 @@ const FavoritesItem = () => {
   const { group } = useUserContext();
   const { data: cities } = apiService.useCities();
   const { data: countries } = apiService.countries.useList();
+  const translations = useTranslations().group.progress;
 
   const isDestination = !!group.destination && group.destination in City;
   const isDone =
-    !!cities && !!countries && (group.bookmarks.length > 0 || isDestination);
+    !!cities &&
+    !!countries &&
+    (group.bookmarks.length > 0 || !!group.destination);
 
   const list: FavoritesListItem[] = useMemo(() => {
-    if (!isDone) return [];
-    return group.bookmarks
+    if (!cities || !countries) return [];
+
+    const favorites = group.destination
+      ? [...group.bookmarks, group.destination]
+      : group.bookmarks;
+    return favorites
       .map((item) => {
         const isCity = item in City;
         const { name, id } = isCity
@@ -174,17 +218,19 @@ const FavoritesItem = () => {
           ? Number(a.isCity) - Number(b.isCity)
           : a.name.localeCompare(b.name),
       );
-  }, [cities, countries, group.bookmarks, isDone]);
+  }, [cities, countries, group.bookmarks, group.destination]);
+
+  const status = isDone ? 'done' : 'none';
 
   return (
-    <Item isDone={isDone} label="Mark Places of Interest">
+    <Item status={status} label={translations.markPlaces}>
       {isDestination ? (
-        <span>A destination was selected</span>
+        <span>{translations.selectedDestination}</span>
       ) : isDone ? (
         list.map(({ id, name, path }, index) => (
           <span
             className={clsx(
-              index !== list.length - 1 && 'after:content-[","] after:mr-1',
+              index !== list.length - 1 && 'after:content-[","] after:me-1',
             )}
           >
             <Link key={id} href={path}>
@@ -194,8 +240,11 @@ const FavoritesItem = () => {
         ))
       ) : (
         <span>
-          Mark <Link href="/countries">countries</Link> or{' '}
-          <Link href="/">cities</Link> of interest.
+          {translations.markPlacesAction1}
+          <Link href="/countries">{translations.markPlacesAction2}</Link>
+          {translations.markPlacesAction3}
+          <Link href="/">{translations.markPlacesAction4}</Link>
+          {translations.markPlacesAction5}
         </span>
       )}
     </Item>
@@ -209,6 +258,7 @@ const DestinationItem = () => {
   const { data: cities } = apiService.useCities();
   const { data: countries } = apiService.countries.useList();
   const navigate = useNavigate();
+  const translations = useTranslations().group.progress;
 
   const handleListClick = () => {
     storageService.setFilters('cities', {
@@ -217,25 +267,32 @@ const DestinationItem = () => {
     navigate('/');
   };
 
-  const isDone = !!destination && destination in City;
+  const status = !destination
+    ? 'none'
+    : destination in City
+      ? 'done'
+      : 'pending';
 
   return (
-    <Item isDone={isDone} label="Choose Destination">
-      {isDone ? (
+    <Item status={status} label={translations.chooseDestination}>
+      {status === 'done' ? (
         <Link href={`/city/${destination}`}>
           {cities?.[destination as City].name}
         </Link>
-      ) : destination ? (
+      ) : status === 'pending' ? (
         <span>
-          Only a destination country was set (
           <Link href={`/city/${destination}`}>
             {countries?.[destination as Country].name}
           </Link>
-          ), choose a city from the <Link onClick={handleListClick}>list</Link>
+          {translations.chooseDestinationPartialAction1}
+          <Link onClick={handleListClick}>
+            {translations.chooseDestinationPartialAction2}
+          </Link>
         </span>
       ) : (
         <span>
-          Choose destination from <Link href="/">cities</Link>
+          {translations.chooseDestinationAction}
+          <Link href="/">{translations.chooseDestinationPartialAction2}</Link>
         </span>
       )}
     </Item>
@@ -247,33 +304,45 @@ const ResearchItem = () => {
     group: { destination },
   } = useUserContext();
   const isDestination = !!destination && destination in City;
+  const translations = useTranslations().group.progress;
 
   const { data: notes = 0 } = apiService.notes.useCount(
     destination!,
     isDestination,
   );
 
-  const isDone = isDestination && notes > 10;
+  const status =
+    !isDestination || !notes ? 'none' : notes > 10 ? 'done' : 'pending';
 
   const link = `/city/${destination}/notes`;
 
   return (
-    <Item isDone={isDone} label="Research Destination and Collect Notes">
-      {isDone ? (
+    <Item status={status} label={translations.researchDestination}>
+      {status === 'done' ? (
         <span>
-          Added {notes.toLocaleString()} <Link href={link}>notes</Link>
+          {translations.addedNotes}
+          <Link href={link}>
+            {interpolateTranslations(translations.notes, {
+              notes: notes.toLocaleString(),
+            })}
+          </Link>
         </span>
       ) : isDestination ? (
         <span>
           {notes === 1
-            ? 'Added 1 note - add more'
+            ? translations.addedSingleNote
             : notes > 0
-              ? `Added ${notes.toLocaleString()} notes - add more`
-              : 'Start adding'}{' '}
-          <Link href={link}>notes</Link> to your destination
+              ? interpolateTranslations(translations.addedNotesFull, {
+                  notes: notes.toLocaleString(),
+                })
+              : ''}{' '}
+          <Link href={link}>
+            {notes ? translations.addMoreNotes : translations.startAddingNotes}
+          </Link>
+          {translations.toYourDestination}
         </span>
       ) : (
-        <span>No destination selected</span>
+        <span>{translations.noDestination}</span>
       )}
     </Item>
   );
@@ -281,11 +350,12 @@ const ResearchItem = () => {
 
 export const ProgressWidget = () => {
   const theme = useTheme();
+  const translations = useTranslations().group.progress;
 
   return (
     <SectionCard
       style={{ background: getCardBg(theme), border: 'none' }}
-      title="Progress"
+      title={translations.title}
     >
       <div className="pl-5">
         <div className="flex flex-col gap-4 relative">

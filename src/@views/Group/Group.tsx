@@ -13,8 +13,14 @@ import {
 const Group = () => {
   const {
     user,
-    group: { partner },
+    group: { partner, children },
   } = useUserContext();
+
+  const hasChildren = children.length > 0;
+  const columns =
+    hasChildren || style.MASONRY_COLUMN_COUNT <= 2
+      ? style.MASONRY_COLUMN_COUNT
+      : style.MASONRY_COLUMN_COUNT - 1;
 
   return (
     <div className="pt-5 flex flex-col gap-4">
@@ -23,15 +29,11 @@ const Group = () => {
         <TopWidget />
       </div>
       <div className="pl-5 pr-1 flex items-center gap-4">
-        <Masonry
-          columns={style.MASONRY_COLUMN_COUNT}
-          spacing={2}
-          sequential={false}
-        >
+        <Masonry columns={columns} spacing={2} sequential={false}>
           <UserDisplay user={user} editLink="/settings/user" />
           {partner && <UserDisplay user={partner} />}
           <GroupDisplay />
-          <ChildrenDisplay />
+          {hasChildren && <ChildrenDisplay />}
         </Masonry>
       </div>
     </div>

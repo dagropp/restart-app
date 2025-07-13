@@ -1,4 +1,5 @@
-import { Currency, ThemeType } from '@root/types';
+import { type Currency, type ThemeType } from '@root/types';
+import { type Language } from '@translations';
 
 import { type LoginResponse } from '../api';
 import { defaultAppStorage } from './storage.const';
@@ -26,6 +27,7 @@ class StorageService {
   get(key: 'theme'): ThemeType;
   get(key: 'filters'): Record<string, string>;
   get(key: 'savedSimulation'): number;
+  get(key: 'language'): Language;
   get(key: keyof AppStorage): DefaultReturn {
     const item = localStorage.getItem(key);
     if (item !== null && item !== undefined)

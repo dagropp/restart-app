@@ -9,6 +9,7 @@ export interface ListItem {
   value: ReactNode;
   Icon: OverridableComponent<SvgIconTypeMap>;
   tooltip?: string;
+  hidden?: boolean;
 }
 
 export interface ListItemsGroup {

@@ -49,17 +49,8 @@ const LanguageDisplay = ({
 
   return (
     <Tooltip
-      title={
-        captionAsTooltip && (
-          <Typography
-            variant="body2"
-            className="px-2 py-1"
-            dir={isRtl ? 'rtl' : 'ltr'}
-          >
-            {englishSpeakersLabel}
-          </Typography>
-        )
-      }
+      title={captionAsTooltip && englishSpeakersLabel}
+      dir={isRtl ? 'rtl' : 'ltr'}
       placement="left"
     >
       <Typography variant="body2" className="flex flex-col">

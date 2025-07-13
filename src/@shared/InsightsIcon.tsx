@@ -15,45 +15,57 @@ import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconOwnProps, SvgIconTypeMap } from '@mui/material/SvgIcon';
 import { InsightKey } from '@services/api';
+import { useTranslations } from '@translations';
 
 interface InsightData {
   Icon: OverridableComponent<SvgIconTypeMap>;
   label: string;
 }
 
-const map: Record<InsightKey, InsightData> = {
-  colIndexMultiple: {
-    Icon: PointOfSaleRoundedIcon,
-    label: 'Cost of Living Index - Two Providers',
-  },
-  colIndexSingle: {
-    Icon: BusinessCenterRoundedIcon,
-    label: 'Cost of Living Index - Single Provider',
-  },
-  community: { Icon: Diversity3RoundedIcon, label: 'Facebook Community' },
-  electricity: {
-    Icon: ElectricBoltRoundedIcon,
-    label: 'Electricity Compatability',
-  },
-  flightDuration: { Icon: FlightTakeoffRoundedIcon, label: 'Flight Duration' },
-  flightPrice: { Icon: AirplaneTicketRoundedIcon, label: 'Flight Price' },
-  language: { Icon: TranslateRoundedIcon, label: 'Language' },
-  quality: {
-    Icon: VolunteerActivismRoundedIcon,
-    label: 'Quality of Life Rank',
-  },
-  rainfall: { Icon: ThunderstormRoundedIcon, label: 'Rainfall Amount' },
-  sunlight: { Icon: WbSunnyRoundedIcon, label: 'Sunlight Duration' },
-  visa: { Icon: ApprovalRoundedIcon, label: 'Visa Requirements' },
-  weather: { Icon: ThermostatRoundedIcon, label: 'Weather' },
-  timezone: { Icon: AccessTimeFilledRoundedIcon, label: 'Timezone Difference' },
-};
-
 interface Props extends SvgIconOwnProps {
   insightKey: InsightKey;
 }
 
 const InsightsIcon = ({ insightKey, ...props }: Props) => {
+  const translations = useTranslations().compare.breakdown;
+
+  const map: Record<InsightKey, InsightData> = {
+    colIndexMultiple: {
+      Icon: PointOfSaleRoundedIcon,
+      label: translations.colIndexCouple,
+    },
+    colIndexSingle: {
+      Icon: BusinessCenterRoundedIcon,
+      label: translations.colIndexSingle,
+    },
+    community: { Icon: Diversity3RoundedIcon, label: translations.community },
+    electricity: {
+      Icon: ElectricBoltRoundedIcon,
+      label: translations.electricity,
+    },
+    flightDuration: {
+      Icon: FlightTakeoffRoundedIcon,
+      label: translations.flightDuration,
+    },
+    flightPrice: {
+      Icon: AirplaneTicketRoundedIcon,
+      label: translations.flightPrice,
+    },
+    language: { Icon: TranslateRoundedIcon, label: translations.language },
+    quality: {
+      Icon: VolunteerActivismRoundedIcon,
+      label: translations.qolRank,
+    },
+    rainfall: { Icon: ThunderstormRoundedIcon, label: translations.rainfall },
+    sunlight: { Icon: WbSunnyRoundedIcon, label: translations.sunlight },
+    visa: { Icon: ApprovalRoundedIcon, label: translations.visa },
+    weather: { Icon: ThermostatRoundedIcon, label: translations.weather },
+    timezone: {
+      Icon: AccessTimeFilledRoundedIcon,
+      label: translations.timezone,
+    },
+  };
+
   const { Icon, label } = map[insightKey];
 
   return (

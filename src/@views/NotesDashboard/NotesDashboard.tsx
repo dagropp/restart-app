@@ -3,6 +3,7 @@ import MuiTabs from '@mui/material/Tabs';
 import { NotesTabKey } from '@root/types';
 import apiService from '@services/api';
 import titleService from '@services/title';
+import Checklist from '@shared/Checklist';
 import Notes from '@shared/Notes';
 import { interpolateTranslations, useTranslations } from '@translations';
 import { object } from '@utils/object.utils';
@@ -40,7 +41,7 @@ const NotesDashboard = ({ tab }: Props) => {
       },
       [NotesTabKey.CHECKLIST]: {
         label: compTranslations.checklist,
-        element: <div>{compTranslations.checklist}</div>,
+        element: <Checklist />,
       },
     }),
     [

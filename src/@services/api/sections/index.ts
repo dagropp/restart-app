@@ -1,4 +1,5 @@
 export * from './authentication';
+export * from './checklist';
 export * from './community';
 export * from './compare';
 export * from './countries';

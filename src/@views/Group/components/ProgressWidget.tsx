@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import { City, Country } from '@root/types';
 import apiService from '@services/api';
-import dateService from '@services/date.service.ts';
+import dateService from '@services/date.service';
 import storageService from '@services/storage';
 import SectionCard from '@shared/SectionCard';
 import { UserInviteDialog } from '@shared/UserInviteDialog';
@@ -19,7 +19,7 @@ import {
   useTranslations,
   useTranslationsContext,
 } from '@translations';
-import { array } from '@utils/array.utils.ts';
+import { array } from '@utils/array.utils';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { ReactNode, useMemo, useState } from 'react';

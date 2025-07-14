@@ -1,4 +1,4 @@
-import { Language } from '@root/types.ts';
+import { Language } from '@root/types';
 
 export const languageMap: Record<Language, string> = {
   [Language.AR]: 'العربية',

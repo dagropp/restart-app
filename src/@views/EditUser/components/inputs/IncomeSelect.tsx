@@ -11,7 +11,7 @@ import { useTranslations } from '@translations';
 import { incomeUtils } from '@utils/income.utils';
 import { is } from '@utils/is.utils';
 import { object } from '@utils/object.utils';
-import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper.tsx';
+import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper';
 import { useEffect, useMemo, useState } from 'react';
 
 import { InputName } from '../../types';

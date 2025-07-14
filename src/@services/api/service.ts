@@ -6,6 +6,7 @@ import { Language, useTranslationsContext } from '@translations';
 import { http } from '../http.service';
 import {
   authentication,
+  checklist,
   community,
   compare,
   countries,
@@ -146,6 +147,7 @@ const apiService = {
   notes,
   score,
   simulation,
+  checklist,
 };
 
 export default apiService;

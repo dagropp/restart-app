@@ -643,3 +643,29 @@ export type UpdateSimulationPayload = Omit<
 >;
 
 export type SaveSimulationPayload = Omit<UpdateSimulationPayload, 'id'>;
+
+// checklist
+export enum ChecklistItemSeverity {
+  Low,
+  Medium,
+  High,
+}
+
+export interface ChecklistItem {
+  id: string;
+  text: string;
+  severity: ChecklistItemSeverity;
+  created?: number;
+}
+
+export interface ChecklistResponse {
+  todo: ChecklistItem[];
+  done: ChecklistItem[];
+}
+
+export interface PutChecklistPayload {
+  text: string;
+  status: boolean;
+  severity: ChecklistItemSeverity;
+  type: 'add' | 'status' | 'update';
+}

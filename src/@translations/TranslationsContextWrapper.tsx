@@ -4,8 +4,8 @@ import storageService from '@services/storage';
 import { useQuery } from '@tanstack/react-query';
 import { type PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
-import { rtlLanguages } from './constants.ts';
-import { defaultTranslations } from './defaultTranslations.ts';
+import { rtlLanguages } from './constants';
+import { defaultTranslations } from './defaultTranslations';
 import { TranslationsContext } from './TranslationsContext';
 import { ITranslations, Language } from './types';
 

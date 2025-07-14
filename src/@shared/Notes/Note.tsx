@@ -18,7 +18,7 @@ const NoteWithData = ({ showCity }: NoteWithDataProps) => {
   const noteId = useNoteId();
   const { id: placeId } = useParams<{ id: City | Country }>();
 
-  const { data: notes = [], refetch } = apiService.notes.useNotesNew({
+  const { data: notes = [], refetch } = apiService.notes.useNotes({
     noteId,
     placeId,
   });

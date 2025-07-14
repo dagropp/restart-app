@@ -36,10 +36,9 @@ interface GeneralTabsProps {
 export const GeneralTabs = ({ item, tab, loading }: GeneralTabsProps) => {
   const { pathname } = useLocation();
   const { data: cities } = apiService.useCities();
-  const { data: notes = [], refetch: refetchNotes } =
-    apiService.notes.useNotesNew({
-      placeId: item?.id,
-    });
+  const { data: notes = [], refetch: refetchNotes } = apiService.notes.useNotes(
+    { placeId: item?.id },
+  );
 
   const [prevCity, nextCity] = list.getListNavigation<CityData>(
     item,

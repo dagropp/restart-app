@@ -23,11 +23,7 @@ const NotesDashboard = ({ tab }: Props) => {
   const translations = useTranslations().notes;
   const compTranslations = translations.tabs;
 
-  const {
-    data: notes = [],
-    isLoading,
-    refetch,
-  } = apiService.notes.useNotesNew();
+  const { data: notes = [], isLoading, refetch } = apiService.notes.useNotes();
 
   const key = pathname?.split('/').at(-1) as NotesTabKey;
 

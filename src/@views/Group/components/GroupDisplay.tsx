@@ -10,7 +10,7 @@ import TollRoundedIcon from '@mui/icons-material/TollRounded';
 import IconButton from '@mui/material/IconButton';
 import { IncomeType } from '@root/types';
 import { ChildrenResponse } from '@services/api';
-import dateService from '@services/date.service.ts';
+import dateService from '@services/date.service';
 import SectionCard from '@shared/SectionCard';
 import {
   interpolateTranslations,
@@ -18,7 +18,7 @@ import {
   useTranslations,
   useTranslationsContext,
 } from '@translations';
-import { array } from '@utils/array.utils.ts';
+import { array } from '@utils/array.utils';
 import { incomeUtils } from '@utils/income.utils';
 
 import { ListItem } from './types';

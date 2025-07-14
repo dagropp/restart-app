@@ -352,7 +352,11 @@
     "checklist": "Checklist",
     "comments": "Comments",
     "pin": "Pin",
-    "removePin": "Remove Pin"
+    "removePin": "Remove Pin",
+    "tabs": {
+      "notes": "Notes ({{notes}})",
+      "checklist": "Checklist"
+    }
   },
   "country": {
     "religion": {

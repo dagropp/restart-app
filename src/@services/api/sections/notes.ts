@@ -1,11 +1,6 @@
 import { City, Country, NoteScope, NoteType } from '@root/types';
-import apiService, {
-  NotesCountResponse,
-  UseNotesHook,
-  UseNotesOptions,
-} from '@services/api';
+import apiService, { NotesCountResponse, UseNotesOptions } from '@services/api';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
 
 import { http } from '../../http.service';
 import { NoteResponse, StatusResponse } from '../types';
@@ -54,37 +49,12 @@ const useReplies = (id: number, enabled: boolean) =>
     enabled,
   });
 
-const useNotes = ({
-  placeId,
-  noteId,
-  enabled,
-}: UseNotesOptions = {}): UseNotesHook => {
-  const [notes, setNotes] = useState<NoteResponse[]>([]);
-
-  const query = useQuery({
+const useNotes = ({ placeId, noteId, enabled }: UseNotesOptions = {}) =>
+  useQuery({
     queryKey: ['getNotes', placeId, noteId, enabled],
     queryFn: () => get(placeId, noteId),
     enabled,
   });
-
-  useEffect(() => {
-    if (query.isSuccess && query.data) setNotes(query.data);
-  }, [query.data, query.isSuccess]);
-
-  const add = (note: NoteResponse) => setNotes((prev) => [note, ...prev]);
-  const update = (note: NoteResponse) =>
-    setNotes((prev) => prev.map((item) => (item.id === note.id ? note : item)));
-  const remove = (id: number) =>
-    setNotes((prev) => prev.filter((item) => item.id !== id));
-  const modifyReplyCount = (noteId: number, count: number) =>
-    setNotes((prev) =>
-      prev.map((item) =>
-        item.id === noteId ? { ...item, replies: item.replies + count } : item,
-      ),
-    );
-
-  return { query, notes, actions: { add, update, remove, modifyReplyCount } };
-};
 
 const useCount = (placeId: City | Country, enabled?: boolean) =>
   useQuery({

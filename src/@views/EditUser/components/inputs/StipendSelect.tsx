@@ -3,7 +3,7 @@ import { Currency } from '@root/types';
 import { UserResponse } from '@services/api';
 import { CurrencyMenu } from '@shared/index';
 import { useTranslations } from '@translations';
-import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper.tsx';
+import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper';
 import { InputName } from '@views/EditUser/types';
 import { ChangeEvent, useState } from 'react';
 

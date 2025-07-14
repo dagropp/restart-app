@@ -1,23 +1,27 @@
-import apiService from '@services/api';
+import { type NoteResponse } from '@services/api';
 import Notes from '@shared/Notes';
 
 import { useCityContext } from '../context';
 
 interface Props {
   loading: boolean;
+  notes: NoteResponse[];
+  refetch: () => void;
 }
 
-const NotesWithData = () => {
+const NotesWithData = ({ notes, refetch }: Omit<Props, 'loading'>) => {
   const { item } = useCityContext();
 
-  const { actions, notes } = apiService.notes.useNotes({ placeId: item.id });
-
-  return <Notes loading={false} id={item.id} notes={notes} actions={actions} />;
+  return <Notes loading={false} id={item.id} notes={notes} refetch={refetch} />;
 };
 
 const NotesSkeleton = () => <Notes loading={true} />;
 
-const CityNotes = ({ loading }: Props) =>
-  loading ? <NotesSkeleton /> : <NotesWithData />;
+const CityNotes = ({ loading, notes, refetch }: Props) =>
+  loading ? (
+    <NotesSkeleton />
+  ) : (
+    <NotesWithData notes={notes} refetch={refetch} />
+  );
 
 export default CityNotes;

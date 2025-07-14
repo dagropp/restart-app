@@ -292,7 +292,7 @@
       "cities": "ערים",
       "countries": "מדינות",
       "compare": "השוואה",
-      "notes": "הערות",
+      "notes": "רשימות",
       "group": "קבוצה",
       "settings": "הגדרות"
     },
@@ -324,14 +324,14 @@
       "comment": "הוספת תגובה",
       "note": "הוספת הערה",
       "link": "הוספת קישור",
-      "checklist": "הוספת רשימת מטלות",
+      "checklist": "הוספת רשימת משימות",
       "title": "הוספת כותרת",
       "todoItem": "הוספת פריט"
     },
     "edit": {
       "reply": "עריכת תגובה",
       "note": "עריכת הערה",
-      "checklist": "עריכת רשימת מטלות",
+      "checklist": "עריכת רשימת משימות",
       "link": "עריכת קישור",
       "title": "עריכה"
     },
@@ -344,14 +344,18 @@
     "commentsCount": "{{comments}} תגובות",
     "fullPageView": "תצוגת עמוד מלא",
     "showMore": "הצגת עוד...",
-    "generalNote": "הערה כללית עבור",
+    "generalNote": "הערה כללית עבור ",
     "createdOn": "נוצר ב-{{date}}",
     "textNote": "הערת טקסט",
     "link": "קישור",
-    "checklist": "רשימת מטלות",
+    "checklist": "רשימת משימות",
     "comments": "תגובות",
     "pin": "נעיצה",
-    "removePin": "הסרת נעיצה"
+    "removePin": "הסרת נעיצה",
+    "tabs": {
+      "notes": "הערות ({{notes}})",
+      "checklist": "רשימת משימות"
+    }
   },
   "country": {
     "religion": {

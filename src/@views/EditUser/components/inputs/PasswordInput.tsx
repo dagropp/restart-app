@@ -1,8 +1,8 @@
 import TextField from '@common/TextField';
 import { ITranslations, useTranslations } from '@translations';
-import { array } from '@utils/array.utils.ts';
+import { array } from '@utils/array.utils';
 import { string } from '@utils/string.utils';
-import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper.tsx';
+import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper';
 import { ChangeEvent, useState } from 'react';
 
 import { InputName } from '../../types';

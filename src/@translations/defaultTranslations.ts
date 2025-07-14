@@ -300,6 +300,7 @@ export const defaultTranslations = {
       notes: 'Notes',
       group: 'Group',
       settings: 'Settings',
+      checklist: 'Checklist',
     },
     secondary: {
       openSettings: 'Open Settings',
@@ -357,6 +358,10 @@ export const defaultTranslations = {
     comments: 'Comments',
     pin: 'Pin',
     removePin: 'Remove Pin',
+    tabs: {
+      notes: 'Notes ({{notes}})',
+      checklist: 'Checklist',
+    },
   },
   country: {
     religion: {

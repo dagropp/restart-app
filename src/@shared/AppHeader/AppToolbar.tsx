@@ -15,7 +15,7 @@ import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
 import Toolbar from '@mui/material/Toolbar';
 import apiService from '@services/api';
 import storageService from '@services/storage';
-import LanguageSelect from '@shared/LanguageSelect.tsx';
+import LanguageSelect from '@shared/LanguageSelect';
 import { UserInviteDialog } from '@shared/UserInviteDialog';
 import { useTranslations } from '@translations';
 import clsx from 'clsx';

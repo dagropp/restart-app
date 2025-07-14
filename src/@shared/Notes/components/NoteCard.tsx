@@ -22,9 +22,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Skeleton from '@mui/material/Skeleton';
 import { SxProps } from '@mui/system';
-import { NoteScope, NoteType } from '@root/types';
-import apiService, { type NoteResponse, UseNotesActions } from '@services/api';
-import { Todo } from '@shared/Notes/components/Todo';
+import { NoteType } from '@root/types';
+import apiService, { type NoteResponse } from '@services/api';
 import {
   interpolateTranslations,
   useTranslations,
@@ -44,10 +43,9 @@ import { TextNote } from './TextNote';
 
 interface Props {
   note: NoteResponse;
-  actions: UseNotesActions;
+  refetch: () => void;
   showCity?: boolean;
   fullPage?: boolean;
-  onDelete?: () => void;
 }
 
 interface NoteCardSkeletonProps {
@@ -102,13 +100,7 @@ export const NoteCardSkeleton = ({ rows }: NoteCardSkeletonProps) => {
   );
 };
 
-export const NoteCard = ({
-  note,
-  actions,
-  showCity,
-  fullPage,
-  onDelete,
-}: Props) => {
+export const NoteCard = ({ note, refetch, showCity, fullPage }: Props) => {
   const { data: users = {} } = apiService.useUsers();
   const translations = useTranslations().notes;
   const { isRtl } = useTranslationsContext();
@@ -152,26 +144,21 @@ export const NoteCard = ({
   const handleDelete = async () => {
     await apiService.notes.delete(note.id);
     handleCloseDeleteDialog();
-    onDelete?.();
-    if (note.parent) {
-      actions.modifyReplyCount(note.parent, -1);
-    } else {
-      actions.remove(note.id);
-    }
+    refetch();
   };
 
   const handleReply = async ({ note: value }: NoteData) => {
     const { status } = await apiService.notes.reply(note.id, value);
     if (status) {
       await refetchReplies();
-      actions.modifyReplyCount(note.id, 1);
+      refetch();
     }
   };
 
   const handlePin = async () => {
     const newValue = !note.pinned;
     const { status } = await apiService.notes.pin(note.id, newValue);
-    if (status) actions.update({ ...note, pinned: newValue ? 1 : 0 });
+    if (status) refetch();
   };
 
   const commentsCounter = !note.replies
@@ -216,6 +203,11 @@ export const NoteCard = ({
   const repliesDisplay = fullPage ? replies : replies.slice(0, 5);
 
   const isHebrewTitle = !!note.title && string.containsHebrew(note.title);
+
+  const handleReplyChange = async () => {
+    refetch();
+    await refetchReplies();
+  };
 
   return (
     <>
@@ -276,15 +268,6 @@ export const NoteCard = ({
           {note.type === NoteType.Link && (
             <NoteLink link={note.data} fullPage={fullPage} />
           )}
-          {note.type === NoteType.Todo && (
-            <Todo
-              actions={actions}
-              placeId={note.cityId}
-              note={note}
-              scope={note.scope === NoteScope.Private}
-              title={note.title ?? ''}
-            />
-          )}
         </CardContent>
         {!isReply && (
           <>
@@ -336,15 +319,13 @@ export const NoteCard = ({
                     autoFocus={!fullPage}
                     size="small"
                     variant="reply"
-                    actions={actions}
                   />
                 </NoteForm>
                 {repliesDisplay.map((note) => (
                   <NoteCard
                     key={`reply-${note.id}`}
                     note={note}
-                    actions={actions}
-                    onDelete={refetchReplies}
+                    refetch={handleReplyChange}
                     fullPage={fullPage}
                   />
                 ))}
@@ -394,8 +375,7 @@ export const NoteCard = ({
             open={isEditDialogOpen}
             onClose={handleCloseEditDialog}
             note={note}
-            actions={actions}
-            placeId={note.cityId}
+            refetch={refetch}
           />
         </>
       )}

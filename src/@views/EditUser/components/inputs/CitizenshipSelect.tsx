@@ -1,7 +1,7 @@
 import { Country } from '@root/types';
 import CountrySelect from '@shared/CountrySelect';
 import { useTranslations } from '@translations';
-import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper.tsx';
+import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper';
 import { useState } from 'react';
 
 import { InputName } from '../../types';

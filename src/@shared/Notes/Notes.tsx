@@ -1,6 +1,6 @@
 import Masonry from '@mui/lab/Masonry';
 import { City, Country, NoteScope } from '@root/types';
-import apiService, { NoteResponse, UseNotesActions } from '@services/api';
+import apiService, { NoteResponse } from '@services/api';
 import { style } from '@utils/style.utils';
 
 import {
@@ -13,7 +13,7 @@ import {
 
 interface Props {
   notes?: NoteResponse[];
-  actions?: UseNotesActions;
+  refetch?: () => void;
   id?: Country | City;
   showCity?: boolean;
   loading: boolean;
@@ -26,7 +26,7 @@ interface NotesWithDataProps extends Required<Omit<Props, 'loading' | 'id'>> {
 const NotesWithData = ({
   notes,
   id,
-  actions,
+  refetch,
   showCity,
 }: NotesWithDataProps) => {
   const handleSave = async ({ note, scope, type, title }: NoteData) => {
@@ -38,7 +38,7 @@ const NotesWithData = ({
       type,
       title,
     );
-    if (response) actions.add(response);
+    if (response) refetch();
   };
 
   return (
@@ -47,12 +47,7 @@ const NotesWithData = ({
         <Masonry columns={style.MASONRY_COLUMN_COUNT} spacing={2} sequential>
           <div className="invisible">|</div>
           <NoteForm onSave={handleSave} className="flex flex-col gap-4">
-            <NoteEditor
-              variant="add"
-              placeId={id}
-              actions={actions}
-              autoFocus
-            />
+            <NoteEditor variant="add" autoFocus />
           </NoteForm>
           <div className="invisible">|</div>
         </Masonry>
@@ -63,7 +58,7 @@ const NotesWithData = ({
           <NoteCard
             key={note.id}
             note={note}
-            actions={actions}
+            refetch={refetch}
             showCity={showCity}
           />
         ))}
@@ -81,7 +76,7 @@ const NotesSkeleton = () => {
         onSave={async () => console.log()}
         className="flex flex-col gap-4 w-full"
       >
-        <NoteEditor disabled actions={{} as UseNotesActions} variant="add" />
+        <NoteEditor disabled variant="add" />
       </NoteForm>
       {rows.map((rows, index) => (
         <NoteCardSkeleton rows={rows} key={index} />
@@ -90,15 +85,15 @@ const NotesSkeleton = () => {
   );
 };
 
-const Notes = ({ loading, id, notes, actions, showCity = false }: Props) => (
+const Notes = ({ loading, id, notes, refetch, showCity = false }: Props) => (
   <div className="pl-5">
-    {loading || !notes || !actions ? (
+    {loading || !notes || !refetch ? (
       <NotesSkeleton />
     ) : (
       <NotesWithData
         id={id}
         notes={notes}
-        actions={actions}
+        refetch={refetch}
         showCity={showCity}
       />
     )}

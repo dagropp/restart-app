@@ -3,8 +3,8 @@ import MuiDialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { City, Country, NoteType } from '@root/types';
-import apiService, { type NoteResponse, UseNotesActions } from '@services/api';
+import { NoteType } from '@root/types';
+import apiService, { type NoteResponse } from '@services/api';
 import { useTranslations } from '@translations';
 
 import { NoteEditor } from './NoteEditor';
@@ -14,17 +14,10 @@ interface Props {
   open: boolean;
   onClose: () => void;
   note: NoteResponse;
-  actions: UseNotesActions;
-  placeId?: City | Country;
+  refetch: () => void;
 }
 
-export const EditNoteDialog = ({
-  open,
-  onClose,
-  note,
-  actions,
-  placeId,
-}: Props) => {
+export const EditNoteDialog = ({ open, onClose, note, refetch }: Props) => {
   const translations = useTranslations();
   const compTranslations = translations.notes;
 
@@ -32,13 +25,11 @@ export const EditNoteDialog = ({
     ? compTranslations.edit.reply
     : note.type === NoteType.Note
       ? compTranslations.edit.note
-      : note.type === NoteType.Todo
-        ? compTranslations.edit.checklist
-        : compTranslations.edit.link;
+      : compTranslations.edit.link;
 
   const handleSave = async ({ note: value, title }: NoteData) => {
     const response = await apiService.notes.edit(note.id, value, title);
-    if (response) actions.update(response);
+    if (response) refetch();
     onClose();
   };
 
@@ -52,13 +43,7 @@ export const EditNoteDialog = ({
         <DialogTitle>{dialogTitle}</DialogTitle>
         <DialogContent>
           <div className="pt-2">
-            <NoteEditor
-              note={note}
-              variant="edit"
-              maxRows={20}
-              placeId={placeId}
-              actions={actions}
-            />
+            <NoteEditor note={note} variant="edit" maxRows={20} />
           </div>
         </DialogContent>
         <DialogActions>

@@ -1,5 +1,4 @@
 import Tooltip from '@common/Tooltip';
-import ChecklistRoundedIcon from '@mui/icons-material/ChecklistRounded';
 import LinkRoundedIcon from '@mui/icons-material/LinkRounded';
 import TextSnippetRoundedIcon from '@mui/icons-material/TextSnippetRounded';
 import IconButton from '@mui/material/IconButton';
@@ -37,11 +36,6 @@ export const NoteTypeToggle = () => {
       type: NoteType.Link,
       Icon: LinkRoundedIcon,
       label: translations.link,
-    },
-    {
-      type: NoteType.Todo,
-      Icon: ChecklistRoundedIcon,
-      label: translations.checklist,
     },
   ];
 

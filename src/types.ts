@@ -20,6 +20,12 @@ export enum SettingsTabKey {
   USERS = 'users',
 }
 
+export enum NotesTabKey {
+  NOTES = 'notes',
+  NOTE = 'notes/:note',
+  CHECKLIST = 'checklist',
+}
+
 export enum VisaLevel {
   None = 0,
   Easy = 1,
@@ -51,7 +57,6 @@ export enum NoteScope {
 
 export enum NoteType {
   Note = 'Note',
-  Todo = 'Todo',
   Link = 'Link',
 }
 

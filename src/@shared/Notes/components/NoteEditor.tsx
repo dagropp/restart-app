@@ -1,14 +1,12 @@
 import { FormInput, FormTextField } from '@common/Form';
 import Tooltip from '@common/Tooltip';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import { TextFieldProps } from '@mui/material/TextField';
-import { City, Country, NoteType } from '@root/types';
-import { NoteResponse, UseNotesActions } from '@services/api';
+import { NoteType } from '@root/types';
+import { NoteResponse } from '@services/api';
 import { NoteData } from '@shared/Notes/components/NoteForm';
 import { NoteTypeToggle } from '@shared/Notes/components/NoteTypeToggle';
-import { Todo } from '@shared/Notes/components/Todo';
 import { ITranslations, useTranslations } from '@translations';
 import { string } from '@utils/string.utils';
 import clsx from 'clsx';
@@ -32,8 +30,6 @@ interface Props
   > {
   note?: NoteResponse;
   variant: EditorVariant;
-  placeId?: City | Country;
-  actions: UseNotesActions;
 }
 
 const isValidUrl = (value: string) =>
@@ -52,8 +48,6 @@ const getPlaceholder = (
         : translations.notes.add.note;
     case NoteType.Link:
       return variant === 'reply' ? '' : translations.notes.add.link;
-    case NoteType.Todo:
-      return variant === 'add' ? translations.notes.add.checklist : '';
   }
 };
 
@@ -76,14 +70,12 @@ export const NoteEditor = ({
   disabled,
   variant,
   note,
-  placeId,
-  actions,
   ...props
 }: Props) => {
   const { watch, setValue } = useFormContext<NoteData>();
   const translations = useTranslations();
 
-  const [value, title, scope, type] = watch(['note', 'title', 'scope', 'type']);
+  const [value, title, type] = watch(['note', 'title', 'type']);
 
   useEffect(() => {
     if (note) {
@@ -139,26 +131,6 @@ export const NoteEditor = ({
           placeholder={placeholder}
           {...props}
         />
-      )}
-      {type === NoteType.Todo && (
-        <Box
-          className="border rounded pt-10 pb-9 px-3.5 focus-within:outline-1"
-          sx={(theme) => ({
-            borderColor: theme.palette.divider,
-            ':hover': { borderColor: theme.palette.text.primary },
-            ':focus-within': {
-              borderColor: theme.palette.primary.main,
-              outlineColor: theme.palette.primary.main,
-            },
-          })}
-        >
-          <Todo
-            placeId={placeId}
-            actions={actions}
-            title={title}
-            scope={scope}
-          />
-        </Box>
       )}
       <div
         className={clsx(

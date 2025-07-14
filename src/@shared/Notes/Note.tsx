@@ -18,14 +18,17 @@ const NoteWithData = ({ showCity }: NoteWithDataProps) => {
   const noteId = useNoteId();
   const { id: placeId } = useParams<{ id: City | Country }>();
 
-  const { notes, actions } = apiService.notes.useNotes({ noteId, placeId });
+  const { data: notes = [], refetch } = apiService.notes.useNotesNew({
+    noteId,
+    placeId,
+  });
 
   const note = notes[0];
 
   if (!note) return null;
 
   return (
-    <NoteCard note={note} actions={actions} showCity={showCity} fullPage />
+    <NoteCard note={note} showCity={showCity} refetch={refetch} fullPage />
   );
 };
 

@@ -29,19 +29,18 @@ interface Props {
 
 interface GeneralTabsProps {
   tab: CityTabKey;
-  notes?: number;
   item?: CityData;
   loading: boolean;
 }
 
-export const GeneralTabs = ({
-  notes = 0,
-  item,
-  tab,
-  loading,
-}: GeneralTabsProps) => {
+export const GeneralTabs = ({ item, tab, loading }: GeneralTabsProps) => {
   const { pathname } = useLocation();
   const { data: cities } = apiService.useCities();
+  const { data: notes = [], refetch: refetchNotes } =
+    apiService.notes.useNotesNew({
+      placeId: item?.id,
+    });
+
   const [prevCity, nextCity] = list.getListNavigation<CityData>(
     item,
     cities,
@@ -57,22 +56,24 @@ export const GeneralTabs = ({
   const routes = {
     [CityTabKey.OVERVIEW]: {
       label: translations.tabs.overview,
-      Component: CityOverview,
+      element: <CityOverview loading={loading} />,
     },
     [CityTabKey.COST]: {
       label: translations.tabs.simulation,
-      Component: Cost,
+      element: <Cost loading={loading} />,
     },
     [CityTabKey.NOTES]: {
       label: translations.tabs.notes,
-      Component: CityNotes,
+      element: (
+        <CityNotes loading={loading} refetch={refetchNotes} notes={notes} />
+      ),
     },
     [CityTabKey.NOTE]: {
-      Component: Note,
+      element: <Note loading={loading} />,
     },
     [CityTabKey.COMPARE]: {
       label: translations.primary.compare,
-      Component: CityCompare,
+      element: <CityCompare loading={loading} />,
     },
   };
 
@@ -106,8 +107,6 @@ export const GeneralTabs = ({
     titleService.setTitle(item?.name, keyTitle);
   }, [item?.name, key, keyMap]);
 
-  const { Component } = routes[tab];
-
   return (
     <>
       <MuiTabs
@@ -136,7 +135,7 @@ export const GeneralTabs = ({
         <MuiTab
           value={CityTabKey.NOTES}
           label={interpolateTranslations(routes[CityTabKey.NOTES].label, {
-            notes: format.shortNumber(notes, 1000),
+            notes: format.shortNumber(notes.length, 1000),
           })}
           component={Link}
           to={getPath(CityTabKey.NOTES)}
@@ -202,7 +201,7 @@ export const GeneralTabs = ({
             </div>
           </div>
         )}
-        <Component loading={loading} />
+        {routes[tab].element}
       </div>
     </>
   );
@@ -211,11 +210,7 @@ export const GeneralTabs = ({
 const Tabs = ({ tab }: Props) => {
   const { item } = useCityContext();
 
-  const { data: notesCount } = apiService.notes.useCount(item.id);
-
-  return (
-    <GeneralTabs tab={tab} item={item} notes={notesCount} loading={false} />
-  );
+  return <GeneralTabs tab={tab} item={item} loading={false} />;
 };
 
 export default Tabs;

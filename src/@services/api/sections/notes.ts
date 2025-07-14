@@ -86,6 +86,13 @@ const useNotes = ({
   return { query, notes, actions: { add, update, remove, modifyReplyCount } };
 };
 
+const useNotesNew = ({ placeId, noteId, enabled }: UseNotesOptions = {}) =>
+  useQuery({
+    queryKey: ['getNotes', placeId, noteId, enabled],
+    queryFn: () => get(placeId, noteId),
+    enabled,
+  });
+
 const useCount = (placeId: City | Country, enabled?: boolean) =>
   useQuery({
     queryKey: ['getNotesCount', placeId],
@@ -106,4 +113,5 @@ export const notes = {
   pin,
   useNotes,
   useCount,
+  useNotesNew,
 };

@@ -29,19 +29,18 @@ interface Props {
 
 interface GeneralTabsProps {
   tab: CountryTabKey;
-  notes?: number;
   item?: CountryResponse;
   loading: boolean;
 }
 
-export const GeneralTabs = ({
-  notes = 0,
-  item,
-  tab,
-  loading,
-}: GeneralTabsProps) => {
+export const GeneralTabs = ({ item, tab, loading }: GeneralTabsProps) => {
   const { pathname } = useLocation();
   const { data: countries } = apiService.countries.useList();
+  const { data: notes = [], refetch: refetchNotes } =
+    apiService.notes.useNotesNew({
+      placeId: item?.id,
+    });
+
   const [prevCountry, nextCountry] = list.getListNavigation<CountryResponse>(
     item,
     countries,
@@ -52,16 +51,18 @@ export const GeneralTabs = ({
   const routes = {
     [CountryTabKey.OVERVIEW]: {
       label: translations.overview,
-      Component: CountryOverview,
+      element: <CountryOverview loading={loading} />,
     },
     [CountryTabKey.NOTES]: {
       label: interpolateTranslations(translations.notes, {
-        notes: format.shortNumber(notes, 1000),
+        notes: format.shortNumber(notes.length, 1000),
       }),
-      Component: CountryNotes,
+      element: (
+        <CountryNotes loading={loading} refetch={refetchNotes} notes={notes} />
+      ),
     },
     [CountryTabKey.NOTE]: {
-      Component: Note,
+      element: <Note loading={loading} />,
     },
   };
 
@@ -73,8 +74,6 @@ export const GeneralTabs = ({
     const keyTitle = key ? keyMap[key] : '';
     titleService.setTitle(item?.name, keyTitle);
   }, [item?.name, key]);
-
-  const { Component } = routes[tab];
 
   return (
     <>
@@ -142,7 +141,7 @@ export const GeneralTabs = ({
             </div>
           </div>
         )}
-        <Component loading={loading} />
+        {routes[tab].element}
       </div>
     </>
   );
@@ -151,9 +150,5 @@ export const GeneralTabs = ({
 export const Tabs = ({ tab }: Props) => {
   const { item } = useCountryContext();
 
-  const { data: notesCount } = apiService.notes.useCount(item.id);
-
-  return (
-    <GeneralTabs tab={tab} item={item} notes={notesCount} loading={false} />
-  );
+  return <GeneralTabs tab={tab} item={item} loading={false} />;
 };

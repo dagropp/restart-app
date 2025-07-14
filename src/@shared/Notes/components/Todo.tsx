@@ -125,7 +125,7 @@ export const Todo = ({ note, placeId, actions, title, scope }: Props) => {
           placeId,
           noteScope,
           update,
-          NoteType.Todo,
+          NoteType.Note,
           title,
         );
       }

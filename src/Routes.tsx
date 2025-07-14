@@ -12,8 +12,7 @@ import CountryPage from '@views/CountryPage';
 import { EditUser } from '@views/EditUser';
 import Group from '@views/Group';
 import Login from '@views/Login';
-import NotesView from '@views/NotesView';
-import NoteView from '@views/NoteView';
+import NotesDashboard from '@views/NotesDashboard';
 import Settings from '@views/Settings';
 import { Fragment, useEffect, useRef } from 'react';
 import {
@@ -24,7 +23,12 @@ import {
 } from 'react-router';
 
 import App from './App';
-import { CityTabKey, CountryTabKey, SettingsTabKey } from './types';
+import {
+  CityTabKey,
+  CountryTabKey,
+  NotesTabKey,
+  SettingsTabKey,
+} from './types';
 
 const overlay = document.getElementById('overlay');
 
@@ -113,8 +117,17 @@ const Routes = () => {
                     <Route index element={<CompareView />} />
                   </Route>
                   <Route path="notes">
-                    <Route index element={<NotesView />} />
-                    <Route path=":note" element={<NoteView />} />
+                    <Route
+                      index
+                      element={<Navigate to={NotesTabKey.NOTES} replace />}
+                    />
+                    {object.values(NotesTabKey).map((tab) => (
+                      <Route
+                        key={tab}
+                        path={tab}
+                        element={<NotesDashboard tab={tab} />}
+                      />
+                    ))}
                   </Route>
                   <Route path="group">
                     <Route index element={<Group />} />

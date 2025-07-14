@@ -1,23 +1,23 @@
-import apiService from '@services/api';
+import { type NoteResponse } from '@services/api';
 import Notes from '@shared/Notes';
 
 import { useCountryContext } from '../context';
 
 interface Props {
   loading: boolean;
+  notes: NoteResponse[];
+  refetch: () => void;
 }
 
-const NotesWithData = () => {
+const NotesWithData = ({ notes, refetch }: Omit<Props, 'loading'>) => {
   const { item } = useCountryContext();
-
-  const { notes, actions } = apiService.notes.useNotes({ placeId: item.id });
 
   return (
     <Notes
       loading={false}
       id={item.id}
       notes={notes}
-      actions={actions}
+      refetch={refetch}
       showCity
     />
   );
@@ -25,7 +25,11 @@ const NotesWithData = () => {
 
 const NotesSkeleton = () => <Notes loading={true} />;
 
-const CountryNotes = ({ loading }: Props) =>
-  loading ? <NotesSkeleton /> : <NotesWithData />;
+const CountryNotes = ({ loading, notes, refetch }: Props) =>
+  loading ? (
+    <NotesSkeleton />
+  ) : (
+    <NotesWithData notes={notes} refetch={refetch} />
+  );
 
 export default CountryNotes;

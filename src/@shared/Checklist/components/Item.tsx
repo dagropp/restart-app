@@ -43,7 +43,7 @@ export const Item = ({
 
   const deleteItem = useMutation({
     mutationKey: ['deleteChecklistItem', item.id],
-    mutationFn: () => apiService.checklist.delete(item.id),
+    mutationFn: () => apiService.checklist.deleteItem(item.id),
     onMutate: () => setThis((prev) => prev.filter(({ id }) => id !== item.id)),
   });
 

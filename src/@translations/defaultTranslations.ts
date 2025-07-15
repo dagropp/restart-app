@@ -358,6 +358,8 @@ export const defaultTranslations = {
     comments: 'Comments',
     pin: 'Pin',
     removePin: 'Remove Pin',
+    deleteChecklistChecked: 'Delete Checked Items',
+    deleteAllChecklist: 'Delete All Items',
     tabs: {
       notes: 'Notes ({{notes}})',
       checklist: 'Checklist',

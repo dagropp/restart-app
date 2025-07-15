@@ -352,6 +352,8 @@
     "comments": "תגובות",
     "pin": "נעיצה",
     "removePin": "הסרת נעיצה",
+    "deleteChecklistChecked": "הסרת משימות שהושלמו",
+    "deleteAllChecklist": "הסרת כלל המשימות",
     "tabs": {
       "notes": "הערות ({{notes}})",
       "checklist": "רשימת משימות"

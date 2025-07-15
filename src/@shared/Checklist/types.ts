@@ -13,3 +13,7 @@ export interface ChecklistItemProps {
   setOther: Dispatch<SetStateAction<ChecklistItem[]>>;
   createInputElement: HTMLInputElement | null;
 }
+
+export interface SkeletonItemProps {
+  isDone: boolean;
+}

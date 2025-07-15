@@ -51,9 +51,10 @@ export const NoteCardSubheader = ({ note, isReply, showCity }: Props) => {
     }
   }, [
     countries,
-    note.cityId,
     note.countryId,
+    note.cityId,
     showCity,
+    isRtl,
     compTranslations.generalNote,
   ]);
 

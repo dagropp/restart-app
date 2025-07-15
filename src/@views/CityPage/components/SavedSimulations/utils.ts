@@ -147,50 +147,47 @@ export const generateSimulationSnapshot = (
   userIncome: IncomeData,
   partnerIncome: IncomeData,
   cost: CostResponse,
-): Pick<SavedSimulation, 'positiveState' | 'negativeState'> => {
-  console.log({ positiveState, negativeState });
-  return {
-    positiveState: {
-      user: positiveState.user.value
-        ? {
-            hidden: positiveState.user.hidden,
-            mark: userIncome.marks.findIndex(
-              (mark) => mark.gross === positiveState.user.value,
-            ),
-          }
-        : {},
-      userStipend: positiveState.userStipend
-        ? { hidden: positiveState.userStipend.hidden }
-        : {},
-      partner: positiveState.partner.value
-        ? {
-            hidden: positiveState.partner.hidden,
-            mark: partnerIncome.marks.findIndex(
-              (mark) => mark.gross === positiveState.partner.value,
-            ),
-          }
-        : {},
-      partnerStipend: positiveState.partnerStipend
-        ? { hidden: positiveState.partnerStipend.hidden }
-        : {},
+): Pick<SavedSimulation, 'positiveState' | 'negativeState'> => ({
+  positiveState: {
+    user: positiveState.user.value
+      ? {
+          hidden: positiveState.user.hidden,
+          mark: userIncome.marks.findIndex(
+            (mark) => mark.gross === positiveState.user.value,
+          ),
+        }
+      : {},
+    userStipend: positiveState.userStipend
+      ? { hidden: positiveState.userStipend.hidden }
+      : {},
+    partner: positiveState.partner.value
+      ? {
+          hidden: positiveState.partner.hidden,
+          mark: partnerIncome.marks.findIndex(
+            (mark) => mark.gross === positiveState.partner.value,
+          ),
+        }
+      : {},
+    partnerStipend: positiveState.partnerStipend
+      ? { hidden: positiveState.partnerStipend.hidden }
+      : {},
+  },
+  negativeState: {
+    rent: { mark: negativeState.rent.value / cost.rentOuter },
+    flights: {
+      instances: negativeState.flights.instances,
+      hidden: negativeState.flights.hidden,
     },
-    negativeState: {
-      rent: { mark: negativeState.rent.value / cost.rentOuter },
-      flights: {
-        instances: negativeState.flights.instances,
-        hidden: negativeState.flights.hidden,
-      },
-      school: {
-        instances: negativeState.school.instances,
-        hidden: negativeState.school.hidden,
-      },
-      preschool: {
-        instances: negativeState.preschool.instances,
-        hidden: negativeState.preschool.hidden,
-      },
+    school: {
+      instances: negativeState.school.instances,
+      hidden: negativeState.school.hidden,
     },
-  };
-};
+    preschool: {
+      instances: negativeState.preschool.instances,
+      hidden: negativeState.preschool.hidden,
+    },
+  },
+});
 
 export const getSelectedPreset = (
   data: SavedSimulation[],

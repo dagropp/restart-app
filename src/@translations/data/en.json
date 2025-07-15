@@ -86,6 +86,7 @@
         "losses": "Yearly Losses",
         "incomes": "Incomes",
         "grossIncome": "{{name}}'s Gross Income",
+        "netIncomeLabel": "{{name}}'s Net Income",
         "tax": "Tax",
         "stipend": "{{name}}'s Stipend / Scholarship",
         "rentDescription": "For a {{bedrooms}} apartment",

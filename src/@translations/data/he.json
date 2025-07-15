@@ -86,6 +86,7 @@
         "losses": "הפסדים שנתיים",
         "incomes": "הכנסות",
         "grossIncome": "הכנסה ברוטו של {{name}}",
+        "netIncomeLabel": "הכנסה נטו של {{name}}",
         "tax": "מס",
         "stipend": "קצבה / מלגה של {{name}}",
         "rentDescription": "עבור דירת {{bedrooms}}",

@@ -13,7 +13,13 @@ import { useNavigate } from 'react-router';
 import EditUserForm from './components/EditUserForm';
 import ExpiredState from './components/ExpiredState';
 import InvalidState from './components/InvalidState';
-import { GroupInputName, InputName, SignUpData } from './types';
+import { CreateNewUser } from './CreateNewUser';
+import {
+  GroupInputName,
+  InputName,
+  PartnerInputName,
+  SignUpData,
+} from './types';
 import { useTokenParams } from './utils';
 
 export const EditUser = () => {
@@ -39,7 +45,7 @@ export const EditUser = () => {
     mutationFn: (data: SignUpData) => {
       const incomeMark = Number(data[InputName.IncomeMark]);
       const stipendValue = data[InputName.StipendValue]
-        ? Number(data[InputName.StipendValue])
+        ? Number(data[InputName.StipendValue].replace(/[^0-9.]/g, ''))
         : null;
       const stipendCurrency = data[InputName.StipendCurrency]
         ? (data[InputName.StipendCurrency] as Currency)
@@ -69,6 +75,32 @@ export const EditUser = () => {
           departureDate: data[GroupInputName.DepartureDate],
           bedrooms: Number(data[GroupInputName.Bedrooms]),
           children: data[GroupInputName.Children] ?? [],
+          destination: data[GroupInputName.Destination],
+        };
+      }
+      if (data[PartnerInputName.FirstName] && data[PartnerInputName.LastName]) {
+        const partnerIncomeMark = Number(data[PartnerInputName.IncomeMark]);
+        const partnerStipendValue = data[PartnerInputName.StipendValue]
+          ? Number(data[PartnerInputName.StipendValue].replace(/[^0-9.]/g, ''))
+          : null;
+        const partnerStipendCurrency = data[PartnerInputName.StipendCurrency]
+          ? (data[PartnerInputName.StipendCurrency] as Currency)
+          : null;
+
+        payload.partnerPayload = {
+          avatar: data[PartnerInputName.Avatar],
+          citizenship: data[PartnerInputName.Citizenship],
+          firstName: data[PartnerInputName.FirstName],
+          income: data[PartnerInputName.Income],
+          incomeMark: partnerIncomeMark === -1 ? undefined : partnerIncomeMark,
+          incomeRemote: data[PartnerInputName.IncomeRemote] ?? null,
+          lastName: data[PartnerInputName.LastName],
+          password: data[PartnerInputName.Password],
+          dateOfBirth: data[PartnerInputName.DateOfBirth],
+          groupId: group,
+          stipendValue: partnerStipendValue,
+          stipendCurrency: partnerStipendCurrency,
+          email: data[PartnerInputName.Email],
         };
       }
       return apiService.signUp(payload);
@@ -128,17 +160,20 @@ export const EditUser = () => {
   return (
     <div className="w-[600px] flex flex-col justify-center items-center mx-auto p-5 max-w-full">
       {status === TokenStatus.Valid ? (
-        <EditUserForm
-          email={email}
-          onSubmit={handleSubmit}
-          submitButton={{
-            label: translations.signUp,
-            loading: signUpRequest.isPending || loginRequest.isPending,
-          }}
-          title={translations.welcome}
-          subtitle={translations.description}
-          createNewGroup={!group}
-        />
+        group ? (
+          <EditUserForm
+            email={email}
+            onSubmit={handleSubmit}
+            submitButton={{
+              label: translations.signUp,
+              loading: signUpRequest.isPending || loginRequest.isPending,
+            }}
+            title={translations.welcome}
+            subtitle={translations.description}
+          />
+        ) : (
+          <CreateNewUser email={email} onSubmit={handleSubmit} />
+        )
       ) : status === TokenStatus.Expired ? (
         <ExpiredState refetch={refetch} />
       ) : status === TokenStatus.Invalid ? (

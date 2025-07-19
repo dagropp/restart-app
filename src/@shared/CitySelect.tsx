@@ -7,7 +7,10 @@ import { useMemo } from 'react';
 import { CityDisplay } from './CityDisplay';
 
 export interface CitySelectProps
-  extends Omit<SelectProps<City>, 'options' | 'multiple' | 'renderValue'> {
+  extends Omit<
+    SelectProps<City>,
+    'options' | 'multiple' | 'renderValue' | 'children'
+  > {
   exclude?: Set<City>;
 }
 

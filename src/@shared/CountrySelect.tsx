@@ -11,7 +11,10 @@ import { useMemo } from 'react';
 import CountryDisplay from './CountryDisplay';
 
 interface Props
-  extends Omit<SelectProps<Country[]>, 'options' | 'multiple' | 'renderValue'> {
+  extends Omit<
+    SelectProps<Country[]>,
+    'options' | 'multiple' | 'renderValue' | 'children'
+  > {
   defaultCountry?: Country;
 }
 

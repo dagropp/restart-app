@@ -3,6 +3,7 @@ import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRou
 import AirplaneTicketRoundedIcon from '@mui/icons-material/AirplaneTicketRounded';
 import ApprovalRoundedIcon from '@mui/icons-material/ApprovalRounded';
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
+import CommuteIcon from '@mui/icons-material/Commute';
 import Diversity3RoundedIcon from '@mui/icons-material/Diversity3Rounded';
 import ElectricBoltRoundedIcon from '@mui/icons-material/ElectricBoltRounded';
 import FlightTakeoffRoundedIcon from '@mui/icons-material/FlightTakeoffRounded';
@@ -64,6 +65,7 @@ const InsightsIcon = ({ insightKey, ...props }: Props) => {
       Icon: AccessTimeFilledRoundedIcon,
       label: translations.timezone,
     },
+    commute: { Icon: CommuteIcon, label: translations.commute },
   };
 
   const { Icon, label } = map[insightKey];

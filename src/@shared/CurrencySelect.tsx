@@ -4,7 +4,8 @@ import currencyService from '@services/currency';
 
 import CurrencyDisplay from './CurrencyDisplay';
 
-export interface Props extends Omit<SelectProps<Currency>, 'options'> {
+export interface Props
+  extends Omit<SelectProps<Currency>, 'options' | 'children'> {
   flagHidden?: boolean;
 }
 

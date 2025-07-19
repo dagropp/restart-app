@@ -14,6 +14,7 @@ const Select = <T = unknown,>({
   className,
   classes = {},
   size,
+  children,
   ...props
 }: SelectProps<T>) => {
   const labelId = useId();
@@ -44,15 +45,16 @@ const Select = <T = unknown,>({
         size={size}
         {...props}
       >
-        {options.map((option) => (
-          <MenuItem
-            key={String(option.value)}
-            value={option.value as string}
-            disabled={option.disabled}
-          >
-            {option.label ?? String(option.value)}
-          </MenuItem>
-        ))}
+        {children ??
+          options?.map((option) => (
+            <MenuItem
+              key={String(option.value)}
+              value={option.value as string}
+              disabled={option.disabled}
+            >
+              {option.label ?? String(option.value)}
+            </MenuItem>
+          ))}
       </MuiSelect>
     </FormControl>
   );

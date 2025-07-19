@@ -1,5 +1,6 @@
 import { toastService } from '@common/Toast';
 import { useUserContext } from '@context/user';
+import { City, Country } from '@root/types';
 import apiService, { GroupPayload } from '@services/api';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslations } from '@translations';
@@ -12,6 +13,8 @@ import { parseChildren } from './utils';
 export const EditExistingGroup = () => {
   const { group } = useUserContext();
   const { refetch } = apiService.useGroup(group.id);
+  const { refetch: refetchCities } = apiService.useCities();
+  const { refetch: refetchCountries } = apiService.countries.useList();
   const translations = useTranslations();
   const compTranslations = translations.settings.editGroup;
 
@@ -19,6 +22,10 @@ export const EditExistingGroup = () => {
     mutationKey: ['editGroupRequest', group?.id],
     mutationFn: (payload: GroupPayload) =>
       apiService.editGroup(group?.id, payload),
+    onSuccess: async () => {
+      await refetchCities();
+      await refetchCountries();
+    },
   });
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
@@ -32,10 +39,14 @@ export const EditExistingGroup = () => {
     const departureDate = formData.get(GroupInputName.DepartureDate);
     const bedrooms = Number(formData.get(GroupInputName.Bedrooms));
     const children = parseChildren(formData.getAll(GroupInputName.Children));
+    const destination = formData.get(GroupInputName.Destination) as
+      | City
+      | Country;
     const status = await editGroup.mutateAsync({
       departureDate: departureDate ? String(departureDate) : null,
       bedrooms,
       children,
+      destination,
     });
     if (status) {
       await refetch();

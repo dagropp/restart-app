@@ -14,13 +14,14 @@ import { object } from '@utils/object.utils';
 import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper';
 import { useEffect, useMemo, useState } from 'react';
 
-import { InputName } from '../../types';
+import { InputName, PartnerInputName } from '../../types';
 
 interface Props {
   defaultIncome?: IncomeType;
   defaultMark?: number;
   defaultRemote?: City | null;
   required?: boolean;
+  Enum: typeof InputName | typeof PartnerInputName;
 }
 
 const IncomeSelect = ({
@@ -28,6 +29,7 @@ const IncomeSelect = ({
   defaultMark,
   defaultRemote,
   required,
+  Enum,
 }: Props) => {
   const translations = useTranslations();
   const compTranslations = translations.settings.form;
@@ -96,7 +98,7 @@ const IncomeSelect = ({
       <div className="w-full">
         <Select
           options={options}
-          name={InputName.Income}
+          name={Enum.Income}
           label={compTranslations.expectedJob}
           placeholder={compTranslations.expectedJob}
           required={required}
@@ -132,7 +134,7 @@ const IncomeSelect = ({
                 placeholder={compTranslations.remoteCity}
                 value={remoteCity}
                 onChange={setRemoteCity}
-                name={InputName.IncomeRemote}
+                name={Enum.IncomeRemote}
               />
             )}
           </div>
@@ -140,7 +142,7 @@ const IncomeSelect = ({
         <input
           type="hidden"
           value={marks.indexOf(gross)}
-          name={InputName.IncomeMark}
+          name={Enum.IncomeMark}
         />
       </div>
     </InputHelperWrapper>

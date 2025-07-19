@@ -4,15 +4,17 @@ import { UserResponse } from '@services/api';
 import { CurrencyMenu } from '@shared/index';
 import { useTranslations } from '@translations';
 import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper';
-import { InputName } from '@views/EditUser/types';
 import { ChangeEvent, useState } from 'react';
+
+import { InputName, PartnerInputName } from '../../types';
 
 interface Props {
   user?: UserResponse;
   isSignUp: boolean;
+  Enum: typeof InputName | typeof PartnerInputName;
 }
 
-export const StipendSelect = ({ user, isSignUp }: Props) => {
+export const StipendSelect = ({ user, isSignUp, Enum }: Props) => {
   const translations = useTranslations().settings.form;
 
   const [currency, setCurrency] = useState(
@@ -38,7 +40,7 @@ export const StipendSelect = ({ user, isSignUp }: Props) => {
           label={translations.monthlyStipend}
           fullWidth
           inputMode="numeric"
-          name={InputName.StipendValue}
+          name={Enum.StipendValue}
           slotProps={{
             htmlInput: { min: 0 },
             input: {
@@ -53,11 +55,7 @@ export const StipendSelect = ({ user, isSignUp }: Props) => {
           onChange={handleChange}
         />
         {!!value && (
-          <input
-            type="hidden"
-            value={currency}
-            name={InputName.StipendCurrency}
-          />
+          <input type="hidden" value={currency} name={Enum.StipendCurrency} />
         )}
       </div>
     </InputHelperWrapper>

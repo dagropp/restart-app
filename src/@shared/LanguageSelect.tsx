@@ -3,7 +3,10 @@ import Typography from '@common/Typography';
 import { Language, useTranslationsContext } from '@translations';
 import { object } from '@utils/object.utils';
 
-type Props = Omit<SelectProps<Language>, 'value' | 'options' | 'onChange'>;
+type Props = Omit<
+  SelectProps<Language>,
+  'value' | 'options' | 'onChange' | 'children'
+>;
 
 interface TranslatedLanguageDisplayProps {
   name: string;

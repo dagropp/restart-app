@@ -117,7 +117,7 @@
     },
     "jobData": {
       "title": "שוק העבודה",
-      "subtitle": "כ{{incomeTitle}}",
+      "subtitle": "בתחום {{incomeTitle}}",
       "expectedSalary": "שכר צפוי",
       "localDescription": "מבוסס על שכר נוכחי וסטנדרטים בתעשייה",
       "remoteDescription": "מבוסס על עבודה מרחוק מ{{cityName}}, {{countryName}}",

@@ -1,7 +1,6 @@
 import { LoginState, useAppContext } from '@context/app';
 import { UserContextWrapper } from '@context/user';
 import { useTheme } from '@mui/material/styles';
-import apiService from '@services/api';
 import AppToolbar from '@shared/AppHeader';
 import { object } from '@utils/object.utils';
 import { style } from '@utils/style.utils';
@@ -54,16 +53,9 @@ const Routes = () => {
   const Wrapper =
     isLoggedIn === LoginState.Valid ? UserContextWrapper : Fragment;
 
-  const { isLoading: isCitiesLoading } = apiService.useCities(
-    isLoggedIn === LoginState.Valid,
-  );
-  const { isLoading: isScoresLoading } = apiService.score.use(
-    isLoggedIn === LoginState.Valid,
-  );
-
   useEffect(() => {
-    if (!isCitiesLoading && !isScoresLoading) overlay?.classList.add('done');
-  }, [isCitiesLoading, isScoresLoading]);
+    if (isLoggedIn !== LoginState.Pending) overlay?.classList.add('done');
+  }, [isLoggedIn]);
 
   return (
     <BrowserRouter>

@@ -34,8 +34,12 @@ export const Item = ({ label, gross, net, description, currency }: Props) => {
   ];
 
   return (
-    <div className="flex flex-col gap-2">
-      <Typography variant="body2" className="flex items-center gap-1">
+    <span className="flex flex-col gap-2">
+      <Typography
+        variant="body2"
+        className="flex items-center gap-1"
+        component="span"
+      >
         {typeof label === 'string' ? <strong>{label}</strong> : label}
         {description && <InfoTooltip title={description} placement="right" />}
       </Typography>
@@ -44,8 +48,11 @@ export const Item = ({ label, gross, net, description, currency }: Props) => {
           className="flex items-center justify-between gap-2"
           key={section.label}
           dir={isRtl ? 'rtl' : 'ltr'}
+          component="span"
         >
-          <Typography variant="body2">{section.label}</Typography>
+          <Typography variant="body2" component="span">
+            {section.label}
+          </Typography>
           {isNaN(section.value) ? (
             <Skeleton variant="text" width="20%" />
           ) : (
@@ -63,6 +70,6 @@ export const Item = ({ label, gross, net, description, currency }: Props) => {
           )}
         </Typography>
       ))}
-    </div>
+    </span>
   );
 };

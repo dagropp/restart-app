@@ -56,7 +56,7 @@ export const WorkData = () => {
       })}
       TitleIcon={BusinessCenterRoundedIcon}
     >
-      <div>
+      <>
         {!!mark && (
           <Item
             label={compTranslations.expectedSalary}
@@ -70,7 +70,7 @@ export const WorkData = () => {
           onChange={setOtherCity}
           marks={otherCityMarks}
         />
-      </div>
+      </>
       {income.jobs.length > 0 && (
         <div className="flex items-center gap-4 w-full mt-2">
           <JobsChart

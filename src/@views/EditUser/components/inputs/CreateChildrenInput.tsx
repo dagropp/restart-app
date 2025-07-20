@@ -10,11 +10,15 @@ import { NewChildInput } from './ChildInput';
 
 const emptyChild: ChildrenPayload = { name: '', dateOfBirth: null };
 
-export const CreateChildrenList = () => {
+interface Props {
+  hasChildren: boolean;
+}
+
+export const CreateChildrenList = ({ hasChildren }: Props) => {
   const { state, update, remove, add, reset } = useMapState<
     string,
     ChildrenPayload
-  >();
+  >(hasChildren ? undefined : { [crypto.randomUUID()]: emptyChild });
   const ref = useRef<HTMLButtonElement>(null);
   const translations = useTranslations().settings.form;
 

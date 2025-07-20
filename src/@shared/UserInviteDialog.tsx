@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import { UserType } from '@root/types';
 import apiService from '@services/api';
 import { useMutation } from '@tanstack/react-query';
 import { interpolateTranslations, useTranslations } from '@translations';
@@ -18,9 +19,11 @@ interface Props {
 }
 
 export const UserInviteDialog = ({ open, onClose, isGroupInvite }: Props) => {
-  const { user } = useUserContext();
+  const { user, group } = useUserContext();
   const translations = useTranslations();
   const compTranslation = translations.menu.invite;
+
+  const isPartnerAnonymous = group.partner?.type === UserType.Anonymous;
 
   const sendInvite = useMutation({
     mutationKey: ['sendInvite', isGroupInvite, user.groupId],
@@ -67,7 +70,9 @@ export const UserInviteDialog = ({ open, onClose, isGroupInvite }: Props) => {
       <form onSubmit={handleInviteSubmit} className="w-[400px] max-w-full">
         <DialogTitle>
           {isGroupInvite
-            ? compTranslation.addToGroup
+            ? isPartnerAnonymous
+              ? compTranslation.addCredentialsToPartner
+              : compTranslation.addToGroup
             : compTranslation.inviteUser}
         </DialogTitle>
         <DialogContent>

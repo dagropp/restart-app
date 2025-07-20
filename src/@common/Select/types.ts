@@ -11,7 +11,9 @@ export type SelectProps<T = unknown> = Omit<
   MuiSelectProps<T>,
   'onChange' | 'children'
 > & {
-  options: SelectOption<T | unknown>[];
   onChange?: (value: T) => void;
   placeholder?: ReactNode;
-};
+} & (
+    | { options: SelectOption<T | unknown>[]; children?: never }
+    | { children: ReactNode; options?: never }
+  );

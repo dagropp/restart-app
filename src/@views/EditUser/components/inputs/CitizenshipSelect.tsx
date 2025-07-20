@@ -4,18 +4,20 @@ import { useTranslations } from '@translations';
 import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper';
 import { useState } from 'react';
 
-import { InputName } from '../../types';
+import { InputName, PartnerInputName } from '../../types';
 
 const DEFAULT_COUNTRY = Country.ISRAEL;
 
 interface Props {
   defaultValue?: Country[];
   required?: boolean;
+  Enum: typeof InputName | typeof PartnerInputName;
 }
 
 const CitizenshipSelect = ({
   defaultValue = [DEFAULT_COUNTRY],
   required,
+  Enum,
 }: Props) => {
   const [selected, setSelected] = useState<Country[]>(defaultValue);
   const translations = useTranslations().settings.form;
@@ -27,7 +29,7 @@ const CitizenshipSelect = ({
       bottomSpacing
     >
       <CountrySelect
-        name={InputName.Citizenship}
+        name={Enum.Citizenship}
         value={selected}
         onChange={setSelected}
         label={translations.citizenship}

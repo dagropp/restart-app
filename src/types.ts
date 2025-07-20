@@ -48,6 +48,7 @@ export enum UserType {
   Admin = 'Admin',
   GroupOwner = 'GroupOwner',
   Standard = 'Standard',
+  Anonymous = 'Anonymous',
 }
 
 export enum NoteScope {

@@ -193,7 +193,8 @@
       "sunlight": "Sunlight Duration",
       "visa": "Visa Requirements",
       "weather": "Weather",
-      "timezone": "Timezone Difference"
+      "timezone": "Timezone Difference",
+      "commute": "Commute Time"
     }
   },
   "common": {
@@ -207,6 +208,13 @@
     "perMonth": "/ M",
     "and": "and",
     "notAvailable": "N/A"
+  },
+  "stepper": {
+    "optional": "Optional",
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "finish": "Finish"
   },
   "group": {
     "adultSingle": "1 adult",
@@ -256,7 +264,7 @@
     },
     "details": {
       "email": "Email",
-      "profession": "Profession",
+      "profession": "Occupation",
       "currentAge": "Current Age",
       "ageAtDeparture": "Age at Departure",
       "citizenship": "Citizenship",
@@ -302,6 +310,7 @@
       "openSettings": "Open Settings",
       "inviteUser": "Invite User",
       "addUserToGroup": "Add User to Group",
+      "addCredentialsToPartner": "Add Credentials to Partner",
       "logout": "Logout",
       "lightTheme": "Light Theme",
       "darkTheme": "Dark Theme"
@@ -314,6 +323,7 @@
     "invite": {
       "addToGroup": "Add User to Group",
       "inviteUser": "Invite User",
+      "addCredentialsToPartner": "Add Credentials to Partner",
       "enterEmail": "Enter email...",
       "send": "Send",
       "statusPending": "Sending invitation email to {{email}}",
@@ -389,7 +399,7 @@
       "lastName": "Last Name",
       "citizenship": "Citizenship",
       "dateOfBirth": "Date of Birth",
-      "expectedJob": "Profession",
+      "expectedJob": "Occupation",
       "isRemoteJob": "Is Remote Job",
       "remoteCity": "Remote City",
       "monthlyStipend": "Monthly Stipend / Scholarship",
@@ -403,6 +413,9 @@
       "apartmentSize": "Apartment Size",
       "bedroomSingle": "1 Bedroom",
       "bedrooms": "{{bedrooms}} Bedrooms",
+      "createUserForPartner": "Add Login Credentials (Optional)",
+      "removeUserFromPartner": "Remove Login Credentials",
+      "destination": "Destination",
       "password": {
         "title": "Password",
         "verify": "Verify Password",
@@ -419,7 +432,17 @@
         "citizenship": "Helps us check if you or your spouse are exempt from needing a work visa",
         "profession": "Helps us check if you or your spouse are exempt from needing a work visa",
         "stipend": "Include any steady support (like a scholarship or help from family) - we'll convert it and add it to your budget",
-        "password": "Use a strong password to help protect your account and personal data"
+        "password": "Use a strong password to help protect your account and personal data",
+        "partnerInfo": "Providing partner details helps us deliver more accurate insights about cost of living and relocation options for your household",
+        "partnerLogin": "Adding login credentials allows your partner to access the platform and explore personalized data from their own perspective",
+        "childrenInfo": "Adding information about your children allows us to better estimate cost of living and provide information on relevant services",
+        "preferences": "Sharing your preferred apartment size helps us better estimate housing costs",
+        "destination": "Already selected a destination city or just a country? If you choose one, it will appear first in your results"
+      },
+      "sections": {
+        "personalDetails": "Personal Details",
+        "loginCredentials": "Login Credentials",
+        "additionalInfo": "Additional Info"
       }
     },
     "editUser": {
@@ -436,6 +459,9 @@
       "signUp": "Sign Up",
       "welcome": "Welcome Aboard!",
       "description": "Enter your user's details",
+      "addUserDetails": "Add User Details",
+      "addPartner": "Add Partner",
+      "addGroupDetails": "Add Group Details",
       "status": {
         "pending": "Creating a new user",
         "success": "Successfully created user",
@@ -456,6 +482,11 @@
           "errorTitle": "We couldn't refresh your sign-up token",
           "errorDescription": "This may be due to an expired request or a system issue. Please contact support."
         }
+      },
+      "successDialog": {
+        "title": "All Done!",
+        "description": "We're so glad you're here!",
+        "action": "Let's get started..."
       }
     }
   },
@@ -652,7 +683,8 @@
     "userType": {
       "Admin": "Administrator",
       "GroupOwner": "Group Owner",
-      "Standard": "Standard User"
+      "Standard": "Standard User",
+      "Anonymous": "Anonymous"
     }
   }
 }

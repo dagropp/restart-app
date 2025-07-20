@@ -5,11 +5,12 @@ import { string } from '@utils/string.utils';
 import { InputHelperWrapper } from '@views/EditUser/components/inputs/InputHelperWrapper';
 import { ChangeEvent, useState } from 'react';
 
-import { InputName } from '../../types';
+import { InputName, PartnerInputName } from '../../types';
 
 interface Props {
   required?: boolean;
   isCreate?: boolean;
+  Enum: typeof InputName | typeof PartnerInputName;
 }
 
 const getPasswordError = (
@@ -34,7 +35,7 @@ const getPasswordError = (
     : '';
 };
 
-const PasswordInput = ({ required, isCreate }: Props) => {
+const PasswordInput = ({ required, isCreate, Enum }: Props) => {
   const [password, setPassword] = useState('');
   const [verify, setVerify] = useState('');
   const translations = useTranslations();
@@ -44,8 +45,28 @@ const PasswordInput = ({ required, isCreate }: Props) => {
   const isVerified = string.isEmpty(verify) || password === verify;
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
+    const input = event.target as HTMLInputElement;
+    const update = input.value;
+    const passwordErrorMsg = getPasswordError(update, translations, isCreate);
+    if (passwordErrorMsg) {
+      input.setCustomValidity(passwordErrorMsg);
+    } else {
+      input.setCustomValidity('');
+    }
+    setPassword(update);
     setVerify('');
+  };
+
+  const handleVerifyChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.target as HTMLInputElement;
+    const update = input.value;
+    const isValid = string.isEmpty(verify) || password === update;
+    setVerify(update);
+    if (isValid) {
+      input.setCustomValidity('');
+    } else {
+      input.setCustomValidity(compTranslations.noMatch);
+    }
   };
 
   return (
@@ -55,7 +76,8 @@ const PasswordInput = ({ required, isCreate }: Props) => {
     >
       <div className="flex gap-4 flex-col sm:flex-row">
         <TextField
-          name={InputName.Password}
+          name={Enum.Password}
+          onSubmit={console.log}
           type="password"
           label={compTranslations.title}
           variant="outlined"
@@ -74,7 +96,7 @@ const PasswordInput = ({ required, isCreate }: Props) => {
             variant="outlined"
             autoComplete="off"
             value={verify}
-            onChange={(event) => setVerify(event.target.value)}
+            onChange={handleVerifyChange}
             error={!isVerified}
             helperText={!isVerified && compTranslations.noMatch}
             disabled={!password || !!passwordError}

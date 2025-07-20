@@ -101,7 +101,7 @@ export const NoteCardSkeleton = ({ rows }: NoteCardSkeletonProps) => {
 };
 
 export const NoteCard = ({ note, refetch, showCity, fullPage }: Props) => {
-  const { data: users = {} } = apiService.useUsers();
+  const { data: users = {} } = apiService.users.use();
   const translations = useTranslations().notes;
   const { isRtl } = useTranslationsContext();
 

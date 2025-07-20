@@ -273,6 +273,12 @@ export interface CommunityResponse {
   members: number;
 }
 
+export interface PartnerPayload
+  extends Omit<UserPayload, 'email' | 'password' | 'groupPayload'> {
+  email?: string;
+  password?: string;
+}
+
 export interface UserPayload {
   citizenship: string;
   firstName: string;
@@ -285,9 +291,10 @@ export interface UserPayload {
   groupId?: string;
   avatar?: string;
   dateOfBirth: string;
-  groupPayload?: GroupPayload;
   stipendValue: number | null;
   stipendCurrency: Currency | null;
+  groupPayload?: GroupPayload;
+  partnerPayload?: PartnerPayload;
 }
 
 export type EditUserPayload = Omit<
@@ -331,6 +338,7 @@ export interface GroupPayload {
   departureDate: string | null;
   children: ChildrenPayload[];
   bedrooms: number;
+  destination?: City | Country;
 }
 
 export interface LoginResponse extends UserResponse {
@@ -572,7 +580,8 @@ export type InsightKey =
   | 'rainfall'
   | 'electricity'
   | 'timezone'
-  | 'sunlight';
+  | 'sunlight'
+  | 'commute';
 
 export interface InsightData {
   key: InsightKey;

@@ -2,6 +2,7 @@ import Typography from '@common/Typography';
 import { City, Country } from '@root/types';
 import apiService from '@services/api';
 import { CountryImage } from '@shared/CountryDisplay';
+import { useTranslationsContext } from '@translations';
 
 interface CityWithDataProps {
   country: Country;
@@ -14,12 +15,18 @@ interface CityByIdProps {
 
 type Props = CityWithDataProps | CityByIdProps;
 
-const CityWithData = ({ country, name }: CityWithDataProps) => (
-  <div className="flex items-center gap-2">
-    <CountryImage country={country} className="h-4" />
-    <Typography variant="body2">{name}</Typography>
-  </div>
-);
+const CityWithData = ({ country, name }: CityWithDataProps) => {
+  const { isRtl } = useTranslationsContext();
+
+  return (
+    <div className="flex items-center gap-2">
+      <CountryImage country={country} className="h-4" />
+      <Typography variant="body2" dir={isRtl ? 'rtl' : 'ltr'}>
+        {name}
+      </Typography>
+    </div>
+  );
+};
 
 const CityById = ({ id }: CityByIdProps) => {
   const { data: cities } = apiService.useCities();

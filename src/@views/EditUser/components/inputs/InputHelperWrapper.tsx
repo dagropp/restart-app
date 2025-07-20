@@ -11,7 +11,7 @@ import classes from './input-helper.module.css';
 interface Props {
   text: string;
   show?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
   bottomSpacing?: boolean;
 }
 
@@ -19,35 +19,41 @@ export const InputHelperWrapper = ({ show, text, children }: Props) => {
   const { isRtl } = useTranslationsContext();
   const theme = useTheme();
 
-  const [showHelper, setShowHelper] = useState(!!show);
+  const [showHelperManually, setShowHelperManually] = useState(true);
 
-  return (
+  const shouldShowHelper = show && showHelperManually;
+
+  const alert = shouldShowHelper && (
+    <Alert
+      severity="info"
+      onClose={() => setShowHelperManually(false)}
+      icon={false}
+      className="z-10"
+    >
+      <Typography variant="caption" dir={isRtl ? 'rtl' : 'ltr'}>
+        {text}
+      </Typography>
+    </Alert>
+  );
+
+  return children ? (
     <div
       className={clsx(
-        "flex flex-col gap-4 relative before:content-[''] before:absolute before:bg-[var(--overlay-bg)] before:-inset-2 before:rounded before:transition-colors",
-        showHelper && classes.component,
+        "flex flex-col gap-4 w-full relative before:content-[''] before:absolute before:bg-[var(--overlay-bg)] before:-inset-2 before:rounded before:transition-colors",
+        shouldShowHelper && classes.component,
       )}
       style={
         {
-          '--overlay-bg': showHelper
+          '--overlay-bg': shouldShowHelper
             ? alpha(theme.palette.info.light, 0.05)
             : 'transparent',
         } as CSSProperties
       }
     >
-      {showHelper && (
-        <Alert
-          severity="info"
-          onClose={() => setShowHelper(false)}
-          icon={false}
-          className="z-10"
-        >
-          <Typography variant="caption" dir={isRtl ? 'rtl' : 'ltr'}>
-            {text}
-          </Typography>
-        </Alert>
-      )}
+      {alert}
       {children}
     </div>
+  ) : (
+    alert
   );
 };

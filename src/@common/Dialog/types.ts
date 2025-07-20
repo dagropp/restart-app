@@ -13,4 +13,5 @@ export interface DialogProps extends Omit<MuiDialogProps, 'onClose'> {
   success?: ActionProps;
   cancel?: ActionProps;
   title?: string;
+  actionsClassName?: string;
 }

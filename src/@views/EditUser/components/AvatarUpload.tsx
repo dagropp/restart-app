@@ -6,13 +6,21 @@ import { useTranslations } from '@translations';
 import { image } from '@utils/image.utils';
 import { type ChangeEvent, useId, useState } from 'react';
 
+import { InputName, PartnerInputName } from '../types';
+
 interface Props {
   firstName: string;
   lastName: string;
   defaultValue?: string;
+  Enum: typeof InputName | typeof PartnerInputName;
 }
 
-const AvatarUpload = ({ firstName, lastName, defaultValue = '' }: Props) => {
+const AvatarUpload = ({
+  firstName,
+  lastName,
+  defaultValue = '',
+  Enum,
+}: Props) => {
   const id = useId();
   const translations = useTranslations().settings.form;
 
@@ -46,7 +54,7 @@ const AvatarUpload = ({ firstName, lastName, defaultValue = '' }: Props) => {
         />
         {translations.uploadAvatar}
       </Button>
-      <input type="hidden" name="avatar" value={resized} />
+      <input type="hidden" name={Enum.Avatar} value={resized} />
       <Tooltip
         title={
           src && (

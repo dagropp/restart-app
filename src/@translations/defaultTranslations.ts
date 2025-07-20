@@ -197,6 +197,7 @@ export const defaultTranslations = {
       visa: 'Visa Requirements',
       weather: 'Weather',
       timezone: 'Timezone Difference',
+      commute: 'Commute Time',
     },
   },
   common: {
@@ -210,6 +211,13 @@ export const defaultTranslations = {
     perMonth: '/ M',
     and: 'and',
     notAvailable: 'N/A',
+  },
+  stepper: {
+    optional: 'Optional',
+    back: 'Back',
+    next: 'Next',
+    skip: 'Skip',
+    finish: 'Finish',
   },
   group: {
     adultSingle: '1 adult',
@@ -260,7 +268,7 @@ export const defaultTranslations = {
     },
     details: {
       email: 'Email',
-      profession: 'Profession',
+      profession: 'Occupation',
       currentAge: 'Current Age',
       ageAtDeparture: 'Age at Departure',
       citizenship: 'Citizenship',
@@ -307,6 +315,7 @@ export const defaultTranslations = {
       openSettings: 'Open Settings',
       inviteUser: 'Invite User',
       addUserToGroup: 'Add User to Group',
+      addCredentialsToPartner: 'Add Credentials to Partner',
       logout: 'Logout',
       lightTheme: 'Light Theme',
       darkTheme: 'Dark Theme',
@@ -318,6 +327,7 @@ export const defaultTranslations = {
     },
     invite: {
       addToGroup: 'Add User to Group',
+      addCredentialsToPartner: 'Add Login Credentials to Partner',
       inviteUser: 'Invite User',
       enterEmail: 'Enter email...',
       send: 'Send',
@@ -409,6 +419,9 @@ export const defaultTranslations = {
       apartmentSize: 'Apartment Size',
       bedroomSingle: '1 Bedroom',
       bedrooms: '{{bedrooms}} Bedrooms',
+      createUserForPartner: 'Add Login Credentials (Optional)',
+      removeUserFromPartner: 'Remove Login Credentials',
+      destination: 'Destination',
       password: {
         title: 'Password',
         verify: 'Verify Password',
@@ -430,6 +443,21 @@ export const defaultTranslations = {
           "Include any steady support (like a scholarship or help from family). We'll convert it and add it to your budget.",
         password:
           'Use a strong password to help protect your account and personal data',
+        partnerInfo:
+          'Providing partner details helps us deliver more accurate insights about cost of living and relocation options for your household',
+        partnerLogin:
+          'Adding login credentials allows your partner to access the platform and explore personalized data from their own perspective',
+        childrenInfo:
+          'Adding information about your children allows us to better estimate cost of living and identify relevant services such as education and childcare',
+        preferences:
+          'Sharing your preferences helps us tailor recommendations and cost of living estimates to your specific plans and lifestyle',
+        destination:
+          'Already selected a destination city or just a country? If you choose one, it will appear first in your results — or leave it empty to see general results.',
+      },
+      sections: {
+        personalDetails: 'Personal Details',
+        loginCredentials: 'Login Credentials',
+        additionalInfo: 'Additional Info',
       },
     },
     editUser: {
@@ -446,6 +474,9 @@ export const defaultTranslations = {
       signUp: 'Sign Up',
       welcome: 'Welcome Aboard!',
       description: "Enter your user's details",
+      addUserDetails: 'Add User Details',
+      addPartner: 'Add Partner',
+      addGroupDetails: 'Add Group Details',
       status: {
         pending: 'Creating a new user',
         success: 'Successfully created user',
@@ -471,6 +502,11 @@ export const defaultTranslations = {
           errorDescription:
             'This may be due to an expired request or a system issue. Please contact support.',
         },
+      },
+      successDialog: {
+        title: 'All Done!',
+        description: "We're so glad you're here",
+        action: "Let's get started...",
       },
     },
   },
@@ -661,6 +697,7 @@ export const defaultTranslations = {
       Admin: 'Administrator',
       GroupOwner: 'Group Owner',
       Standard: 'Standard User',
+      Anonymous: 'Anonymous',
     },
   },
 };

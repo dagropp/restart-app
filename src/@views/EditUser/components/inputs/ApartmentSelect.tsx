@@ -45,8 +45,8 @@ export const ApartmentSelect = ({ defaultValue }: Props) => {
       value={value}
       onChange={setValue}
       name={GroupInputName.Bedrooms}
-      placeholder="Apartment Size"
-      label="Apartment Size"
+      placeholder={translations.apartmentSize}
+      label={translations.apartmentSize}
     />
   );
 };

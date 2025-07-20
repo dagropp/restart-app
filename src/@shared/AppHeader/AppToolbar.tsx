@@ -13,6 +13,7 @@ import MenuItem, { type MenuItemProps } from '@mui/material/MenuItem';
 import { type OverridableComponent } from '@mui/material/OverridableComponent';
 import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
 import Toolbar from '@mui/material/Toolbar';
+import { UserType } from '@root/types';
 import apiService from '@services/api';
 import storageService from '@services/storage';
 import LanguageSelect from '@shared/LanguageSelect';
@@ -54,8 +55,10 @@ const MenuItemComponent = ({
 
 const AppToolbar = () => {
   const { setIsLoggedIn, currency, setCurrency, theme } = useAppContext();
-  const { isAdmin, canSendGroupInvite } = useUserContext();
+  const { isAdmin, canSendGroupInvite, group } = useUserContext();
   const translations = useTranslations().menu.secondary;
+
+  const isPartnerAnonymous = group.partner?.type === UserType.Anonymous;
 
   const navigate = useNavigate();
   const { user } = useUserContext();
@@ -109,7 +112,7 @@ const AppToolbar = () => {
                 </IconButton>
               </Tooltip>
               <Menu
-                classes={{ paper: 'w-[215px]' }}
+                classes={{ paper: 'min-w-[215px]' }}
                 anchorEl={anchorElUser}
                 anchorOrigin={{ vertical: 48, horizontal: 'right' }}
                 transformOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -147,7 +150,9 @@ const AppToolbar = () => {
                     onClick={openInviteDialog(true)}
                     Icon={GroupAddRoundedIcon}
                   >
-                    {translations.addUserToGroup}
+                    {isPartnerAnonymous
+                      ? translations.addCredentialsToPartner
+                      : translations.addUserToGroup}
                   </MenuItemComponent>
                 )}
                 <MenuItemComponent onClick={logout} Icon={LogoutRoundedIcon}>

@@ -22,15 +22,17 @@ export const PriceItem = ({
 }: Props) => {
   const { isRtl } = useTranslationsContext();
 
+  const dir = isRtl ? 'rtl' : 'ltr';
+
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center" dir={dir}>
       <div className="flex items-center gap-2">
         {Icon && <Icon fontSize="small" />}
         <Typography
           variant="body2"
           lineHeight="normal"
           className={clsx('flex items-center gap-1', !Icon && 'pl-7')}
-          dir={isRtl ? 'rtl' : 'ltr'}
+          dir={dir}
         >
           {label}
           {caption && (

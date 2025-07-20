@@ -1,7 +1,6 @@
 import Accordion from '@common/Accordion';
 import { useAppContext } from '@context/app';
 import { useUserContext } from '@context/user';
-import CreditCardRoundedIcon from '@mui/icons-material/CreditCardRounded';
 import DinnerDiningRoundedIcon from '@mui/icons-material/DinnerDiningRounded';
 import DirectionsCarFilledRoundedIcon from '@mui/icons-material/DirectionsCarFilledRounded';
 import MapsHomeWorkRoundedIcon from '@mui/icons-material/MapsHomeWorkRounded';
@@ -82,7 +81,7 @@ interface CostGroupProps extends Group {
 }
 
 const map: Record<keyof DisplayableFields, FieldData> = {
-  generalCost: { Icon: CreditCardRoundedIcon },
+  generalCost: {},
   // real estate
   rentOuter: { rangeKey: 'rentCentral' },
   buyOuter: { rangeKey: 'buyCentral', mapper: (value) => value * 120 },

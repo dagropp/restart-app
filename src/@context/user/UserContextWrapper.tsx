@@ -43,7 +43,9 @@ export const UserContextWrapper = ({ children }: Props) => {
     user,
     isAdmin,
     isGroupOwner,
-    canSendGroupInvite: isGroupOwner && !group?.partner,
+    canSendGroupInvite:
+      isGroupOwner &&
+      (!group?.partner || group.partner.type === UserType.Anonymous),
     group,
     updateUser,
   };

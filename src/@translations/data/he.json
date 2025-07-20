@@ -309,6 +309,7 @@
       "openSettings": "פתיחת הגדרות",
       "inviteUser": "הזמנת משתמש",
       "addUserToGroup": "הוספת משתמש לקבוצה",
+      "addCredentialsToPartner": "הוספת פרטי התחברות לשותפים",
       "logout": "התנתקות",
       "lightTheme": "ערכת נושא בהירה",
       "darkTheme": "ערכת נושא כהה"
@@ -321,6 +322,7 @@
     "invite": {
       "addToGroup": "הוספת משתמש לקבוצה",
       "inviteUser": "הזמנת משתמש",
+      "addCredentialsToPartner": "הוספת פרטי התחברות לשותפים",
       "enterEmail": "דואר אלקטרוני",
       "send": "שליחה",
       "statusPending": "שולח הזמנה ל{{email}}",
@@ -479,6 +481,11 @@
           "errorTitle": "לא הצלחנו לרענן את קישור ההרשמה שלכם",
           "errorDescription": "ייתכן שהבקשה פגה או שמדובר בתקלה טכנית. אנא פנו לתמיכה."
         }
+      },
+      "successDialog": {
+        "title": "הכל מוכן!",
+        "description": "איזה כיף שבאתם!",
+        "action": "בואו נתחיל..."
       }
     }
   },
@@ -675,7 +682,8 @@
     "userType": {
       "Admin": "מנהל מערכת",
       "GroupOwner": "מנהל קבוצה",
-      "Standard": "משתמש רגיל"
+      "Standard": "משתמש רגיל",
+      "Anonymous": "אנונימי"
     }
   }
 }

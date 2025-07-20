@@ -315,6 +315,7 @@ export const defaultTranslations = {
       openSettings: 'Open Settings',
       inviteUser: 'Invite User',
       addUserToGroup: 'Add User to Group',
+      addCredentialsToPartner: 'Add Credentials to Partner',
       logout: 'Logout',
       lightTheme: 'Light Theme',
       darkTheme: 'Dark Theme',
@@ -326,6 +327,7 @@ export const defaultTranslations = {
     },
     invite: {
       addToGroup: 'Add User to Group',
+      addCredentialsToPartner: 'Add Login Credentials to Partner',
       inviteUser: 'Invite User',
       enterEmail: 'Enter email...',
       send: 'Send',
@@ -500,6 +502,11 @@ export const defaultTranslations = {
           errorDescription:
             'This may be due to an expired request or a system issue. Please contact support.',
         },
+      },
+      successDialog: {
+        title: 'All Done!',
+        description: "We're so glad you're here",
+        action: "Let's get started...",
       },
     },
   },
@@ -690,6 +697,7 @@ export const defaultTranslations = {
       Admin: 'Administrator',
       GroupOwner: 'Group Owner',
       Standard: 'Standard User',
+      Anonymous: 'Anonymous',
     },
   },
 };

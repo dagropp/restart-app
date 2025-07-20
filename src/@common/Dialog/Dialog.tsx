@@ -15,6 +15,7 @@ const Dialog = ({
   success,
   cancel,
   title,
+  actionsClassName,
   ...props
 }: DialogProps) => {
   const translations = useTranslations().common;
@@ -42,7 +43,7 @@ const Dialog = ({
           children
         )}
       </DialogContent>
-      <DialogActions>
+      <DialogActions className={actionsClassName}>
         {cancel && (
           <Button
             onClick={handleCancel}

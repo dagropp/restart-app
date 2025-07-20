@@ -15,6 +15,7 @@ interface Props {
   submitButton: { label: string; loading?: boolean };
   title?: string;
   subtitle?: string;
+  isSignUp?: boolean;
 }
 
 const EditUserForm = ({
@@ -24,9 +25,9 @@ const EditUserForm = ({
   submitButton,
   title,
   subtitle,
+  isSignUp = false,
 }: Props) => {
   const { isRtl } = useTranslationsContext();
-  const isSignUp = !user;
 
   const handleSubmit = handleFormSubmit<SignUpData>(onSubmit);
 

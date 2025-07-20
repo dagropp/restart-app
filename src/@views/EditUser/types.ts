@@ -42,6 +42,7 @@ export interface TokenQuery {
   token: string;
   email: string;
   group?: string;
+  userId?: string;
 }
 
 export interface SignUpData {

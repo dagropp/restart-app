@@ -1,5 +1,4 @@
 import { toastService } from '@common/Toast';
-import { LoginState, useAppContext } from '@context/app';
 import { CircularProgress } from '@mui/material';
 import { Currency } from '@root/types';
 import apiService, { TokenStatus, UserPayload } from '@services/api';
@@ -7,8 +6,8 @@ import storageService from '@services/storage';
 import titleService from '@services/title';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useTranslations } from '@translations';
-import { useCallback, useLayoutEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { SuccessDialog } from '@views/EditUser/components';
+import { useCallback, useLayoutEffect, useState } from 'react';
 
 import EditUserForm from './components/EditUserForm';
 import ExpiredState from './components/ExpiredState';
@@ -23,10 +22,9 @@ import {
 import { useTokenParams } from './utils';
 
 export const EditUser = () => {
-  const navigate = useNavigate();
-  const { setIsLoggedIn } = useAppContext();
-  const { token, email, group } = useTokenParams();
+  const { token, email, group, userId } = useTokenParams();
   const translations = useTranslations().settings.signUp;
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   useLayoutEffect(() => {
     titleService.setTitle(translations.signUp);
@@ -38,8 +36,12 @@ export const EditUser = () => {
     enabled: !!email && !!token,
   });
 
-  const { refetch: refetchCities } = apiService.useCities();
-
+  const { data: anonymousUser, isLoading: isAnonymousUserLoading } = useQuery({
+    queryKey: ['getExistingUser', userId],
+    queryFn: () => apiService.users.get(userId!),
+    enabled: !!userId,
+  });
+  console.log(anonymousUser);
   const signUpRequest = useMutation({
     mutationKey: ['signUpRequest', email, token, group],
     mutationFn: (data: SignUpData) => {
@@ -128,13 +130,12 @@ export const EditUser = () => {
         toastService.showToast({
           message: translations.status.success,
           severity: 'success',
+          autoHide: true,
         });
         const user = await loginRequest.mutateAsync(data);
         if (user) {
           storageService.set('user', user);
-          setIsLoggedIn(LoginState.Valid);
-          navigate('/');
-          await refetchCities();
+          setShowSuccessDialog(true);
         }
       } else {
         toastService.showToast({
@@ -145,9 +146,6 @@ export const EditUser = () => {
     },
     [
       loginRequest,
-      navigate,
-      refetchCities,
-      setIsLoggedIn,
       signUpRequest,
       translations.status.error,
       translations.status.pending,
@@ -161,16 +159,22 @@ export const EditUser = () => {
     <div className="w-[600px] flex flex-col justify-center items-center mx-auto p-5 max-w-full">
       {status === TokenStatus.Valid ? (
         group ? (
-          <EditUserForm
-            email={email}
-            onSubmit={handleSubmit}
-            submitButton={{
-              label: translations.signUp,
-              loading: signUpRequest.isPending || loginRequest.isPending,
-            }}
-            title={translations.welcome}
-            subtitle={translations.description}
-          />
+          userId && isAnonymousUserLoading ? (
+            <CircularProgress />
+          ) : (
+            <EditUserForm
+              email={email}
+              onSubmit={handleSubmit}
+              submitButton={{
+                label: translations.signUp,
+                loading: signUpRequest.isPending || loginRequest.isPending,
+              }}
+              title={translations.welcome}
+              subtitle={translations.description}
+              user={anonymousUser}
+              isSignUp
+            />
+          )
         ) : (
           <CreateNewUser email={email} onSubmit={handleSubmit} />
         )
@@ -181,6 +185,10 @@ export const EditUser = () => {
       ) : (
         <CircularProgress />
       )}
+      <SuccessDialog
+        open={showSuccessDialog}
+        onClose={() => setShowSuccessDialog(false)}
+      />
     </div>
   );
 };

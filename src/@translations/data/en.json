@@ -310,6 +310,7 @@
       "openSettings": "Open Settings",
       "inviteUser": "Invite User",
       "addUserToGroup": "Add User to Group",
+      "addCredentialsToPartner": "Add Credentials to Partner",
       "logout": "Logout",
       "lightTheme": "Light Theme",
       "darkTheme": "Dark Theme"
@@ -322,6 +323,7 @@
     "invite": {
       "addToGroup": "Add User to Group",
       "inviteUser": "Invite User",
+      "addCredentialsToPartner": "Add Credentials to Partner",
       "enterEmail": "Enter email...",
       "send": "Send",
       "statusPending": "Sending invitation email to {{email}}",
@@ -480,6 +482,11 @@
           "errorTitle": "We couldn't refresh your sign-up token",
           "errorDescription": "This may be due to an expired request or a system issue. Please contact support."
         }
+      },
+      "successDialog": {
+        "title": "All Done!",
+        "description": "We're so glad you're here!",
+        "action": "Let's get started..."
       }
     }
   },
@@ -676,7 +683,8 @@
     "userType": {
       "Admin": "Administrator",
       "GroupOwner": "Group Owner",
-      "Standard": "Standard User"
+      "Standard": "Standard User",
+      "Anonymous": "Anonymous"
     }
   }
 }

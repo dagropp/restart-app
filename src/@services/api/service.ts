@@ -17,6 +17,7 @@ import {
   quality,
   scraping,
   simulation,
+  users,
   wiki,
 } from './sections';
 import {
@@ -30,12 +31,9 @@ import {
   StatusResponse,
   UserPayload,
   UserResponse,
-  UsersList,
   ValidateTokenResponse,
 } from './types';
 import { getUrl } from './utils';
-
-const getUsers = (): Promise<UsersList> => http.get<UsersList>(getUrl('users'));
 
 const getGroup = (
   id: string,
@@ -91,13 +89,6 @@ const validateToken = (
 const getLinkMetadata = (link: string): Promise<LinkMetadataResponse> =>
   http.get(getUrl('link-metadata'), { link });
 
-const useUsers = () =>
-  useQuery({
-    queryKey: ['users'],
-    queryFn: () => getUsers(),
-    staleTime: Infinity,
-  });
-
 const useGroup = (group?: string, token?: string, email?: string) =>
   useQuery({
     queryKey: ['group', group, token, email],
@@ -120,7 +111,6 @@ const useCities = (
 };
 
 const apiService = {
-  useUsers,
   useGroup,
   useCities,
   getCost,
@@ -148,6 +138,7 @@ const apiService = {
   score,
   simulation,
   checklist,
+  users,
 };
 
 export default apiService;

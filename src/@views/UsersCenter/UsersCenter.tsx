@@ -4,6 +4,7 @@ import { useUserContext } from '@context/user';
 import apiService, { type CompactUserResponse } from '@services/api';
 import UserAvatar from '@shared/UserAvatar';
 import { object } from '@utils/object.utils';
+import { ActionsCell } from '@views/UsersCenter/components';
 import { Navigate } from 'react-router';
 
 const columns: TableColumn<CompactUserResponse>[] = [
@@ -31,10 +32,13 @@ const columns: TableColumn<CompactUserResponse>[] = [
       <CopyToClipboard value={row.email}>{row.email}</CopyToClipboard>
     ),
   },
+  { key: 'type', label: 'Type' },
+  { key: 'groupId', label: 'Group' },
+  { key: 'actions', cellRenderer: ActionsCell },
 ];
 
 const PermittedUsersCenter = () => {
-  const { data, isLoading } = apiService.useUsers();
+  const { data, isLoading } = apiService.users.use();
 
   return (
     <Table

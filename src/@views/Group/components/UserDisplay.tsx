@@ -10,6 +10,7 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import SecurityRoundedIcon from '@mui/icons-material/SecurityRounded';
 import IconButton from '@mui/material/IconButton';
+import { UserType } from '@root/types';
 import apiService, { UserResponse } from '@services/api';
 import { CountryImage } from '@shared/CountryDisplay';
 import SectionCard from '@shared/SectionCard';
@@ -76,6 +77,7 @@ export const UserDisplay = ({ user, editLink }: Props) => {
         </Link>
       ),
       Icon: AlternateEmailRoundedIcon,
+      hidden: user.type === UserType.Anonymous,
     },
     {
       key: 'profession',
@@ -145,25 +147,27 @@ export const UserDisplay = ({ user, editLink }: Props) => {
       }
     >
       <div className="flex flex-col gap-4">
-        {items.map(({ key, label, value, Icon, tooltip }) => (
-          <Typography
-            key={key}
-            variant="body2"
-            className="flex items-center justify-between"
-          >
-            <span className="flex gap-2 items-center">
-              <Icon fontSize="small" />
-              <strong>{label}</strong>
-            </span>
-            <Tooltip
-              title={tooltip}
-              placement="left"
-              dir={isRtl ? 'rtl' : 'ltr'}
+        {items
+          .filter((item) => !item.hidden)
+          .map(({ key, label, value, Icon, tooltip }) => (
+            <Typography
+              key={key}
+              variant="body2"
+              className="flex items-center justify-between"
             >
-              <span>{value}</span>
-            </Tooltip>
-          </Typography>
-        ))}
+              <span className="flex gap-2 items-center">
+                <Icon fontSize="small" />
+                <strong>{label}</strong>
+              </span>
+              <Tooltip
+                title={tooltip}
+                placement="left"
+                dir={isRtl ? 'rtl' : 'ltr'}
+              >
+                <span>{value}</span>
+              </Tooltip>
+            </Typography>
+          ))}
       </div>
     </SectionCard>
   );

@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useTranslations, useTranslationsContext } from '@translations';
 
 import CitySelect, { CitySelectProps } from '../CitySelect';
-import { List, ListSkeleton } from './components';
+import { List, ListSkeleton, PricesList } from './components';
 import { CompareProps } from './types';
 
 const Compare = ({
@@ -54,6 +54,7 @@ const Compare = ({
       </Typography>
       <CitySelect {...getProps('other')} />
       {loading || isLoading ? <ListSkeleton /> : <List data={data} />}
+      <PricesList city={filters.city} other={filters.other} />
     </div>
   );
 };

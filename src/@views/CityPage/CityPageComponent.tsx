@@ -40,11 +40,7 @@ const CityPageComponent = ({ tab }: Props) => {
     enabled: !!group.partner && !!item?.id,
   });
 
-  const { data: cost } = useQuery({
-    queryKey: ['getCost', item?.id],
-    queryFn: () => apiService.getCost(item!.id),
-    enabled: !!item?.id,
-  });
+  const { data: cost } = apiService.useCost(item?.id);
 
   const { data: flights } = useQuery({
     queryKey: ['getFlights', item?.id],

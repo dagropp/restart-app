@@ -9,7 +9,6 @@ import { City, IncomeType } from '@root/types';
 import apiService, { IncomeItem } from '@services/api';
 import CityMenu from '@shared/CityMenu';
 import InfoTooltip from '@shared/InfoTooltip';
-import { useQuery } from '@tanstack/react-query';
 import {
   interpolateTranslations,
   useTranslations,
@@ -37,10 +36,7 @@ export const OtherCityItem = ({ value, onChange, marks = [] }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isAdjustedCOL, setIsAdjustedCOL] = useState(true);
 
-  const { data: otherCost } = useQuery({
-    queryKey: ['getOtherCityCost', value],
-    queryFn: () => apiService.getCost(value),
-  });
+  const { data: otherCost } = apiService.useCost(value);
 
   const converter = useMemo(() => {
     if (!cities) return 1;

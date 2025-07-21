@@ -71,6 +71,13 @@ const getData = (language: Language): Promise<Record<City, CityData>> =>
 const getCost = (id: City | Country): Promise<CostResponse> =>
   http.get(getUrl('cost', id));
 
+const useCost = (id?: City | Country) =>
+  useQuery({
+    queryKey: ['getCost', id],
+    queryFn: () => getCost(id!),
+    enabled: !!id,
+  });
+
 const getCurrencies = (base: Currency): Promise<CurrencyList> =>
   http.get(getUrl('currencies', base));
 
@@ -113,7 +120,7 @@ const useCities = (
 const apiService = {
   useGroup,
   useCities,
-  getCost,
+  useCost,
   getCurrencies,
   sendInvite,
   refreshToken,

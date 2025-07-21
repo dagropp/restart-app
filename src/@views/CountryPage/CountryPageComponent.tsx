@@ -1,6 +1,5 @@
 import { Country, CountryTabKey } from '@root/types';
 import apiService from '@services/api';
-import { useQuery } from '@tanstack/react-query';
 import { object } from '@utils/object.utils';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
@@ -17,11 +16,7 @@ const CountryPageComponent = ({ tab }: Props) => {
 
   const item = useMemo(() => data && data[id], [data, id]);
 
-  const { data: cost } = useQuery({
-    queryKey: ['getCost', item?.id],
-    queryFn: () => apiService.getCost(item!.id),
-    enabled: !!item?.id,
-  });
+  const { data: cost } = apiService.useCost(item?.id);
 
   const { data: cities } = apiService.useCities();
   const { data: scores } = apiService.score.use();

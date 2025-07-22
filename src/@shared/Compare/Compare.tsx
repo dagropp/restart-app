@@ -1,12 +1,20 @@
 import Typography from '@common/Typography';
 import useFilters from '@hooks/useFilters';
+import { City } from '@root/types.ts';
 import apiService from '@services/api';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations, useTranslationsContext } from '@translations';
 
 import CitySelect, { CitySelectProps } from '../CitySelect';
 import { List, ListSkeleton, PricesList } from './components';
-import { CompareProps } from './types';
+
+interface Props {
+  storageKey: string;
+  defaultCity?: City;
+  defaultOther?: City;
+  loading?: boolean;
+  readOnly?: boolean;
+}
 
 const Compare = ({
   storageKey,
@@ -14,7 +22,7 @@ const Compare = ({
   defaultCity,
   defaultOther,
   readOnly,
-}: CompareProps) => {
+}: Props) => {
   const { filters, update } = useFilters(storageKey, {
     city: defaultCity,
     other: defaultOther,

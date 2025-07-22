@@ -8,6 +8,9 @@ import { object } from './object.utils';
 const units = ['', 'K', 'M', 'B', 'T']; // Define units for thousands, millions, etc.
 
 export type CurrencyConverter = (value: number, round?: boolean) => string;
+
+export type CurrencyConverterToNumber = (value: number) => number;
+
 export type HardCurrencyConverter = (
   value: number,
   round?: boolean,
@@ -54,6 +57,14 @@ export const convertCurrency =
     const multiplier = currencies[currency as keyof CurrencyList] ?? 1;
     return formatCurrency(value / multiplier, base, round);
   };
+
+export const convertCurrencyToNumber = (
+  currencies: CurrencyList,
+  currency: Currency,
+): CurrencyConverterToNumber => {
+  const multiplier = currencies[currency as keyof CurrencyList] ?? 1;
+  return (value: number) => value / multiplier;
+};
 
 export const convertHardCurrency =
   (

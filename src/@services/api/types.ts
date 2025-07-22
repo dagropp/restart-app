@@ -229,6 +229,19 @@ export interface CostResponse {
   wine: number;
 }
 
+export type DisplayableCostFields = Omit<
+  CostResponse,
+  | 'lastUpdate'
+  | 'city'
+  | 'buyCentral'
+  | 'rentCentral'
+  | 'directFlight'
+  | 'japanCar'
+  | 'rentSingleCentral'
+  | 'rentSingleOuter'
+  | 'generalSingleCost'
+>;
+
 export interface IncomeItem {
   gross: number;
   net: number;

@@ -8,7 +8,7 @@ import CostOfLivingChart from '../../../components/CostOfLivingChart';
 import { useCostContext } from '../../../context';
 import { getCardBg } from '../utils';
 
-const CostWithData = () => {
+export const CostWithData = () => {
   const theme = useTheme();
   const translations = useTranslations().city.cost.simulation;
 
@@ -47,5 +47,3 @@ const CostWithData = () => {
     </>
   );
 };
-
-export default CostWithData;

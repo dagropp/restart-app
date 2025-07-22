@@ -1,6 +1,4 @@
-import { lazy } from 'react';
-
-const Compare = lazy(() => import('@shared/Compare'));
+import Compare from '@shared/Compare';
 
 const CompareView = () => {
   return (

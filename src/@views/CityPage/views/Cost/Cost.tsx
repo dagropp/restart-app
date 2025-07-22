@@ -2,15 +2,13 @@ import Typography from '@common/Typography';
 import SentimentVeryDissatisfiedRoundedIcon from '@mui/icons-material/SentimentVeryDissatisfiedRounded';
 import { useTranslations } from '@translations';
 import { style } from '@utils/style.utils';
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
 
-import { CostSkeleton } from './components';
+import { CostSkeleton, CostWithData } from './components';
 
 interface Props {
   loading: boolean;
 }
-
-const CostWithData = lazy(() => import('./components/CostWithData'));
 
 const Cost = ({ loading }: Props) => {
   const translations = useTranslations().city.cost.simulation;

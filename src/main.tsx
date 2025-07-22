@@ -12,10 +12,6 @@ dateService.init();
 
 const queryClient = new QueryClient();
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js');
-}
-
 createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
     <TranslationsContextWrapper>

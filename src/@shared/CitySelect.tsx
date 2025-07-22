@@ -23,6 +23,7 @@ const CitySelect = ({ exclude = new Set(), ...props }: CitySelectProps) => {
         ? object
             .values(cities)
             .filter(({ id }) => !exclude?.has(id))
+            .toSorted((a, b) => a.name.localeCompare(b.name))
             .map((city) => ({
               label: <CityDisplay name={city.name} country={city.country.id} />,
               value: city.id,

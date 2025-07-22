@@ -54,8 +54,8 @@ const Routes = () => {
     isLoggedIn === LoginState.Valid ? UserContextWrapper : Fragment;
 
   useEffect(() => {
-    if (isLoggedIn !== LoginState.Pending) overlay?.classList.add('done');
-  }, [isLoggedIn]);
+    overlay?.classList.add('done');
+  }, []);
 
   return (
     <BrowserRouter>

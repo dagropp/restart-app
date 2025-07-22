@@ -1,7 +1,6 @@
 import titleService from '@services/title';
-import { lazy, useLayoutEffect } from 'react';
-
-const Cities = lazy(() => import('@views/Cities'));
+import Cities from '@views/Cities';
+import { useLayoutEffect } from 'react';
 
 const App = () => {
   useLayoutEffect(() => {

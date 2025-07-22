@@ -21,6 +21,21 @@
     />
 
     <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const registration of registrations) {
+            registration.unregister();
+          }
+        });
+
+        caches.keys().then((cacheNames) => {
+          for (const name of cacheNames) {
+            caches.delete(name);
+          }
+        });
+      }
+    </script>
     <style>
       .overlay {
         &.light {

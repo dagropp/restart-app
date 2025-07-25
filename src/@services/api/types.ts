@@ -255,6 +255,8 @@ export interface QualityIndexResponse {
   quality?: CityStatResponse;
   crime?: CityStatResponse;
   pollution?: CityStatResponse;
+  traffic?: CityStatResponse;
+  health?: CityStatResponse;
 }
 
 export interface FlightsResponse {

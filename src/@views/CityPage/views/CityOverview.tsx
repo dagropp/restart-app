@@ -9,6 +9,7 @@ import {
   CityWikiData,
   GeneralData,
   Plan,
+  QualityRank,
   ScoreCard,
   TimeDisplayList,
   WeatherDisplay,
@@ -38,6 +39,7 @@ const OverviewWithData = () => {
       <Prices currency={item.country.currency} cost={cost} />
       <Plan />
       <FlightData />
+      <QualityRank />
       <TimeDisplayList />
       <WeatherDisplay />
       <CityLinks />

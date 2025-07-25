@@ -59,6 +59,10 @@ export const defaultTranslations = {
       title: 'Time Difference',
       current: 'Current Time',
     },
+    qualityRank: {
+      title: 'Quality of Life Rank',
+      average: 'Average Rating',
+    },
     cost: {
       incomeSlider: {
         title: 'Annual Income',
@@ -698,6 +702,13 @@ export const defaultTranslations = {
       GroupOwner: 'Group Owner',
       Standard: 'Standard User',
       Anonymous: 'Anonymous',
+    },
+    qualityOfLife: {
+      quality: 'Quality of Life',
+      crime: 'Crime',
+      pollution: 'Pollution',
+      traffic: 'Traffic',
+      health: 'Health Care',
     },
   },
 };

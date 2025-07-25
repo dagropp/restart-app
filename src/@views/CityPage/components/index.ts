@@ -5,6 +5,7 @@ export * from './CityWikiData';
 export * from './GeneralData';
 export * from './Insights';
 export * from './Plan';
+export * from './QualityRank';
 export * from './SavedSimulations';
 export * from './ScoreCard';
 export * from './SimulationResults';

@@ -142,6 +142,11 @@ export const defaultTranslations = {
       facebook: 'Facebook Community',
       flight: 'Flight Data',
       wikipedia: 'Wikipedia Page',
+      qualityOfLife: 'Quality of Life Data',
+      crime: 'Crime Data',
+      pollution: 'Pollution Data',
+      traffic: 'Traffic Data',
+      health: 'Health Care Data',
     },
     plan: {
       title: 'Plan Ahead',

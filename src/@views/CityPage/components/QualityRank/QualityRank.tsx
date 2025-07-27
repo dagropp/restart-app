@@ -1,21 +1,21 @@
+import Link from '@common/Link';
 import Rating from '@common/Rating';
 import Typography from '@common/Typography';
 import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded';
 import { lighten, Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
-import apiService, { type QualityIndexResponse } from '@services/api';
+import apiService from '@services/api';
 import { quality } from '@services/api/sections';
 import SectionCard from '@shared/SectionCard';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations, useTranslationsContext } from '@translations';
-import { is } from '@utils/is.utils.ts';
+import { is } from '@utils/is.utils';
+import { QualityKey, qualityUtils } from '@utils/quality.utils';
 import { useCityContext } from '@views/CityPage/context';
 
-type Key = keyof QualityIndexResponse;
-
 interface SectionProps {
-  id: Key;
+  id: QualityKey;
   rank?: number;
   minRank?: number;
 }
@@ -28,6 +28,7 @@ const getBgColor = (score: number, theme: Theme) => {
 
 const Section = ({ id, rank, minRank }: SectionProps) => {
   const translations = useTranslations().enum.qualityOfLife;
+  const { isRtl } = useTranslationsContext();
 
   if (is.nullOrUndefined(rank) || is.nullOrUndefined(minRank)) return null;
 
@@ -36,13 +37,22 @@ const Section = ({ id, rank, minRank }: SectionProps) => {
   return (
     <>
       <Typography variant="body2" fontWeight={500}>
-        {translations[id]}
+        {translations[id]}{' '}
+        <Link
+          external
+          href={qualityUtils.getLinkUrl(id)}
+          className="!text-inherit"
+        />
       </Typography>
-      <Typography variant="body2" dir="ltr">
-        {rank + 1}/{minRank}
+      <Typography
+        variant="body2"
+        dir="ltr"
+        className={isRtl ? 'text-left' : 'text-right'}
+      >
+        {qualityUtils.getRankDisplay(id, rank, minRank)}/{minRank}
       </Typography>
       <Box
-        className="appearance-none w-full min-w-2 h-2 rounded"
+        className="appearance-none w-full min-w-2 h-1.5 rounded"
         style={{ width: `${100 - score * 100}%` }}
         sx={(theme) => ({
           bgcolor: lighten(getBgColor(score, theme), 0.2),
@@ -68,7 +78,13 @@ export const QualityRank = () => {
 
   if (is.emptyObject(data)) return null;
 
-  const sorted: Key[] = ['quality', 'crime', 'pollution', 'health', 'traffic'];
+  const sorted: QualityKey[] = [
+    'quality',
+    'crime',
+    'pollution',
+    'health',
+    'traffic',
+  ];
 
   return (
     <SectionCard

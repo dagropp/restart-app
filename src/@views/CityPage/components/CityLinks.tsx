@@ -3,17 +3,28 @@ import Typography from '@common/Typography';
 import { useUserContext } from '@context/user';
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
+import FactoryRoundedIcon from '@mui/icons-material/FactoryRounded';
 import FlightTakeoffRoundedIcon from '@mui/icons-material/FlightTakeoffRounded';
 import Groups2RoundedIcon from '@mui/icons-material/Groups2Rounded';
 import LibraryBooksRoundedIcon from '@mui/icons-material/LibraryBooksRounded';
+import LocalPoliceRoundedIcon from '@mui/icons-material/LocalPoliceRounded';
+import MedicalInformationRoundedIcon from '@mui/icons-material/MedicalInformationRounded';
 import PointOfSaleRoundedIcon from '@mui/icons-material/PointOfSaleRounded';
 import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
+import TrafficRoundedIcon from '@mui/icons-material/TrafficRounded';
+import VolunteerActivismRoundedIcon from '@mui/icons-material/VolunteerActivismRounded';
 import { type OverridableComponent } from '@mui/material/OverridableComponent';
 import { type SvgIconTypeMap } from '@mui/material/SvgIcon';
 import SectionCard from '@shared/SectionCard';
-import { interpolateTranslations, useTranslations } from '@translations';
+import {
+  interpolateTranslations,
+  useTranslations,
+  useTranslationsContext,
+} from '@translations';
 import { incomeUtils } from '@utils/income.utils';
+import { qualityUtils } from '@utils/quality.utils';
 import { useCityContext } from '@views/CityPage/context';
+import clsx from 'clsx';
 
 interface LinkData {
   label: string;
@@ -22,14 +33,23 @@ interface LinkData {
   hidden?: boolean;
 }
 
-const Item = ({ label, Icon, url }: LinkData) => (
-  <li className="list-none flex items-center gap-4">
-    <Icon fontSize="small" />
-    <Link href={url} external>
-      <Typography variant="body2">{label}</Typography>
-    </Link>
-  </li>
-);
+const Item = ({ label, Icon, url }: LinkData) => {
+  const { isRtl } = useTranslationsContext();
+
+  return (
+    <li className="list-none flex items-center gap-4">
+      <Icon fontSize="small" />
+      <Link
+        href={url}
+        external
+        dir={isRtl ? 'rtl' : 'ltr'}
+        className={clsx(isRtl && 'flex-row-reverse')}
+      >
+        <Typography variant="body2">{label}</Typography>
+      </Link>
+    </li>
+  );
+};
 
 export const CityLinks = () => {
   const { item } = useCityContext();
@@ -44,17 +64,42 @@ export const CityLinks = () => {
 
   const list: LinkData[] = [
     {
-      label: compTranslations.costOfLiving,
-      url: `https://www.numbeo.com/cost-of-living/in/${item.costOfLivingKey}`,
-      Icon: PointOfSaleRoundedIcon,
-    },
-    {
       label: interpolateTranslations(compTranslations.income, {
         name: user.firstName,
       }),
       url: userIncomeTypeData?.getLink?.(item) ?? '',
       Icon: BusinessCenterRoundedIcon,
       hidden: !userIncomeTypeData?.getLink,
+    },
+    {
+      label: compTranslations.costOfLiving,
+      url: `https://www.numbeo.com/cost-of-living/in/${item.costOfLivingKey}`,
+      Icon: PointOfSaleRoundedIcon,
+    },
+    {
+      label: compTranslations.qualityOfLife,
+      url: qualityUtils.getLinkUrl('quality', item.costOfLivingKey),
+      Icon: VolunteerActivismRoundedIcon,
+    },
+    {
+      label: compTranslations.crime,
+      url: qualityUtils.getLinkUrl('crime', item.costOfLivingKey),
+      Icon: LocalPoliceRoundedIcon,
+    },
+    {
+      label: compTranslations.pollution,
+      url: qualityUtils.getLinkUrl('pollution', item.costOfLivingKey),
+      Icon: FactoryRoundedIcon,
+    },
+    {
+      label: compTranslations.health,
+      url: qualityUtils.getLinkUrl('health', item.costOfLivingKey),
+      Icon: MedicalInformationRoundedIcon,
+    },
+    {
+      label: compTranslations.traffic,
+      url: qualityUtils.getLinkUrl('traffic', item.costOfLivingKey),
+      Icon: TrafficRoundedIcon,
     },
     {
       label: interpolateTranslations(compTranslations.income, {

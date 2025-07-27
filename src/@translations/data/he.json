@@ -129,6 +129,7 @@
       "colAdjusted": "מותאם לעלות המחיה",
       "colAdjustedDescription": "התאמה להבדלי עלות המחיה בין {{city}} ל-{{other}}",
       "jobsPosted": "{{jobs}} משרות פורסמו",
+      "jobsRange": "ב־{{days}} הימים האחרונים",
       "gross": "ברוטו שנתי",
       "net": "נטו חודשי"
     },

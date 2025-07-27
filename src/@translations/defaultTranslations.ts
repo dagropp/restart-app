@@ -132,6 +132,7 @@ export const defaultTranslations = {
       colAdjustedDescription:
         'Adjustment for cost of living differences between {{city}} and {{other}}',
       jobsPosted: '{{jobs}} Jobs Posted',
+      jobsRange: 'In the past {{days}} days',
       gross: 'Gross Annual',
       net: 'Monthly Net',
     },

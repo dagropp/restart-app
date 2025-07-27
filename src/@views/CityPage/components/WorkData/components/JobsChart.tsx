@@ -2,7 +2,6 @@ import SparkLineChart from '@common/SparkLineChart';
 import Typography from '@common/Typography';
 import { alpha, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import dateService from '@services/date.service';
 import {
   interpolateTranslations,
   useTranslations,
@@ -11,7 +10,6 @@ import {
 import { format } from '@utils/format.utils';
 import { is } from '@utils/is.utils';
 import { number } from '@utils/number.utils';
-import dayjs from 'dayjs';
 import { useMemo } from 'react';
 
 interface Props {
@@ -45,7 +43,6 @@ export const JobsChart = ({ jobs = [], name }: Props) => {
       ? `+${number.toFixed(trendRate, 2)}%`
       : `${number.toFixed(trendRate, 2)}%`;
 
-  const range = `${dateService.formatDate(dayjs().subtract(jobs.length - 1, 'day'))} - ${dateService.formatDate(dayjs())}`;
   const latest = jobs.at(-1);
   const isLoading = is.nullOrUndefined(latest);
 
@@ -82,7 +79,11 @@ export const JobsChart = ({ jobs = [], name }: Props) => {
       {isLoading ? (
         <Skeleton variant="text" width="60%" />
       ) : (
-        <Typography variant="caption">{range}</Typography>
+        <Typography variant="caption">
+          {interpolateTranslations(translations.jobsRange, {
+            days: jobs.length,
+          })}
+        </Typography>
       )}
 
       <SparkLineChart

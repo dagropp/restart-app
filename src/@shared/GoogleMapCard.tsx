@@ -1,12 +1,13 @@
-import { Tab, Tabs } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import apiService from '@services/api';
 import { useTranslations } from '@translations';
 import { is } from '@utils/is.utils';
 import clsx from 'clsx';
 import { memo, useState } from 'react';
 
 import SectionCard from './SectionCard';
-
-const API_KEY = 'AIzaSyD9BbzQz7f9iADHjsvjtaLlWzB6WnFrfcg';
 
 interface MapParams {
   place: string;
@@ -29,8 +30,13 @@ type View = 'PLACE' | 'AIRPORT' | 'METRO';
 
 const ROOT = 'https://www.google.com/maps/embed/v1/';
 
-const getUrl = (params: MapParams, view: View, zoom?: number) => {
-  const query: Record<string, string> = { key: API_KEY };
+const getUrl = (
+  apiKey: string,
+  params: MapParams,
+  view: View,
+  zoom?: number,
+) => {
+  const query: Record<string, string> = { key: apiKey };
   const api = view === 'PLACE' ? 'place' : 'directions';
 
   switch (view) {
@@ -62,7 +68,12 @@ const GoogleMapCard = memo(
     const [view, setView] = useState<View>(() =>
       params.destination ? 'METRO' : 'PLACE',
     );
-    const url = getUrl(params, view, zoom);
+
+    const apiKeyQuery = apiService.external.useMapsApiKey();
+
+    const url =
+      apiKeyQuery.data?.apiKey &&
+      getUrl(apiKeyQuery.data.apiKey, params, view, zoom);
 
     const tabsData: TabData[] = [
       {
@@ -97,15 +108,27 @@ const GoogleMapCard = memo(
               ))}
           </Tabs>
         )}
-        <iframe
-          referrerPolicy="no-referrer-when-downgrade"
-          src={url}
-          allowFullScreen
-          className={clsx(
-            'border-0 w-full h-[300px]',
-            !isPlaceOnly && 'rounded-lg overflow-hidden',
+        <div className="relative w-full h-[300px]">
+          {url && (
+            <iframe
+              referrerPolicy="no-referrer-when-downgrade"
+              src={url}
+              allowFullScreen
+              className={clsx(
+                'border-0 w-full h-full',
+                !isPlaceOnly && 'rounded-lg overflow-hidden',
+              )}
+            />
           )}
-        ></iframe>
+          <Skeleton
+            variant="rounded"
+            className={clsx(
+              'absolute inset-0 z-10',
+              !apiKeyQuery.isLoading && 'invisible',
+            )}
+            height={300}
+          />
+        </div>
       </SectionCard>
     );
   },

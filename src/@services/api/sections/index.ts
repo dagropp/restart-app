@@ -3,6 +3,7 @@ export * from './checklist';
 export * from './community';
 export * from './compare';
 export * from './countries';
+export * from './external';
 export * from './flights';
 export * from './income';
 export * from './insights';

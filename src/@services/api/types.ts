@@ -680,3 +680,7 @@ export interface PutChecklistPayload {
   severity: ChecklistItemSeverity;
   type: 'add' | 'status' | 'update';
 }
+
+export interface ExternalMapsApiResponse {
+  apiKey: string;
+}

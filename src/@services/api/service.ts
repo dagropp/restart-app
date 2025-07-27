@@ -10,6 +10,7 @@ import {
   community,
   compare,
   countries,
+  external,
   flights,
   income,
   insights,
@@ -139,6 +140,7 @@ const apiService = {
   simulation,
   checklist,
   users,
+  external,
 };
 
 export default apiService;

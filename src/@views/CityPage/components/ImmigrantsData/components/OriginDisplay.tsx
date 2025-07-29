@@ -1,5 +1,6 @@
 import Tooltip from '@common/Tooltip';
 import Typography from '@common/Typography';
+import { useTheme } from '@mui/material/styles';
 import { RefCountry } from '@root/types';
 import { useTranslations } from '@translations';
 
@@ -31,9 +32,13 @@ export const OriginDisplay = () => {
   const translations = useTranslations().city.immigrants;
   const { item } = useCityContext();
   const { origins } = item.immigrants;
+  const { palette } = useTheme();
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div
+      className="flex flex-col items-center gap-2 border-t mx-4 mt-2 pt-2"
+      style={{ borderColor: palette.divider }}
+    >
       <Typography variant="body2" fontWeight={500}>
         {translations.origins}
       </Typography>

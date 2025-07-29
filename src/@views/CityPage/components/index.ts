@@ -3,6 +3,7 @@ export * from './CityGoogleMapCard';
 export * from './CityLinks';
 export * from './CityWikiData';
 export * from './GeneralData';
+export * from './ImmigrantsData';
 export * from './Insights';
 export * from './Plan';
 export * from './QualityRank';

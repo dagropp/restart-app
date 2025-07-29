@@ -6,6 +6,7 @@ import { UserResponse } from '@services/api';
 import titleService from '@services/title';
 import { useTranslations } from '@translations';
 import { object } from '@utils/object.utils';
+import FlagsCenter from '@views/FlagsCenter';
 import { useLayoutEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router';
 
@@ -55,11 +56,17 @@ const Settings = ({ tab }: Props) => {
         element: <UsersCenter />,
         shouldHide: (user: UserResponse) => user.type !== UserType.Admin,
       },
+      [SettingsTabKey.FLAGS]: {
+        label: compTranslations.flags,
+        element: <FlagsCenter />,
+        shouldHide: (user: UserResponse) => user.type !== UserType.Admin,
+      },
     }),
     [
       compTranslations.dataCenter,
       compTranslations.editGroup,
       compTranslations.editUser,
+      compTranslations.flags,
       compTranslations.users,
     ],
   );

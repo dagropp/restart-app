@@ -11,6 +11,7 @@ import {
   compare,
   countries,
   external,
+  flags,
   flights,
   income,
   insights,
@@ -141,6 +142,7 @@ const apiService = {
   checklist,
   users,
   external,
+  flags,
 };
 
 export default apiService;

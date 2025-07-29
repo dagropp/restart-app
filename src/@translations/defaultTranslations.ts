@@ -415,6 +415,7 @@ export const defaultTranslations = {
       editGroup: 'Edit Group',
       dataCenter: 'Data Center',
       users: 'Users',
+      flags: 'Flags',
     },
     form: {
       email: 'Email',

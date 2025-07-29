@@ -408,7 +408,8 @@
       "editUser": "Edit User",
       "editGroup": "Edit Group",
       "dataCenter": "Data Center",
-      "users": "Users"
+      "users": "Users",
+      "flags": "Flags"
     },
     "form": {
       "email": "Email",

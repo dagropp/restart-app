@@ -183,6 +183,13 @@
     },
     "funFacts": {
       "title": "הידעת?"
+    },
+    "immigrants": {
+      "title": "נוכחות מוסלמית",
+      "origins": "מדינות מוצא",
+      "neighborhoods": "שכונות עיקריות",
+      "percentage": "חלקם של המוסלמים באוכלוסייה",
+      "people": "{{people}} אנשים"
     }
   },
   "compare": {
@@ -701,6 +708,42 @@
       "pollution": "זיהום",
       "traffic": "תנועה",
       "health": "שירותי בריאות"
+    },
+    "refCountry": {
+      "MOROCCO": "מרוקו",
+      "TURKEY": "טורקיה",
+      "SURINAME": "סורינאם",
+      "INDONESIA": "אינדונזיה",
+      "SOMALIA": "סומליה",
+      "IRAQ": "עיראק",
+      "PAKISTAN": "פקיסטן",
+      "AFGHANISTAN": "אפגניסטן",
+      "IRAN": "איראן",
+      "BANGLADESH": "בנגלדש",
+      "SYRIA": "סוריה",
+      "EGYPT": "מצרים",
+      "NATIVE": "אוכלוסיה מקומית",
+      "FIJI": "פיג'י",
+      "INDIA": "הודו",
+      "PALESTINE": "פלסטין",
+      "SENEGAL": "סנגל",
+      "ALGERIA": "אלג'יריה",
+      "BOSNIA": "בוסניה והרצגובינה",
+      "ALBANIA": "אלבניה",
+      "KOSOVO": "קוסובו",
+      "LEBANON": "לבנון",
+      "TUNISIA": "תוניסיה",
+      "MALAYSIA": "מלזיה",
+      "SUDAN": "סודן",
+      "NIGERIA": "ניגריה",
+      "LIBYA": "לוב",
+      "CHECHNYA": "צ'צ'ניה",
+      "GUINEA_BISSAU": "גינאה-ביסאו",
+      "MOZAMBIQUE": "מוזמביק",
+      "YEMEN": "תימן",
+      "MALI": "מאלי",
+      "ETHIOPIA": "אתיופיה",
+      "UKRAINE": "אוקראינה"
     }
   }
 }

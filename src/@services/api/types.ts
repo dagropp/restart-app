@@ -7,6 +7,7 @@ import {
   type Language,
   type NoteScope,
   type NoteType,
+  type RefCountry,
   type Region,
   type Religion,
   type UserType,
@@ -163,6 +164,12 @@ export type CityCountryResponse = Pick<
   | 'voltage'
 >;
 
+export interface ImmigrantData {
+  percentage: number;
+  origins: RefCountry[];
+  neighborhoods: string[];
+}
+
 export interface CityData {
   id: City;
   country: CityCountryResponse;
@@ -189,6 +196,7 @@ export interface CityData {
   satelliteChildren: City[];
   satelliteCity?: City;
   satelliteDistance?: number;
+  immigrants: ImmigrantData;
 }
 
 export interface CostResponse {

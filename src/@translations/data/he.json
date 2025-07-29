@@ -7,7 +7,7 @@
     "cells": {
       "city": "עיר",
       "country": "מדינה",
-      "score": "ציון ממוצע",
+      "score": "דירוג ממוצע",
       "isEu": "האם באיחוד האירופי",
       "visa": "אשרת עבודה",
       "language": "שפה",
@@ -155,7 +155,7 @@
       "perPeople": "× {{people}} אנשים"
     },
     "score": {
-      "title": "ציון"
+      "title": "דירוג"
     },
     "weather": {
       "title": "מזג אוויר",
@@ -189,7 +189,7 @@
       "origins": "מדינות מוצא",
       "neighborhoods": "שכונות עיקריות",
       "percentage": "חלקם של המוסלמים באוכלוסייה",
-      "people": "{{people}} אנשים"
+      "people": "כ-{{people}} אנשים"
     }
   },
   "compare": {

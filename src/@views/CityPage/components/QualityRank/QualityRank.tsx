@@ -107,7 +107,7 @@ export const QualityRank = () => {
         <Typography variant="body2" className="pb-1">
           {translations.average}
         </Typography>
-        <Rating value={rating} base={10} readOnly size="large" />
+        <Rating value={rating} base={10} readOnly />
         <Typography variant="h6" fontWeight={500}>
           {(rating / 2).toFixed(1)}
         </Typography>

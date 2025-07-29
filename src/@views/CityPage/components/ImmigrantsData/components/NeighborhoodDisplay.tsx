@@ -22,7 +22,7 @@ export const NeighborhoodDisplay = () => {
 
   return (
     <div
-      className="flex flex-col items-center gap-2 border-t mx-4 mt-2 pt-2"
+      className="flex flex-col items-center gap-2"
       style={{ borderColor: palette.divider }}
     >
       <Typography variant="body2" fontWeight={500}>

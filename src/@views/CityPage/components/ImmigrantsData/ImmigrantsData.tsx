@@ -15,7 +15,7 @@ export const ImmigrantsData = () => {
     <SectionCard
       title={translations.title}
       TitleIcon={MosqueRoundedIcon}
-      contentClassName="flex flex-col gap-2"
+      contentClassName="flex flex-col gap-4"
     >
       <PercentageDisplay />
       <OriginDisplay />

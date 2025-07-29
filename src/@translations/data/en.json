@@ -189,7 +189,7 @@
       "origins": "Countries of Origin",
       "neighborhoods": "Main Neighborhoods",
       "percentage": "Muslim Share of the Population",
-      "people": "{{people}} people"
+      "people": "Around {{people}} people"
     }
   },
   "compare": {

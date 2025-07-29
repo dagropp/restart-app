@@ -232,10 +232,9 @@ const FavoritesItem = () => {
             className={clsx(
               index !== list.length - 1 && 'after:content-[","] after:me-1',
             )}
+            key={id}
           >
-            <Link key={id} href={path}>
-              {name}
-            </Link>
+            <Link href={path}>{name}</Link>
           </span>
         ))
       ) : (

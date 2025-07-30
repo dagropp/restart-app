@@ -1,3 +1,4 @@
+import apiService from '@services/api';
 import FunFacts from '@shared/FunFacts';
 import Landmarks from '@shared/Landmarks';
 import Overview from '@shared/Overview';
@@ -26,6 +27,7 @@ interface Props {
 
 const OverviewWithData = () => {
   const { item, cost } = useCityContext();
+  const flags = apiService.flags.use();
 
   return (
     <Overview gridKey={item.id}>
@@ -40,7 +42,7 @@ const OverviewWithData = () => {
       <Prices currency={item.country.currency} cost={cost} />
       <Plan />
       <FlightData />
-      <ImmigrantsData />
+      {flags.immigration && <ImmigrantsData />}
       <QualityRank />
       <TimeDisplayList />
       <WeatherDisplay />

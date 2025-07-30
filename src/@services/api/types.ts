@@ -695,7 +695,7 @@ export interface ExternalMapsApiResponse {
 }
 
 // flags
-export type FlagName = string;
+export type FlagName = 'immigration';
 
 export type FlagsResponse = Record<FlagName, boolean>;
 

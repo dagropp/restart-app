@@ -1,6 +1,6 @@
 import Button from '@common/Button';
 import TextField from '@common/TextField';
-import apiService, { EditFlagPayload } from '@services/api';
+import apiService, { EditFlagPayload, FlagName } from '@services/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FormEvent } from 'react';
 
@@ -23,7 +23,7 @@ export const CreateNewFlag = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const name = String(data.get(metadata.name.key));
+    const name = String(data.get(metadata.name.key)) as FlagName;
     const description = String(data.get(metadata.description.key));
     editStatusApi.mutate({
       name,

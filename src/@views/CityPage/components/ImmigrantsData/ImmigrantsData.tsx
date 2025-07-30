@@ -14,6 +14,7 @@ export const ImmigrantsData = () => {
   return (
     <SectionCard
       title={translations.title}
+      subtitle={translations.percentage}
       TitleIcon={MosqueRoundedIcon}
       contentClassName="flex flex-col gap-4"
     >

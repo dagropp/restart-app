@@ -49,9 +49,6 @@ export const PercentageDisplay = () => {
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <Typography variant="body2" dir={dir} fontWeight={500}>
-        {interpolateTranslations(translations.percentage, { percentage })}
-      </Typography>
       <div className="relative h-12 w-12 flex items-center justify-center mx-auto">
         <CircularProgress color="inherit" {...getProgressProps()} />
         <CircularProgress {...getProgressProps(percentage)} />

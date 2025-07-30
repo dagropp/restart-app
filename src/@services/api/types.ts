@@ -689,6 +689,27 @@ export interface PutChecklistPayload {
   type: 'add' | 'status' | 'update';
 }
 
+// external apis
 export interface ExternalMapsApiResponse {
   apiKey: string;
+}
+
+// flags
+export type FlagName = 'immigration';
+
+export type FlagsResponse = Record<FlagName, boolean>;
+
+export interface FlagItemResponse {
+  id: number;
+  name: FlagName;
+  users: string[];
+  groups: string[];
+  status: boolean;
+  description?: string;
+}
+
+export type EditFlagPayload = Omit<FlagItemResponse, 'id'>;
+
+export interface FlagParams {
+  id: number;
 }

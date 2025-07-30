@@ -18,6 +18,7 @@ export enum SettingsTabKey {
   DATA_CENTER = 'data-center',
   DATA_CENTER_ITEM = 'data-center/:type',
   USERS = 'users',
+  FLAGS = 'flags',
 }
 
 export enum NotesTabKey {

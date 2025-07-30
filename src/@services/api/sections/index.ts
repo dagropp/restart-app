@@ -4,6 +4,7 @@ export * from './community';
 export * from './compare';
 export * from './countries';
 export * from './external';
+export * from './flags';
 export * from './flights';
 export * from './income';
 export * from './insights';

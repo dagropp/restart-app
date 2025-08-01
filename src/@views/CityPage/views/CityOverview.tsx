@@ -10,6 +10,7 @@ import {
   CityWikiData,
   GeneralData,
   ImmigrantsData,
+  LanguageData,
   Plan,
   QualityRank,
   ScoreCard,
@@ -44,6 +45,7 @@ const OverviewWithData = () => {
       <FlightData />
       {flags.immigration && <ImmigrantsData />}
       <QualityRank />
+      <LanguageData />
       <TimeDisplayList />
       <WeatherDisplay />
       <CityLinks />

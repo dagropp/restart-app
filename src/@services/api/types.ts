@@ -713,3 +713,14 @@ export type EditFlagPayload = Omit<FlagItemResponse, 'id'>;
 export interface FlagParams {
   id: number;
 }
+
+// language data
+export type LanguageCategory = 0 | 1 | 2 | 3 | 4 | 4.5 | 5;
+
+export interface LanguageDataResponse {
+  numberOfWeeks: [number] | [number, number];
+  numberOfHours: [number] | [number, number];
+  languages: Language[];
+  description: string;
+  category: LanguageCategory;
+}

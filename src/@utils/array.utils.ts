@@ -6,4 +6,6 @@ const joinWithLast = <T>(array: T[], joiner: string, lastJoiner?: string) =>
     ? `${array.slice(0, -1).join(joiner)}${lastJoiner}${array.at(-1)}`
     : array.toString();
 
-export const array = { getIndices, joinWithLast };
+const unique = <T>(array: T[]): T[] => Array.from(new Set(array));
+
+export const array = { getIndices, joinWithLast, unique };

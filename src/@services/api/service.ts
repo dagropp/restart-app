@@ -15,6 +15,7 @@ import {
   flights,
   income,
   insights,
+  language,
   notes,
   quality,
   scraping,
@@ -143,6 +144,7 @@ const apiService = {
   users,
   external,
   flags,
+  language,
 };
 
 export default apiService;

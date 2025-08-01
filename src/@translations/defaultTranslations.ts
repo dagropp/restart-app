@@ -63,6 +63,17 @@ export const defaultTranslations = {
       title: 'Quality of Life Rank',
       average: 'Average Rating',
     },
+    language: {
+      title: 'Language',
+      rank: '{{language}} language difficulty ranking',
+      other: 'Other languages in this category include',
+      duration: 'Estimated time to learn the language',
+      englishSpeakers: '{{percentage}}% of the population speaks English',
+      average: 'Language Rating',
+      languagesSeparator: ' and ',
+      weeks: 'Weeks',
+      hours: 'Hours',
+    },
     cost: {
       incomeSlider: {
         title: 'Annual Income',

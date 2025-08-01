@@ -63,6 +63,17 @@
       "title": "מדד איכות חיים",
       "average": "דירוג ממוצע"
     },
+    "language": {
+      "title": "שפה",
+      "rank": "דירוג קושי השפה ה{{language}}",
+      "other": "שפות נוספות בקטגוריה זו כוללות",
+      "duration": "משך הזמן המשוער ללמידת השפה",
+      "englishSpeakers": "{{percentage}}% מהאוכלוסייה דוברי אנגלית",
+      "average": "דירוג השפה",
+      "languagesSeparator": " ו",
+      "weeks": "שבועות",
+      "hours": "שעות"
+    },
     "cost": {
       "incomeSlider": {
         "title": "הכנסה שנתית",
@@ -610,7 +621,7 @@
       },
       "language": {
         "label": "שפה",
-        "description": "השוואת רמות שליטה באנגלית ובעברית"
+        "description": "השוואת רמות שליטה באנגלית ובעברית והקושי בלימוד השפה"
       },
       "qualityRank": {
         "label": "מדד איכות חיים",

@@ -8,6 +8,7 @@ export * from './flags';
 export * from './flights';
 export * from './income';
 export * from './insights';
+export * from './language';
 export * from './notes';
 export * from './quality';
 export * from './scraping';

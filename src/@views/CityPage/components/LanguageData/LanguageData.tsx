@@ -22,7 +22,7 @@ export const LanguageData = () => {
   const compTranslations = translations.city.language;
   const langTranslations = translations.enum.language;
 
-  const { data } = apiService.language.use(item.language);
+  const { data, isLoading } = apiService.language.use(item.language);
 
   const subtitle = array
     .unique([langTranslations[item.language], languageMap[item.language]])
@@ -38,20 +38,18 @@ export const LanguageData = () => {
       subtitle={subtitle}
       TitleIcon={TranslateRoundedIcon}
     >
-      {data && (
-        <div className="text-center flex flex-col gap-4">
-          {isForeign && (
-            <>
-              <LanguageCategory data={data} />
-              <LanguageDuration data={data} />
-              <OtherLanguages data={data} />
-              <EnglishSpeakers />
-              <Divider />
-            </>
-          )}
-          <LanguageAverageScore />
-        </div>
-      )}
+      <div className="text-center flex flex-col gap-4">
+        {isForeign && (
+          <>
+            <LanguageCategory data={data} />
+            <LanguageDuration data={data} />
+            <OtherLanguages data={data} isLoading={isLoading} />
+            <EnglishSpeakers />
+            <Divider />
+          </>
+        )}
+        <LanguageAverageScore />
+      </div>
     </SectionCard>
   );
 };

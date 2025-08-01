@@ -2,11 +2,12 @@ import Typography from '@common/Typography';
 import CircularProgress, {
   type CircularProgressProps,
 } from '@mui/material/CircularProgress';
+import Skeleton from '@mui/material/Skeleton';
 import { type LanguageCategory } from '@services/api';
 import clsx from 'clsx';
 
 interface Props {
-  category: LanguageCategory;
+  category?: LanguageCategory;
 }
 
 const categoryLabelMap: Record<LanguageCategory, string> = {
@@ -51,7 +52,11 @@ export const DifficultyRating = ({ category }: Props) => {
       <CircularProgress thickness={5} {...getProgressProps()} />
       <CircularProgress thickness={5} {...getProgressProps(category)} />
       <Typography variant="body1" lineHeight="normal" fontWeight={500}>
-        {categoryLabelMap[category]}
+        {category ? (
+          categoryLabelMap[category]
+        ) : (
+          <Skeleton variant="rounded" width={20} />
+        )}
       </Typography>
     </div>
   );

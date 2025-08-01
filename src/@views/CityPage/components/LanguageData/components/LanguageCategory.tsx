@@ -1,5 +1,6 @@
 import Link from '@common/Link';
 import Typography from '@common/Typography';
+import Skeleton from '@mui/material/Skeleton';
 import { LanguageDataResponse } from '@services/api';
 import {
   interpolateTranslations,
@@ -11,7 +12,7 @@ import { useCityContext } from '../../../context';
 import { DifficultyRating } from './DifficultyRating';
 
 interface Props {
-  data: LanguageDataResponse;
+  data?: LanguageDataResponse;
 }
 
 const SOURCE_LINK =
@@ -32,13 +33,17 @@ export const LanguageCategory = ({ data }: Props) => {
         })}{' '}
         <Link external href={SOURCE_LINK} />
       </Typography>
-      <DifficultyRating category={data.category} />
+      <DifficultyRating category={data?.category} />
       <Typography
         variant="caption"
         color="textSecondary"
         className="text-balance"
       >
-        [ {data.description} ]
+        {data?.description ? (
+          [`${data.description}`]
+        ) : (
+          <Skeleton variant="text" className="mx-auto w-3/4" />
+        )}
       </Typography>
     </div>
   );

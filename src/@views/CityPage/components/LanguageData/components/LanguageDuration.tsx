@@ -5,7 +5,7 @@ import { useTranslations, useTranslationsContext } from '@translations';
 import { DurationBadge } from './DurationBadge';
 
 interface Props {
-  data: LanguageDataResponse;
+  data?: LanguageDataResponse;
 }
 
 export const LanguageDuration = ({ data }: Props) => {
@@ -19,11 +19,11 @@ export const LanguageDuration = ({ data }: Props) => {
       </Typography>
       <div className="flex items-center justify-center mt-4">
         <DurationBadge
-          duration={data.numberOfWeeks}
+          duration={data?.numberOfWeeks}
           label={translations.weeks}
         />
         <DurationBadge
-          duration={data.numberOfHours}
+          duration={data?.numberOfHours}
           label={translations.hours}
           isLast
         />

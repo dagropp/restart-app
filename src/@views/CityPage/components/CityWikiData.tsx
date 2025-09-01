@@ -20,6 +20,7 @@ const ratioMap: Record<City, number> = {
   [City.CAMBRIDGE]: 600 / 400,
   [City.CHICAGO]: 600 / 424,
   [City.COPENHAGEN]: 600 / 296,
+  [City.AARHUS]: 1000 / 336,
   [City.DENVER]: 600 / 399,
   [City.DUBAI]: 600 / 415,
   [City.DUBLIN]: 600 / 298,
